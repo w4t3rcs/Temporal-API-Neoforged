@@ -10,7 +10,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
 
-public class SoundEventFactory implements TypedFactory<SoundEvent> {
+public class SoundEventFactory implements ObjectFactory<SoundEvent> {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS = IOHelper.createRegistry(Registries.SOUND_EVENT);
 
     public Holder<SoundEvent> create(String name) {
@@ -20,11 +20,6 @@ public class SoundEventFactory implements TypedFactory<SoundEvent> {
     @Override
     public Holder<SoundEvent> create(String name, Supplier<SoundEvent> soundEventSupplier) {
         return SOUND_EVENTS.register(name, soundEventSupplier);
-    }
-
-    @Override
-    public Holder<? extends SoundEvent> createTyped(String name, Supplier<? extends SoundEvent> tSupplier) {
-        return SOUND_EVENTS.register(name, tSupplier);
     }
 
     @Override

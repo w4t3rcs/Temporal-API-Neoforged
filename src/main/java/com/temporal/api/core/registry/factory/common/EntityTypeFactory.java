@@ -14,7 +14,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
 
-public class EntityTypeFactory implements TypedFactory<EntityType<?>> {
+public class EntityTypeFactory implements ObjectFactory<EntityType<?>> {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = IOHelper.createRegistry(Registries.ENTITY_TYPE);
 
     public <T extends Entity> Holder<EntityType<?>> create(String name, EntityType.EntityFactory<T> entityFactory, Size size, MobCategory category) {
@@ -32,11 +32,6 @@ public class EntityTypeFactory implements TypedFactory<EntityType<?>> {
 
     @Override
     public Holder<EntityType<?>> create(String name, Supplier<EntityType<?>> entitySupplier) {
-        return ENTITY_TYPES.register(name, entitySupplier);
-    }
-
-    @Override
-    public Holder<? extends EntityType<?>> createTyped(String name, Supplier<? extends EntityType<?>> entitySupplier) {
         return ENTITY_TYPES.register(name, entitySupplier);
     }
 

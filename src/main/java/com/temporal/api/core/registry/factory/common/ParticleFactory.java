@@ -11,7 +11,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
 
-public class ParticleFactory implements TypedFactory<ParticleType<?>> {
+public class ParticleFactory implements ObjectFactory<ParticleType<?>> {
     public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = IOHelper.createRegistry(Registries.PARTICLE_TYPE);
 
     public Holder<ParticleType<?>> create(String name, boolean overrideLimiter) {
@@ -21,11 +21,6 @@ public class ParticleFactory implements TypedFactory<ParticleType<?>> {
     @Override
     public Holder<ParticleType<?>> create(String name, Supplier<ParticleType<?>> particleTypeSupplier) {
         return PARTICLE_TYPES.register(name, particleTypeSupplier);
-    }
-
-    @Override
-    public Holder<? extends ParticleType<?>> createTyped(String name, Supplier<? extends ParticleType<?>> tSupplier) {
-        return PARTICLE_TYPES.register(name, tSupplier);
     }
 
     @Override

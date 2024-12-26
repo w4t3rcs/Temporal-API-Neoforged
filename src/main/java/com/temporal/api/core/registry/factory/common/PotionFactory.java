@@ -12,7 +12,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
 
-public class PotionFactory implements TypedFactory<Potion> {
+public class PotionFactory implements ObjectFactory<Potion> {
     public static final DeferredRegister<Potion> POTIONS = IOHelper.createRegistry(Registries.POTION);
 
     public Holder<Potion> create(String name, MobEffectInstance mobEffectInstance) {
@@ -26,11 +26,6 @@ public class PotionFactory implements TypedFactory<Potion> {
     @Override
     public Holder<Potion> create(String name, Supplier<Potion> potionSupplier) {
         return POTIONS.register(name, potionSupplier);
-    }
-
-    @Override
-    public Holder<? extends Potion> createTyped(String name, Supplier<? extends Potion> tSupplier) {
-        return POTIONS.register(name, tSupplier);
     }
 
     @Override

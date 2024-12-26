@@ -14,7 +14,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.Set;
 import java.util.function.Supplier;
 
-public class PoiTypeFactory implements TypedFactory<PoiType> {
+public class PoiTypeFactory implements ObjectFactory<PoiType> {
     public static final DeferredRegister<PoiType> POI_TYPES = IOHelper.createRegistry(Registries.POINT_OF_INTEREST_TYPE);
 
     public Holder<PoiType> create(String name, Block block, int maxTickets, int validRange) {
@@ -28,11 +28,6 @@ public class PoiTypeFactory implements TypedFactory<PoiType> {
     @Override
     public Holder<PoiType> create(String name, Supplier<PoiType> poiSupplier) {
         return POI_TYPES.register(name, poiSupplier);
-    }
-
-    @Override
-    public Holder<? extends PoiType> createTyped(String name, Supplier<? extends PoiType> tSupplier) {
-        return POI_TYPES.register(name, tSupplier);
     }
 
     @Override

@@ -13,7 +13,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.Set;
 import java.util.function.Supplier;
 
-public class BlockEntityTypeFactory implements TypedFactory<BlockEntityType<?>> {
+public class BlockEntityTypeFactory implements ObjectFactory<BlockEntityType<?>> {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = IOHelper.createRegistry(Registries.BLOCK_ENTITY_TYPE);
 
     public Holder<BlockEntityType<?>> create(String name, BlockEntityType.BlockEntitySupplier<? extends BlockEntity> blockEntitySupplier, Block... blocks) {
@@ -22,11 +22,6 @@ public class BlockEntityTypeFactory implements TypedFactory<BlockEntityType<?>> 
 
     @Override
     public Holder<BlockEntityType<?>> create(String name, Supplier<BlockEntityType<?>> entitySupplier) {
-        return BLOCK_ENTITY_TYPES.register(name, entitySupplier);
-    }
-
-    @Override
-    public Holder<? extends BlockEntityType<?>> createTyped(String name, Supplier<? extends BlockEntityType<?>> entitySupplier) {
         return BLOCK_ENTITY_TYPES.register(name, entitySupplier);
     }
 

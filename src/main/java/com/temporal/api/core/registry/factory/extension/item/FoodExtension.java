@@ -6,7 +6,6 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
 
-@SuppressWarnings("unchecked")
 public interface FoodExtension {
     default DeferredItem<Item> createFood(String name, int nutrition, float saturation) {
         return createFood(name, new Item.Properties(), nutrition, saturation);
@@ -18,6 +17,6 @@ public interface FoodExtension {
 
     default DeferredItem<Item> createFood(String name, Item.Properties properties, FoodProperties foodProperties) {
         ItemFactory itemFactory = InjectionContext.getFromInstance(ItemFactory.class);
-        return (DeferredItem<Item>) itemFactory.createTyped(name, () -> new Item(properties.food(foodProperties)));
+        return itemFactory.create(name, properties.food(foodProperties), Item::new);
     }
 }

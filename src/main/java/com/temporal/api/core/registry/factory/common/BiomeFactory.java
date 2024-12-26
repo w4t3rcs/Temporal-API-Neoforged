@@ -10,17 +10,12 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
 
-public class BiomeFactory implements TypedFactory<Biome> {
+public class BiomeFactory implements ObjectFactory<Biome> {
     public static final DeferredRegister<Biome> BIOMES = IOHelper.createRegistry(Registries.BIOME);
 
     @Override
     public Holder<Biome> create(String name, Supplier<Biome> potionSupplier) {
         return BIOMES.register(name, potionSupplier);
-    }
-
-    @Override
-    public Holder<? extends Biome> createTyped(String name, Supplier<? extends Biome> tSupplier) {
-        return BIOMES.register(name, tSupplier);
     }
 
     @Override

@@ -6,17 +6,9 @@ import net.minecraft.world.item.ArrowItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
 
-import java.util.function.Supplier;
-
-@SuppressWarnings("unchecked")
 public interface ArrowExtension {
-    default DeferredItem<ArrowItem> createArrow(String name, Item.Properties properties) {
+    default DeferredItem<Item> createArrow(String name, Item.Properties properties) {
         ItemFactory itemFactory = InjectionContext.getFromInstance(ItemFactory.class);
-        return (DeferredItem<ArrowItem>) itemFactory.createTyped(name, () -> new ArrowItem(properties));
-    }
-
-    default DeferredItem<? extends ArrowItem> createArrow(String name, Supplier<? extends ArrowItem> tTypedSupplier) {
-        ItemFactory itemFactory = InjectionContext.getFromInstance(ItemFactory.class);
-        return (DeferredItem<? extends ArrowItem>) itemFactory.createTyped(name, tTypedSupplier);
+        return itemFactory.create(name, properties, ArrowItem::new);
     }
 }

@@ -7,16 +7,22 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.registries.DeferredItem;
 
-@SuppressWarnings("unchecked")
 public interface BowlExtension {
     default DeferredItem<Item> createBowl(String name, int nutrition, float saturation) {
+        return this.createBowl(name, new Item.Properties(), nutrition, saturation);
+    }
+
+    default DeferredItem<Item> createBowl(String name, Item.Properties properties, int nutrition, float saturation) {
+        return this.createBowl(name, properties, new FoodProperties.Builder()
+                .nutrition(nutrition)
+                .saturationModifier(saturation)
+                .build());
+    }
+
+    default DeferredItem<Item> createBowl(String name, Item.Properties properties, FoodProperties foodProperties) {
         ItemFactory itemFactory = InjectionContext.getFromInstance(ItemFactory.class);
-        return (DeferredItem<Item>) itemFactory.createTyped(name, () -> new Item(new Item.Properties()
-                .stacksTo(1)
-                .food(new FoodProperties.Builder()
-                        .nutrition(nutrition)
-                        .saturationModifier(saturation)
-                        .build())
-                .usingConvertsTo(Items.BOWL)));
+        return itemFactory.create(name, properties.stacksTo(1)
+                .food(foodProperties)
+                .usingConvertsTo(Items.BOWL), Item::new);
     }
 }

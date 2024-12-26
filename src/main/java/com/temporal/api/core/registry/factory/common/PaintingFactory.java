@@ -12,7 +12,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-public class PaintingFactory implements TypedFactory<PaintingVariant> {
+public class PaintingFactory implements ObjectFactory<PaintingVariant> {
     public static final DeferredRegister<PaintingVariant> PAINTING_VARIANTS = IOHelper.createRegistry(Registries.PAINTING_VARIANT);
 
     public Holder<PaintingVariant> create16x16(String name, String title, String author) {
@@ -39,11 +39,6 @@ public class PaintingFactory implements TypedFactory<PaintingVariant> {
     @Override
     public Holder<PaintingVariant> create(String name, Supplier<PaintingVariant> paintingVariantSupplier) {
         return PAINTING_VARIANTS.register(name, paintingVariantSupplier);
-    }
-
-    @Override
-    public Holder<? extends PaintingVariant> createTyped(String name, Supplier<? extends PaintingVariant> tSupplier) {
-        return PAINTING_VARIANTS.register(name, tSupplier);
     }
 
     @Override

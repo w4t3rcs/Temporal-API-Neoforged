@@ -15,7 +15,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
 
-public class VillagerProfessionFactory implements TypedFactory<VillagerProfession> {
+public class VillagerProfessionFactory implements ObjectFactory<VillagerProfession> {
     public static final DeferredRegister<VillagerProfession> VILLAGER_PROFESSIONS = IOHelper.createRegistry(Registries.VILLAGER_PROFESSION);
 
     public Holder<VillagerProfession> create(String name, String professionName, PoiType heldJobSite, SoundEvent workSound) {
@@ -33,11 +33,6 @@ public class VillagerProfessionFactory implements TypedFactory<VillagerProfessio
     @Override
     public Holder<VillagerProfession> create(String name, Supplier<VillagerProfession> villagerProfessionSupplier) {
         return VILLAGER_PROFESSIONS.register(name, villagerProfessionSupplier);
-    }
-
-    @Override
-    public Holder<? extends VillagerProfession> createTyped(String name, Supplier<? extends VillagerProfession> tSupplier) {
-        return VILLAGER_PROFESSIONS.register(name, tSupplier);
     }
 
     @Override

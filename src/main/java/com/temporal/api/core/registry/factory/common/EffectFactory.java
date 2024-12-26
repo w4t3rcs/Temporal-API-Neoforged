@@ -10,16 +10,11 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
 
-public class EffectFactory implements TypedFactory<MobEffect> {
+public class EffectFactory implements ObjectFactory<MobEffect> {
     public static final DeferredRegister<MobEffect> EFFECTS = IOHelper.createRegistry(Registries.MOB_EFFECT);
 
     @Override
     public Holder<MobEffect> create(String name, Supplier<MobEffect> mobEffectSupplier) {
-        return EFFECTS.register(name, mobEffectSupplier);
-    }
-
-    @Override
-    public Holder<? extends MobEffect> createTyped(String name, Supplier<? extends MobEffect> mobEffectSupplier) {
         return EFFECTS.register(name, mobEffectSupplier);
     }
 

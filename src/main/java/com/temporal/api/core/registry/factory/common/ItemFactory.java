@@ -7,9 +7,10 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class ItemFactory implements TypedFactory<Item> {
+public class ItemFactory implements ObjectFactory<Item> {
     public static final DeferredRegister.Items ITEMS = IOHelper.createItemRegistry();
 
     public DeferredItem<Item> create(String name) {
@@ -20,13 +21,12 @@ public class ItemFactory implements TypedFactory<Item> {
         return ITEMS.registerSimpleItem(name, properties);
     }
 
-    @Override
-    public DeferredItem<Item> create(String name, Supplier<Item> itemSupplier) {
-        return ITEMS.register(name, itemSupplier);
+    public DeferredItem<Item> create(String name, Item.Properties properties, Function<Item.Properties, ? extends Item> function) {
+        return ITEMS.registerItem(name, function, properties);
     }
 
     @Override
-    public DeferredItem<? extends Item> createTyped(String name, Supplier<? extends Item> itemSupplier) {
+    public DeferredItem<Item> create(String name, Supplier<Item> itemSupplier) {
         return ITEMS.register(name, itemSupplier);
     }
 
