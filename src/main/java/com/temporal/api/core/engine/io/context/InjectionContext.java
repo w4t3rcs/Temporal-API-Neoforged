@@ -15,7 +15,13 @@ public class InjectionContext implements Context {
 
     @Override
     public <T> T getObject(Class<? extends T> key) {
-        return key.cast(this.objects.get(key));
+        Object object = this.objects.get(key);
+        if (object == null) {
+            List<? extends T> list = this.getObjects(key);
+            if (!list.isEmpty()) object = list.getFirst();
+        }
+
+        return key.cast(object);
     }
 
     @Override
@@ -56,7 +62,8 @@ public class InjectionContext implements Context {
     }
 
     public static <T> T getFromInstance(Class<? extends T> key) {
-        return InjectionContext.getInstance().getObject(key);
+        InjectionContext context = InjectionContext.getInstance();
+        return context.getObject(key);
     }
 
     public static InjectionContext getInstance() {

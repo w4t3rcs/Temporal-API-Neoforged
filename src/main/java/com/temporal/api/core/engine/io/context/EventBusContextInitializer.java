@@ -1,5 +1,6 @@
 package com.temporal.api.core.engine.io.context;
 
+import net.neoforged.bus.EventBus;
 import net.neoforged.bus.api.IEventBus;
 
 import java.util.List;
@@ -11,7 +12,10 @@ public class EventBusContextInitializer implements ContextInitializer {
         InjectionContext context = InjectionContext.getInstance();
         externalObjects.stream()
                 .filter(o -> o instanceof IEventBus)
-                .map(o -> (IEventBus)o)
-                .forEach(context::putObject);
+                .map(o -> (EventBus)o)
+                .forEach(value -> {
+                    System.out.println(value);
+                    context.putObject(value);
+                });
     }
 }
