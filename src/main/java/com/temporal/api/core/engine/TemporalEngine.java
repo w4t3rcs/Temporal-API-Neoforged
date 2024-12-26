@@ -59,7 +59,7 @@ public class TemporalEngine {
                 ioLayer.setModClass(modClass);
                 ioLayer.setContextInitializers(List.of(contextInitializers));
                 ioLayer.setExternalSource(externalInitializingSource);
-                this.logLayerProcession(ioLayer);
+                this.processLayer(ioLayer);
             };
 
             tasks.add(ioSetupTask);
@@ -73,7 +73,7 @@ public class TemporalEngine {
             return this.layerContainer;
         }
 
-        private void logLayerProcession(EngineLayer engineLayer) {
+        private void processLayer(EngineLayer engineLayer) {
             engineLayer.processAllTasks();
             ApiMod.LOGGER.info(LOAD_MESSAGE, engineLayer.getClass().getSimpleName());
         }

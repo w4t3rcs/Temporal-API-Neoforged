@@ -32,8 +32,9 @@ public class DefaultAnnotationStrategyExecutor implements AnnotationStrategyExec
             Field[] fields = clazz.getDeclaredFields();
             for (Field field : fields) {
                 strategy.execute(field, null);
-                logScanning(strategy, clazz);
             }
+
+            logScanning(strategy, clazz);
         } catch (Exception e) {
             logException(e, strategy, clazz);
         }
@@ -45,8 +46,9 @@ public class DefaultAnnotationStrategyExecutor implements AnnotationStrategyExec
             Field[] fields = clazz.getDeclaredFields();
             for (Field field : fields) {
                 strategy.execute(field, InjectionContext.getFromInstance(clazz));
-                logScanning(strategy, clazz);
             }
+
+            logScanning(strategy, clazz);
         } catch (Exception e) {
             logException(e, strategy, clazz);
         }
@@ -58,8 +60,9 @@ public class DefaultAnnotationStrategyExecutor implements AnnotationStrategyExec
             Method[] methods = clazz.getDeclaredMethods();
             for (Method method : methods) {
                 strategy.execute(method, InjectionContext.getFromInstance(clazz));
-                logScanning(strategy, clazz);
             }
+
+            logScanning(strategy, clazz);
         } catch (Exception e) {
             logException(e, strategy, clazz);
         }

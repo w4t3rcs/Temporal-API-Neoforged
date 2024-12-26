@@ -18,9 +18,9 @@ public class ApiDataGenerator implements DataGatherer {
     @Override
     public void gatherData(GatherDataEvent event) {
         addLootTableProvider(event);
+        addRecipeProvider(event);
         addModelProvider(event);
         addLanguageProvider(event);
-        addRecipeProvider(event);
     }
 
     @Override
@@ -28,7 +28,7 @@ public class ApiDataGenerator implements DataGatherer {
         final DataGenerator generator = getDataGenerator(event);
         final PackOutput packOutput = getPackOutput(event);
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
-        generator.addProvider(isServer(event), LootTableProviderFactory.createProvider(packOutput, lookupProvider));
+        generator.addProvider(true, LootTableProviderFactory.createProvider(packOutput, lookupProvider));
     }
 
     @Override
@@ -36,21 +36,21 @@ public class ApiDataGenerator implements DataGatherer {
         final DataGenerator generator = getDataGenerator(event);
         final PackOutput packOutput = getPackOutput(event);
         final ExistingFileHelper existingFileHelper = getExistingFileHelper(event);
-        generator.addProvider(isClient(event), new BlockStateProviderImpl(packOutput, existingFileHelper));
-        generator.addProvider(isClient(event), new ItemModelProviderImpl(packOutput, existingFileHelper));
+        generator.addProvider(true, new BlockStateProviderImpl(packOutput, existingFileHelper));
+        generator.addProvider(true, new ItemModelProviderImpl(packOutput, existingFileHelper));
     }
 
     @Override
     public void addLanguageProvider(GatherDataEvent event) {
         final DataGenerator generator = getDataGenerator(event);
         final PackOutput packOutput = getPackOutput(event);
-        generator.addProvider(isClient(event), new EnglishProvider(packOutput));
-        generator.addProvider(isClient(event), new UkrainianProvider(packOutput));
-        generator.addProvider(isClient(event), new PolishProvider(packOutput));
-        generator.addProvider(isClient(event), new GermanProvider(packOutput));
-        generator.addProvider(isClient(event), new FrenchProvider(packOutput));
-        generator.addProvider(isClient(event), new ItalianProvider(packOutput));
-        generator.addProvider(isClient(event), new SpanishProvider(packOutput));
+        generator.addProvider(true, new EnglishProvider(packOutput));
+        generator.addProvider(true, new UkrainianProvider(packOutput));
+        generator.addProvider(true, new PolishProvider(packOutput));
+        generator.addProvider(true, new GermanProvider(packOutput));
+        generator.addProvider(true, new FrenchProvider(packOutput));
+        generator.addProvider(true, new ItalianProvider(packOutput));
+        generator.addProvider(true, new SpanishProvider(packOutput));
     }
 
     @Override
@@ -58,7 +58,7 @@ public class ApiDataGenerator implements DataGatherer {
         final DataGenerator generator = getDataGenerator(event);
         final PackOutput packOutput = getPackOutput(event);
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
-        generator.addProvider(isServer(event), new ApiRecipeProvider.Runner(packOutput, lookupProvider));
+        generator.addProvider(true, new ApiRecipeProvider.Runner(packOutput, lookupProvider));
     }
 
     @Override
@@ -74,13 +74,5 @@ public class ApiDataGenerator implements DataGatherer {
     @Override
     public DataGenerator getDataGenerator(GatherDataEvent event) {
         return event.getGenerator();
-    }
-
-    private boolean isServer(GatherDataEvent event) {
-        return event instanceof GatherDataEvent.Server;
-    }
-
-    private boolean isClient(GatherDataEvent event) {
-        return event instanceof GatherDataEvent.Client;
     }
 }
