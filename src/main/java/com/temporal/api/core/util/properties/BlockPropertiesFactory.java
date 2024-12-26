@@ -1,5 +1,8 @@
 package com.temporal.api.core.util.properties;
 
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
@@ -32,5 +35,9 @@ public class BlockPropertiesFactory {
 
     public static Properties copy(BlockBehaviour block) {
         return Properties.ofFullCopy(block);
+    }
+
+    public static Properties init(Properties properties, ResourceLocation resourceLocation) {
+        return properties.setId(ResourceKey.create(Registries.BLOCK, resourceLocation));
     }
 }

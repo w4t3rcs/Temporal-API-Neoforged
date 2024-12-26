@@ -15,7 +15,8 @@ import java.util.function.Supplier;
 public interface BushExtension {
     default DeferredBlock<BushBlock> createBush(String name, BlockBehaviour.Properties properties) {
         final TypedFactory<Block> blockFactory = InjectionContext.getFromInstance(BlockFactory.class);
-        return (DeferredBlock<BushBlock>) blockFactory.createTyped(name, () -> new SweetBerryBushBlock(properties.noOcclusion().noCollission()));
+        return (DeferredBlock<BushBlock>) blockFactory.createTyped(name, () -> new SweetBerryBushBlock(properties.noOcclusion()
+                .noCollission()));
     }
 
     default DeferredBlock<? extends BushBlock> createBush(String name, Supplier<? extends BushBlock> tTypedSupplier) {

@@ -13,11 +13,11 @@ public class ItemFactory implements TypedFactory<Item> {
     public static final DeferredRegister.Items ITEMS = IOHelper.createItemRegistry();
 
     public DeferredItem<Item> create(String name) {
-        return create(name, () -> new Item(new Item.Properties()));
+        return ITEMS.registerSimpleItem(name);
     }
 
     public DeferredItem<Item> create(String name, Item.Properties properties) {
-        return create(name, () -> new Item(properties));
+        return ITEMS.registerSimpleItem(name, properties);
     }
 
     @Override

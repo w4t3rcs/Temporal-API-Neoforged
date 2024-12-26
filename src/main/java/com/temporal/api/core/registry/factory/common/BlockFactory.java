@@ -10,6 +10,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class BlockFactory implements TypedFactory<Block> {
@@ -17,7 +18,13 @@ public class BlockFactory implements TypedFactory<Block> {
     private final ItemFactory itemFactory = InjectionContext.getFromInstance(ItemFactory.class);
 
     public DeferredBlock<Block> create(String name, BlockBehaviour.Properties properties) {
-        return create(name, () -> new Block(properties));
+        return create(name, Block::new, properties);
+    }
+
+    public DeferredBlock<Block> create(String name, Function<BlockBehaviour.Properties, ? extends Block> function, BlockBehaviour.Properties properties) {
+        DeferredBlock<Block> block = BLOCKS.registerBlock(name, function, properties);
+        this.itemFactory.createTyped(name, () -> new BlockItem(block.value(), new Item.Properties()));
+        return block;
     }
 
     @Override
