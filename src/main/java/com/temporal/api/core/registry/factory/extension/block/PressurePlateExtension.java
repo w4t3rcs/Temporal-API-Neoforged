@@ -7,19 +7,19 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.PressurePlateBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredBlock;
 
 import java.util.function.Supplier;
 
 @SuppressWarnings("unchecked")
 public interface PressurePlateExtension {
-    default RegistryObject<PressurePlateBlock> createPressurePlate(String name, BlockBehaviour.Properties properties, BlockSetType setType) {
-        final TypedFactory<Block> blockFactory = InjectionContext.getInstance().getObject(BlockFactory.class);
-        return (RegistryObject<PressurePlateBlock>) blockFactory.createTyped(name, () -> new PressurePlateBlock(setType, properties));
+    default DeferredBlock<PressurePlateBlock> createPressurePlate(String name, BlockBehaviour.Properties properties, BlockSetType setType) {
+        final TypedFactory<Block> blockFactory = InjectionContext.getFromInstance(BlockFactory.class);
+        return (DeferredBlock<PressurePlateBlock>) blockFactory.createTyped(name, () -> new PressurePlateBlock(setType, properties));
     }
 
-    default RegistryObject<? extends PressurePlateBlock> createPressurePlate(String name, Supplier<? extends PressurePlateBlock> tTypedSupplier) {
-        final TypedFactory<Block> blockFactory = InjectionContext.getInstance().getObject(BlockFactory.class);
-        return (RegistryObject<? extends PressurePlateBlock>) blockFactory.createTyped(name, tTypedSupplier);
+    default DeferredBlock<? extends PressurePlateBlock> createPressurePlate(String name, Supplier<? extends PressurePlateBlock> tTypedSupplier) {
+        final TypedFactory<Block> blockFactory = InjectionContext.getFromInstance(BlockFactory.class);
+        return (DeferredBlock<? extends PressurePlateBlock>) blockFactory.createTyped(name, tTypedSupplier);
     }
 }

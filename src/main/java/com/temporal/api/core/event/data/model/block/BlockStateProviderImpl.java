@@ -3,27 +3,27 @@ package com.temporal.api.core.event.data.model.block;
 import com.temporal.api.common.block.LogBlock;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.*;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.registries.DeferredBlock;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BlockStateProvider extends ApiBlockStateProvider {
-    public static final List<RegistryObject<Block>> BLOCKS = new ArrayList<>();
-    public static final List<RegistryObject<ButtonBlock>> BUTTONS = new ArrayList<>();
-    public static final List<RegistryObject<DoorBlock>> DOORS = new ArrayList<>();
-    public static final List<RegistryObject<FenceBlock>> FENCES = new ArrayList<>();
-    public static final List<RegistryObject<FenceGateBlock>> FENCE_GATES = new ArrayList<>();
-    public static final List<RegistryObject<PressurePlateBlock>> PRESSURE_PLATES = new ArrayList<>();
-    public static final List<RegistryObject<SlabBlock>> SLABS = new ArrayList<>();
-    public static final List<RegistryObject<StairBlock>> STAIRS = new ArrayList<>();
-    public static final List<RegistryObject<TrapDoorBlock>> TRAPDOORS = new ArrayList<>();
-    public static final List<RegistryObject<WallBlock>> WALLS = new ArrayList<>();
-    public static final List<RegistryObject<LogBlock>> LOGS = new ArrayList<>();
-    public static final List<RegistryObject<RotatedPillarBlock>> ROTATED_PILLARS = new ArrayList<>();
+public class BlockStateProviderImpl extends ApiBlockStateProvider {
+    public static final List<DeferredBlock<Block>> BLOCKS = new ArrayList<>();
+    public static final List<DeferredBlock<ButtonBlock>> BUTTONS = new ArrayList<>();
+    public static final List<DeferredBlock<DoorBlock>> DOORS = new ArrayList<>();
+    public static final List<DeferredBlock<FenceBlock>> FENCES = new ArrayList<>();
+    public static final List<DeferredBlock<FenceGateBlock>> FENCE_GATES = new ArrayList<>();
+    public static final List<DeferredBlock<PressurePlateBlock>> PRESSURE_PLATES = new ArrayList<>();
+    public static final List<DeferredBlock<SlabBlock>> SLABS = new ArrayList<>();
+    public static final List<DeferredBlock<StairBlock>> STAIRS = new ArrayList<>();
+    public static final List<DeferredBlock<TrapDoorBlock>> TRAPDOORS = new ArrayList<>();
+    public static final List<DeferredBlock<WallBlock>> WALLS = new ArrayList<>();
+    public static final List<DeferredBlock<LogBlock>> LOGS = new ArrayList<>();
+    public static final List<DeferredBlock<RotatedPillarBlock>> ROTATED_PILLARS = new ArrayList<>();
 
-    public BlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
+    public BlockStateProviderImpl(PackOutput output, ExistingFileHelper exFileHelper) {
         super(output, exFileHelper);
     }
 

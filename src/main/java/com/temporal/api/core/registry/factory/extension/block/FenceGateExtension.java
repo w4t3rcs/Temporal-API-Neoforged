@@ -8,19 +8,20 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.WoodType;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredBlock;
 
+import java.util.Optional;
 import java.util.function.Supplier;
 
 @SuppressWarnings("unchecked")
 public interface FenceGateExtension {
-    default RegistryObject<FenceGateBlock> createFenceGate(String name, BlockBehaviour.Properties properties, WoodType woodType, SoundEvent openSound, SoundEvent closeSound) {
-        final TypedFactory<Block> blockFactory = InjectionContext.getInstance().getObject(BlockFactory.class);
-        return (RegistryObject<FenceGateBlock>) blockFactory.createTyped(name, () -> new FenceGateBlock(woodType, properties, openSound, closeSound));
+    default DeferredBlock<FenceGateBlock> createFenceGate(String name, BlockBehaviour.Properties properties, WoodType woodType, SoundEvent openSound, SoundEvent closeSound) {
+        final TypedFactory<Block> blockFactory = InjectionContext.getFromInstance(BlockFactory.class);
+        return (DeferredBlock<FenceGateBlock>) blockFactory.createTyped(name, () -> new FenceGateBlock(Optional.of(woodType), properties, Optional.of(openSound), Optional.of(closeSound)));
     }
 
-    default RegistryObject<? extends FenceGateBlock> createFenceGate(String name, Supplier<? extends FenceGateBlock> tTypedSupplier) {
-        final TypedFactory<Block> blockFactory = InjectionContext.getInstance().getObject(BlockFactory.class);
-        return (RegistryObject<? extends FenceGateBlock>) blockFactory.createTyped(name, tTypedSupplier);
+    default DeferredBlock<? extends FenceGateBlock> createFenceGate(String name, Supplier<? extends FenceGateBlock> tTypedSupplier) {
+        final TypedFactory<Block> blockFactory = InjectionContext.getFromInstance(BlockFactory.class);
+        return (DeferredBlock<? extends FenceGateBlock>) blockFactory.createTyped(name, tTypedSupplier);
     }
 }

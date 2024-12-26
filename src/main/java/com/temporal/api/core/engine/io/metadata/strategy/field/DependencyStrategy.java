@@ -3,7 +3,7 @@ package com.temporal.api.core.engine.io.metadata.strategy.field;
 import com.temporal.api.core.engine.io.context.Context;
 import com.temporal.api.core.engine.io.context.InjectionContext;
 import com.temporal.api.core.engine.io.metadata.annotation.Dependency;
-import net.minecraftforge.fml.ModList;
+import net.neoforged.fml.ModList;
 
 import java.lang.reflect.Field;
 

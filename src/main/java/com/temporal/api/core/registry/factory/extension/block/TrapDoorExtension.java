@@ -7,19 +7,19 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredBlock;
 
 import java.util.function.Supplier;
 
 @SuppressWarnings("unchecked")
 public interface TrapDoorExtension {
-    default RegistryObject<TrapDoorBlock> createTrapDoor(String name, BlockBehaviour.Properties properties, BlockSetType setType) {
-        final TypedFactory<Block> blockFactory = InjectionContext.getInstance().getObject(BlockFactory.class);
-        return (RegistryObject<TrapDoorBlock>) blockFactory.createTyped(name, () -> new TrapDoorBlock(setType, properties));
+    default DeferredBlock<TrapDoorBlock> createTrapDoor(String name, BlockBehaviour.Properties properties, BlockSetType setType) {
+        final TypedFactory<Block> blockFactory = InjectionContext.getFromInstance(BlockFactory.class);
+        return (DeferredBlock<TrapDoorBlock>) blockFactory.createTyped(name, () -> new TrapDoorBlock(setType, properties));
     }
 
-    default RegistryObject<? extends TrapDoorBlock> createTrapDoor(String name, Supplier<? extends TrapDoorBlock> tTypedSupplier) {
-        final TypedFactory<Block> blockFactory = InjectionContext.getInstance().getObject(BlockFactory.class);
-        return (RegistryObject<? extends TrapDoorBlock>) blockFactory.createTyped(name, tTypedSupplier);
+    default DeferredBlock<? extends TrapDoorBlock> createTrapDoor(String name, Supplier<? extends TrapDoorBlock> tTypedSupplier) {
+        final TypedFactory<Block> blockFactory = InjectionContext.getFromInstance(BlockFactory.class);
+        return (DeferredBlock<? extends TrapDoorBlock>) blockFactory.createTyped(name, tTypedSupplier);
     }
 }

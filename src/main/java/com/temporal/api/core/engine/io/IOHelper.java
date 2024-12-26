@@ -4,9 +4,9 @@ import com.temporal.api.core.engine.IOLayer;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.forgespi.language.ModFileScanData;
-import net.minecraftforge.registries.DeferredRegister;
+import net.neoforged.fml.ModList;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforgespi.language.ModFileScanData;
 import org.objectweb.asm.Type;
 
 import java.lang.annotation.Annotation;
@@ -71,10 +71,18 @@ public class IOHelper {
     }
 
     public static ResourceLocation createResourceLocation(String name) {
-        return ResourceLocation.fromNamespaceAndPath(IOLayer.FORGE_MOD.getModId(), name);
+        return ResourceLocation.fromNamespaceAndPath(IOLayer.NEO_MOD.getModId(), name);
+    }
+
+    public static DeferredRegister.Items createItemRegistry() {
+        return DeferredRegister.createItems(IOLayer.NEO_MOD.getModId());
+    }
+
+    public static DeferredRegister.Blocks createBlockRegistry() {
+        return DeferredRegister.createBlocks(IOLayer.NEO_MOD.getModId());
     }
 
     public static <T> DeferredRegister<T> createRegistry(ResourceKey<Registry<T>> registry) {
-        return DeferredRegister.create(registry, IOLayer.FORGE_MOD.getModId());
+        return DeferredRegister.create(registry, IOLayer.NEO_MOD.getModId());
     }
 }

@@ -3,7 +3,7 @@ package com.temporal.api.core.engine.io.metadata.strategy.type;
 import com.temporal.api.core.engine.io.context.Context;
 import com.temporal.api.core.engine.io.context.InjectionContext;
 import com.temporal.api.core.engine.io.metadata.annotation.Injected;
-import net.minecraftforge.fml.ModList;
+import net.neoforged.fml.ModList;
 
 public class InjectedStrategy implements ClassAnnotationStrategy {
     @Override

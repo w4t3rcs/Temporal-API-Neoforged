@@ -7,6 +7,7 @@ public class ApiItemProperties {
     public static void putCompostable(ItemLike itemLike, float value) {
         ComposterBlock.COMPOSTABLES.put(itemLike, value);
     }
+
 //    TODO: idk where ItemProperties is located :(
 //    public static void makeBow(Item item) {
 //        ItemProperties.register(item, new ResourceLocation("pull"), (itemStack, clientLevel, livingEntity, number) -> {

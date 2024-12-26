@@ -1,7 +1,7 @@
 package com.temporal.api.core.engine.io.metadata.strategy.method;
 
 import com.temporal.api.core.engine.io.metadata.annotation.Execution;
-import net.minecraftforge.fml.ModList;
+import net.neoforged.fml.ModList;
 
 import java.lang.reflect.Method;
 

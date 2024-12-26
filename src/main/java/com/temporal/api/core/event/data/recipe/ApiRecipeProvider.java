@@ -2,29 +2,26 @@ package com.temporal.api.core.event.data.recipe;
 
 import com.temporal.api.core.event.data.recipe.holder.*;
 import com.temporal.api.core.event.data.recipe.strategy.*;
-import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
-public class ApiRecipeProvider extends RecipeProvider implements IConditionBuilder {
+public class ApiRecipeProvider extends RecipeProvider {
     public static final List<RecipeHolder> RECIPES = new ArrayList<>();
     private static final RecipeStrategy<ShapelessRecipeHolder> SHAPELESS_RECIPE_STRATEGY = new ShapelessRecipeStrategy();
     private static final RecipeStrategy<ShapedRecipeHolder> SHAPED_RECIPE_STRATEGY = new ShapedRecipeStrategy();
@@ -65,7 +62,7 @@ public class ApiRecipeProvider extends RecipeProvider implements IConditionBuild
     }
 
     public static @NotNull String getItemName(ItemLike itemLike) {
-        return Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(itemLike.asItem())).getPath();
+        return Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(itemLike.asItem())).getPath();
     }
 
     @Override
@@ -74,10 +71,6 @@ public class ApiRecipeProvider extends RecipeProvider implements IConditionBuild
         return inventoryTrigger(ItemPredicate.Builder.item()
                 .of(items, new ItemLike[]{itemLike})
                 .build());
-    }
-
-    private static Criterion<InventoryChangeTrigger.TriggerInstance> inventoryTrigger(ItemPredicate... predicates) {
-        return CriteriaTriggers.INVENTORY_CHANGED.createCriterion(new InventoryChangeTrigger.TriggerInstance(Optional.empty(), InventoryChangeTrigger.TriggerInstance.Slots.ANY, List.of(predicates)));
     }
 
     public HolderGetter<Item> getItems() {

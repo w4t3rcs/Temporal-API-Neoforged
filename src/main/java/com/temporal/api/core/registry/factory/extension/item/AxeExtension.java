@@ -5,23 +5,23 @@ import com.temporal.api.core.registry.factory.common.ItemFactory;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ToolMaterial;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredItem;
 
 import java.util.function.Supplier;
 
 @SuppressWarnings("unchecked")
 public interface AxeExtension {
-    default RegistryObject<AxeItem> createAxe(String name, ToolMaterial material, float damage, float speed) {
+    default DeferredItem<AxeItem> createAxe(String name, ToolMaterial material, float damage, float speed) {
         return this.createAxe(name, material, damage, speed, new Item.Properties());
     }
 
-    default RegistryObject<AxeItem> createAxe(String name, ToolMaterial material, float damage, float speed, Item.Properties properties) {
-        ItemFactory itemFactory = InjectionContext.getInstance().getObject(ItemFactory.class);
-        return (RegistryObject<AxeItem>) itemFactory.createTyped(name, () -> new AxeItem(material, damage, speed, properties));
+    default DeferredItem<AxeItem> createAxe(String name, ToolMaterial material, float damage, float speed, Item.Properties properties) {
+        ItemFactory itemFactory = InjectionContext.getFromInstance(ItemFactory.class);
+        return (DeferredItem<AxeItem>) itemFactory.createTyped(name, () -> new AxeItem(material, damage, speed, properties));
     }
 
-    default RegistryObject<? extends AxeItem> createAxe(String name, Supplier<? extends AxeItem> tTypedSupplier) {
-        ItemFactory itemFactory = InjectionContext.getInstance().getObject(ItemFactory.class);
-        return (RegistryObject<AxeItem>) itemFactory.createTyped(name, tTypedSupplier);
+    default DeferredItem<? extends AxeItem> createAxe(String name, Supplier<? extends AxeItem> tTypedSupplier) {
+        ItemFactory itemFactory = InjectionContext.getFromInstance(ItemFactory.class);
+        return (DeferredItem<AxeItem>) itemFactory.createTyped(name, tTypedSupplier);
     }
 }

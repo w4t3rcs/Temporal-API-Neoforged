@@ -7,19 +7,19 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredBlock;
 
 import java.util.function.Supplier;
 
 @SuppressWarnings("unchecked")
 public interface ButtonExtension {
-    default RegistryObject<ButtonBlock> createButton(String name, BlockBehaviour.Properties properties, BlockSetType setType, int ticksToStayPressed) {
-        final TypedFactory<Block> blockFactory = InjectionContext.getInstance().getObject(BlockFactory.class);
-        return (RegistryObject<ButtonBlock>) blockFactory.createTyped(name, () -> new ButtonBlock(setType, ticksToStayPressed, properties));
+    default DeferredBlock<ButtonBlock> createButton(String name, BlockBehaviour.Properties properties, BlockSetType setType, int ticksToStayPressed) {
+        final TypedFactory<Block> blockFactory = InjectionContext.getFromInstance(BlockFactory.class);
+        return (DeferredBlock<ButtonBlock>) blockFactory.createTyped(name, () -> new ButtonBlock(setType, ticksToStayPressed, properties));
     }
 
-    default RegistryObject<? extends ButtonBlock> createButton(String name, Supplier<? extends ButtonBlock> tTypedSupplier) {
-        final TypedFactory<Block> blockFactory = InjectionContext.getInstance().getObject(BlockFactory.class);
-        return (RegistryObject<? extends ButtonBlock>) blockFactory.createTyped(name, tTypedSupplier);
+    default DeferredBlock<? extends ButtonBlock> createButton(String name, Supplier<? extends ButtonBlock> tTypedSupplier) {
+        final TypedFactory<Block> blockFactory = InjectionContext.getFromInstance(BlockFactory.class);
+        return (DeferredBlock<? extends ButtonBlock>) blockFactory.createTyped(name, tTypedSupplier);
     }
 }

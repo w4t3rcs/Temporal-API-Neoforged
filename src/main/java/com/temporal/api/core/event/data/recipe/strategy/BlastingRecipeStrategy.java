@@ -15,7 +15,7 @@ public class BlastingRecipeStrategy implements RecipeStrategy<BlastingRecipeHold
                         recipeHolder.getExperience(), recipeHolder.getCookingTime())
                 .group(recipeHolder.getGroup())
                 .unlockedBy(ApiRecipeProvider.getHasName(recipeHolder.getIngredient()), recipeProvider.has(recipeHolder.getIngredient()))
-                .save(recipeOutput, IOLayer.FORGE_MOD.getModId() + ":" + ApiRecipeProvider.getItemName(recipeHolder.getResult()) + recipeHolder.getRecipeName() + "_" + ApiRecipeProvider.getItemName(recipeHolder.getIngredient()));
+                .save(recipeOutput, IOLayer.NEO_MOD.getModId() + ":" + ApiRecipeProvider.getItemName(recipeHolder.getResult()) + recipeHolder.getRecipeName() + "_" + ApiRecipeProvider.getItemName(recipeHolder.getIngredient()));
 
     }
 }

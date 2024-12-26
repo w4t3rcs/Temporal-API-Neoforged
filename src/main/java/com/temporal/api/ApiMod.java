@@ -1,10 +1,13 @@
 package com.temporal.api;
 
 import com.mojang.logging.LogUtils;
+import com.temporal.api.core.engine.TemporalEngine;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
 
 @Mod(ApiMod.MOD_ID)
@@ -13,7 +16,11 @@ public class ApiMod {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public ApiMod(IEventBus modEventBus, ModContainer modContainer) {
-
+        TemporalEngine.run(ApiMod.class, modEventBus, modContainer);
         NeoForge.EVENT_BUS.register(this);
+    }
+
+    @SubscribeEvent
+    public void onServerStarting(ServerStartingEvent event) {
     }
 }

@@ -4,25 +4,23 @@ import com.temporal.api.core.util.exception.AddingToTabException;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-
-import java.util.function.Supplier;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 
 public class SimpleTabAdder implements TabAdder {
     @Override
     @SafeVarargs
-    public final void addAllToTab(BuildCreativeModeTabContentsEvent event, ResourceKey<CreativeModeTab> tab, Supplier<? extends ItemLike>... registries) {
-        for (Supplier<? extends ItemLike> registry : registries) {
-            addToTab(event, tab, registry);
+    public final void addAllToTab(BuildCreativeModeTabContentsEvent event, ResourceKey<CreativeModeTab> tab, ItemLike... items) {
+        for (ItemLike item : items) {
+            addToTab(event, tab, item);
         }
     }
 
     @Override
-    public void addToTab(BuildCreativeModeTabContentsEvent event, ResourceKey<CreativeModeTab> tab, Supplier<? extends ItemLike> registryObject) {
+    public void addToTab(BuildCreativeModeTabContentsEvent event, ResourceKey<CreativeModeTab> tab, ItemLike item) {
         try {
-            if (event.getTabKey() == tab) event.accept(registryObject);
+            if (event.getTabKey() == tab) event.accept(item);
         } catch (Exception e) {
-            throw new AddingToTabException("Adding to the %s gone wrong for %s".formatted(tab, registryObject), e);
+            throw new AddingToTabException("Adding to the %s gone wrong for %s".formatted(tab, item), e);
         }
     }
 }

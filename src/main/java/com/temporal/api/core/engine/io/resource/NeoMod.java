@@ -1,21 +1,21 @@
 package com.temporal.api.core.engine.io.resource;
 
 import com.google.common.base.MoreObjects;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.fml.common.Mod;
 
-public class ForgeMod {
+public class NeoMod {
     private String name;
     private Class<?> clazz;
     private String modId;
 
-    public ForgeMod(String name, Class<?> clazz, String modId) {
+    public NeoMod(String name, Class<?> clazz, String modId) {
         this.name = name;
         this.clazz = clazz;
         this.modId = modId;
     }
 
-    public static ForgeMod create(Class<?> clazz) {
-        return new ForgeMod(clazz.getSimpleName(), clazz, clazz.getDeclaredAnnotation(Mod.class).value());
+    public static NeoMod create(Class<?> clazz) {
+        return new NeoMod(clazz.getSimpleName(), clazz, clazz.getDeclaredAnnotation(Mod.class).value());
     }
 
     public String getName() {

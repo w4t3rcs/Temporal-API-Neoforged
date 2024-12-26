@@ -2,7 +2,11 @@ package com.temporal.api.core.engine;
 
 import com.temporal.api.ApiMod;
 import com.temporal.api.core.engine.io.context.ContextInitializer;
+import com.temporal.api.core.engine.io.context.EventBusContextInitializer;
 import com.temporal.api.core.engine.io.context.ExtraContextInitializer;
+import com.temporal.api.core.engine.io.context.ModContainerContextInitializer;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +23,11 @@ public class TemporalEngine {
                           |-|    --------| |-|    |-| |-|
                     """;
 
-    public static LayerContainer run(Class<?> modClass) {
+    public static LayerContainer run(Class<?> modClass, IEventBus eventBus, ModContainer modContainer) {
         return config()
                 .addLayer(new IOLayer())
-                .processIOLayer(modClass, new ExtraContextInitializer())
+                .processIOLayer(modClass, List.of(eventBus, modContainer),
+                        new ExtraContextInitializer(), new EventBusContextInitializer(), new ModContainerContextInitializer())
                 .build();
     }
 
@@ -48,11 +53,12 @@ public class TemporalEngine {
             return this;
         }
 
-        public Configurator processIOLayer(Class<?> modClass, ContextInitializer... contextInitializers) {
+        public Configurator processIOLayer(Class<?> modClass, List<?> externalInitializingSource, ContextInitializer... contextInitializers) {
             Task ioSetupTask = () -> {
                 IOLayer ioLayer = layerContainer.getLayer(IOLayer.class);
                 ioLayer.setModClass(modClass);
                 ioLayer.setContextInitializers(List.of(contextInitializers));
+                ioLayer.setExternalSource(externalInitializingSource);
                 this.logLayerProcession(ioLayer);
             };
 
@@ -63,7 +69,7 @@ public class TemporalEngine {
         public LayerContainer build() {
             System.out.println(BANNER);
             tasks.forEach(Task::execute);
-            ApiMod.LOGGER.info("Mod: {} has been registered as a TemporalEngine component!", IOLayer.FORGE_MOD);
+            ApiMod.LOGGER.info("Mod: {} has been registered as a TemporalEngine component!", IOLayer.NEO_MOD);
             return this.layerContainer;
         }
 

@@ -9,11 +9,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredBlock;
 
 public interface SignExtension {
-    default RegistryObject<?> createStandingSign(String name, float strength, WoodType woodType) {
-        BlockFactory factory = InjectionContext.getInstance().getObject(BlockFactory.class);
+    default DeferredBlock<?> createStandingSign(String name, float strength, WoodType woodType) {
+        BlockFactory factory = InjectionContext.getFromInstance(BlockFactory.class);
         return factory.createTyped(name, () -> new StandingSignBlock(woodType, BlockBehaviour.Properties.of()
                 .mapColor(MapColor.WOOD)
                 .forceSolidOn()
@@ -23,8 +23,8 @@ public interface SignExtension {
                 .ignitedByLava()));
     }
 
-    default RegistryObject<?> createHangingSign(String name, MapColor color, float strength, WoodType woodType) {
-        BlockFactory factory = InjectionContext.getInstance().getObject(BlockFactory.class);
+    default DeferredBlock<?> createHangingSign(String name, MapColor color, float strength, WoodType woodType) {
+        BlockFactory factory = InjectionContext.getFromInstance(BlockFactory.class);
         return factory.createTyped(name, () -> new CeilingHangingSignBlock(woodType, BlockBehaviour.Properties.of()
                 .mapColor(color)
                 .forceSolidOn()
@@ -34,8 +34,8 @@ public interface SignExtension {
                 .ignitedByLava()));
     }
 
-    default RegistryObject<?> createWallSign(String name, float strength, WoodType woodType) {
-        BlockFactory factory = InjectionContext.getInstance().getObject(BlockFactory.class);
+    default DeferredBlock<?> createWallSign(String name, float strength, WoodType woodType) {
+        BlockFactory factory = InjectionContext.getFromInstance(BlockFactory.class);
         return factory.createTyped(name, () -> new WallSignBlock(woodType, BlockBehaviour.Properties.of()
                 .mapColor(MapColor.WOOD)
                 .forceSolidOn()

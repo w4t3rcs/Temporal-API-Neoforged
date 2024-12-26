@@ -44,11 +44,6 @@ public class GermanProvider extends ApiLanguageProvider {
     }
 
     @Override
-    public Map<Supplier<? extends Enchantment>, String> getEnchantmentTranslations() {
-        return ENCHANTMENT_TRANSLATIONS;
-    }
-
-    @Override
     public Map<String, String> getOtherTranslations() {
         return OTHER_TRANSLATIONS;
     }

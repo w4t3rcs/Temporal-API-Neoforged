@@ -4,13 +4,13 @@ import com.temporal.api.core.engine.io.metadata.DefaultAnnotationExecutor;
 import com.temporal.api.core.event.data.ApiDataGenerator;
 import com.temporal.api.core.registry.factory.common.*;
 import com.temporal.api.core.tag.factory.*;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+
+import java.util.List;
 
 public class ExtraContextInitializer implements ContextInitializer {
-    public void initialize() {
+    @Override
+    public void initialize(List<?> externalObjects) {
         Context context = InjectionContext.getInstance();
-        context.putObject(IEventBus.class, FMLJavaModLoadingContext.get().getModEventBus());
 
         context.putObject(new DefaultAnnotationExecutor());
         context.putObject(new ApiDataGenerator());
@@ -30,6 +30,7 @@ public class ExtraContextInitializer implements ContextInitializer {
         context.putObject(new SoundEventFactory());
         context.putObject(new VillagerProfessionFactory());
         context.putObject(new ArmorMaterialFactory());
+        context.putObject(new LootModifierSerializerFactory());
 
         context.putObject(new ItemTagFactory());
         context.putObject(new BlockTagFactory());

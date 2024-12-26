@@ -7,19 +7,19 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredBlock;
 
 import java.util.function.Supplier;
 
 @SuppressWarnings("unchecked")
 public interface DoorExtension {
-    default RegistryObject<DoorBlock> createDoor(String name, BlockBehaviour.Properties properties, BlockSetType setType) {
-        final TypedFactory<Block> blockFactory = InjectionContext.getInstance().getObject(BlockFactory.class);
-        return (RegistryObject<DoorBlock>) blockFactory.createTyped(name, () -> new DoorBlock(setType, properties));
+    default DeferredBlock<DoorBlock> createDoor(String name, BlockBehaviour.Properties properties, BlockSetType setType) {
+        final TypedFactory<Block> blockFactory = InjectionContext.getFromInstance(BlockFactory.class);
+        return (DeferredBlock<DoorBlock>) blockFactory.createTyped(name, () -> new DoorBlock(setType, properties));
     }
 
-    default RegistryObject<? extends DoorBlock> createDoor(String name, Supplier<? extends DoorBlock> tTypedSupplier) {
-        final TypedFactory<Block> blockFactory = InjectionContext.getInstance().getObject(BlockFactory.class);
-        return (RegistryObject<? extends DoorBlock>) blockFactory.createTyped(name, tTypedSupplier);
+    default DeferredBlock<? extends DoorBlock> createDoor(String name, Supplier<? extends DoorBlock> tTypedSupplier) {
+        final TypedFactory<Block> blockFactory = InjectionContext.getFromInstance(BlockFactory.class);
+        return (DeferredBlock<? extends DoorBlock>) blockFactory.createTyped(name, tTypedSupplier);
     }
 }

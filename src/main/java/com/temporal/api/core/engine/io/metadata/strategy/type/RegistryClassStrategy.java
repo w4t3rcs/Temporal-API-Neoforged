@@ -2,7 +2,7 @@ package com.temporal.api.core.engine.io.metadata.strategy.type;
 
 import com.temporal.api.core.engine.io.metadata.annotation.Registry;
 import com.temporal.api.core.registry.factory.common.ObjectFactory;
-import net.minecraftforge.fml.ModList;
+import net.neoforged.fml.ModList;
 
 import java.lang.reflect.Field;
 

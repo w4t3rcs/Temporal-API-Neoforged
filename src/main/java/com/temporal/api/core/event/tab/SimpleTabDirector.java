@@ -4,9 +4,7 @@ import com.temporal.api.ApiMod;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-
-import java.util.function.Supplier;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 
 public class SimpleTabDirector implements TabDirector {
     private final TabAdder tabAdder;
@@ -21,17 +19,16 @@ public class SimpleTabDirector implements TabDirector {
         return new SimpleTabDirector(new SimpleTabAdder(), event);
     }
 
-    @SafeVarargs
-    public final TabDirector direct(ResourceKey<CreativeModeTab> tab, Supplier<? extends ItemLike>... registries) {
-        return this.direct(true, tab, registries);
+    public final TabDirector direct(ResourceKey<CreativeModeTab> tab, ItemLike... items) {
+        return this.direct(true, tab, items);
     }
 
     @Override
     @SafeVarargs
-    public final TabDirector direct(boolean condition, ResourceKey<CreativeModeTab> tab, Supplier<? extends ItemLike>... registries) {
+    public final TabDirector direct(boolean condition, ResourceKey<CreativeModeTab> tab, ItemLike... items) {
         if (condition) {
             try {
-                this.tabAdder.addAllToTab(this.event, tab, registries);
+                this.tabAdder.addAllToTab(this.event, tab, items);
             } catch (Exception e) {
                 ApiMod.LOGGER.error("Tab adding gone wrong!", e);
             }
