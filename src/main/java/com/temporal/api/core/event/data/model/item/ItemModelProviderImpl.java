@@ -3,6 +3,7 @@ package com.temporal.api.core.event.data.model.item;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 import java.util.ArrayList;
@@ -18,7 +19,11 @@ public class ItemModelProviderImpl extends ApiItemModelProvider {
 
     @Override
     protected void registerModels() {
-        ITEMS.forEach(item -> this.registerItem(item, "item/generated"));
-        HANDHELD_ITEMS.forEach(item -> this.registerItem(item, "item/handheld"));
+        ITEMS.stream()
+                .map(DeferredHolder::get)
+                .forEach(this::basicItem);
+        HANDHELD_ITEMS.stream()
+                .map(DeferredHolder::get)
+                .forEach(this::handheldItem);
     }
 }
