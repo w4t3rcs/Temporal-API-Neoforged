@@ -2,13 +2,11 @@ package com.temporal.api.core.event.data;
 
 import com.temporal.api.core.event.data.language.*;
 import com.temporal.api.core.event.data.loot.LootTableProviderFactory;
-import com.temporal.api.core.event.data.model.block.BlockStateProviderImpl;
-import com.temporal.api.core.event.data.model.item.ItemModelProviderImpl;
+import com.temporal.api.core.event.data.model.ModelProviderImpl;
 import com.temporal.api.core.event.data.recipe.ApiRecipeProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import org.jetbrains.annotations.NotNull;
 
@@ -27,7 +25,7 @@ public class ApiDataGenerator implements DataGatherer {
     public void addLootTableProvider(GatherDataEvent event) {
         final DataGenerator generator = getDataGenerator(event);
         final PackOutput packOutput = getPackOutput(event);
-        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+        final CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         generator.addProvider(true, LootTableProviderFactory.createProvider(packOutput, lookupProvider));
     }
 
@@ -35,9 +33,7 @@ public class ApiDataGenerator implements DataGatherer {
     public void addModelProvider(GatherDataEvent event) {
         final DataGenerator generator = getDataGenerator(event);
         final PackOutput packOutput = getPackOutput(event);
-        final ExistingFileHelper existingFileHelper = getExistingFileHelper(event);
-        generator.addProvider(true, new BlockStateProviderImpl(packOutput, existingFileHelper));
-        generator.addProvider(true, new ItemModelProviderImpl(packOutput, existingFileHelper));
+        generator.addProvider(true, new ModelProviderImpl(packOutput));
     }
 
     @Override
@@ -59,11 +55,6 @@ public class ApiDataGenerator implements DataGatherer {
         final PackOutput packOutput = getPackOutput(event);
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         generator.addProvider(true, new ApiRecipeProvider.Runner(packOutput, lookupProvider));
-    }
-
-    @Override
-    public ExistingFileHelper getExistingFileHelper(GatherDataEvent event) {
-        return event.getExistingFileHelper();
     }
 
     @Override

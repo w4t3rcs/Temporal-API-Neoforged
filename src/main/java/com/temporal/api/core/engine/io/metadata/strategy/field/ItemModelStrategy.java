@@ -1,7 +1,7 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field;
 
 import com.temporal.api.core.engine.io.metadata.annotation.ItemModel;
-import com.temporal.api.core.event.data.model.item.ItemModelProviderImpl;
+import com.temporal.api.core.event.data.model.item.ItemModelDescriptionContainer;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
 
@@ -16,8 +16,8 @@ public class ItemModelStrategy implements FieldAnnotationStrategy {
             DeferredItem<Item> registryObject = (DeferredItem<Item>) field.get(object);
             ItemModel itemModel = field.getDeclaredAnnotation(ItemModel.class);
             switch (itemModel.type()) {
-                case SIMPLE -> ItemModelProviderImpl.ITEMS.add(registryObject);
-                case HANDHELD -> ItemModelProviderImpl.HANDHELD_ITEMS.add(registryObject);
+                case BASIC -> ItemModelDescriptionContainer.BASIC_ITEMS.add(registryObject);
+                case HANDHELD -> ItemModelDescriptionContainer.HANDHELD_ITEMS.add(registryObject);
             }
         }
     }

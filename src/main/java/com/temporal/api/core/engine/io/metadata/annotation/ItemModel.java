@@ -9,9 +9,9 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface ItemModel {
     enum Type {
-        SIMPLE,
+        BASIC,
         HANDHELD
     }
 
-    Type type() default Type.SIMPLE;
+    Type type() default Type.BASIC;
 }
