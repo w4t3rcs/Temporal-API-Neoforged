@@ -18,10 +18,30 @@ public abstract class ApiLanguageProvider extends LanguageProvider {
 
     @Override
     protected void addTranslations() {
+        translateItems();
+        translateBlocks();
+        translateEntities();
+        translateEffects();
+        translateOthers();
+    }
+
+    protected void translateItems() {
         this.getItemTranslations().forEach(this::addItem);
+    }
+
+    protected void translateBlocks() {
         this.getBlockTranslations().forEach(this::addBlock);
+    }
+
+    protected void translateEntities() {
         this.getEntityTranslations().forEach(this::addEntityType);
+    }
+
+    protected void translateEffects() {
         this.getEffectTranslations().forEach(this::addEffect);
+    }
+
+    protected void translateOthers() {
         this.getOtherTranslations().forEach(this::add);
     }
 
