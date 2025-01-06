@@ -13,6 +13,6 @@ public class HandheldItemModelProviderStrategy extends AbstractItemModelProvider
     @Override
     public void registerItemModel(DeferredItem<Item> itemRegistry) {
         Item item = itemRegistry.get();
-        this.getItemModels().createFlatItemModel(item, ModelTemplates.FLAT_HANDHELD_ITEM);
+        this.getItemModels().generateFlatItem(item, ModelTemplates.FLAT_HANDHELD_ITEM);
     }
 }
