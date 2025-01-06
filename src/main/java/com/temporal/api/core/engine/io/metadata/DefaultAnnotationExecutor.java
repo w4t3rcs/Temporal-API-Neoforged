@@ -1,7 +1,7 @@
 package com.temporal.api.core.engine.io.metadata;
 
 import com.temporal.api.core.engine.io.IOHelper;
-import com.temporal.api.core.engine.io.metadata.annotation.*;
+import com.temporal.api.core.engine.io.metadata.annotation.Injected;
 import com.temporal.api.core.engine.io.metadata.strategy.field.*;
 import com.temporal.api.core.engine.io.metadata.strategy.method.ExecutionStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.method.MethodAnnotationStrategy;
@@ -73,7 +73,8 @@ public class DefaultAnnotationExecutor implements AnnotationExecutor {
                 new FrenchTranslationStrategy(),
                 new ItalianTranslationStrategy(),
                 new SpanishTranslationStrategy(),
-                new RecipeStrategy()
+                new RecipeStrategy(),
+                new ArmorAssetStrategy()
         );
 
         this.classes.forEach(clazz -> strategies.forEach(strategy -> strategyExecutor.executeStaticField(strategy, clazz)));

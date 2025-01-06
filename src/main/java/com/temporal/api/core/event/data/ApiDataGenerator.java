@@ -1,5 +1,6 @@
 package com.temporal.api.core.event.data;
 
+import com.temporal.api.core.event.data.equipment.EquipmentAssetProviderImpl;
 import com.temporal.api.core.event.data.language.*;
 import com.temporal.api.core.event.data.loot.LootTableProviderFactory;
 import com.temporal.api.core.event.data.model.ModelProviderImpl;
@@ -34,6 +35,7 @@ public class ApiDataGenerator implements DataGatherer {
         final DataGenerator generator = getDataGenerator(event);
         final PackOutput packOutput = getPackOutput(event);
         generator.addProvider(true, new ModelProviderImpl(packOutput));
+        generator.addProvider(true, new EquipmentAssetProviderImpl(packOutput));
     }
 
     @Override
