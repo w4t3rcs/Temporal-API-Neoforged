@@ -73,6 +73,13 @@ public class DefaultAnnotationExecutor implements AnnotationExecutor {
                 new FrenchTranslationStrategy(),
                 new ItalianTranslationStrategy(),
                 new SpanishTranslationStrategy(),
+                new EnglishTranslationsStrategy(),
+                new UkrainianTranslationsStrategy(),
+                new PolishTranslationsStrategy(),
+                new GermanTranslationsStrategy(),
+                new FrenchTranslationsStrategy(),
+                new ItalianTranslationsStrategy(),
+                new SpanishTranslationsStrategy(),
                 new RecipeStrategy(),
                 new ArmorAssetStrategy()
         );
