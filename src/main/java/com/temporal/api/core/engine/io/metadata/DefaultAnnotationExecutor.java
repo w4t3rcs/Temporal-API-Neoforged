@@ -5,9 +5,7 @@ import com.temporal.api.core.engine.io.metadata.annotation.Injected;
 import com.temporal.api.core.engine.io.metadata.strategy.field.*;
 import com.temporal.api.core.engine.io.metadata.strategy.method.ExecutionStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.method.MethodAnnotationStrategy;
-import com.temporal.api.core.engine.io.metadata.strategy.type.ClassAnnotationStrategy;
-import com.temporal.api.core.engine.io.metadata.strategy.type.InjectedStrategy;
-import com.temporal.api.core.engine.io.metadata.strategy.type.RegistryClassStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.type.*;
 
 import java.util.List;
 import java.util.Set;
@@ -62,7 +60,11 @@ public class DefaultAnnotationExecutor implements AnnotationExecutor {
 
     @Override
     public void executeDataGenerationAnnotations() {
-        final List<FieldAnnotationStrategy> strategies = List.of(
+        final List<ClassAnnotationStrategy> classStrategies = List.of(
+                new DefinedRecipeStrategy(),
+                new DefinedGlobalLootModifierStrategy()
+        );
+        final List<FieldAnnotationStrategy> fieldStrategies = List.of(
                 new BlockModelStrategy(),
                 new ItemModelStrategy(),
                 new BlockLootTableStrategy(),
@@ -84,6 +86,7 @@ public class DefaultAnnotationExecutor implements AnnotationExecutor {
                 new ArmorAssetStrategy()
         );
 
-        this.classes.forEach(clazz -> strategies.forEach(strategy -> strategyExecutor.executeStaticField(strategy, clazz)));
+        this.classes.forEach(clazz -> classStrategies.forEach(strategy -> strategyExecutor.executeClass(strategy, clazz)));
+        this.classes.forEach(clazz -> fieldStrategies.forEach(strategy -> strategyExecutor.executeStaticField(strategy, clazz)));
     }
 }

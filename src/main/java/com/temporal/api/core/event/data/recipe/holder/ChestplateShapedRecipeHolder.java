@@ -1,5 +1,7 @@
 package com.temporal.api.core.event.data.recipe.holder;
 
+import net.minecraft.data.recipes.RecipeCategory;
+
 public interface ChestplateShapedRecipeHolder extends ShapedOneMaterialRecipeHolder {
     @Override
     default String[] getPattern() {
@@ -8,5 +10,10 @@ public interface ChestplateShapedRecipeHolder extends ShapedOneMaterialRecipeHol
                 "XXX",
                 "XXX"
         };
+    }
+
+    @Override
+    default RecipeCategory getRecipeCategory() {
+        return RecipeCategory.COMBAT;
     }
 }

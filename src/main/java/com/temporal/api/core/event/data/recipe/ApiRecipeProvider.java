@@ -5,7 +5,6 @@ import com.temporal.api.core.event.data.recipe.strategy.*;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -32,11 +31,9 @@ public class ApiRecipeProvider extends RecipeProvider {
     private static final RecipeStrategy<SmithingTrimRecipeHolder> SMITHING_TRIM_RECIPE_STRATEGY = new SmithingTrimRecipeStrategy();
     private static final RecipeStrategy<SmithingTransformRecipeHolder> SMITHING_TRANSFORM_RECIPE_STRATEGY = new SmithingTransformRecipeStrategy();
     private static final RecipeStrategy<StoneCuttingRecipeHolder> STONE_CUTTING_RECIPE_STRATEGY_RECIPE_STRATEGY = new StoneCuttingRecipeStrategy();
-    private final HolderGetter<Item> items;
 
     public ApiRecipeProvider(HolderLookup.Provider registries, RecipeOutput recipeOutput) {
         super(registries, recipeOutput);
-        items = registries.lookupOrThrow(Registries.ITEM);
     }
 
     @Override
@@ -67,14 +64,15 @@ public class ApiRecipeProvider extends RecipeProvider {
 
     @Override
     public @NotNull Criterion<InventoryChangeTrigger.TriggerInstance> has(@NotNull ItemLike itemLike) {
-        if (items == null) throw new RuntimeException("No items found");
+        HolderLookup.RegistryLookup<Item> lookup = registries.lookupOrThrow(Registries.ITEM);
+        if (lookup == null) throw new RuntimeException("No items found");
         return inventoryTrigger(ItemPredicate.Builder.item()
-                .of(items, new ItemLike[]{itemLike})
+                .of(lookup, new ItemLike[]{itemLike})
                 .build());
     }
 
-    public HolderGetter<Item> getItems() {
-        return items;
+    public HolderLookup.Provider getRegistries() {
+        return registries;
     }
 
     public static class Runner extends RecipeProvider.Runner {

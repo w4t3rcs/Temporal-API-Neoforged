@@ -10,6 +10,4 @@ public interface CookingRecipeHolder extends RecipeHolder {
     int getCookingTime();
 
     String getGroup();
-
-    String getRecipeName();
 }

@@ -8,6 +8,8 @@ import org.jetbrains.annotations.NotNull;
 public interface DataGatherer {
     void gatherData(GatherDataEvent event);
 
+    void addGlobalLootModifierProvider(GatherDataEvent event);
+
     void addLootTableProvider(GatherDataEvent event);
 
     void addModelProvider(GatherDataEvent event);

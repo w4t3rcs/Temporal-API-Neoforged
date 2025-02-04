@@ -8,5 +8,11 @@ public interface RecipeHolder {
 
     ItemLike getResult();
 
-    int getCount();
+    default String getName() {
+        return null;
+    }
+
+    default int getCount() {
+        return 1;
+    }
 }
