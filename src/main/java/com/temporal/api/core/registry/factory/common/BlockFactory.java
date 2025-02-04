@@ -18,19 +18,31 @@ public class BlockFactory implements ObjectFactory<Block> {
     private final ItemFactory itemFactory = InjectionContext.getFromInstance(ItemFactory.class);
 
     public DeferredBlock<Block> create(String name, BlockBehaviour.Properties properties) {
-        return create(name, properties, Block::new);
+        return create(name, properties, new Item.Properties());
+    }
+
+    public DeferredBlock<Block> create(String name, BlockBehaviour.Properties properties, Item.Properties itemProperties) {
+        return create(name, properties, Block::new, itemProperties);
     }
 
     public DeferredBlock<Block> create(String name, BlockBehaviour.Properties properties, Function<BlockBehaviour.Properties, ? extends Block> function) {
+        return create(name, properties, function, new Item.Properties());
+    }
+
+    public DeferredBlock<Block> create(String name, BlockBehaviour.Properties properties, Function<BlockBehaviour.Properties, ? extends Block> function, Item.Properties itemProperties) {
         DeferredBlock<Block> block = BLOCKS.registerBlock(name, function, properties);
-        this.itemFactory.create(name, new Item.Properties(), props -> new BlockItem(block.value(), props));
+        this.itemFactory.create(name, itemProperties, props -> new BlockItem(block.value(), props));
         return block;
     }
 
     @Override
     public DeferredBlock<Block> create(String name, Supplier<Block> blockSupplier) {
+        return create(name, blockSupplier, new Item.Properties());
+    }
+
+    public DeferredBlock<Block> create(String name, Supplier<Block> blockSupplier, Item.Properties itemProperties) {
         DeferredBlock<Block> block = BLOCKS.register(name, blockSupplier);
-        this.itemFactory.create(name, new Item.Properties(), props -> new BlockItem(block.value(), props));
+        this.itemFactory.create(name, itemProperties, props -> new BlockItem(block.value(), props));
         return block;
     }
 
