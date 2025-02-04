@@ -1,5 +1,6 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field;
 
+import com.temporal.api.core.engine.io.metadata.annotation.UkrainianTranslation;
 import com.temporal.api.core.engine.io.metadata.annotation.UkrainianTranslations;
 import com.temporal.api.core.event.data.language.UkrainianProvider;
 import net.minecraft.core.Holder;
@@ -22,8 +23,7 @@ public class UkrainianTranslationsStrategy implements FieldAnnotationStrategy {
         if (field.isAnnotationPresent(UkrainianTranslations.class)) {
             field.setAccessible(true);
             Holder<?> registryObject = (Holder<?>) field.get(object);
-            UkrainianTranslations translations = field.getDeclaredAnnotation(UkrainianTranslations.class);
-            Arrays.stream(translations.value()).forEach(translation -> {
+            Arrays.stream(field.getAnnotationsByType(UkrainianTranslation.class)).forEach(translation -> {
                 switch (translation.type()) {
                     case OTHER -> UkrainianProvider.OTHER_TRANSLATIONS.put(translation.id(), translation.value());
                     case ITEM -> UkrainianProvider.ITEM_TRANSLATIONS.put((DeferredItem<? extends Item>) registryObject, translation.value());

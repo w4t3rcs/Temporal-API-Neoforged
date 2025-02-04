@@ -1,5 +1,6 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field;
 
+import com.temporal.api.core.engine.io.metadata.annotation.PolishTranslation;
 import com.temporal.api.core.engine.io.metadata.annotation.PolishTranslations;
 import com.temporal.api.core.event.data.language.PolishProvider;
 import net.minecraft.core.Holder;
@@ -22,8 +23,7 @@ public class PolishTranslationsStrategy implements FieldAnnotationStrategy {
         if (field.isAnnotationPresent(PolishTranslations.class)) {
             field.setAccessible(true);
             Holder<?> registryObject = (Holder<?>) field.get(object);
-            PolishTranslations translations = field.getDeclaredAnnotation(PolishTranslations.class);
-            Arrays.stream(translations.value()).forEach(translation -> {
+            Arrays.stream(field.getAnnotationsByType(PolishTranslation.class)).forEach(translation -> {
                 switch (translation.type()) {
                     case OTHER -> PolishProvider.OTHER_TRANSLATIONS.put(translation.id(), translation.value());
                     case ITEM -> PolishProvider.ITEM_TRANSLATIONS.put((DeferredItem<? extends Item>) registryObject, translation.value());

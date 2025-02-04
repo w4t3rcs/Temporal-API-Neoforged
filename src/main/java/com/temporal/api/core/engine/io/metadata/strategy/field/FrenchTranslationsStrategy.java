@@ -1,5 +1,6 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field;
 
+import com.temporal.api.core.engine.io.metadata.annotation.FrenchTranslation;
 import com.temporal.api.core.engine.io.metadata.annotation.FrenchTranslations;
 import com.temporal.api.core.event.data.language.FrenchProvider;
 import net.minecraft.core.Holder;
@@ -22,8 +23,7 @@ public class FrenchTranslationsStrategy implements FieldAnnotationStrategy {
         if (field.isAnnotationPresent(FrenchTranslations.class)) {
             field.setAccessible(true);
             Holder<?> registryObject = (Holder<?>) field.get(object);
-            FrenchTranslations translations = field.getDeclaredAnnotation(FrenchTranslations.class);
-            Arrays.stream(translations.value()).forEach(translation -> {
+            Arrays.stream(field.getAnnotationsByType(FrenchTranslation.class)).forEach(translation -> {
                 switch (translation.type()) {
                     case OTHER -> FrenchProvider.OTHER_TRANSLATIONS.put(translation.id(), translation.value());
                     case ITEM -> FrenchProvider.ITEM_TRANSLATIONS.put((DeferredItem<? extends Item>) registryObject, translation.value());

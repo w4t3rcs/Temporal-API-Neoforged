@@ -30,7 +30,10 @@ public abstract class ApiLanguageProvider extends LanguageProvider {
     }
 
     protected void translateBlocks() {
-        this.getBlockTranslations().forEach(this::addBlock);
+        this.getBlockTranslations().forEach((block, value) -> {
+            this.addBlock(block, value);
+            this.addItem(() -> block.get().asItem(), value);
+        });
     }
 
     protected void translateEntities() {

@@ -1,5 +1,6 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field;
 
+import com.temporal.api.core.engine.io.metadata.annotation.SpanishTranslation;
 import com.temporal.api.core.engine.io.metadata.annotation.SpanishTranslations;
 import com.temporal.api.core.event.data.language.SpanishProvider;
 import net.minecraft.core.Holder;
@@ -22,8 +23,7 @@ public class SpanishTranslationsStrategy implements FieldAnnotationStrategy {
         if (field.isAnnotationPresent(SpanishTranslations.class)) {
             field.setAccessible(true);
             Holder<?> registryObject = (Holder<?>) field.get(object);
-            SpanishTranslations translations = field.getDeclaredAnnotation(SpanishTranslations.class);
-            Arrays.stream(translations.value()).forEach(translation -> {
+            Arrays.stream(field.getAnnotationsByType(SpanishTranslation.class)).forEach(translation -> {
                 switch (translation.type()) {
                     case OTHER -> SpanishProvider.OTHER_TRANSLATIONS.put(translation.id(), translation.value());
                     case ITEM -> SpanishProvider.ITEM_TRANSLATIONS.put((DeferredItem<? extends Item>) registryObject, translation.value());

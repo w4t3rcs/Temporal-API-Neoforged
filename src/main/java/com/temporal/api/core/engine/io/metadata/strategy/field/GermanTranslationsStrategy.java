@@ -1,5 +1,6 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field;
 
+import com.temporal.api.core.engine.io.metadata.annotation.GermanTranslation;
 import com.temporal.api.core.engine.io.metadata.annotation.GermanTranslations;
 import com.temporal.api.core.event.data.language.GermanProvider;
 import net.minecraft.core.Holder;
@@ -22,8 +23,7 @@ public class GermanTranslationsStrategy implements FieldAnnotationStrategy {
         if (field.isAnnotationPresent(GermanTranslations.class)) {
             field.setAccessible(true);
             Holder<?> registryObject = (Holder<?>) field.get(object);
-            GermanTranslations translations = field.getDeclaredAnnotation(GermanTranslations.class);
-            Arrays.stream(translations.value()).forEach(translation -> {
+            Arrays.stream(field.getAnnotationsByType(GermanTranslation.class)).forEach(translation -> {
                 switch (translation.type()) {
                     case OTHER -> GermanProvider.OTHER_TRANSLATIONS.put(translation.id(), translation.value());
                     case ITEM -> GermanProvider.ITEM_TRANSLATIONS.put((DeferredItem<? extends Item>) registryObject, translation.value());
