@@ -5,6 +5,7 @@ import com.temporal.api.core.event.data.language.*;
 import com.temporal.api.core.event.data.loot.LootTableProviderFactory;
 import com.temporal.api.core.event.data.model.ModelProviderImpl;
 import com.temporal.api.core.event.data.modifier.ApiGlobalLootModifierProvider;
+import com.temporal.api.core.event.data.pack.ApiDatapackProvider;
 import com.temporal.api.core.event.data.recipe.ApiRecipeProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -67,6 +68,14 @@ public class ApiDataGenerator implements DataGatherer {
         final PackOutput packOutput = getPackOutput(event);
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         generator.addProvider(true, new ApiRecipeProvider.Runner(packOutput, lookupProvider));
+    }
+
+    @Override
+    public void addDatapackProvider(GatherDataEvent event) {
+        final DataGenerator generator = getDataGenerator(event);
+        final PackOutput packOutput = getPackOutput(event);
+        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+        generator.addProvider(true, new ApiDatapackProvider(packOutput, lookupProvider));
     }
 
     @Override

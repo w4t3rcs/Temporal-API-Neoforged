@@ -8,7 +8,10 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 
-public class ConfiguredFeatureUtils {
+public final class ConfiguredFeatureUtils {
+    private ConfiguredFeatureUtils() {
+    }
+
     public static ResourceKey<ConfiguredFeature<?, ?>> createKey(String name) {
         return ResourceKey.create(Registries.CONFIGURED_FEATURE, IOHelper.createResourceLocation(name));
     }

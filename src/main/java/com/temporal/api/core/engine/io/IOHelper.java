@@ -1,20 +1,22 @@
 package com.temporal.api.core.engine.io;
 
 import com.temporal.api.core.engine.IOLayer;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforgespi.language.ModFileScanData;
+import org.jetbrains.annotations.NotNull;
 import org.objectweb.asm.Type;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class IOHelper {
@@ -84,5 +86,34 @@ public class IOHelper {
 
     public static <T> DeferredRegister<T> createRegistry(ResourceKey<Registry<T>> registry) {
         return DeferredRegister.create(registry, IOLayer.NEO_MOD.getModId());
+    }
+
+    public static <T> @NotNull List<Holder<T>> getTagHoldersByKey(String key, HolderGetter<T> getter, Class<?>... tagClassHolder) {
+        for (Class<?> clazz : tagClassHolder) {
+            List<Holder<T>> holders = getTagHoldersByKey(key, getter, clazz);
+            if (!holders.isEmpty()) {
+                return holders;
+            }
+        }
+
+        return Collections.emptyList();
+    }
+
+    public static <T> @NotNull List<Holder<T>> getTagHoldersByKey(String key, HolderGetter<T> getter, Class<?> tagClassHolder) {
+        return Objects.requireNonNull(Arrays.stream(tagClassHolder.getDeclaredFields())
+                        .map(field -> {
+                            try {
+                                return field.get(null);
+                            } catch (IllegalAccessException e) {
+                                throw new RuntimeException(e);
+                            }
+                        })
+                        .map(object -> (TagKey<T>) object)
+                        .filter(resourceKey -> key.equals(resourceKey.location().getPath()))
+                        .map(getter::getOrThrow)
+                        .findAny()
+                        .orElse(null))
+                .stream()
+                .toList();
     }
 }

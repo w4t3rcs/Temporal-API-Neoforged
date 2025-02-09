@@ -18,6 +18,8 @@ public interface DataGatherer {
 
     void addRecipeProvider(GatherDataEvent event);
 
+    void addDatapackProvider(GatherDataEvent event);
+
     @NotNull
     PackOutput getPackOutput(GatherDataEvent event);
 

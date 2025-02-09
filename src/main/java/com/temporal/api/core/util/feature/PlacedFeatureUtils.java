@@ -11,16 +11,19 @@ import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 
 import java.util.List;
 
-public class PlacedFeatureUtils {
+public final class PlacedFeatureUtils {
+    private PlacedFeatureUtils() {
+    }
+
     public static ResourceKey<PlacedFeature> createKey(String name) {
         return ResourceKey.create(Registries.PLACED_FEATURE, IOHelper.createResourceLocation(name));
     }
 
-    public static void register(BootstrapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key, Holder<ConfiguredFeature<?, ?>> configuration, List<PlacementModifier> modifiers) {
-        context.register(key, new PlacedFeature(configuration, List.copyOf(modifiers)));
-    }
-
     public static void register(BootstrapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key, Holder<ConfiguredFeature<?, ?>> configuration, PlacementModifier... modifiers) {
         register(context, key, configuration, List.of(modifiers));
+    }
+
+    public static void register(BootstrapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key, Holder<ConfiguredFeature<?, ?>> configuration, List<PlacementModifier> modifiers) {
+        context.register(key, new PlacedFeature(configuration, List.copyOf(modifiers)));
     }
 }

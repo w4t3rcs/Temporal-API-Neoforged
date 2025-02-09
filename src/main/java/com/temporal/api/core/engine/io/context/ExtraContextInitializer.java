@@ -39,5 +39,6 @@ public class ExtraContextInitializer implements ContextInitializer {
         context.putObject(new EntityTypeTagFactory());
         context.putObject(new FluidTagFactory());
         context.putObject(new StructureTagFactory());
+        context.putObject(new BiomeModifierTagFactory());
     }
 }
