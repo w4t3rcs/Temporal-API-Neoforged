@@ -18,6 +18,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class IOHelper {
     public static <T> T createNullObject(Class<? extends T> clazz) {
@@ -100,20 +101,27 @@ public class IOHelper {
     }
 
     public static <T> @NotNull List<Holder<T>> getTagHoldersByKey(String key, HolderGetter<T> getter, Class<?> tagClassHolder) {
-        return Objects.requireNonNull(Arrays.stream(tagClassHolder.getDeclaredFields())
-                        .map(field -> {
-                            try {
-                                return field.get(null);
-                            } catch (IllegalAccessException e) {
-                                throw new RuntimeException(e);
-                            }
-                        })
-                        .map(object -> (TagKey<T>) object)
-                        .filter(resourceKey -> key.equals(resourceKey.location().getPath()))
+        return Objects.requireNonNull(IOHelper.<T>getTagKeyStream(key, tagClassHolder)
                         .map(getter::getOrThrow)
                         .findAny()
                         .orElse(null))
                 .stream()
                 .toList();
+    }
+
+    public static <T> @NotNull Stream<TagKey<T>> getTagKeyStream(String key, Class<?> tagClassHolder) {
+        return IOHelper.<T>getTagKeyStream(tagClassHolder).filter(resourceKey -> key.equals(resourceKey.location().getPath()));
+    }
+
+    public static <T> @NotNull Stream<TagKey<T>> getTagKeyStream(Class<?> tagClassHolder) {
+        return Arrays.stream(tagClassHolder.getDeclaredFields())
+                .map(field -> {
+                    try {
+                        return field.get(null);
+                    } catch (IllegalAccessException e) {
+                        throw new RuntimeException(e);
+                    }
+                })
+                .map(object -> (TagKey<T>) object);
     }
 }

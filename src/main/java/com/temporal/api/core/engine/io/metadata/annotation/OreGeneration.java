@@ -1,6 +1,6 @@
 package com.temporal.api.core.engine.io.metadata.annotation;
 
-import net.neoforged.neoforge.common.Tags;
+import net.minecraft.tags.BiomeTags;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -40,6 +40,6 @@ public @interface OreGeneration {
 
     @interface BiomeModifier {
         String biomeTag() default "";
-        Class<?>[] biomeTagContainers() default {Tags.Biomes.class};
+        Class<?>[] biomeTagContainers() default {BiomeTags.class};
     }
 }

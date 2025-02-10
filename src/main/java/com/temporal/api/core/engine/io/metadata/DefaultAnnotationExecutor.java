@@ -84,7 +84,9 @@ public class DefaultAnnotationExecutor implements AnnotationExecutor {
                 new SpanishTranslationsStrategy(),
                 new RecipeStrategy(),
                 new ArmorAssetStrategy(),
-                new OreGenerationStrategy()
+                new OreGenerationStrategy(),
+                new BlockTagComponentStrategy(),
+                new ItemTagComponentStrategy()
         );
 
         this.classes.forEach(clazz -> classStrategies.forEach(strategy -> strategyExecutor.executeClass(strategy, clazz)));

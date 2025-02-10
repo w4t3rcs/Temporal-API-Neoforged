@@ -7,6 +7,8 @@ import com.temporal.api.core.event.data.model.ModelProviderImpl;
 import com.temporal.api.core.event.data.modifier.ApiGlobalLootModifierProvider;
 import com.temporal.api.core.event.data.pack.ApiDatapackProvider;
 import com.temporal.api.core.event.data.recipe.ApiRecipeProvider;
+import com.temporal.api.core.event.data.tag.block.ApiBlockTagsProvider;
+import com.temporal.api.core.event.data.tag.item.ApiItemTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -23,6 +25,8 @@ public class ApiDataGenerator implements DataGatherer {
         addRecipeProvider(event);
         addModelProvider(event);
         addLanguageProvider(event);
+        addTagProvider(event);
+        addDatapackProvider(event);
     }
 
     @Override
@@ -68,6 +72,16 @@ public class ApiDataGenerator implements DataGatherer {
         final PackOutput packOutput = getPackOutput(event);
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         generator.addProvider(true, new ApiRecipeProvider.Runner(packOutput, lookupProvider));
+    }
+
+    @Override
+    public void addTagProvider(GatherDataEvent event) {
+        final DataGenerator generator = getDataGenerator(event);
+        final PackOutput packOutput = getPackOutput(event);
+        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+        ApiBlockTagsProvider blockTagsProvider = new ApiBlockTagsProvider(packOutput, lookupProvider);
+        generator.addProvider(true, blockTagsProvider);
+        generator.addProvider(true, new ApiItemTagsProvider(packOutput, lookupProvider, blockTagsProvider.contentsGetter()));
     }
 
     @Override
