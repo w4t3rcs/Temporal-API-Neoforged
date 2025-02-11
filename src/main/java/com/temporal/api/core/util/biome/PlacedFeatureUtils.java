@@ -1,4 +1,4 @@
-package com.temporal.api.core.util.feature;
+package com.temporal.api.core.util.biome;
 
 import com.temporal.api.core.engine.io.IOHelper;
 import net.minecraft.core.Holder;

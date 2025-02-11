@@ -7,19 +7,25 @@ import com.temporal.api.core.event.data.model.ModelProviderImpl;
 import com.temporal.api.core.event.data.modifier.ApiGlobalLootModifierProvider;
 import com.temporal.api.core.event.data.pack.ApiDatapackProvider;
 import com.temporal.api.core.event.data.recipe.ApiRecipeProvider;
+import com.temporal.api.core.event.data.tag.TagGenerationPreparer;
+import com.temporal.api.core.event.data.tag.biome.BiomeTagGenerationPreparer;
 import com.temporal.api.core.event.data.tag.block.ApiBlockTagsProvider;
+import com.temporal.api.core.event.data.tag.block.BlockTagGenerationPreparer;
 import com.temporal.api.core.event.data.tag.item.ApiItemTagsProvider;
+import com.temporal.api.core.event.data.tag.item.ItemTagGenerationPreparer;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class ApiDataGenerator implements DataGatherer {
     @Override
     public void gatherData(GatherDataEvent event) {
+        init();
         addGlobalLootModifierProvider(event);
         addLootTableProvider(event);
         addRecipeProvider(event);
@@ -27,6 +33,12 @@ public class ApiDataGenerator implements DataGatherer {
         addLanguageProvider(event);
         addTagProvider(event);
         addDatapackProvider(event);
+    }
+
+    @Override
+    public void init() {
+        List.of(new ItemTagGenerationPreparer(), new BlockTagGenerationPreparer(), new BiomeTagGenerationPreparer())
+                .forEach(TagGenerationPreparer::prepare);
     }
 
     @Override

@@ -61,6 +61,7 @@ public class DefaultAnnotationExecutor implements AnnotationExecutor {
     @Override
     public void executeDataGenerationAnnotations() {
         final List<ClassAnnotationStrategy> classStrategies = List.of(
+                new TagContainerStrategy(),
                 new DefinedRecipeStrategy(),
                 new DefinedGlobalLootModifierStrategy()
         );

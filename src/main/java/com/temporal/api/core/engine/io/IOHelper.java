@@ -1,8 +1,6 @@
 package com.temporal.api.core.engine.io;
 
 import com.temporal.api.core.engine.IOLayer;
-import net.minecraft.core.Holder;
-import net.minecraft.core.HolderGetter;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -16,7 +14,9 @@ import org.objectweb.asm.Type;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -89,26 +89,6 @@ public class IOHelper {
         return DeferredRegister.create(registry, IOLayer.NEO_MOD.getModId());
     }
 
-    public static <T> @NotNull List<Holder<T>> getTagHoldersByKey(String key, HolderGetter<T> getter, Class<?>... tagClassHolder) {
-        for (Class<?> clazz : tagClassHolder) {
-            List<Holder<T>> holders = getTagHoldersByKey(key, getter, clazz);
-            if (!holders.isEmpty()) {
-                return holders;
-            }
-        }
-
-        return Collections.emptyList();
-    }
-
-    public static <T> @NotNull List<Holder<T>> getTagHoldersByKey(String key, HolderGetter<T> getter, Class<?> tagClassHolder) {
-        return Objects.requireNonNull(IOHelper.<T>getTagKeyStream(key, tagClassHolder)
-                        .map(getter::getOrThrow)
-                        .findAny()
-                        .orElse(null))
-                .stream()
-                .toList();
-    }
-
     public static <T> @NotNull Stream<TagKey<T>> getTagKeyStream(String key, Class<?> tagClassHolder) {
         return IOHelper.<T>getTagKeyStream(tagClassHolder).filter(resourceKey -> key.equals(resourceKey.location().getPath()));
     }
@@ -122,6 +102,7 @@ public class IOHelper {
                         throw new RuntimeException(e);
                     }
                 })
+                .filter(obj -> obj instanceof TagKey)
                 .map(object -> (TagKey<T>) object);
     }
 }

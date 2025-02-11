@@ -2,7 +2,7 @@ package com.temporal.api.core.event.data.biome.configuration;
 
 import com.temporal.api.core.engine.io.metadata.annotation.OreGeneration;
 import com.temporal.api.core.event.data.biome.GenerationProcess;
-import com.temporal.api.core.util.feature.ConfiguredFeatureUtils;
+import com.temporal.api.core.util.biome.ConfiguredFeatureUtils;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;

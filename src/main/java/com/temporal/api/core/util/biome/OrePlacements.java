@@ -1,4 +1,4 @@
-package com.temporal.api.core.util.feature;
+package com.temporal.api.core.util.biome;
 
 import net.minecraft.world.level.levelgen.placement.*;
 
