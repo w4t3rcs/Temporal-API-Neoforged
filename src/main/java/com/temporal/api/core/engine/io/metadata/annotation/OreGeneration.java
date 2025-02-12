@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
+@Target(ElementType.FIELD)
 public @interface OreGeneration {
     Configuration configuration();
     Placement placement();
@@ -37,7 +37,7 @@ public @interface OreGeneration {
     }
 
     @interface BiomeModifier {
-        String biomeTag() default "";
-        Class<?> biomeTagContainer();
+        String biomeTag() default "is_overworld";
+        Class<?> biomeTagContainer() default Object.class;
     }
 }

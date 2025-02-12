@@ -15,9 +15,7 @@ public class OreGenerationStrategy implements FieldAnnotationStrategy {
             DeferredBlock<?> registryObject = (DeferredBlock<?>) field.get(object);
             OreGeneration generationDescription = field.getDeclaredAnnotation(OreGeneration.class);
             Class<?> tagContainer = generationDescription.biomeModifier().biomeTagContainer();
-            if (tagContainer != null) {
-                BiomeTagGenerationPreparer.TAG_CONTAINERS.add(tagContainer);
-            }
+            if (!tagContainer.equals(Object.class)) BiomeTagGenerationPreparer.TAG_CONTAINERS.add(tagContainer);
             GenerationFeaturesDescriptionContainer.ORES.put(registryObject, generationDescription);
         }
     }
