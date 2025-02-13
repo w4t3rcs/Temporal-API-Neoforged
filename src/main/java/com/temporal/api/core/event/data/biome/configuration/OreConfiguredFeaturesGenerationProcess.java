@@ -22,7 +22,7 @@ public class OreConfiguredFeaturesGenerationProcess implements GenerationProcess
         ConfiguredFeaturesContainer.CONFIGURED_FEATURES.put(configuration.registry(), configuredFeatureResourceKey);
         String[] replaceableBlocks = configuration.replaceableBlocks();
         var rules = BuiltInRegistries.BLOCK.stream()
-                .filter(reg -> Arrays.asList(replaceableBlocks).contains(IOHelper.getIdByFromBlock(reg)))
+                .filter(reg -> Arrays.asList(replaceableBlocks).contains(IOHelper.getIdFromBlock(reg)))
                 .map(BlockMatchTest::new)
                 .map(rule -> OreConfiguration.target(rule, block.get().defaultBlockState()))
                 .toList();

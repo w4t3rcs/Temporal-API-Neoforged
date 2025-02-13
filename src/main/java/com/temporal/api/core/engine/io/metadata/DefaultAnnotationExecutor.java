@@ -92,7 +92,9 @@ public class DefaultAnnotationExecutor implements AnnotationExecutor {
                 new CompostableStrategy(),
                 new OxidizableStrategy(),
                 new WaxableStrategy(),
-                new RaidHeroGiftStrategy()
+                new RaidHeroGiftStrategy(),
+                new MonsterRoomMobStrategy(),
+                new ParrotImitationStrategy()
         );
 
         this.classes.forEach(clazz -> classStrategies.forEach(strategy -> strategyExecutor.executeClass(strategy, clazz)));
