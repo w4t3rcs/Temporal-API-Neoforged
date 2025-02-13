@@ -26,6 +26,8 @@ public interface DataGatherer {
 
     void addDataMapProvider(GatherDataEvent event);
 
+    void addAdvancementProvider(GatherDataEvent event);
+
     @NotNull
     PackOutput getPackOutput(GatherDataEvent event);
 

@@ -63,7 +63,8 @@ public class DefaultAnnotationExecutor implements AnnotationExecutor {
         final List<ClassAnnotationStrategy> classStrategies = List.of(
                 new TagContainerStrategy(),
                 new DefinedRecipeStrategy(),
-                new DefinedGlobalLootModifierStrategy()
+                new DefinedGlobalLootModifierStrategy(),
+                new DefinedAdvancementStrategy()
         );
         final List<FieldAnnotationStrategy> fieldStrategies = List.of(
                 new BlockModelStrategy(),

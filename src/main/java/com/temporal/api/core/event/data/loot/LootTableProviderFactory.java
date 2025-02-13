@@ -9,7 +9,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-public class LootTableProviderFactory {
+public final class LootTableProviderFactory {
+    private LootTableProviderFactory() {
+    }
+
     public static LootTableProvider createProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
         return new LootTableProvider(output, Collections.emptySet(), List.of(
                 new LootTableProvider.SubProviderEntry(BlockLootTableProvider::new, LootContextParamSets.BLOCK)
