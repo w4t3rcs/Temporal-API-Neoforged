@@ -3,6 +3,7 @@ package com.temporal.api.core.event.data;
 import com.temporal.api.core.event.data.equipment.EquipmentAssetProviderImpl;
 import com.temporal.api.core.event.data.language.*;
 import com.temporal.api.core.event.data.loot.LootTableProviderFactory;
+import com.temporal.api.core.event.data.map.ApiDataMapProvider;
 import com.temporal.api.core.event.data.model.ModelProviderImpl;
 import com.temporal.api.core.event.data.modifier.ApiGlobalLootModifierProvider;
 import com.temporal.api.core.event.data.pack.ApiDatapackProvider;
@@ -33,6 +34,7 @@ public class ApiDataGenerator implements DataGatherer {
         addLanguageProvider(event);
         addTagProvider(event);
         addDatapackProvider(event);
+        addDataMapProvider(event);
     }
 
     @Override
@@ -102,6 +104,14 @@ public class ApiDataGenerator implements DataGatherer {
         final PackOutput packOutput = getPackOutput(event);
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         generator.addProvider(true, new ApiDatapackProvider(packOutput, lookupProvider));
+    }
+
+    @Override
+    public void addDataMapProvider(GatherDataEvent event) {
+        final DataGenerator generator = getDataGenerator(event);
+        final PackOutput packOutput = getPackOutput(event);
+        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+        generator.addProvider(true, new ApiDataMapProvider(packOutput, lookupProvider));
     }
 
     @Override

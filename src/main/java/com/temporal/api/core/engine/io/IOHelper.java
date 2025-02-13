@@ -2,9 +2,11 @@ package com.temporal.api.core.engine.io;
 
 import com.temporal.api.core.engine.IOLayer;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforgespi.language.ModFileScanData;
@@ -16,6 +18,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -73,6 +76,11 @@ public class IOHelper {
         }
     }
 
+    public static ResourceLocation createNamespacedResourceLocation(String name) {
+        String[] split = name.split(":");
+        return ResourceLocation.fromNamespaceAndPath(split[0], split[1]);
+    }
+
     public static ResourceLocation createResourceLocation(String name) {
         return ResourceLocation.fromNamespaceAndPath(IOLayer.NEO_MOD.getModId(), name);
     }
@@ -104,5 +112,25 @@ public class IOHelper {
                 })
                 .filter(obj -> obj instanceof TagKey)
                 .map(object -> (TagKey<T>) object);
+    }
+
+    public static Block getBlockById(String id) {
+        return BuiltInRegistries.BLOCK.stream()
+                .filter(block -> Objects.requireNonNull(block.defaultBlockState()
+                                .getBlockHolder()
+                                .getKey())
+                        .location()
+                        .getPath()
+                        .equals(id))
+                .findFirst()
+                .orElseThrow();
+    }
+
+    public static String getIdByFromBlock(Block block) {
+        return Objects.requireNonNull(block.defaultBlockState()
+                        .getBlockHolder()
+                        .getKey())
+                .location()
+                .getPath();
     }
 }

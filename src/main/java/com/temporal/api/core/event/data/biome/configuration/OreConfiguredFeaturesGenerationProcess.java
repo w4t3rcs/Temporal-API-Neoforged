@@ -1,5 +1,6 @@
 package com.temporal.api.core.event.data.biome.configuration;
 
+import com.temporal.api.core.engine.io.IOHelper;
 import com.temporal.api.core.engine.io.metadata.annotation.OreGeneration;
 import com.temporal.api.core.event.data.biome.GenerationProcess;
 import com.temporal.api.core.util.biome.ConfiguredFeatureUtils;
@@ -12,7 +13,6 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTes
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 import java.util.Arrays;
-import java.util.Objects;
 
 public class OreConfiguredFeaturesGenerationProcess implements GenerationProcess<ConfiguredFeature<?, ?>, OreGeneration> {
     @Override
@@ -22,11 +22,7 @@ public class OreConfiguredFeaturesGenerationProcess implements GenerationProcess
         ConfiguredFeaturesContainer.CONFIGURED_FEATURES.put(configuration.registry(), configuredFeatureResourceKey);
         String[] replaceableBlocks = configuration.replaceableBlocks();
         var rules = BuiltInRegistries.BLOCK.stream()
-                .filter(reg -> Arrays.asList(replaceableBlocks).contains(Objects.requireNonNull(reg.defaultBlockState()
-                                .getBlockHolder()
-                                .getKey())
-                        .location()
-                        .getPath()))
+                .filter(reg -> Arrays.asList(replaceableBlocks).contains(IOHelper.getIdByFromBlock(reg)))
                 .map(BlockMatchTest::new)
                 .map(rule -> OreConfiguration.target(rule, block.get().defaultBlockState()))
                 .toList();

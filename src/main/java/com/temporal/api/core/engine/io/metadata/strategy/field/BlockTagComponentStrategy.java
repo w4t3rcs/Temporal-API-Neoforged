@@ -14,7 +14,7 @@ public class BlockTagComponentStrategy implements FieldAnnotationStrategy {
         if (field.isAnnotationPresent(BlockTagComponent.class)) {
             field.setAccessible(true);
             BlockTagComponent annotation = field.getDeclaredAnnotation(BlockTagComponent.class);
-            DeferredBlock<?> deferredBlock = (DeferredBlock<?>) field.get(null);
+            DeferredBlock<?> deferredBlock = (DeferredBlock<?>) field.get(object);
             if (!annotation.tagContainer().equals(Object.class)) BlockTagGenerationPreparer.TAG_CONTAINERS.add(annotation.tagContainer());
             boolean exists = ApiBlockTagsProvider.TAG_GENERATION_DESCRIPTIONS.containsKey(annotation.tag());
             if (exists) {
