@@ -28,6 +28,8 @@ public interface DataGatherer {
 
     void addAdvancementProvider(GatherDataEvent event);
 
+    void addSoundProvider(GatherDataEvent event);
+
     @NotNull
     PackOutput getPackOutput(GatherDataEvent event);
 

@@ -95,7 +95,8 @@ public class DefaultAnnotationExecutor implements AnnotationExecutor {
                 new WaxableStrategy(),
                 new RaidHeroGiftStrategy(),
                 new MonsterRoomMobStrategy(),
-                new ParrotImitationStrategy()
+                new ParrotImitationStrategy(),
+                new SoundDescriptionStrategy()
         );
 
         this.classes.forEach(clazz -> classStrategies.forEach(strategy -> strategyExecutor.executeClass(strategy, clazz)));

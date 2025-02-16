@@ -9,6 +9,7 @@ import com.temporal.api.core.event.data.model.ModelProviderImpl;
 import com.temporal.api.core.event.data.modifier.ApiGlobalLootModifierProvider;
 import com.temporal.api.core.event.data.pack.ApiDatapackProvider;
 import com.temporal.api.core.event.data.recipe.ApiRecipeProvider;
+import com.temporal.api.core.event.data.sound.ApiSoundProvider;
 import com.temporal.api.core.event.data.tag.TagGenerationPreparer;
 import com.temporal.api.core.event.data.tag.biome.BiomeTagGenerationPreparer;
 import com.temporal.api.core.event.data.tag.block.ApiBlockTagsProvider;
@@ -36,6 +37,8 @@ public class ApiDataGenerator implements DataGatherer {
         addTagProvider(event);
         addDatapackProvider(event);
         addDataMapProvider(event);
+        addAdvancementProvider(event);
+        addSoundProvider(event);
     }
 
     @Override
@@ -121,6 +124,13 @@ public class ApiDataGenerator implements DataGatherer {
         final PackOutput packOutput = getPackOutput(event);
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         generator.addProvider(true, AdvancementProviderFactory.createProvider(packOutput, lookupProvider));
+    }
+
+    @Override
+    public void addSoundProvider(GatherDataEvent event) {
+        final DataGenerator generator = getDataGenerator(event);
+        final PackOutput packOutput = getPackOutput(event);
+        generator.addProvider(true, new ApiSoundProvider(packOutput));
     }
 
     @Override
