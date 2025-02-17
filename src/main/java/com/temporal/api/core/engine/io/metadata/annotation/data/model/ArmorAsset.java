@@ -1,0 +1,14 @@
+package com.temporal.api.core.engine.io.metadata.annotation.data.model;
+
+import com.temporal.api.core.engine.io.metadata.constant.ArmorAssetType;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+public @interface ArmorAsset {
+    ArmorAssetType type() default ArmorAssetType.HUMANOID;
+}

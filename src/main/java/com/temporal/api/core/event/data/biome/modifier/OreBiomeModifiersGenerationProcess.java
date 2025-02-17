@@ -1,6 +1,6 @@
 package com.temporal.api.core.event.data.biome.modifier;
 
-import com.temporal.api.core.engine.io.metadata.annotation.OreGeneration;
+import com.temporal.api.core.engine.io.metadata.annotation.data.other.OreGeneration;
 import com.temporal.api.core.event.data.biome.GenerationProcess;
 import com.temporal.api.core.event.data.biome.placement.PlacedFeaturesContainer;
 import com.temporal.api.core.event.data.preparer.tag.biome.BiomeTagDynamicPreparer;

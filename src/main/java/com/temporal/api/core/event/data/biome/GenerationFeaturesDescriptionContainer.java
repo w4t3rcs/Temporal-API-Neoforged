@@ -1,6 +1,6 @@
 package com.temporal.api.core.event.data.biome;
 
-import com.temporal.api.core.engine.io.metadata.annotation.OreGeneration;
+import com.temporal.api.core.engine.io.metadata.annotation.data.other.OreGeneration;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 import java.util.HashMap;

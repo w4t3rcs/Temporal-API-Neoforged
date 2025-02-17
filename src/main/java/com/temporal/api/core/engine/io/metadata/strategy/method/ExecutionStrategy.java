@@ -1,6 +1,6 @@
 package com.temporal.api.core.engine.io.metadata.strategy.method;
 
-import com.temporal.api.core.engine.io.metadata.annotation.Execution;
+import com.temporal.api.core.engine.io.metadata.annotation.injection.Execution;
 import net.neoforged.fml.ModList;
 
 import java.lang.reflect.Method;

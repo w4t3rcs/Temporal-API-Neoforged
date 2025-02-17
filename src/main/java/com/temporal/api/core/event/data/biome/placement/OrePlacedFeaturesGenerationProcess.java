@@ -1,6 +1,6 @@
 package com.temporal.api.core.event.data.biome.placement;
 
-import com.temporal.api.core.engine.io.metadata.annotation.OreGeneration;
+import com.temporal.api.core.engine.io.metadata.annotation.data.other.OreGeneration;
 import com.temporal.api.core.event.data.biome.GenerationProcess;
 import com.temporal.api.core.event.data.biome.configuration.ConfiguredFeaturesContainer;
 import com.temporal.api.core.util.biome.OrePlacements;

@@ -1,11 +1,30 @@
 package com.temporal.api.core.engine.io.metadata;
 
 import com.temporal.api.core.engine.io.IOHelper;
-import com.temporal.api.core.engine.io.metadata.annotation.Injected;
-import com.temporal.api.core.engine.io.metadata.strategy.field.*;
+import com.temporal.api.core.engine.io.metadata.annotation.injection.Injected;
+import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.field.data.language.*;
+import com.temporal.api.core.engine.io.metadata.strategy.field.data.model.ArmorAssetStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.field.data.model.BlockModelStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.field.data.model.ItemModelStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.field.data.model.ParticleSpriteSetStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.field.data.other.*;
+import com.temporal.api.core.engine.io.metadata.strategy.field.data.properties.*;
+import com.temporal.api.core.engine.io.metadata.strategy.field.data.tag.BlockTagComponentStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.field.data.tag.ItemTagComponentStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.field.injection.DependencyStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.field.injection.InjectionStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.field.injection.RegistryFieldStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.method.ExecutionStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.method.MethodAnnotationStrategy;
-import com.temporal.api.core.engine.io.metadata.strategy.type.*;
+import com.temporal.api.core.engine.io.metadata.strategy.type.ClassAnnotationStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.type.data.defined.DefinedAdvancementStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.type.data.defined.DefinedEnchantmentEntityEffectStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.type.data.defined.DefinedGlobalLootModifierStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.type.data.defined.DefinedRecipeStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.type.data.tag.TagContainerStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.type.injection.InjectedStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.type.injection.RegistryClassStrategy;
 
 import java.util.List;
 import java.util.Set;

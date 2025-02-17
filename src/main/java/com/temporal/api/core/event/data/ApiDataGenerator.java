@@ -48,7 +48,10 @@ public class ApiDataGenerator implements DataGatherer {
     @Override
     public void init() {
         List.of(
-                new ItemTagDynamicPreparer(), new BlockTagDynamicPreparer(), new BiomeTagDynamicPreparer(), new EnchantmentTagDynamicPreparer()
+                new ItemTagDynamicPreparer(),
+                new BlockTagDynamicPreparer(),
+                new BiomeTagDynamicPreparer(),
+                new EnchantmentTagDynamicPreparer()
         ).forEach(DynamicPreparer::prepare);
     }
 
