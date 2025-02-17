@@ -30,6 +30,8 @@ public interface DataGatherer {
 
     void addSoundProvider(GatherDataEvent event);
 
+    void addParticleProvider(GatherDataEvent event);
+
     @NotNull
     PackOutput getPackOutput(GatherDataEvent event);
 

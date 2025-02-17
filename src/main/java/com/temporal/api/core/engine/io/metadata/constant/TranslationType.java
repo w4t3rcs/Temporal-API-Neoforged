@@ -1,4 +1,4 @@
-package com.temporal.api.core.engine.io.metadata.annotation;
+package com.temporal.api.core.engine.io.metadata.constant;
 
 public enum TranslationType {
     ITEM,

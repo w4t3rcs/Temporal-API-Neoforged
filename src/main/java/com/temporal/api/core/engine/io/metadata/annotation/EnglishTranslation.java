@@ -1,5 +1,7 @@
 package com.temporal.api.core.engine.io.metadata.annotation;
 
+import com.temporal.api.core.engine.io.metadata.constant.TranslationType;
+
 import java.lang.annotation.*;
 
 @Repeatable(EnglishTranslations.class)
