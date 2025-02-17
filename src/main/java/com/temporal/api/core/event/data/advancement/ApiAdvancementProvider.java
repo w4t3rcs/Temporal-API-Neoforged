@@ -7,7 +7,6 @@ import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.advancements.AdvancementSubProvider;
-import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.NotNull;
 import oshi.util.tuples.Pair;
 
@@ -24,7 +23,7 @@ public class ApiAdvancementProvider implements AdvancementSubProvider {
             Advancement.Builder builder = Advancement.Builder.advancement();
             builder.parent(AdvancementSubProvider.createPlaceholder(advancement.getParentRoot()));
             builder.display(advancement.icon(),
-                    Component.translatable(advancement.getId() + ".title"), Component.translatable(advancement.getId() + ".description"),
+                    advancement.getTitleComponent(), advancement.getDescriptionComponent(),
                     advancement.getBackground(), advancement.getType(),
                     advancement.showToast(), advancement.isAnnouncedInChat(), advancement.isHidden()
             );

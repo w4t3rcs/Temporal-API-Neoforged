@@ -3,6 +3,7 @@ package com.temporal.api.core.engine.io.metadata.strategy.field;
 import com.temporal.api.core.engine.io.metadata.annotation.ItalianTranslation;
 import com.temporal.api.core.event.data.language.ItalianProvider;
 import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
@@ -20,10 +21,22 @@ public class ItalianTranslationStrategy implements FieldAnnotationStrategy {
     public void execute(Field field, Object object) throws Exception {
         if (field.isAnnotationPresent(ItalianTranslation.class)) {
             field.setAccessible(true);
-            Holder<?> registryObject = (Holder<?>) field.get(object);
+            Object o = field.get(object);
+            Holder<?> registryObject;
+            if (o instanceof Holder<?>) registryObject = (Holder<?>) o;
+            else registryObject = null;
             ItalianTranslation translation = field.getDeclaredAnnotation(ItalianTranslation.class);
             switch (translation.type()) {
-                case OTHER -> ItalianProvider.OTHER_TRANSLATIONS.put(translation.id(), translation.value());
+                case OTHER -> {
+                    String id;
+                    switch (o) {
+                        case String stringField -> id = stringField;
+                        case Component component -> id = component.getContents().type().id();
+                        case null, default -> id = translation.id();
+                    }
+
+                    ItalianProvider.OTHER_TRANSLATIONS.put(id, translation.value());
+                }
                 case ITEM -> ItalianProvider.ITEM_TRANSLATIONS.put((DeferredItem<? extends Item>) registryObject, translation.value());
                 case BLOCK -> ItalianProvider.BLOCK_TRANSLATIONS.put((DeferredBlock<? extends Block>) registryObject, translation.value());
                 case ENTITY -> ItalianProvider.ENTITY_TRANSLATIONS.put((DeferredHolder<? extends EntityType<?>, ? extends EntityType<?>>) registryObject, translation.value());

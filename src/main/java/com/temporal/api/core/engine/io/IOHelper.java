@@ -48,6 +48,10 @@ public class IOHelper {
         }
     }
 
+    public static <T> ResourceKey<T> createResourceKey(ResourceKey<Registry<T>> registry, String name) {
+        return ResourceKey.create(registry, createResourceLocation(name));
+    }
+
     public static ResourceLocation createNamespacedResourceLocation(String name) {
         String[] split = name.split(":");
         return ResourceLocation.fromNamespaceAndPath(split[0], split[1]);

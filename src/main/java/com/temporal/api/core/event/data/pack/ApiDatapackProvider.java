@@ -2,6 +2,7 @@ package com.temporal.api.core.event.data.pack;
 
 import com.temporal.api.core.engine.IOLayer;
 import com.temporal.api.core.event.data.biome.CompoundGenerationProcessFacade;
+import com.temporal.api.core.event.data.enchantment.ApiEnchantmentProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
@@ -14,6 +15,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class ApiDatapackProvider extends DatapackBuiltinEntriesProvider {
     public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
+            .add(Registries.ENCHANTMENT, ApiEnchantmentProvider::bootstrap)
             .add(Registries.CONFIGURED_FEATURE, CompoundGenerationProcessFacade::executeConfiguredFeatures)
             .add(Registries.PLACED_FEATURE, CompoundGenerationProcessFacade::executePlacedFeatures)
             .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, CompoundGenerationProcessFacade::executeBiomeModifiers);
