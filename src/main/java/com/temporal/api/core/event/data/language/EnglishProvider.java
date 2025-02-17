@@ -45,6 +45,11 @@ public class EnglishProvider extends ApiLanguageProvider {
     }
 
     @Override
+    public Map<ResourceKey<Enchantment>, String> getEnchantmentTranslations() {
+        return ENCHANTMENT_TRANSLATIONS;
+    }
+
+    @Override
     public Map<String, String> getOtherTranslations() {
         return OTHER_TRANSLATIONS;
     }

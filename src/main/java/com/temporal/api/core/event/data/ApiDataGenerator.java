@@ -90,6 +90,42 @@ public class ApiDataGenerator implements DataGatherer {
         generator.addProvider(true, new FrenchProvider(packOutput));
         generator.addProvider(true, new ItalianProvider(packOutput));
         generator.addProvider(true, new SpanishProvider(packOutput));
+        generator.addProvider(true, new AlbanianProvider(packOutput));
+        generator.addProvider(true, new AustrianGermanProvider(packOutput));
+        generator.addProvider(true, new SwissGermanProvider(packOutput));
+        generator.addProvider(true, new BelarusianProvider(packOutput));
+        generator.addProvider(true, new BosnianProvider(packOutput));
+        generator.addProvider(true, new BulgarianProvider(packOutput));
+        generator.addProvider(true, new CroatianProvider(packOutput));
+        generator.addProvider(true, new CzechProvider(packOutput));
+        generator.addProvider(true, new DanishProvider(packOutput));
+        generator.addProvider(true, new DutchProvider(packOutput));
+        generator.addProvider(true, new EstonianProvider(packOutput));
+        generator.addProvider(true, new FilipinoProvider(packOutput));
+        generator.addProvider(true, new FinnishProvider(packOutput));
+        generator.addProvider(true, new GreekProvider(packOutput));
+        generator.addProvider(true, new HebrewProvider(packOutput));
+        generator.addProvider(true, new HindiProvider(packOutput));
+        generator.addProvider(true, new HungarianProvider(packOutput));
+        generator.addProvider(true, new IcelandicProvider(packOutput));
+        generator.addProvider(true, new IndonesianProvider(packOutput));
+        generator.addProvider(true, new IrishProvider(packOutput));
+        generator.addProvider(true, new JapaneseProvider(packOutput));
+        generator.addProvider(true, new KazakhProvider(packOutput));
+        generator.addProvider(true, new KoreanProvider(packOutput));
+        generator.addProvider(true, new LatvianProvider(packOutput));
+        generator.addProvider(true, new LithuanianProvider(packOutput));
+        generator.addProvider(true, new MandarinProvider(packOutput));
+        generator.addProvider(true, new PersianProvider(packOutput));
+        generator.addProvider(true, new PortugueseProvider(packOutput));
+        generator.addProvider(true, new RomanianProvider(packOutput));
+        generator.addProvider(true, new SerbianProvider(packOutput));
+        generator.addProvider(true, new SlovakProvider(packOutput));
+        generator.addProvider(true, new SlovenianProvider(packOutput));
+        generator.addProvider(true, new SwedishProvider(packOutput));
+        generator.addProvider(true, new ThaiProvider(packOutput));
+        generator.addProvider(true, new TurkishProvider(packOutput));
+        generator.addProvider(true, new VietnameseProvider(packOutput));
     }
 
     @Override

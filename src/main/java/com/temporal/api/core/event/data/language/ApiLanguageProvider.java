@@ -2,9 +2,11 @@ package com.temporal.api.core.event.data.language;
 
 import com.temporal.api.core.engine.IOLayer;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 
@@ -22,6 +24,7 @@ public abstract class ApiLanguageProvider extends LanguageProvider {
         translateBlocks();
         translateEntities();
         translateEffects();
+        translateEnchantments();
         translateOthers();
     }
 
@@ -44,6 +47,10 @@ public abstract class ApiLanguageProvider extends LanguageProvider {
         this.getEffectTranslations().forEach(this::addEffect);
     }
 
+    protected void translateEnchantments() {
+        this.getEnchantmentTranslations().forEach((key, value) -> this.add("enchantment." + key.location().getNamespace() + "." + key.location().getPath(), value));
+    }
+
     protected void translateOthers() {
         this.getOtherTranslations().forEach(this::add);
     }
@@ -55,6 +62,8 @@ public abstract class ApiLanguageProvider extends LanguageProvider {
     public abstract Map<Supplier<? extends EntityType<?>>, String> getEntityTranslations();
 
     public abstract Map<Supplier<? extends MobEffect>, String> getEffectTranslations();
+
+    public abstract Map<ResourceKey<Enchantment>, String> getEnchantmentTranslations();
 
     public abstract Map<String, String> getOtherTranslations();
 }

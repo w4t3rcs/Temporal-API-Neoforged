@@ -10,7 +10,7 @@ public interface AnnotationExecutor {
             executeStaticFieldAnnotations();
             executeFieldAnnotations();
             executeMethodAnnotations();
-            executeDataGenerationAnnotations();
+            if (System.getProperty("clientData") != null) executeDataGenerationAnnotations();
         } catch (Exception e) {
             ApiMod.LOGGER.error(e.getMessage());
         }
