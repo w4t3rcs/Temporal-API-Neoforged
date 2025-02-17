@@ -1,6 +1,7 @@
 package com.temporal.api.core.event.data.tag.biome;
 
 import com.temporal.api.core.engine.IOLayer;
+import com.temporal.api.core.event.data.preparer.tag.biome.BiomeTagDynamicPreparer;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.BiomeTagsProvider;
@@ -24,8 +25,8 @@ public class ApiBiomeTagsProvider extends BiomeTagsProvider {
     @Override
     protected void addTags(@NotNull HolderLookup.Provider provider) {
         TAG_GENERATION_DESCRIPTIONS.forEach((tag, biomes) -> {
-            if (BiomeTagGenerationPreparer.BIOME_TAGS.containsKey(tag)) {
-                TagKey<Biome> tagKey = BiomeTagGenerationPreparer.BIOME_TAGS.get(tag);
+            if (BiomeTagDynamicPreparer.BIOME_TAGS.containsKey(tag)) {
+                TagKey<Biome> tagKey = BiomeTagDynamicPreparer.BIOME_TAGS.get(tag);
                 tag(tagKey).addAll(biomes);
             }
         });

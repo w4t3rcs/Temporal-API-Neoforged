@@ -3,7 +3,7 @@ package com.temporal.api.core.event.data.biome.modifier;
 import com.temporal.api.core.engine.io.metadata.annotation.OreGeneration;
 import com.temporal.api.core.event.data.biome.GenerationProcess;
 import com.temporal.api.core.event.data.biome.placement.PlacedFeaturesContainer;
-import com.temporal.api.core.event.data.tag.biome.BiomeTagGenerationPreparer;
+import com.temporal.api.core.event.data.preparer.tag.biome.BiomeTagDynamicPreparer;
 import com.temporal.api.core.util.biome.BiomeModifiersUtils;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
@@ -25,7 +25,7 @@ public class OreBiomeModifiersGenerationProcess implements GenerationProcess<Bio
         var placedFeatures = context.lookup(Registries.PLACED_FEATURE);
         var biomes = context.lookup(Registries.BIOME);
         String biomeTag = biomeModifier.biomeTag();
-        HolderSet.Named<Biome> foundBiomes = biomes.getOrThrow(BiomeTagGenerationPreparer.BIOME_TAGS.get(biomeTag));
+        HolderSet.Named<Biome> foundBiomes = biomes.getOrThrow(BiomeTagDynamicPreparer.BIOME_TAGS.get(biomeTag));
         context.register(biomeModifierKey, new BiomeModifiers.AddFeaturesBiomeModifier(
                 foundBiomes,
                 HolderSet.direct(placedFeatures.getOrThrow(PlacedFeaturesContainer.PLACED_FEATURES.get(registryName))),

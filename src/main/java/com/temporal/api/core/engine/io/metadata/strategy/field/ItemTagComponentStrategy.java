@@ -1,8 +1,8 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field;
 
 import com.temporal.api.core.engine.io.metadata.annotation.ItemTagComponent;
+import com.temporal.api.core.event.data.preparer.tag.item.ItemTagDynamicPreparer;
 import com.temporal.api.core.event.data.tag.item.ApiItemTagsProvider;
-import com.temporal.api.core.event.data.tag.item.ItemTagGenerationPreparer;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 import java.lang.reflect.Field;
@@ -15,7 +15,7 @@ public class ItemTagComponentStrategy implements FieldAnnotationStrategy {
             field.setAccessible(true);
             ItemTagComponent annotation = field.getDeclaredAnnotation(ItemTagComponent.class);
             DeferredItem<?> deferredItem = (DeferredItem<?>) field.get(object);
-            if (!annotation.tagContainer().equals(Object.class)) ItemTagGenerationPreparer.TAG_CONTAINERS.add(annotation.tagContainer());
+            if (!annotation.tagContainer().equals(Object.class)) ItemTagDynamicPreparer.TAG_CONTAINERS.add(annotation.tagContainer());
             boolean exists = ApiItemTagsProvider.TAG_GENERATION_DESCRIPTIONS.containsKey(annotation.tag());
             if (exists) {
                 ApiItemTagsProvider.TAG_GENERATION_DESCRIPTIONS.get(annotation.tag())

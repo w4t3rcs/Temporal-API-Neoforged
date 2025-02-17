@@ -9,14 +9,16 @@ import com.temporal.api.core.event.data.model.ModelProviderImpl;
 import com.temporal.api.core.event.data.modifier.ApiGlobalLootModifierProvider;
 import com.temporal.api.core.event.data.pack.ApiDatapackProvider;
 import com.temporal.api.core.event.data.particle.ApiParticleProvider;
+import com.temporal.api.core.event.data.preparer.DynamicPreparer;
+import com.temporal.api.core.event.data.preparer.tag.biome.BiomeTagDynamicPreparer;
+import com.temporal.api.core.event.data.preparer.tag.block.BlockTagDynamicPreparer;
+import com.temporal.api.core.event.data.preparer.tag.enchantment.EnchantmentTagDynamicPreparer;
+import com.temporal.api.core.event.data.preparer.tag.item.ItemTagDynamicPreparer;
 import com.temporal.api.core.event.data.recipe.ApiRecipeProvider;
 import com.temporal.api.core.event.data.sound.ApiSoundProvider;
-import com.temporal.api.core.event.data.tag.TagGenerationPreparer;
-import com.temporal.api.core.event.data.tag.biome.BiomeTagGenerationPreparer;
+import com.temporal.api.core.event.data.tag.biome.ApiBiomeTagsProvider;
 import com.temporal.api.core.event.data.tag.block.ApiBlockTagsProvider;
-import com.temporal.api.core.event.data.tag.block.BlockTagGenerationPreparer;
 import com.temporal.api.core.event.data.tag.item.ApiItemTagsProvider;
-import com.temporal.api.core.event.data.tag.item.ItemTagGenerationPreparer;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -45,8 +47,9 @@ public class ApiDataGenerator implements DataGatherer {
 
     @Override
     public void init() {
-        List.of(new ItemTagGenerationPreparer(), new BlockTagGenerationPreparer(), new BiomeTagGenerationPreparer())
-                .forEach(TagGenerationPreparer::prepare);
+        List.of(
+                new ItemTagDynamicPreparer(), new BlockTagDynamicPreparer(), new BiomeTagDynamicPreparer(), new EnchantmentTagDynamicPreparer()
+        ).forEach(DynamicPreparer::prepare);
     }
 
     @Override
@@ -102,6 +105,7 @@ public class ApiDataGenerator implements DataGatherer {
         ApiBlockTagsProvider blockTagsProvider = new ApiBlockTagsProvider(packOutput, lookupProvider);
         generator.addProvider(true, blockTagsProvider);
         generator.addProvider(true, new ApiItemTagsProvider(packOutput, lookupProvider, blockTagsProvider.contentsGetter()));
+        generator.addProvider(true, new ApiBiomeTagsProvider(packOutput, lookupProvider));
     }
 
     @Override

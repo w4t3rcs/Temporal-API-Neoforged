@@ -1,6 +1,7 @@
 package com.temporal.api.core.event.data.tag.item;
 
 import com.temporal.api.core.engine.IOLayer;
+import com.temporal.api.core.event.data.preparer.tag.item.ItemTagDynamicPreparer;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
@@ -26,8 +27,8 @@ public class ApiItemTagsProvider extends ItemTagsProvider {
     @Override
     protected void addTags(@NotNull HolderLookup.Provider provider) {
         TAG_GENERATION_DESCRIPTIONS.forEach((tag, items) -> {
-            if (ItemTagGenerationPreparer.ITEM_TAGS.containsKey(tag)) {
-                TagKey<Item> tagKey = ItemTagGenerationPreparer.ITEM_TAGS.get(tag);
+            if (ItemTagDynamicPreparer.ITEM_TAGS.containsKey(tag)) {
+                TagKey<Item> tagKey = ItemTagDynamicPreparer.ITEM_TAGS.get(tag);
                 tag(tagKey).add(items.stream()
                         .map(DeferredHolder::get)
                         .toArray(Item[]::new));

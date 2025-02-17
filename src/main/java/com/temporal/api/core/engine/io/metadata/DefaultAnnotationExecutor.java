@@ -64,7 +64,8 @@ public class DefaultAnnotationExecutor implements AnnotationExecutor {
                 new TagContainerStrategy(),
                 new DefinedRecipeStrategy(),
                 new DefinedGlobalLootModifierStrategy(),
-                new DefinedAdvancementStrategy()
+                new DefinedAdvancementStrategy(),
+                new DefinedEnchantmentEntityEffectStrategy()
         );
         final List<FieldAnnotationStrategy> fieldStrategies = List.of(
                 new BlockModelStrategy(),
@@ -77,13 +78,6 @@ public class DefaultAnnotationExecutor implements AnnotationExecutor {
                 new FrenchTranslationStrategy(),
                 new ItalianTranslationStrategy(),
                 new SpanishTranslationStrategy(),
-                new EnglishTranslationsStrategy(),
-                new UkrainianTranslationsStrategy(),
-                new PolishTranslationsStrategy(),
-                new GermanTranslationsStrategy(),
-                new FrenchTranslationsStrategy(),
-                new ItalianTranslationsStrategy(),
-                new SpanishTranslationsStrategy(),
                 new RecipeStrategy(),
                 new ArmorAssetStrategy(),
                 new OreGenerationStrategy(),
@@ -97,7 +91,8 @@ public class DefaultAnnotationExecutor implements AnnotationExecutor {
                 new MonsterRoomMobStrategy(),
                 new ParrotImitationStrategy(),
                 new SoundDescriptionStrategy(),
-                new ParticleSpriteSetStrategy()
+                new ParticleSpriteSetStrategy(),
+                new EnchantmentDefinitionStrategy()
         );
 
         this.classes.forEach(clazz -> classStrategies.forEach(strategy -> strategyExecutor.executeClass(strategy, clazz)));

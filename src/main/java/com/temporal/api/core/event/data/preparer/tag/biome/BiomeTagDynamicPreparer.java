@@ -1,7 +1,7 @@
-package com.temporal.api.core.event.data.tag.biome;
+package com.temporal.api.core.event.data.preparer.tag.biome;
 
 import com.temporal.api.core.engine.io.IOHelper;
-import com.temporal.api.core.event.data.tag.TagGenerationPreparer;
+import com.temporal.api.core.event.data.preparer.DynamicPreparer;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
@@ -9,7 +9,7 @@ import net.neoforged.neoforge.common.Tags;
 
 import java.util.*;
 
-public final class BiomeTagGenerationPreparer implements TagGenerationPreparer {
+public final class BiomeTagDynamicPreparer implements DynamicPreparer {
     public static final Set<Class<?>> TAG_CONTAINERS = new HashSet<>(List.of(BiomeTags.class, Tags.Biomes.class));
     public static final Map<String, TagKey<Biome>> BIOME_TAGS = new HashMap<>();
 

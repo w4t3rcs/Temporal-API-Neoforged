@@ -1,6 +1,8 @@
 package com.temporal.api.core.engine.io;
 
 import com.temporal.api.core.engine.IOLayer;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
@@ -17,8 +19,10 @@ import org.objectweb.asm.Type;
 
 import java.lang.annotation.Annotation;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -73,12 +77,24 @@ public class IOHelper {
         return DeferredRegister.create(registry, IOLayer.NEO_MOD.getModId());
     }
 
-    public static <T> @NotNull Stream<TagKey<T>> getTagKeyStream(String key, Class<?> tagClassHolder) {
-        return IOHelper.<T>getTagKeyStream(tagClassHolder).filter(resourceKey -> key.equals(resourceKey.location().getPath()));
+    public static <T> HolderSet<T> createHolderSetFromIds(List<String> ids, Function<String, T> mapper) {
+        if (ids == null || ids.isEmpty()) return HolderSet.empty();
+        return HolderSet.direct(ids.stream()
+                .map(mapper)
+                .map(Holder::direct)
+                .toList());
+    }
+
+    public static <T> @NotNull Stream<ResourceKey<T>> getResourceKeyStream(Class<?> resourceClassHolder) {
+        return getFieldStream(resourceClassHolder, o -> o instanceof ResourceKey, o -> (ResourceKey<T>) o);
     }
 
     public static <T> @NotNull Stream<TagKey<T>> getTagKeyStream(Class<?> tagClassHolder) {
-        return Arrays.stream(tagClassHolder.getDeclaredFields())
+        return getFieldStream(tagClassHolder, o -> o instanceof TagKey, o -> (TagKey<T>) o);
+    }
+
+    public static <T> @NotNull Stream<T> getFieldStream(Class<?> container, Predicate<Object> filteringPredicate, Function<Object, T> mapper) {
+        return Arrays.stream(container.getDeclaredFields())
                 .map(field -> {
                     try {
                         return field.get(null);
@@ -86,8 +102,8 @@ public class IOHelper {
                         throw new RuntimeException(e);
                     }
                 })
-                .filter(obj -> obj instanceof TagKey)
-                .map(object -> (TagKey<T>) object);
+                .filter(filteringPredicate)
+                .map(mapper);
     }
 
     public static SoundEvent getSoundEventById(String id) {
@@ -124,6 +140,12 @@ public class IOHelper {
     }
 
     public static String getResourceId(ResourceKey<?> resourceKey) {
+        if (resourceKey == null) throw new RuntimeException("ResourceKey is null");
         return resourceKey.location().getPath();
+    }
+
+    public static String getResourceId(TagKey<?> tagKey) {
+        if (tagKey == null) throw new RuntimeException("ResourceKey is null");
+        return tagKey.location().getPath();
     }
 }
