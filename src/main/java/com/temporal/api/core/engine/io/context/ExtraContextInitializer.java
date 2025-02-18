@@ -31,6 +31,7 @@ public class ExtraContextInitializer implements ContextInitializer {
         context.putObject(new VillagerProfessionFactory());
         context.putObject(new ArmorMaterialFactory());
         context.putObject(new LootModifierSerializerFactory());
+        context.putObject(new MenuTypeFactory());
 
         context.putObject(new ItemTagFactory());
         context.putObject(new BlockTagFactory());
