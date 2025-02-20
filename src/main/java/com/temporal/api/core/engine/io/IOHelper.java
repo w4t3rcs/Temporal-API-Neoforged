@@ -61,6 +61,11 @@ public class IOHelper {
         return ResourceLocation.fromNamespaceAndPath(split[0], split[1]);
     }
 
+    public static ResourceLocation createResourceLocation(ResourceKey<?> resourceKey) {
+        String namespace = resourceKey.location().getNamespace();
+        return ResourceLocation.fromNamespaceAndPath(namespace, getResourceId(resourceKey));
+    }
+
     public static ResourceLocation createResourceLocation(String name) {
         return ResourceLocation.fromNamespaceAndPath(IOLayer.NEO_MOD.getModId(), name);
     }

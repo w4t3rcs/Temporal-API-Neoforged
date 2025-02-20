@@ -9,6 +9,10 @@ import java.util.Map;
 
 public final class EquipmentDescriptionContainer {
     public static final Map<ResourceKey<EquipmentAsset>, EquipmentClientInfo> HUMANOID_EQUIPMENT = new HashMap<>();
+    public static final Map<ResourceKey<EquipmentAsset>, EquipmentClientInfo> HUMANOID_WINGS_EQUIPMENT = new HashMap<>();
+    public static final Map<ResourceKey<EquipmentAsset>, EquipmentClientInfo> HORSE_EQUIPMENT = new HashMap<>();
+    public static final Map<ResourceKey<EquipmentAsset>, EquipmentClientInfo> HUMANOID_AND_HORSE_EQUIPMENT = new HashMap<>();
+    public static final Map<ResourceKey<EquipmentAsset>, EquipmentClientInfo> WOLF_EQUIPMENT = new HashMap<>();
 
     private EquipmentDescriptionContainer() {
     }
