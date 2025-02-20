@@ -1,8 +1,8 @@
 package com.temporal.api.core.event.data.biome.placement;
 
-import com.temporal.api.core.engine.io.metadata.annotation.data.other.OreGeneration;
 import com.temporal.api.core.event.data.biome.GenerationProcess;
 import com.temporal.api.core.event.data.biome.configuration.ConfiguredFeaturesContainer;
+import com.temporal.api.core.event.data.biome.dto.Ore;
 import com.temporal.api.core.util.biome.OrePlacements;
 import com.temporal.api.core.util.biome.PlacedFeatureUtils;
 import net.minecraft.core.registries.Registries;
@@ -16,17 +16,17 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 
 import java.util.List;
 
-public class OrePlacedFeaturesGenerationProcess implements GenerationProcess<PlacedFeature, OreGeneration> {
+public class OrePlacedFeaturesGenerationProcess implements GenerationProcess<PlacedFeature, Ore> {
     @Override
-    public void bootstrap(BootstrapContext<PlacedFeature> context, DeferredBlock<?> block, OreGeneration description) {
+    public void bootstrap(BootstrapContext<PlacedFeature> context, DeferredBlock<?> block, Ore description) {
         var lookup = context.lookup(Registries.CONFIGURED_FEATURE);
-        String registryName = description.configuration().registry();
+        String registryName = description.id();
         var configuredFeatureResourceKey = ConfiguredFeaturesContainer.CONFIGURED_FEATURES.get(registryName);
         var configuredFeatureReference = lookup.getOrThrow(configuredFeatureResourceKey);
         String placedFeatureRegistryName = registryName + "_placed";
         ResourceKey<PlacedFeature> placedFeatureResourceKey = PlacedFeatureUtils.createKey(placedFeatureRegistryName);
         PlacedFeaturesContainer.PLACED_FEATURES.put(registryName, placedFeatureResourceKey);
-        OreGeneration.Placement placement = description.placement();
+        Ore.Placement placement = description.placement();
         VerticalAnchor anchorFrom = VerticalAnchor.absolute(placement.from());
         VerticalAnchor anchorTo = VerticalAnchor.absolute(placement.to());
         HeightRangePlacement heightRangePlacement = switch (placement.shape()) {

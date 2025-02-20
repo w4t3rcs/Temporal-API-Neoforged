@@ -16,7 +16,6 @@ public @interface OreGeneration {
     BiomeModifier biomeModifier();
 
     @interface Configuration {
-        String registry();
         String[] replaceableBlocks();
         int size() default 1;
     }
