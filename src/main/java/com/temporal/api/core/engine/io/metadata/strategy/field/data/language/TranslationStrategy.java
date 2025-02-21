@@ -8,6 +8,8 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.equipment.trim.TrimMaterial;
+import net.minecraft.world.item.equipment.trim.TrimPattern;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -40,6 +42,8 @@ public abstract class TranslationStrategy implements FieldAnnotationStrategy {
             case ENTITY -> putTranslation("ENTITY_TRANSLATIONS", (DeferredHolder<? extends EntityType<?>, ? extends EntityType<?>>) o, value);
             case EFFECT -> putTranslation("EFFECT_TRANSLATIONS", (DeferredHolder<? extends MobEffect, ? extends MobEffect>) o, value);
             case ENCHANTMENT -> putTranslation("ENCHANTMENT_TRANSLATIONS", (ResourceKey<Enchantment>) o, value);
+            case TRIM_MATERIAL -> putTranslation("TRIM_MATERIAL_TRANSLATIONS", (ResourceKey<TrimMaterial>) o, value);
+            case TRIM_PATTERN -> putTranslation("TRIM_PATTERN_TRANSLATIONS", (ResourceKey<TrimPattern>) o, value);
         }
     }
 

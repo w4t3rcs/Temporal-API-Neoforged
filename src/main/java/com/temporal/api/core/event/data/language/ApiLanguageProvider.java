@@ -3,10 +3,13 @@ package com.temporal.api.core.event.data.language;
 import com.temporal.api.core.engine.IOLayer;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.equipment.trim.TrimMaterial;
+import net.minecraft.world.item.equipment.trim.TrimPattern;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 
@@ -25,6 +28,8 @@ public abstract class ApiLanguageProvider extends LanguageProvider {
         translateEntities();
         translateEffects();
         translateEnchantments();
+        translateTrimMaterials();
+        translateTrimPatterns();
         translateOthers();
     }
 
@@ -48,7 +53,20 @@ public abstract class ApiLanguageProvider extends LanguageProvider {
     }
 
     protected void translateEnchantments() {
-        this.getEnchantmentTranslations().forEach((key, value) -> this.add("enchantment." + key.location().getNamespace() + "." + key.location().getPath(), value));
+        this.getEnchantmentTranslations().forEach((key, value) -> translateResourceKey(key, value, "enchantment"));
+    }
+
+    protected void translateTrimMaterials() {
+        this.getTrimMaterialTranslations().forEach((key, value) -> translateResourceKey(key, value, "trim_material"));
+    }
+
+    protected void translateTrimPatterns() {
+        this.getTrimPatternTranslations().forEach((key, value) -> translateResourceKey(key, value, "trim_pattern"));
+    }
+
+    protected void translateResourceKey(ResourceKey<?> key, String value, String prefix) {
+        ResourceLocation location = key.location();
+        this.add(prefix + "." + location.getNamespace() + "." + location.getPath(), value);
     }
 
     protected void translateOthers() {
@@ -64,6 +82,10 @@ public abstract class ApiLanguageProvider extends LanguageProvider {
     public abstract Map<Supplier<? extends MobEffect>, String> getEffectTranslations();
 
     public abstract Map<ResourceKey<Enchantment>, String> getEnchantmentTranslations();
+
+    public abstract Map<ResourceKey<TrimMaterial>, String> getTrimMaterialTranslations();
+
+    public abstract Map<ResourceKey<TrimPattern>, String> getTrimPatternTranslations();
 
     public abstract Map<String, String> getOtherTranslations();
 }

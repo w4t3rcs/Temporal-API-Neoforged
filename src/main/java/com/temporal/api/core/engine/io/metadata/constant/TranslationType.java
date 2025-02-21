@@ -6,5 +6,7 @@ public enum TranslationType {
     ENTITY,
     EFFECT,
     ENCHANTMENT,
+    TRIM_MATERIAL,
+    TRIM_PATTERN,
     OTHER
 }
