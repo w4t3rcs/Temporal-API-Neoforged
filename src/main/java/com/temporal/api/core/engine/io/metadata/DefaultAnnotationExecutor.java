@@ -106,6 +106,7 @@ public class DefaultAnnotationExecutor implements AnnotationExecutor {
                 new ParticleSpriteSetStrategy(),
                 new EnchantmentDefinitionStrategy(),
                 new DamageTypeDescriptionStrategy(),
+                new TrimMaterialDescriptionStrategy(),
                 new EnglishTranslationStrategy(),
                 new UkrainianTranslationStrategy(),
                 new PolishTranslationStrategy(),

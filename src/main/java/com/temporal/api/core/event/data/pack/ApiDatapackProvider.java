@@ -4,6 +4,7 @@ import com.temporal.api.core.engine.IOLayer;
 import com.temporal.api.core.event.data.biome.CompoundGenerationProcessFacade;
 import com.temporal.api.core.event.data.damage.ApiDamageTypeProvider;
 import com.temporal.api.core.event.data.enchantment.ApiEnchantmentProvider;
+import com.temporal.api.core.event.data.trim.material.ApiTrimMaterialProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
@@ -16,6 +17,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class ApiDatapackProvider extends DatapackBuiltinEntriesProvider {
     public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
+            .add(Registries.TRIM_MATERIAL, ApiTrimMaterialProvider::bootstrap)
             .add(Registries.DAMAGE_TYPE, ApiDamageTypeProvider::bootstrap)
             .add(Registries.ENCHANTMENT, ApiEnchantmentProvider::bootstrap)
             .add(Registries.CONFIGURED_FEATURE, CompoundGenerationProcessFacade::executeConfiguredFeatures)
