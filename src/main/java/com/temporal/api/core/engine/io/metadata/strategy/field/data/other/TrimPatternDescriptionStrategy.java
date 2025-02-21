@@ -1,0 +1,23 @@
+package com.temporal.api.core.engine.io.metadata.strategy.field.data.other;
+
+import com.temporal.api.core.engine.io.metadata.annotation.data.other.TrimPatternDescription;
+import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
+import com.temporal.api.core.event.data.trim.pattern.ApiTrimPatternProvider;
+import com.temporal.api.core.event.data.trim.pattern.TrimPatternDescriptionHolder;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.equipment.trim.TrimPattern;
+
+import java.lang.reflect.Field;
+
+public class TrimPatternDescriptionStrategy implements FieldAnnotationStrategy {
+    @Override
+    public void execute(Field field, Object object) throws Exception {
+        if (field.isAnnotationPresent(TrimPatternDescription.class)) {
+            field.setAccessible(true);
+            TrimPatternDescription annotation = field.getDeclaredAnnotation(TrimPatternDescription.class);
+            ResourceKey<TrimPattern> trimPattern = (ResourceKey<TrimPattern>) field.get(object);
+            TrimPatternDescriptionHolder descriptionHolder = new TrimPatternDescriptionHolder(annotation.itemId(), annotation.decal());
+            ApiTrimPatternProvider.TRIM_PATTERNS.put(trimPattern, descriptionHolder);
+        }
+    }
+}
