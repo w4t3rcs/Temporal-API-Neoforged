@@ -22,6 +22,7 @@ import com.temporal.api.core.engine.io.metadata.strategy.type.data.defined.Defin
 import com.temporal.api.core.engine.io.metadata.strategy.type.data.defined.DefinedEnchantmentEntityEffectStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.type.data.defined.DefinedGlobalLootModifierStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.type.data.defined.DefinedRecipeStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.type.data.resource.ResourceContainerStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.type.data.tag.TagContainerStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.type.injection.InjectedStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.type.injection.RegistryClassStrategy;
@@ -81,6 +82,7 @@ public class DefaultAnnotationExecutor implements AnnotationExecutor {
     public void executeDataGenerationAnnotations() {
         final List<ClassAnnotationStrategy> classStrategies = List.of(
                 new TagContainerStrategy(),
+                new ResourceContainerStrategy(),
                 new DefinedRecipeStrategy(),
                 new DefinedGlobalLootModifierStrategy(),
                 new DefinedAdvancementStrategy(),

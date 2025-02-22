@@ -10,6 +10,7 @@ import com.temporal.api.core.event.data.modifier.ApiGlobalLootModifierProvider;
 import com.temporal.api.core.event.data.pack.ApiDatapackProvider;
 import com.temporal.api.core.event.data.particle.ApiParticleProvider;
 import com.temporal.api.core.event.data.preparer.DynamicPreparer;
+import com.temporal.api.core.event.data.preparer.resource.equipment.EquipmentResourceDynamicPreparer;
 import com.temporal.api.core.event.data.preparer.tag.biome.BiomeTagDynamicPreparer;
 import com.temporal.api.core.event.data.preparer.tag.block.BlockTagDynamicPreparer;
 import com.temporal.api.core.event.data.preparer.tag.enchantment.EnchantmentTagDynamicPreparer;
@@ -51,7 +52,8 @@ public class ApiDataGenerator implements DataGatherer {
                 new ItemTagDynamicPreparer(),
                 new BlockTagDynamicPreparer(),
                 new BiomeTagDynamicPreparer(),
-                new EnchantmentTagDynamicPreparer()
+                new EnchantmentTagDynamicPreparer(),
+                new EquipmentResourceDynamicPreparer()
         ).forEach(DynamicPreparer::prepare);
     }
 
