@@ -9,6 +9,7 @@ import java.util.List;
 public final class ItemModelDescriptionContainer {
     public static final List<DeferredItem<Item>> BASIC_ITEMS = new ArrayList<>();
     public static final List<DeferredItem<Item>> HANDHELD_ITEMS = new ArrayList<>();
+    public static final List<DeferredItem<Item>> TRIMMED_ARMOR_ITEMS = new ArrayList<>();
 
     private ItemModelDescriptionContainer() {
     }

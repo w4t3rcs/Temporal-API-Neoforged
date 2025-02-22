@@ -10,5 +10,5 @@ import java.lang.annotation.Target;
 public @interface TrimMaterialDescription {
     String itemId();
     String color();
-    int itemModelIndex();
+    float itemModelIndex();
 }

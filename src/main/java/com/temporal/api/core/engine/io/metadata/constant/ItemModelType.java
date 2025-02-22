@@ -2,5 +2,6 @@ package com.temporal.api.core.engine.io.metadata.constant;
 
 public enum ItemModelType {
     BASIC,
-    HANDHELD
+    HANDHELD,
+    TRIMMED_ARMOR
 }
