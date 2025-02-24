@@ -11,10 +11,8 @@ public class ExtraContextInitializer implements ContextInitializer {
     @Override
     public void initialize(List<?> externalObjects) {
         Context context = InjectionContext.getInstance();
-
         context.putObject(new DefaultAnnotationExecutor());
         context.putObject(new ApiDataGenerator());
-
         context.putObject(new ItemFactory());
         context.putObject(new BlockFactory());
         context.putObject(new BiomeFactory());
@@ -29,10 +27,8 @@ public class ExtraContextInitializer implements ContextInitializer {
         context.putObject(new RecipeSerializerFactory());
         context.putObject(new SoundEventFactory());
         context.putObject(new VillagerProfessionFactory());
-        context.putObject(new ArmorMaterialFactory());
         context.putObject(new LootModifierSerializerFactory());
         context.putObject(new MenuTypeFactory());
-
         context.putObject(new ItemTagFactory());
         context.putObject(new BlockTagFactory());
         context.putObject(new BannerPatternTagFactory());
