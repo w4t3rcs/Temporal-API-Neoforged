@@ -1,4 +1,4 @@
-package com.temporal.api.core.engine.io.metadata.annotation.data.other;
+package com.temporal.api.core.engine.io.metadata.annotation.data.biome;
 
 import com.temporal.api.core.engine.io.metadata.constant.OrePlacementShape;
 import com.temporal.api.core.engine.io.metadata.constant.OreRarity;

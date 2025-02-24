@@ -18,12 +18,10 @@ import org.jetbrains.annotations.NotNull;
 import org.objectweb.asm.Type;
 
 import java.lang.annotation.Annotation;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -88,6 +86,17 @@ public class IOHelper {
                 .map(mapper)
                 .map(Holder::direct)
                 .toList());
+    }
+
+    public static <T> Collector<Holder<T>, ArrayList<Holder<T>>, HolderSet<T>> createHolderSetCollector() {
+        return Collector.of(
+                ArrayList::new,
+                ArrayList::add,
+                (r1, r2) -> {
+                    r1.addAll(r2);
+                    return r1;
+                },
+                HolderSet::direct);
     }
 
     public static <T> @NotNull Stream<ResourceKey<T>> getResourceKeyStream(Class<?> resourceClassHolder) {

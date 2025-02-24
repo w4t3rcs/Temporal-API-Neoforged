@@ -1,7 +1,7 @@
-package com.temporal.api.core.engine.io.metadata.strategy.field.data.other;
+package com.temporal.api.core.engine.io.metadata.strategy.field.data.biome;
 
 import com.temporal.api.core.engine.io.IOHelper;
-import com.temporal.api.core.engine.io.metadata.annotation.data.other.OreGeneration;
+import com.temporal.api.core.engine.io.metadata.annotation.data.biome.OreGeneration;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.event.data.biome.GenerationFeaturesDescriptionContainer;
 import com.temporal.api.core.event.data.biome.dto.Ore;
@@ -19,9 +19,9 @@ public class OreGenerationStrategy implements FieldAnnotationStrategy {
             OreGeneration oreGeneration = field.getDeclaredAnnotation(OreGeneration.class);
             Class<?> tagContainer = oreGeneration.biomeTagContainer();
             if (!tagContainer.equals(Object.class)) BiomeTagDynamicPreparer.TAG_CONTAINERS.add(tagContainer);
-            Ore.Configuration configuration = new Ore.Configuration(oreGeneration.replaceableBlocks(), oreGeneration.size());
-            Ore.Placement placement = new Ore.Placement(oreGeneration.rarity(), oreGeneration.count(), oreGeneration.shape(), oreGeneration.from(), oreGeneration.to());
-            Ore.BiomeModifier biomeModifier = new Ore.BiomeModifier(oreGeneration.biomeTag());
+            var configuration = new Ore.Configuration(oreGeneration.replaceableBlocks(), oreGeneration.size());
+            var placement = new Ore.Placement(oreGeneration.rarity(), oreGeneration.count(), oreGeneration.shape(), oreGeneration.from(), oreGeneration.to());
+            var biomeModifier = new Ore.BiomeModifier(oreGeneration.biomeTag());
             Ore ore = new Ore(IOHelper.getResourceId(registryObject.getKey()), configuration, placement, biomeModifier);
             GenerationFeaturesDescriptionContainer.ORES.put(registryObject, ore);
         }
