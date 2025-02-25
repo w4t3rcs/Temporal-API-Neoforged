@@ -17,26 +17,26 @@ public final class CompoundGenerationProcessFacade {
 
     public static void executeConfiguredFeatures(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         executeBlockProcess(context, new OreConfiguredFeaturesGenerationProcess(), GenerationFeaturesDescriptionContainer.ORES);
+        executeBlockProcess(context, new TreeConfiguredFeaturesGenerationProcess(), GenerationFeaturesDescriptionContainer.TREES);
         executeBlockProcess(context, new FlowerConfiguredFeaturesGenerationProcess(), GenerationFeaturesDescriptionContainer.FLOWERS);
         executeBlockProcess(context, new GrassConfiguredFeaturesGenerationProcess(), GenerationFeaturesDescriptionContainer.GRASSES);
         executeBlockProcess(context, new VineConfiguredFeaturesGenerationProcess(), GenerationFeaturesDescriptionContainer.VINES);
-        executeBlockProcess(context, new TreeConfiguredFeaturesGenerationProcess(), GenerationFeaturesDescriptionContainer.TREES);
     }
 
     public static void executePlacedFeatures(BootstrapContext<PlacedFeature> context) {
         executeBlockProcess(context, new OrePlacedFeaturesGenerationProcess(), GenerationFeaturesDescriptionContainer.ORES);
+        executeBlockProcess(context, new TreePlacedFeaturesGenerationProcess(), GenerationFeaturesDescriptionContainer.TREES);
         executeBlockProcess(context, new FlowerPlacedFeaturesGenerationProcess(), GenerationFeaturesDescriptionContainer.FLOWERS);
         executeBlockProcess(context, new GrassPlacedFeaturesGenerationProcess(), GenerationFeaturesDescriptionContainer.GRASSES);
         executeBlockProcess(context, new VinePlacedFeaturesGenerationProcess(), GenerationFeaturesDescriptionContainer.VINES);
-        executeBlockProcess(context, new TreePlacedFeaturesGenerationProcess(), GenerationFeaturesDescriptionContainer.TREES);
     }
 
     public static void executeBiomeModifiers(BootstrapContext<BiomeModifier> context) {
         executeBlockProcess(context, new OreBiomeModifiersGenerationProcess(), GenerationFeaturesDescriptionContainer.ORES);
+        executeBlockProcess(context, new TreeBiomeModifiersGenerationProcess(), GenerationFeaturesDescriptionContainer.TREES);
         executeBlockProcess(context, new FlowerBiomeModifiersGenerationProcess(), GenerationFeaturesDescriptionContainer.FLOWERS);
         executeBlockProcess(context, new GrassBiomeModifiersGenerationProcess(), GenerationFeaturesDescriptionContainer.GRASSES);
         executeBlockProcess(context, new VineBiomeModifiersGenerationProcess(), GenerationFeaturesDescriptionContainer.VINES);
-        executeBlockProcess(context, new TreeBiomeModifiersGenerationProcess(), GenerationFeaturesDescriptionContainer.TREES);
     }
 
     private static <T, D> void executeBlockProcess(BootstrapContext<T> context, GenerationProcess<T, D> process, Map<DeferredBlock<?>, D> data) {
