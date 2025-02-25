@@ -9,10 +9,10 @@ import net.neoforged.neoforge.registries.DeferredItem;
 
 public interface AxeExtension {
     default DeferredItem<Item> createAxe(String name, ToolMaterial material, float damage, float speed) {
-        return this.createAxe(name, material, damage, speed, new Item.Properties());
+        return this.createAxe(name, new Item.Properties(), material, damage, speed);
     }
 
-    default DeferredItem<Item> createAxe(String name, ToolMaterial material, float damage, float speed, Item.Properties properties) {
+    default DeferredItem<Item> createAxe(String name, Item.Properties properties, ToolMaterial material, float damage, float speed) {
         ItemFactory itemFactory = InjectionContext.getFromInstance(ItemFactory.class);
         return itemFactory.create(name, properties, props -> new AxeItem(material, damage, speed, props));
     }

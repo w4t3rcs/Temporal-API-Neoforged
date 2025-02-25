@@ -7,6 +7,10 @@ import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 public interface BowExtension {
+    default DeferredItem<Item> createBow(String name) {
+        return createBow(name, new Item.Properties());
+    }
+
     default DeferredItem<Item> createBow(String name, Item.Properties properties) {
         ItemFactory itemFactory = InjectionContext.getFromInstance(ItemFactory.class);
         return itemFactory.create(name, properties, BowItem::new);

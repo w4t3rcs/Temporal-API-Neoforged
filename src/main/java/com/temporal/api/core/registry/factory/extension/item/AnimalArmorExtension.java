@@ -9,10 +9,10 @@ import net.neoforged.neoforge.registries.DeferredItem;
 
 public interface AnimalArmorExtension {
     default DeferredItem<Item> createAnimalArmor(String name, ArmorMaterial material, AnimalArmorItem.BodyType type) {
-        return this.createAnimalArmor(name, material, type, new Item.Properties());
+        return this.createAnimalArmor(name, new Item.Properties(), material, type);
     }
 
-    default DeferredItem<Item> createAnimalArmor(String name, ArmorMaterial material, AnimalArmorItem.BodyType type, Item.Properties properties) {
+    default DeferredItem<Item> createAnimalArmor(String name, Item.Properties properties, ArmorMaterial material, AnimalArmorItem.BodyType type) {
         ItemFactory itemFactory = InjectionContext.getFromInstance(ItemFactory.class);
         return itemFactory.create(name, properties, props -> new AnimalArmorItem(material, type, props));
     }

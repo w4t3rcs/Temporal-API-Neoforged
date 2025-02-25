@@ -10,10 +10,10 @@ import net.neoforged.neoforge.registries.DeferredItem;
 
 public interface ArmorExtension {
     default DeferredItem<Item> createArmor(String name, ArmorMaterial material, ArmorType type) {
-        return this.createArmor(name, material, type, new Item.Properties());
+        return this.createArmor(name, new Item.Properties(), material, type);
     }
 
-    default DeferredItem<Item> createArmor(String name, ArmorMaterial material, ArmorType type, Item.Properties properties) {
+    default DeferredItem<Item> createArmor(String name, Item.Properties properties, ArmorMaterial material, ArmorType type) {
         ItemFactory itemFactory = InjectionContext.getFromInstance(ItemFactory.class);
         return itemFactory.create(name, properties, props -> new ArmorItem(material, type, props));
     }

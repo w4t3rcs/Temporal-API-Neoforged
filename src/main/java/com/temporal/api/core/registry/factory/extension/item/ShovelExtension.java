@@ -9,10 +9,10 @@ import net.neoforged.neoforge.registries.DeferredItem;
 
 public interface ShovelExtension {
     default DeferredItem<Item> createShovel(String name, ToolMaterial material, float damage, float speed) {
-        return this.createShovel(name, material, damage, speed, new Item.Properties());
+        return this.createShovel(name, new Item.Properties(), material, damage, speed);
     }
 
-    default DeferredItem<Item> createShovel(String name, ToolMaterial material, float damage, float speed, Item.Properties properties) {
+    default DeferredItem<Item> createShovel(String name, Item.Properties properties, ToolMaterial material, float damage, float speed) {
         ItemFactory itemFactory = InjectionContext.getFromInstance(ItemFactory.class);
         return itemFactory.create(name, properties, props -> new ShovelItem(material, damage, speed, props));
     }

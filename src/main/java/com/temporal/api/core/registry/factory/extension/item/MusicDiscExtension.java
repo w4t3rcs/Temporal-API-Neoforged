@@ -11,7 +11,11 @@ import net.minecraft.world.item.Rarity;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 public interface MusicDiscExtension {
-    default DeferredItem<Item> createMusicDisc(String name, String soundId, Item.Properties properties) {
+    default DeferredItem<Item> createMusicDisc(String name, String soundId) {
+        return createMusicDisc(name, new Item.Properties(), soundId);
+    }
+
+    default DeferredItem<Item> createMusicDisc(String name, Item.Properties properties, String soundId) {
         ItemFactory itemFactory = InjectionContext.getFromInstance(ItemFactory.class);
         ResourceKey<JukeboxSong> songResourceKey = ResourceKey.create(Registries.JUKEBOX_SONG, IOHelper.createResourceLocation(soundId));
         return itemFactory.create(name, properties.stacksTo(1)
