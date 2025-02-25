@@ -11,7 +11,7 @@ public class BasicItemModelProviderStrategy extends AbstractItemModelProviderStr
     }
 
     @Override
-    public void registerItemModel(DeferredItem<Item> itemRegistry) {
+    public void registerItemModel(DeferredItem<Item> itemRegistry, Object... additionalData) {
         Item item = itemRegistry.get();
         this.getItemModels().generateFlatItem(item, ModelTemplates.FLAT_ITEM);
     }

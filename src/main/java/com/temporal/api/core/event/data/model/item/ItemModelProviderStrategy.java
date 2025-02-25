@@ -4,5 +4,5 @@ import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 public interface ItemModelProviderStrategy<T extends Item> {
-    void registerItemModel(DeferredItem<T> itemRegistry);
+    void registerItemModel(DeferredItem<T> itemRegistry, Object... additionalData);
 }

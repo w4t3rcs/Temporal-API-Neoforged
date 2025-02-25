@@ -16,7 +16,7 @@ public class TrimmedItemModelProviderStrategy extends AbstractItemModelProviderS
     }
 
     @Override
-    public void registerItemModel(DeferredItem<Item> itemRegistry) {
+    public void registerItemModel(DeferredItem<Item> itemRegistry, Object... additionalData) {
         ResourceLocation id = itemRegistry.getId();
         String path = id.getPath();
         String armorType = "";

@@ -16,8 +16,16 @@ public class ItemModelProviderStrategyConsumerImpl implements ItemModelProviderS
         BASIC_ITEMS.forEach(registerItemModel(basicItemModelProviderStrategy));
         var handheldItemModelProviderStrategy = new HandheldItemModelProviderStrategy(itemModels);
         HANDHELD_ITEMS.forEach(registerItemModel(handheldItemModelProviderStrategy));
+        var bowModelProviderStrategy = new BowModelProviderStrategy(itemModels);
+        BOW_ITEMS.forEach(registerItemModel(bowModelProviderStrategy));
+        var crossbowModelProviderStrategy = new CrossbowModelProviderStrategy(itemModels);
+        CROSSBOW_ITEMS.forEach(registerItemModel(crossbowModelProviderStrategy));
+        var shieldModelProviderStrategy = new ShieldModelProviderStrategy(itemModels);
+        SHIELD_ITEMS.forEach(registerItemModel(shieldModelProviderStrategy));
         var trimmedItemModelProviderStrategy = new TrimmedItemModelProviderStrategy(itemModels);
         TRIMMED_ARMOR_ITEMS.forEach(registerItemModel(trimmedItemModelProviderStrategy));
+        var potionItemModelProviderStrategy = new PotionItemModelProviderStrategy(itemModels);
+        POTION_ITEMS.forEach(registerItemModel(potionItemModelProviderStrategy));
     }
 
     @Override
