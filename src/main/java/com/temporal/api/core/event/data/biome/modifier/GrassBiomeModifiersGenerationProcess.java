@@ -34,7 +34,7 @@ public class GrassBiomeModifiersGenerationProcess implements GenerationProcess<B
         context.register(biomeModifierKey, new BiomeModifiers.AddFeaturesBiomeModifier(
                 foundBiomes,
                 HolderSet.direct(placedFeatures.getOrThrow(PlacedFeaturesContainer.PLACED_FEATURES.get(registryName))),
-                GenerationStep.Decoration.UNDERGROUND_ORES
+                GenerationStep.Decoration.VEGETAL_DECORATION
         ));
     }
 

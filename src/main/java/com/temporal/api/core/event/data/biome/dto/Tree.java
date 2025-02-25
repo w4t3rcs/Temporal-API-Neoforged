@@ -11,7 +11,7 @@ public record Tree(String id, Configuration configuration, Placement placement, 
                                 TreeFeatureSize featureSize, int limit, int upperLimit, int lowerSize, int middleSize, int upperSize, int minClippedHeight) {
     }
 
-    public record Placement(int count) {
+    public record Placement(int baseValue, float chance, int addedAmount) {
     }
 
     public record BiomeModifier(String... biomeTags) {

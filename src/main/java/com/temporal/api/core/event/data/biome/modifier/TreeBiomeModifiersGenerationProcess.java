@@ -2,7 +2,7 @@ package com.temporal.api.core.event.data.biome.modifier;
 
 import com.temporal.api.core.engine.io.IOHelper;
 import com.temporal.api.core.event.data.biome.GenerationProcess;
-import com.temporal.api.core.event.data.biome.dto.Ore;
+import com.temporal.api.core.event.data.biome.dto.Tree;
 import com.temporal.api.core.event.data.biome.placement.PlacedFeaturesContainer;
 import com.temporal.api.core.event.data.preparer.tag.biome.BiomeTagDynamicPreparer;
 import com.temporal.api.core.util.biome.BiomeModifiersUtils;
@@ -18,11 +18,11 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 
 import java.util.Arrays;
 
-public class OreBiomeModifiersGenerationProcess implements GenerationProcess<BiomeModifier, Ore> {
+public class TreeBiomeModifiersGenerationProcess implements GenerationProcess<BiomeModifier, Tree> {
     @Override
-    public void bootstrap(BootstrapContext<BiomeModifier> context, DeferredBlock<?> block, Ore description) {
+    public void bootstrap(BootstrapContext<BiomeModifier> context, DeferredBlock<?> block, Tree description) {
         String registryName = description.id();
-        Ore.BiomeModifier biomeModifier = description.biomeModifier();
+        Tree.BiomeModifier biomeModifier = description.biomeModifier();
         ResourceKey<BiomeModifier> biomeModifierKey = BiomeModifiersUtils.registerKey("add_" + registryName);
         BiomeModifiersContainer.BIOME_MODIFIERS.put(registryName, biomeModifierKey);
         var placedFeatures = context.lookup(Registries.PLACED_FEATURE);
@@ -34,7 +34,7 @@ public class OreBiomeModifiersGenerationProcess implements GenerationProcess<Bio
         context.register(biomeModifierKey, new BiomeModifiers.AddFeaturesBiomeModifier(
                 foundBiomes,
                 HolderSet.direct(placedFeatures.getOrThrow(PlacedFeaturesContainer.PLACED_FEATURES.get(registryName))),
-                GenerationStep.Decoration.UNDERGROUND_ORES
+                GenerationStep.Decoration.VEGETAL_DECORATION
         ));
     }
 

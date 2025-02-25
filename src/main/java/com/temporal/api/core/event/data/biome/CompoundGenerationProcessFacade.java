@@ -1,17 +1,8 @@
 package com.temporal.api.core.event.data.biome;
 
-import com.temporal.api.core.event.data.biome.configuration.FlowerConfiguredFeaturesGenerationProcess;
-import com.temporal.api.core.event.data.biome.configuration.GrassConfiguredFeaturesGenerationProcess;
-import com.temporal.api.core.event.data.biome.configuration.OreConfiguredFeaturesGenerationProcess;
-import com.temporal.api.core.event.data.biome.configuration.VineConfiguredFeaturesGenerationProcess;
-import com.temporal.api.core.event.data.biome.modifier.FlowerBiomeModifiersGenerationProcess;
-import com.temporal.api.core.event.data.biome.modifier.GrassBiomeModifiersGenerationProcess;
-import com.temporal.api.core.event.data.biome.modifier.OreBiomeModifiersGenerationProcess;
-import com.temporal.api.core.event.data.biome.modifier.VineBiomeModifiersGenerationProcess;
-import com.temporal.api.core.event.data.biome.placement.FlowerPlacedFeaturesGenerationProcess;
-import com.temporal.api.core.event.data.biome.placement.GrassPlacedFeaturesGenerationProcess;
-import com.temporal.api.core.event.data.biome.placement.OrePlacedFeaturesGenerationProcess;
-import com.temporal.api.core.event.data.biome.placement.VinePlacedFeaturesGenerationProcess;
+import com.temporal.api.core.event.data.biome.configuration.*;
+import com.temporal.api.core.event.data.biome.modifier.*;
+import com.temporal.api.core.event.data.biome.placement.*;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
@@ -29,6 +20,7 @@ public final class CompoundGenerationProcessFacade {
         executeBlockProcess(context, new FlowerConfiguredFeaturesGenerationProcess(), GenerationFeaturesDescriptionContainer.FLOWERS);
         executeBlockProcess(context, new GrassConfiguredFeaturesGenerationProcess(), GenerationFeaturesDescriptionContainer.GRASSES);
         executeBlockProcess(context, new VineConfiguredFeaturesGenerationProcess(), GenerationFeaturesDescriptionContainer.VINES);
+        executeBlockProcess(context, new TreeConfiguredFeaturesGenerationProcess(), GenerationFeaturesDescriptionContainer.TREES);
     }
 
     public static void executePlacedFeatures(BootstrapContext<PlacedFeature> context) {
@@ -36,6 +28,7 @@ public final class CompoundGenerationProcessFacade {
         executeBlockProcess(context, new FlowerPlacedFeaturesGenerationProcess(), GenerationFeaturesDescriptionContainer.FLOWERS);
         executeBlockProcess(context, new GrassPlacedFeaturesGenerationProcess(), GenerationFeaturesDescriptionContainer.GRASSES);
         executeBlockProcess(context, new VinePlacedFeaturesGenerationProcess(), GenerationFeaturesDescriptionContainer.VINES);
+        executeBlockProcess(context, new TreePlacedFeaturesGenerationProcess(), GenerationFeaturesDescriptionContainer.TREES);
     }
 
     public static void executeBiomeModifiers(BootstrapContext<BiomeModifier> context) {
@@ -43,6 +36,7 @@ public final class CompoundGenerationProcessFacade {
         executeBlockProcess(context, new FlowerBiomeModifiersGenerationProcess(), GenerationFeaturesDescriptionContainer.FLOWERS);
         executeBlockProcess(context, new GrassBiomeModifiersGenerationProcess(), GenerationFeaturesDescriptionContainer.GRASSES);
         executeBlockProcess(context, new VineBiomeModifiersGenerationProcess(), GenerationFeaturesDescriptionContainer.VINES);
+        executeBlockProcess(context, new TreeBiomeModifiersGenerationProcess(), GenerationFeaturesDescriptionContainer.TREES);
     }
 
     private static <T, D> void executeBlockProcess(BootstrapContext<T> context, GenerationProcess<T, D> process, Map<DeferredBlock<?>, D> data) {

@@ -10,6 +10,6 @@ public record Ore(String id, Configuration configuration, Placement placement, B
     public record Placement(OreRarity rarity, int count, OrePlacementShape shape, int from, int to) {
     }
 
-    public record BiomeModifier(String biomeTag) {
+    public record BiomeModifier(String... biomeTags) {
     }
 }
