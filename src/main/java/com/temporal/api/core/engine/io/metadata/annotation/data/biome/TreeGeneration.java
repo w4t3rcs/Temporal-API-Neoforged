@@ -32,6 +32,7 @@ public @interface TreeGeneration {
     int middleSize() default 0;
     int upperSize();
     int minClippedHeight() default 0;
+    boolean ignoreVines() default true;
     int baseValue();
     int chance();
     int addedAmount();

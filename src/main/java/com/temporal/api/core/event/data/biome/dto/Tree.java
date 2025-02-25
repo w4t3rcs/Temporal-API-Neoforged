@@ -8,7 +8,8 @@ public record Tree(String id, Configuration configuration, Placement placement, 
     public record Configuration(String logBlock, String leavesBlock, String rootBlock,
                                 Class<? extends TrunkPlacer> trunkPlacerClass, int baseHeight, int heightRandA, int heightRandB,
                                 Class<? extends FoliagePlacer> foliagePlacerClass, int radius, int offset, int height,
-                                TreeFeatureSize featureSize, int limit, int upperLimit, int lowerSize, int middleSize, int upperSize, int minClippedHeight) {
+                                TreeFeatureSize featureSize, int limit, int upperLimit,
+                                int lowerSize, int middleSize, int upperSize, int minClippedHeight, boolean ignoreVines) {
     }
 
     public record Placement(int baseValue, float chance, int addedAmount) {

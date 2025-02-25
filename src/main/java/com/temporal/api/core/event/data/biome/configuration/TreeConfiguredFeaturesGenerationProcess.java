@@ -35,13 +35,15 @@ public class TreeConfiguredFeaturesGenerationProcess implements GenerationProces
             TrunkPlacer trunkPlacer = getTrunkPlacer(configuration);
             FoliagePlacer foliagePlacer = getFoliagePlacer(configuration);
             FeatureSize featureSize = getFeatureSize(configuration);
-            ConfiguredFeatureUtils.register(context, configuredFeatureResourceKey, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+            TreeConfiguration.TreeConfigurationBuilder builder = new TreeConfiguration.TreeConfigurationBuilder(
                     BlockStateProvider.simple(IOHelper.getBlockById(configuration.logBlock())),
                     trunkPlacer,
                     BlockStateProvider.simple(IOHelper.getBlockById(configuration.leavesBlock())),
                     foliagePlacer,
                     featureSize
-            ).dirt(BlockStateProvider.simple(IOHelper.getBlockById(configuration.rootBlock()))).build());
+            ).dirt(BlockStateProvider.simple(IOHelper.getBlockById(configuration.rootBlock())));
+            builder = configuration.ignoreVines() ? builder.ignoreVines() : builder;
+            ConfiguredFeatureUtils.register(context, configuredFeatureResourceKey, Feature.TREE, builder.build());
         } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
             ApiMod.LOGGER.error("Error while instantiating trunk placer or foliage placer", e);
             throw new RuntimeException(e);
