@@ -21,7 +21,7 @@ public class OreGenerationStrategy implements FieldAnnotationStrategy {
             if (!tagContainer.equals(Object.class)) BiomeTagDynamicPreparer.TAG_CONTAINERS.add(tagContainer);
             var configuration = new Ore.Configuration(oreGeneration.replaceableBlocks(), oreGeneration.size());
             var placement = new Ore.Placement(oreGeneration.rarity(), oreGeneration.count(), oreGeneration.shape(), oreGeneration.from(), oreGeneration.to());
-            var biomeModifier = new Ore.BiomeModifier(oreGeneration.biomeTags());
+            var biomeModifier = new Ore.BiomeModifier(oreGeneration.biomeTag());
             Ore ore = new Ore(IOHelper.getResourceId(registryObject.getKey()), configuration, placement, biomeModifier);
             GenerationFeaturesDescriptionContainer.ORES.put(registryObject, ore);
         }

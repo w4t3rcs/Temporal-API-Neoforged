@@ -10,6 +10,6 @@ public record Flower(String id, Configuration configuration, Placement placement
     public record Placement(int chance, float noiseLevel, int belowNoise, int aboveNoise) {
     }
 
-    public record BiomeModifier(String... biomeTags) {
+    public record BiomeModifier(String biomeTag) {
     }
 }

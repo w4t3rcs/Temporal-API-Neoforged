@@ -21,7 +21,7 @@ public class GrassGenerationStrategy implements FieldAnnotationStrategy {
             if (!tagContainer.equals(Object.class)) BiomeTagDynamicPreparer.TAG_CONTAINERS.add(tagContainer);
             var configuration = new Grass.Configuration(grassGeneration.tries());
             var placement = new Grass.Placement(grassGeneration.count());
-            var biomeModifier = new Grass.BiomeModifier(grassGeneration.biomeTags());
+            var biomeModifier = new Grass.BiomeModifier(grassGeneration.biomeTag());
             Grass grass = new Grass(IOHelper.getResourceId(registryObject.getKey()), configuration, placement, biomeModifier);
             GenerationFeaturesDescriptionContainer.GRASSES.put(registryObject, grass);
         }

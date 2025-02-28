@@ -26,7 +26,7 @@ public class TreeGenerationStrategy implements FieldAnnotationStrategy {
                     treeGeneration.lowerSize(), treeGeneration.middleSize(), treeGeneration.upperSize(), treeGeneration.minClippedHeight(),
                     treeGeneration.ignoreVines());
             var placement = new Tree.Placement(treeGeneration.baseValue(), treeGeneration.chance(), treeGeneration.addedAmount());
-            var biomeModifier = new Tree.BiomeModifier(treeGeneration.biomeTags());
+            var biomeModifier = new Tree.BiomeModifier(treeGeneration.biomeTag());
             Tree tree = new Tree(IOHelper.getResourceId(registryObject.getKey()), configuration, placement, biomeModifier);
             GenerationFeaturesDescriptionContainer.TREES.put(registryObject, tree);
         }

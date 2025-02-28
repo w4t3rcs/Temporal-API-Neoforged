@@ -10,6 +10,6 @@ import java.lang.annotation.Target;
 public @interface GrassGeneration {
     int tries() default 32;
     int count() default 5;
-    String[] biomeTags() default "is_overworld";
+    String biomeTag() default "is_overworld";
     Class<?> biomeTagContainer() default Object.class;
 }

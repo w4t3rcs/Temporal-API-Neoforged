@@ -36,6 +36,6 @@ public @interface TreeGeneration {
     int baseValue();
     int chance();
     int addedAmount();
-    String[] biomeTags() default "is_overworld";
+    String biomeTag() default "is_overworld";
     Class<?> biomeTagContainer() default Object.class;
 }

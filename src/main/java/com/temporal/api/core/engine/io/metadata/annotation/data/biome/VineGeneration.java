@@ -11,6 +11,6 @@ public @interface VineGeneration {
     int count() default 127;
     int from() default 54;
     int to() default 100;
-    String[] biomeTags() default "is_overworld";
+    String biomeTag() default "is_overworld";
     Class<?> biomeTagContainer() default Object.class;
 }

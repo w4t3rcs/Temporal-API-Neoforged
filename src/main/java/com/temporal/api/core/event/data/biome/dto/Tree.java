@@ -15,6 +15,6 @@ public record Tree(String id, Configuration configuration, Placement placement, 
     public record Placement(int baseValue, float chance, int addedAmount) {
     }
 
-    public record BiomeModifier(String... biomeTags) {
+    public record BiomeModifier(String biomeTag) {
     }
 }

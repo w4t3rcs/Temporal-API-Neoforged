@@ -21,7 +21,7 @@ public class FlowerGenerationStrategy implements FieldAnnotationStrategy {
             if (!tagContainer.equals(Object.class)) BiomeTagDynamicPreparer.TAG_CONTAINERS.add(tagContainer);
             var configuration = new Flower.Configuration(flowerGeneration.tries(), flowerGeneration.xzSpread(), flowerGeneration.ySpread(), flowerGeneration.noiseSeed(), flowerGeneration.noiseScale(), flowerGeneration.noiseThreshold(), flowerGeneration.noiseHighChance(), flowerGeneration.firstOctave(), flowerGeneration.amplitudes(), flowerGeneration.lowStateFlowers(), flowerGeneration.highStateFlowers());
             var placement = new Flower.Placement(flowerGeneration.chance(), flowerGeneration.noiseLevel(), flowerGeneration.belowNoise(), flowerGeneration.aboveNoise());
-            var biomeModifier = new Flower.BiomeModifier(flowerGeneration.biomeTags());
+            var biomeModifier = new Flower.BiomeModifier(flowerGeneration.biomeTag());
             Flower flower = new Flower(IOHelper.getResourceId(registryObject.getKey()), configuration, placement, biomeModifier);
             GenerationFeaturesDescriptionContainer.FLOWERS.put(registryObject, flower);
         }

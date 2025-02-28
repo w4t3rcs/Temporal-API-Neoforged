@@ -18,6 +18,6 @@ public @interface OreGeneration {
     OrePlacementShape shape() default OrePlacementShape.UNIFORM;
     int from();
     int to();
-    String[] biomeTags() default "is_overworld";
+    String biomeTag() default "is_overworld";
     Class<?> biomeTagContainer() default Object.class;
 }

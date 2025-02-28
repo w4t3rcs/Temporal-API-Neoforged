@@ -20,7 +20,7 @@ public class VineGenerationStrategy implements FieldAnnotationStrategy {
             Class<?> tagContainer = vineGeneration.biomeTagContainer();
             if (!tagContainer.equals(Object.class)) BiomeTagDynamicPreparer.TAG_CONTAINERS.add(tagContainer);
             var placement = new Vine.Placement(vineGeneration.count(), vineGeneration.from(), vineGeneration.to());
-            var biomeModifier = new Vine.BiomeModifier(vineGeneration.biomeTags());
+            var biomeModifier = new Vine.BiomeModifier(vineGeneration.biomeTag());
             Vine vine = new Vine(IOHelper.getResourceId(registryObject.getKey()), placement, biomeModifier);
             GenerationFeaturesDescriptionContainer.VINES.put(registryObject, vine);
         }

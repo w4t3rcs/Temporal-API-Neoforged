@@ -7,6 +7,6 @@ public record Grass(String id, Configuration configuration, Placement placement,
     public record Placement(int count) {
     }
 
-    public record BiomeModifier(String... biomeTags) {
+    public record BiomeModifier(String biomeTag) {
     }
 }

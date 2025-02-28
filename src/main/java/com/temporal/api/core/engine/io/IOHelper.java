@@ -88,6 +88,15 @@ public class IOHelper {
                 .toList());
     }
 
+    public static <T> HolderSet.Direct<T> mergeHolderSets(Collection<? extends HolderSet<T>> sets) {
+        List<Holder<T>> data = new ArrayList<>();
+        for (HolderSet<T> set : sets) {
+            set.forEach(data::add);
+        }
+
+        return HolderSet.direct(data);
+    }
+
     public static <T> Collector<Holder<T>, ArrayList<Holder<T>>, HolderSet<T>> createHolderSetCollector() {
         return Collector.of(
                 ArrayList::new,
