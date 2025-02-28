@@ -8,6 +8,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface BlockTagComponent {
-    String tag() default "";
+    String[] tags();
     Class<?> tagContainer() default Object.class;
 }

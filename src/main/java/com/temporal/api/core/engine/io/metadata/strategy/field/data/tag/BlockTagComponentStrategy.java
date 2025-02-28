@@ -17,14 +17,15 @@ public class BlockTagComponentStrategy implements FieldAnnotationStrategy {
             BlockTagComponent annotation = field.getDeclaredAnnotation(BlockTagComponent.class);
             DeferredBlock<?> deferredBlock = (DeferredBlock<?>) field.get(object);
             if (!annotation.tagContainer().equals(Object.class)) BlockTagDynamicPreparer.TAG_CONTAINERS.add(annotation.tagContainer());
-            boolean exists = ApiBlockTagsProvider.TAG_GENERATION_DESCRIPTIONS.containsKey(annotation.tag());
-            if (exists) {
-                ApiBlockTagsProvider.TAG_GENERATION_DESCRIPTIONS.get(annotation.tag())
-                        .add(deferredBlock);
-            } else {
-                ArrayList<DeferredBlock<?>> blocks = new ArrayList<>();
-                blocks.add(deferredBlock);
-                ApiBlockTagsProvider.TAG_GENERATION_DESCRIPTIONS.put(annotation.tag(), blocks);
+            for (String tag : annotation.tags()) {
+                boolean exists = ApiBlockTagsProvider.TAG_GENERATION_DESCRIPTIONS.containsKey(tag);
+                if (exists) {
+                    ApiBlockTagsProvider.TAG_GENERATION_DESCRIPTIONS.get(tag).add(deferredBlock);
+                } else {
+                    ArrayList<DeferredBlock<?>> blocks = new ArrayList<>();
+                    blocks.add(deferredBlock);
+                    ApiBlockTagsProvider.TAG_GENERATION_DESCRIPTIONS.put(tag, blocks);
+                }
             }
         }
     }

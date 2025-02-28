@@ -17,14 +17,15 @@ public class ItemTagComponentStrategy implements FieldAnnotationStrategy {
             ItemTagComponent annotation = field.getDeclaredAnnotation(ItemTagComponent.class);
             DeferredItem<?> deferredItem = (DeferredItem<?>) field.get(object);
             if (!annotation.tagContainer().equals(Object.class)) ItemTagDynamicPreparer.TAG_CONTAINERS.add(annotation.tagContainer());
-            boolean exists = ApiItemTagsProvider.TAG_GENERATION_DESCRIPTIONS.containsKey(annotation.tag());
-            if (exists) {
-                ApiItemTagsProvider.TAG_GENERATION_DESCRIPTIONS.get(annotation.tag())
-                        .add(deferredItem);
-            } else {
-                ArrayList<DeferredItem<?>> items = new ArrayList<>();
-                items.add(deferredItem);
-                ApiItemTagsProvider.TAG_GENERATION_DESCRIPTIONS.put(annotation.tag(), items);
+            for (String tag : annotation.tags()) {
+                boolean exists = ApiItemTagsProvider.TAG_GENERATION_DESCRIPTIONS.containsKey(tag);
+                if (exists) {
+                    ApiItemTagsProvider.TAG_GENERATION_DESCRIPTIONS.get(tag).add(deferredItem);
+                } else {
+                    ArrayList<DeferredItem<?>> items = new ArrayList<>();
+                    items.add(deferredItem);
+                    ApiItemTagsProvider.TAG_GENERATION_DESCRIPTIONS.put(tag, items);
+                }
             }
         }
     }
