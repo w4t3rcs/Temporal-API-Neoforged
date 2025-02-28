@@ -13,6 +13,8 @@ public class BlockModelProviderStrategyConsumerImpl implements BlockModelProvide
     @Override
     public void registerModels(@NotNull BlockModelGenerators blockModels) {
         CUBED_BLOCKS.forEach(registerBlockModel(new CubedBlockModelProviderStrategy(blockModels)));
+        CROSS_BLOCKS.forEach(registerBlockModel(new CrossBlockModelProviderStrategy(blockModels)));
+        TINTED_CROSS_BLOCKS.forEach(registerBlockModel(new TintedCrossBlockModelProviderStrategy(blockModels)));
         BUTTONS.forEach(registerBlockModel(new ButtonBlockModelProviderStrategy(blockModels)));
         DOORS.forEach(registerBlockModel(new DoorBlockModelProviderStrategy(blockModels)));
         FENCES.forEach(registerBlockModel(new FenceBlockModelProviderStrategy(blockModels)));
@@ -24,6 +26,8 @@ public class BlockModelProviderStrategyConsumerImpl implements BlockModelProvide
         WALLS.forEach(registerBlockModel(new WallBlockModelProviderStrategy(blockModels)));
         LOGS.forEach(registerBlockModel(new LogBlockModelProviderStrategy(blockModels)));
         ROTATED_PILLARS.forEach(registerBlockModel(new RotatedPillarBlockModelProviderStrategy(blockModels)));
+        CROP_BLOCKS.forEach(registerBlockModel(new CropBlockModelProviderStrategy(blockModels)));
+        VINE_BLOCKS.forEach(registerBlockModel(new VineBlockModelProviderStrategy(blockModels)));
     }
 
     @Override

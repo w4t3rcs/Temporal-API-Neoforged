@@ -2,6 +2,8 @@ package com.temporal.api.core.engine.io.metadata.constant;
 
 public enum BlockModelType {
     CUBED,
+    CROSS,
+    TINTED_CROSS,
     BUTTON,
     DOOR,
     FENCE,
@@ -12,5 +14,7 @@ public enum BlockModelType {
     TRAPDOOR,
     WALL,
     LOG,
-    ROTATED_PILLAR
+    ROTATED_PILLAR,
+    CROP,
+    VINE
 }

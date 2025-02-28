@@ -13,6 +13,6 @@ public class RotatedPillarBlockModelProviderStrategy extends AbstractModelProvid
     @Override
     public void registerBlockModel(DeferredBlock<RotatedPillarBlock> blockRegistry) {
         RotatedPillarBlock block = blockRegistry.get();
-        this.getBlockModels().createAxisAlignedPillarBlock(block, TexturedModel.COLUMN);
+        this.getBlockModels().createRotatedPillarWithHorizontalVariant(block, TexturedModel.COLUMN_ALT, TexturedModel.COLUMN_HORIZONTAL_ALT);
     }
 }

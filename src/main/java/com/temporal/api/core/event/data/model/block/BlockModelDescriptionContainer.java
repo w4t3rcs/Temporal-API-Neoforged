@@ -9,6 +9,8 @@ import java.util.List;
 
 public final class BlockModelDescriptionContainer {
     public static final List<DeferredBlock<Block>> CUBED_BLOCKS = new ArrayList<>();
+    public static final List<DeferredBlock<Block>> CROSS_BLOCKS = new ArrayList<>();
+    public static final List<DeferredBlock<Block>> TINTED_CROSS_BLOCKS = new ArrayList<>();
     public static final List<DeferredBlock<ButtonBlock>> BUTTONS = new ArrayList<>();
     public static final List<DeferredBlock<DoorBlock>> DOORS = new ArrayList<>();
     public static final List<DeferredBlock<FenceBlock>> FENCES = new ArrayList<>();
@@ -20,7 +22,8 @@ public final class BlockModelDescriptionContainer {
     public static final List<DeferredBlock<WallBlock>> WALLS = new ArrayList<>();
     public static final List<DeferredBlock<LogBlock>> LOGS = new ArrayList<>();
     public static final List<DeferredBlock<RotatedPillarBlock>> ROTATED_PILLARS = new ArrayList<>();
-
+    public static final List<DeferredBlock<CropBlock>> CROP_BLOCKS = new ArrayList<>();
+    public static final List<DeferredBlock<VineBlock>> VINE_BLOCKS = new ArrayList<>();
 
     private BlockModelDescriptionContainer() {
     }
