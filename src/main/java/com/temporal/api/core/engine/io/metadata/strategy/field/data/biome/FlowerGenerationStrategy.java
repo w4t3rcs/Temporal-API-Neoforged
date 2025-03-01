@@ -6,7 +6,8 @@ import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationSt
 import com.temporal.api.core.event.data.biome.GenerationFeaturesDescriptionContainer;
 import com.temporal.api.core.event.data.biome.dto.Flower;
 import com.temporal.api.core.event.data.preparer.tag.biome.BiomeTagDynamicPreparer;
-import net.neoforged.neoforge.registries.DeferredBlock;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
 import java.lang.reflect.Field;
 
@@ -15,15 +16,15 @@ public class FlowerGenerationStrategy implements FieldAnnotationStrategy {
     public void execute(Field field, Object object) throws Exception {
         if (field.isAnnotationPresent(FlowerGeneration.class)) {
             field.setAccessible(true);
-            DeferredBlock<?> registryObject = (DeferredBlock<?>) field.get(object);
+            ResourceKey<ConfiguredFeature<?, ?>> configuredFeatureKey = (ResourceKey<ConfiguredFeature<?, ?>>) field.get(object);
             FlowerGeneration flowerGeneration = field.getDeclaredAnnotation(FlowerGeneration.class);
             Class<?> tagContainer = flowerGeneration.biomeTagContainer();
             if (!tagContainer.equals(Object.class)) BiomeTagDynamicPreparer.TAG_CONTAINERS.add(tagContainer);
-            var configuration = new Flower.Configuration(flowerGeneration.tries(), flowerGeneration.xzSpread(), flowerGeneration.ySpread(), flowerGeneration.noiseSeed(), flowerGeneration.noiseScale(), flowerGeneration.noiseThreshold(), flowerGeneration.noiseHighChance(), flowerGeneration.firstOctave(), flowerGeneration.amplitudes(), flowerGeneration.lowStateFlowers(), flowerGeneration.highStateFlowers());
+            var configuration = new Flower.Configuration(flowerGeneration.blockId(), flowerGeneration.tries(), flowerGeneration.xzSpread(), flowerGeneration.ySpread(), flowerGeneration.noiseSeed(), flowerGeneration.noiseScale(), flowerGeneration.noiseThreshold(), flowerGeneration.noiseHighChance(), flowerGeneration.firstOctave(), flowerGeneration.amplitudes(), flowerGeneration.lowStateFlowers(), flowerGeneration.highStateFlowers());
             var placement = new Flower.Placement(flowerGeneration.chance(), flowerGeneration.noiseLevel(), flowerGeneration.belowNoise(), flowerGeneration.aboveNoise());
             var biomeModifier = new Flower.BiomeModifier(flowerGeneration.biomeTag());
-            Flower flower = new Flower(IOHelper.getResourceId(registryObject.getKey()), configuration, placement, biomeModifier);
-            GenerationFeaturesDescriptionContainer.FLOWERS.put(registryObject, flower);
+            Flower flower = new Flower(IOHelper.getResourceId(configuredFeatureKey), configuration, placement, biomeModifier);
+            GenerationFeaturesDescriptionContainer.FLOWERS.put(configuredFeatureKey, flower);
         }
     }
 }

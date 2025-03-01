@@ -14,9 +14,10 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface TreeGeneration {
-    String logBlock();
-    String leavesBlock();
-    String rootBlock() default "grass";
+    String saplingBlockId();
+    String logBlockId();
+    String leavesBlockId();
+    String rootBlockId() default "grass";
     Class<? extends TrunkPlacer> trunkPlacerClass() default ForkingTrunkPlacer.class;
     int baseHeight();
     int heightRandA();

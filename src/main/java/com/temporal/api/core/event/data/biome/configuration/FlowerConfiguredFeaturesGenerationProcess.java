@@ -6,6 +6,7 @@ import com.temporal.api.core.event.data.biome.dto.Flower;
 import com.temporal.api.core.util.biome.ConfiguredFeatureUtils;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -13,18 +14,14 @@ import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConf
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseThresholdProvider;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
-import net.neoforged.neoforge.registries.DeferredBlock;
 
 import java.util.Arrays;
 
 public class FlowerConfiguredFeaturesGenerationProcess implements GenerationProcess<ConfiguredFeature<?, ?>, Flower> {
     @Override
-    public void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context, DeferredBlock<?> block, Flower description) {
+    public void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context, ResourceKey<ConfiguredFeature<?, ?>> configuredFeatureKey, Flower description) {
         Flower.Configuration configuration = description.configuration();
-        String registryName = description.id();
-        var configuredFeatureResourceKey = ConfiguredFeatureUtils.createKey(registryName);
-        ConfiguredFeaturesContainer.CONFIGURED_FEATURES.put(registryName, configuredFeatureResourceKey);
-        ConfiguredFeatureUtils.register(context, configuredFeatureResourceKey, Feature.FLOWER,
+        ConfiguredFeatureUtils.register(context, configuredFeatureKey, Feature.FLOWER,
                 new RandomPatchConfiguration(configuration.tries(), configuration.xzSpread(), configuration.ySpread(),
                         PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
                                 new SimpleBlockConfiguration(
@@ -33,7 +30,7 @@ public class FlowerConfiguredFeaturesGenerationProcess implements GenerationProc
                                                 configuration.noiseScale(),
                                                 configuration.noiseThreshold(),
                                                 configuration.noiseHighChance(),
-                                                block.get().defaultBlockState(),
+                                                IOHelper.getBlockById(configuration.blockId()).defaultBlockState(),
                                                 Arrays.stream(configuration.lowStateFlowers())
                                                         .map(IOHelper::getBlockById)
                                                         .map(Block::defaultBlockState)

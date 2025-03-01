@@ -11,6 +11,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface OreGeneration {
+    String blockId();
     String[] replaceableBlocks();
     int size() default 1;
     OreRarity rarity() default OreRarity.COMMON;

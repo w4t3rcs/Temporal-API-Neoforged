@@ -3,7 +3,10 @@ package com.temporal.api.core.engine.io.metadata;
 import com.temporal.api.core.engine.io.IOHelper;
 import com.temporal.api.core.engine.io.metadata.annotation.injection.Injected;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
-import com.temporal.api.core.engine.io.metadata.strategy.field.data.biome.*;
+import com.temporal.api.core.engine.io.metadata.strategy.field.data.biome.FlowerGenerationStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.field.data.biome.GrassGenerationStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.field.data.biome.OreGenerationStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.field.data.biome.TreeGenerationStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.language.*;
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.model.ArmorAssetStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.model.BlockModelStrategy;
@@ -101,7 +104,6 @@ public class DefaultAnnotationExecutor implements AnnotationExecutor {
                 new TreeGenerationStrategy(),
                 new FlowerGenerationStrategy(),
                 new GrassGenerationStrategy(),
-                new VineGenerationStrategy(),
                 new FurnaceFuelStrategy(),
                 new CompostableStrategy(),
                 new OxidizableStrategy(),

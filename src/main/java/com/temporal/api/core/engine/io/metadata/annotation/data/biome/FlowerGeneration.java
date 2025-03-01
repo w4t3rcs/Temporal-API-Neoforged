@@ -8,6 +8,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface FlowerGeneration {
+    String blockId();
     int tries() default 64;
     int xzSpread() default 6;
     int ySpread() default 2;

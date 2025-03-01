@@ -6,6 +6,7 @@ import com.temporal.api.core.event.data.biome.GenerationProcess;
 import com.temporal.api.core.event.data.biome.dto.Tree;
 import com.temporal.api.core.util.biome.ConfiguredFeatureUtils;
 import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -17,7 +18,6 @@ import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSi
 import net.minecraft.world.level.levelgen.feature.foliageplacers.*;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
-import net.neoforged.neoforge.registries.DeferredBlock;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Constructor;
@@ -26,11 +26,8 @@ import java.util.OptionalInt;
 
 public class TreeConfiguredFeaturesGenerationProcess implements GenerationProcess<ConfiguredFeature<?, ?>, Tree> {
     @Override
-    public void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context, DeferredBlock<?> block, Tree description) {
+    public void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context, ResourceKey<ConfiguredFeature<?, ?>> configuredFeatureKey, Tree description) {
         Tree.Configuration configuration = description.configuration();
-        String registryName = description.id();
-        var configuredFeatureResourceKey = ConfiguredFeatureUtils.createKey(registryName);
-        ConfiguredFeaturesContainer.CONFIGURED_FEATURES.put(registryName, configuredFeatureResourceKey);
         try {
             TrunkPlacer trunkPlacer = getTrunkPlacer(configuration);
             FoliagePlacer foliagePlacer = getFoliagePlacer(configuration);
@@ -43,7 +40,7 @@ public class TreeConfiguredFeaturesGenerationProcess implements GenerationProces
                     featureSize
             ).dirt(BlockStateProvider.simple(IOHelper.getBlockById(configuration.rootBlock())));
             builder = configuration.ignoreVines() ? builder.ignoreVines() : builder;
-            ConfiguredFeatureUtils.register(context, configuredFeatureResourceKey, Feature.TREE, builder.build());
+            ConfiguredFeatureUtils.register(context, configuredFeatureKey, Feature.TREE, builder.build());
         } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
             ApiMod.LOGGER.error("Error while instantiating trunk placer or foliage placer", e);
             throw new RuntimeException(e);

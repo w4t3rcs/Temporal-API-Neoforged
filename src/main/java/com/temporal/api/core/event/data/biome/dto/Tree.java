@@ -12,7 +12,7 @@ public record Tree(String id, Configuration configuration, Placement placement, 
                                 int lowerSize, int middleSize, int upperSize, int minClippedHeight, boolean ignoreVines) {
     }
 
-    public record Placement(int baseValue, float chance, int addedAmount) {
+    public record Placement(String saplingBlock, int baseValue, float chance, int addedAmount) {
     }
 
     public record BiomeModifier(String biomeTag) {

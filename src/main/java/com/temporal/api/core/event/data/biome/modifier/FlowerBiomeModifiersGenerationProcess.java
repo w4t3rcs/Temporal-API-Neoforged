@@ -12,13 +12,13 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.neoforged.neoforge.common.world.BiomeModifier;
 import net.neoforged.neoforge.common.world.BiomeModifiers;
-import net.neoforged.neoforge.registries.DeferredBlock;
 
 public class FlowerBiomeModifiersGenerationProcess implements GenerationProcess<BiomeModifier, Flower> {
     @Override
-    public void bootstrap(BootstrapContext<BiomeModifier> context, DeferredBlock<?> block, Flower description) {
+    public void bootstrap(BootstrapContext<BiomeModifier> context, ResourceKey<ConfiguredFeature<?, ?>> configuredFeatureKey, Flower description) {
         String registryName = description.id();
         Flower.BiomeModifier biomeModifier = description.biomeModifier();
         ResourceKey<BiomeModifier> biomeModifierKey = BiomeModifiersUtils.registerKey("add_" + registryName);

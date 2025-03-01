@@ -6,7 +6,8 @@ import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationSt
 import com.temporal.api.core.event.data.biome.GenerationFeaturesDescriptionContainer;
 import com.temporal.api.core.event.data.biome.dto.Grass;
 import com.temporal.api.core.event.data.preparer.tag.biome.BiomeTagDynamicPreparer;
-import net.neoforged.neoforge.registries.DeferredBlock;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
 import java.lang.reflect.Field;
 
@@ -15,15 +16,15 @@ public class GrassGenerationStrategy implements FieldAnnotationStrategy {
     public void execute(Field field, Object object) throws Exception {
         if (field.isAnnotationPresent(GrassGeneration.class)) {
             field.setAccessible(true);
-            DeferredBlock<?> registryObject = (DeferredBlock<?>) field.get(object);
+            ResourceKey<ConfiguredFeature<?, ?>> configuredFeatureKey = (ResourceKey<ConfiguredFeature<?, ?>>) field.get(object);
             GrassGeneration grassGeneration = field.getDeclaredAnnotation(GrassGeneration.class);
             Class<?> tagContainer = grassGeneration.biomeTagContainer();
             if (!tagContainer.equals(Object.class)) BiomeTagDynamicPreparer.TAG_CONTAINERS.add(tagContainer);
-            var configuration = new Grass.Configuration(grassGeneration.tries());
+            var configuration = new Grass.Configuration(grassGeneration.blockId(), grassGeneration.tries());
             var placement = new Grass.Placement(grassGeneration.count());
             var biomeModifier = new Grass.BiomeModifier(grassGeneration.biomeTag());
-            Grass grass = new Grass(IOHelper.getResourceId(registryObject.getKey()), configuration, placement, biomeModifier);
-            GenerationFeaturesDescriptionContainer.GRASSES.put(registryObject, grass);
+            Grass grass = new Grass(IOHelper.getResourceId(configuredFeatureKey), configuration, placement, biomeModifier);
+            GenerationFeaturesDescriptionContainer.GRASSES.put(configuredFeatureKey, grass);
         }
     }
 }

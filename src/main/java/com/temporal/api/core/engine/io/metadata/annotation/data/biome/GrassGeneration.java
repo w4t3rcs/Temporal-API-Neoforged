@@ -8,6 +8,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface GrassGeneration {
+    String blockId();
     int tries() default 32;
     int count() default 5;
     String biomeTag() default "is_overworld";
