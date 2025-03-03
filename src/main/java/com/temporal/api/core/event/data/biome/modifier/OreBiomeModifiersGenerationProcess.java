@@ -13,8 +13,8 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.neoforged.neoforge.common.world.BiomeModifier;
-import net.neoforged.neoforge.common.world.BiomeModifiers;
 
 public class OreBiomeModifiersGenerationProcess implements GenerationProcess<BiomeModifier, Ore> {
     @Override
@@ -27,10 +27,7 @@ public class OreBiomeModifiersGenerationProcess implements GenerationProcess<Bio
         var biomes = context.lookup(Registries.BIOME);
         TagKey<Biome> biomeTagKey = BiomeTagDynamicPreparer.BIOME_TAGS.get(biomeModifier.biomeTag());
         HolderSet.Named<Biome> foundBiomes = biomes.getOrThrow(biomeTagKey);
-        context.register(biomeModifierKey, new BiomeModifiers.AddFeaturesBiomeModifier(
-                foundBiomes,
-                HolderSet.direct(placedFeatures.getOrThrow(PlacedFeaturesContainer.PLACED_FEATURES.get(registryName))),
-                GenerationStep.Decoration.UNDERGROUND_ORES
-        ));
+        HolderSet.Direct<PlacedFeature> placedFeature = HolderSet.direct(placedFeatures.getOrThrow(PlacedFeaturesContainer.PLACED_FEATURES.get(registryName)));
+        BiomeModifiersUtils.register(context, biomeModifierKey, foundBiomes, placedFeature, GenerationStep.Decoration.UNDERGROUND_ORES);
     }
 }
