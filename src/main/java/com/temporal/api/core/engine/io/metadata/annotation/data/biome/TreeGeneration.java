@@ -17,7 +17,7 @@ public @interface TreeGeneration {
     String saplingBlockId();
     String logBlockId();
     String leavesBlockId();
-    String rootBlockId() default "grass";
+    String rootBlockId() default "grass_block";
     Trunk trunk();
     Foliage foliage();
     FeatureSize featureSize();
