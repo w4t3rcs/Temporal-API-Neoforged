@@ -18,25 +18,37 @@ public @interface TreeGeneration {
     String logBlockId();
     String leavesBlockId();
     String rootBlockId() default "grass";
-    Class<? extends TrunkPlacer> trunkPlacerClass() default ForkingTrunkPlacer.class;
-    int baseHeight();
-    int heightRandA();
-    int heightRandB();
-    Class<? extends FoliagePlacer> foliagePlacerClass() default BlobFoliagePlacer.class;
-    int radius();
-    int offset();
-    int height();
-    TreeFeatureSize featureSize() default TreeFeatureSize.TWO_LAYERED;
-    int limit();
-    int upperLimit() default 0;
-    int lowerSize();
-    int middleSize() default 0;
-    int upperSize();
-    int minClippedHeight() default 0;
+    Trunk trunk();
+    Foliage foliage();
+    FeatureSize featureSize();
     boolean ignoreVines() default true;
     int baseValue();
     int chance();
     int addedAmount();
     String biomeTag() default "is_overworld";
     Class<?> biomeTagContainer() default Object.class;
+
+    @interface Trunk {
+        Class<? extends TrunkPlacer> trunkPlacerClass() default ForkingTrunkPlacer.class;
+        int baseHeight();
+        int heightRandA();
+        int heightRandB();
+    }
+
+    @interface Foliage {
+        Class<? extends FoliagePlacer> foliagePlacerClass() default BlobFoliagePlacer.class;
+        int radius();
+        int offset();
+        int height();
+    }
+
+    @interface FeatureSize {
+        TreeFeatureSize type() default TreeFeatureSize.TWO_LAYERED;
+        int limit();
+        int upperLimit() default 0;
+        int lowerSize();
+        int middleSize() default 0;
+        int upperSize();
+        int minClippedHeight() default 0;
+    }
 }

@@ -48,7 +48,7 @@ public class TreeConfiguredFeaturesGenerationProcess implements GenerationProces
     }
 
     private @NotNull TrunkPlacer getTrunkPlacer(Tree.Configuration configuration) throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
-        Constructor<? extends TrunkPlacer> trunkPlacerConstructor = configuration.trunkPlacerClass().getDeclaredConstructor(Integer.class, Integer.class, Integer.class);
+        Constructor<? extends TrunkPlacer> trunkPlacerConstructor = configuration.trunkPlacerClass().getDeclaredConstructor(int.class, int.class, int.class);
         return trunkPlacerConstructor.newInstance(configuration.baseHeight(), configuration.heightRandA(), configuration.heightRandB());
     }
 
@@ -58,7 +58,7 @@ public class TreeConfiguredFeaturesGenerationProcess implements GenerationProces
         if (foliagedPlacerClass.equals(BlobFoliagePlacer.class)
                 || foliagedPlacerClass.equals(FancyFoliagePlacer.class)
                 || foliagedPlacerClass.equals(MegaJungleFoliagePlacer.class)) {
-            Constructor<? extends FoliagePlacer> foliagePlacerConstructor = foliagedPlacerClass.getDeclaredConstructor(IntProvider.class, IntProvider.class, Integer.class);
+            Constructor<? extends FoliagePlacer> foliagePlacerConstructor = foliagedPlacerClass.getDeclaredConstructor(IntProvider.class, IntProvider.class, int.class);
             foliagePlacer = foliagePlacerConstructor.newInstance(ConstantInt.of(configuration.radius()), ConstantInt.of(configuration.offset()), configuration.height());
         } else if (foliagedPlacerClass.equals(PineFoliagePlacer.class)
                 || foliagedPlacerClass.equals(MegaPineFoliagePlacer.class)

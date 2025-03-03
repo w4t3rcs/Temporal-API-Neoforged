@@ -20,11 +20,14 @@ public class TreeGenerationStrategy implements FieldAnnotationStrategy {
             TreeGeneration treeGeneration = field.getDeclaredAnnotation(TreeGeneration.class);
             Class<?> tagContainer = treeGeneration.biomeTagContainer();
             if (!tagContainer.equals(Object.class)) BiomeTagDynamicPreparer.TAG_CONTAINERS.add(tagContainer);
+            TreeGeneration.Trunk trunk = treeGeneration.trunk();
+            TreeGeneration.Foliage foliage = treeGeneration.foliage();
+            TreeGeneration.FeatureSize featureSize = treeGeneration.featureSize();
             var configuration = new Tree.Configuration(treeGeneration.logBlockId(), treeGeneration.leavesBlockId(), treeGeneration.rootBlockId(),
-                    treeGeneration.trunkPlacerClass(), treeGeneration.baseHeight(), treeGeneration.heightRandA(), treeGeneration.heightRandB(),
-                    treeGeneration.foliagePlacerClass(), treeGeneration.radius(), treeGeneration.offset(), treeGeneration.height(),
-                    treeGeneration.featureSize(), treeGeneration.limit(), treeGeneration.upperLimit(),
-                    treeGeneration.lowerSize(), treeGeneration.middleSize(), treeGeneration.upperSize(), treeGeneration.minClippedHeight(),
+                    trunk.trunkPlacerClass(), trunk.baseHeight(), trunk.heightRandA(), trunk.heightRandB(),
+                    foliage.foliagePlacerClass(), foliage.radius(), foliage.offset(), foliage.height(),
+                    featureSize.type(), featureSize.limit(), featureSize.upperLimit(),
+                    featureSize.lowerSize(), featureSize.middleSize(), featureSize.upperSize(), featureSize.minClippedHeight(),
                     treeGeneration.ignoreVines());
             var placement = new Tree.Placement(treeGeneration.saplingBlockId(), treeGeneration.baseValue(), treeGeneration.chance(), treeGeneration.addedAmount());
             var biomeModifier = new Tree.BiomeModifier(treeGeneration.biomeTag());
