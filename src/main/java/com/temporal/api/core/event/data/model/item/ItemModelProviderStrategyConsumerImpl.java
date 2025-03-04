@@ -9,6 +9,7 @@ import java.util.function.Consumer;
 
 import static com.temporal.api.core.event.data.model.item.ItemModelDescriptionContainer.*;
 
+//TODO
 public class ItemModelProviderStrategyConsumerImpl implements ItemModelProviderStrategyConsumer {
     @Override
     public void registerModels(@NotNull ItemModelGenerators itemModels) {
