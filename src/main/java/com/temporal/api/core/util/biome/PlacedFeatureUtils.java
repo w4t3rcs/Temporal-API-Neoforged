@@ -1,6 +1,6 @@
 package com.temporal.api.core.util.biome;
 
-import com.temporal.api.core.engine.io.IOHelper;
+import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -16,7 +16,7 @@ public final class PlacedFeatureUtils {
     }
 
     public static ResourceKey<PlacedFeature> createKey(String name) {
-        return ResourceKey.create(Registries.PLACED_FEATURE, IOHelper.createResourceLocation(name));
+        return ResourceKey.create(Registries.PLACED_FEATURE, ResourceUtils.createResourceLocation(name));
     }
 
     public static void register(BootstrapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key, Holder<ConfiguredFeature<?, ?>> configuration, List<PlacementModifier> modifiers) {

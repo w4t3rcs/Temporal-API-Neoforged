@@ -1,6 +1,7 @@
 package com.temporal.api.core.event.data.trim.material;
 
-import com.temporal.api.core.engine.io.IOHelper;
+import com.temporal.api.core.util.other.RegistryUtils;
+import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.Util;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.network.chat.Component;
@@ -20,8 +21,8 @@ public class ApiTrimMaterialProvider implements TrimMaterialProvider {
     @Override
     public void registerTrimMaterials(BootstrapContext<TrimMaterial> context) {
         TRIM_MATERIALS.forEach((trimMaterial, description) -> {
-            String assetName = IOHelper.getResourceId(trimMaterial);
-            Item ingredient = IOHelper.getItemById(description.itemId());
+            String assetName = ResourceUtils.getResourceId(trimMaterial);
+            Item ingredient = RegistryUtils.getItemById(description.itemId());
             String descriptionId = Util.makeDescriptionId("trim_material", trimMaterial.location());
             TextColor textColor = TextColor.parseColor(description.color()).getOrThrow();
             Style style = Style.EMPTY.withColor(textColor);

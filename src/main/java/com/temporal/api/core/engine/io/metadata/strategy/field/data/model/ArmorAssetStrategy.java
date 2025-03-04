@@ -1,9 +1,9 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field.data.model;
 
-import com.temporal.api.core.engine.io.IOHelper;
 import com.temporal.api.core.engine.io.metadata.annotation.data.model.ArmorAsset;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.event.data.equipment.EquipmentDescriptionContainer;
+import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.client.resources.model.EquipmentClientInfo;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.equipment.ArmorMaterial;
@@ -22,20 +22,20 @@ public class ArmorAssetStrategy implements FieldAnnotationStrategy {
             ArmorAsset annotation = field.getDeclaredAnnotation(ArmorAsset.class);
             switch (annotation.type()) {
                 case HUMANOID -> EquipmentDescriptionContainer.HUMANOID_EQUIPMENT.put(equipmentAsset, EquipmentClientInfo.builder()
-                        .addHumanoidLayers(IOHelper.createResourceLocation(equipmentAsset))
+                        .addHumanoidLayers(ResourceUtils.createResourceLocation(equipmentAsset))
                         .build());
                 case HUMANOID_WINGS -> EquipmentDescriptionContainer.HUMANOID_WINGS_EQUIPMENT.put(equipmentAsset, EquipmentClientInfo.builder()
-                        .addLayers(EquipmentClientInfo.LayerType.WINGS, new EquipmentClientInfo.Layer(IOHelper.createResourceLocation(equipmentAsset), Optional.empty(), true))
+                        .addLayers(EquipmentClientInfo.LayerType.WINGS, new EquipmentClientInfo.Layer(ResourceUtils.createResourceLocation(equipmentAsset), Optional.empty(), true))
                         .build());
                 case HORSE -> EquipmentDescriptionContainer.HORSE_EQUIPMENT.put(equipmentAsset, EquipmentClientInfo.builder()
-                        .addLayers(EquipmentClientInfo.LayerType.HORSE_BODY, EquipmentClientInfo.Layer.leatherDyeable(IOHelper.createResourceLocation(equipmentAsset), false))
+                        .addLayers(EquipmentClientInfo.LayerType.HORSE_BODY, EquipmentClientInfo.Layer.leatherDyeable(ResourceUtils.createResourceLocation(equipmentAsset), false))
                         .build());
                 case HUMANOID_AND_HORSE -> EquipmentDescriptionContainer.HUMANOID_AND_HORSE_EQUIPMENT.put(equipmentAsset, EquipmentClientInfo.builder()
-                        .addHumanoidLayers(IOHelper.createResourceLocation(equipmentAsset))
-                        .addLayers(EquipmentClientInfo.LayerType.HORSE_BODY, EquipmentClientInfo.Layer.leatherDyeable(IOHelper.createResourceLocation(equipmentAsset), false))
+                        .addHumanoidLayers(ResourceUtils.createResourceLocation(equipmentAsset))
+                        .addLayers(EquipmentClientInfo.LayerType.HORSE_BODY, EquipmentClientInfo.Layer.leatherDyeable(ResourceUtils.createResourceLocation(equipmentAsset), false))
                         .build());
                 case WOLF -> EquipmentDescriptionContainer.WOLF_EQUIPMENT.put(equipmentAsset, EquipmentClientInfo.builder()
-                        .addLayers(EquipmentClientInfo.LayerType.WOLF_BODY, EquipmentClientInfo.Layer.onlyIfDyed(IOHelper.createResourceLocation(equipmentAsset), false))
+                        .addLayers(EquipmentClientInfo.LayerType.WOLF_BODY, EquipmentClientInfo.Layer.onlyIfDyed(ResourceUtils.createResourceLocation(equipmentAsset), false))
                         .build());
             }
         }

@@ -1,8 +1,8 @@
 package com.temporal.api.core.registry.factory.extension.item;
 
-import com.temporal.api.core.engine.io.IOHelper;
 import com.temporal.api.core.engine.io.context.InjectionContext;
 import com.temporal.api.core.registry.factory.common.ItemFactory;
+import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
@@ -17,7 +17,7 @@ public interface MusicDiscExtension {
 
     default DeferredItem<Item> createMusicDisc(String name, Item.Properties properties, String soundId) {
         ItemFactory itemFactory = InjectionContext.getFromInstance(ItemFactory.class);
-        ResourceKey<JukeboxSong> songResourceKey = ResourceKey.create(Registries.JUKEBOX_SONG, IOHelper.createResourceLocation(soundId));
+        ResourceKey<JukeboxSong> songResourceKey = ResourceKey.create(Registries.JUKEBOX_SONG, ResourceUtils.createResourceLocation(soundId));
         return itemFactory.create(name, properties.stacksTo(1)
                 .jukeboxPlayable(songResourceKey)
                 .rarity(Rarity.RARE), Item::new);

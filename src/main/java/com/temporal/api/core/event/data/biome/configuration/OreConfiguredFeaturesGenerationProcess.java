@@ -1,9 +1,9 @@
 package com.temporal.api.core.event.data.biome.configuration;
 
-import com.temporal.api.core.engine.io.IOHelper;
 import com.temporal.api.core.event.data.biome.GenerationProcess;
 import com.temporal.api.core.event.data.biome.dto.Ore;
 import com.temporal.api.core.util.biome.ConfiguredFeatureUtils;
+import com.temporal.api.core.util.other.RegistryUtils;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
@@ -20,9 +20,9 @@ public class OreConfiguredFeaturesGenerationProcess implements GenerationProcess
         Ore.Configuration configuration = description.configuration();
         String[] replaceableBlocks = configuration.replaceableBlocks();
         var rules = BuiltInRegistries.BLOCK.stream()
-                .filter(reg -> Arrays.asList(replaceableBlocks).contains(IOHelper.getIdFromBlock(reg)))
+                .filter(reg -> Arrays.asList(replaceableBlocks).contains(RegistryUtils.getIdFromBlock(reg)))
                 .map(BlockMatchTest::new)
-                .map(rule -> OreConfiguration.target(rule, IOHelper.getBlockById(configuration.blockId()).defaultBlockState()))
+                .map(rule -> OreConfiguration.target(rule, RegistryUtils.getBlockById(configuration.blockId()).defaultBlockState()))
                 .toList();
         ConfiguredFeatureUtils.register(context, configuredFeatureKey, Feature.ORE, new OreConfiguration(rules, configuration.size()));
     }

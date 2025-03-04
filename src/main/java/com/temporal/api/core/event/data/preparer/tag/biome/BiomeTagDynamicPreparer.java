@@ -1,7 +1,7 @@
 package com.temporal.api.core.event.data.preparer.tag.biome;
 
-import com.temporal.api.core.engine.io.IOHelper;
 import com.temporal.api.core.event.data.preparer.DynamicPreparer;
+import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
@@ -16,7 +16,7 @@ public final class BiomeTagDynamicPreparer implements DynamicPreparer {
     @Override
     public void prepare() {
         TAG_CONTAINERS.stream()
-                .flatMap(IOHelper::<Biome>getTagKeyStream)
+                .flatMap(ResourceUtils::<Biome>getTagKeyStream)
                 .forEach(tag -> {
                     String path = tag.location().getPath();
                     BIOME_TAGS.putIfAbsent(path, tag);

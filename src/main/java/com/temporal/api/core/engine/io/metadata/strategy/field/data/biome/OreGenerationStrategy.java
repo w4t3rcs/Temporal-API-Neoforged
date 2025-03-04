@@ -1,11 +1,11 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field.data.biome;
 
-import com.temporal.api.core.engine.io.IOHelper;
 import com.temporal.api.core.engine.io.metadata.annotation.data.biome.OreGeneration;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.event.data.biome.GenerationFeaturesDescriptionContainer;
 import com.temporal.api.core.event.data.biome.dto.Ore;
 import com.temporal.api.core.event.data.preparer.tag.biome.BiomeTagDynamicPreparer;
+import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
@@ -23,7 +23,7 @@ public class OreGenerationStrategy implements FieldAnnotationStrategy {
             var configuration = new Ore.Configuration(oreGeneration.blockId(), oreGeneration.replaceableBlocks(), oreGeneration.size());
             var placement = new Ore.Placement(oreGeneration.rarity(), oreGeneration.count(), oreGeneration.shape(), oreGeneration.from(), oreGeneration.to());
             var biomeModifier = new Ore.BiomeModifier(oreGeneration.biomeTag());
-            Ore ore = new Ore(IOHelper.getResourceId(configuredFeatureKey), configuration, placement, biomeModifier);
+            Ore ore = new Ore(ResourceUtils.getResourceId(configuredFeatureKey), configuration, placement, biomeModifier);
             GenerationFeaturesDescriptionContainer.ORES.put(configuredFeatureKey, ore);
         }
     }

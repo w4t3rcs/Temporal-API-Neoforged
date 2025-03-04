@@ -1,11 +1,11 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field.data.biome;
 
-import com.temporal.api.core.engine.io.IOHelper;
 import com.temporal.api.core.engine.io.metadata.annotation.data.biome.TreeGeneration;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.event.data.biome.GenerationFeaturesDescriptionContainer;
 import com.temporal.api.core.event.data.biome.dto.Tree;
 import com.temporal.api.core.event.data.preparer.tag.biome.BiomeTagDynamicPreparer;
+import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
@@ -31,7 +31,7 @@ public class TreeGenerationStrategy implements FieldAnnotationStrategy {
                     treeGeneration.ignoreVines());
             var placement = new Tree.Placement(treeGeneration.saplingBlockId(), treeGeneration.baseValue(), treeGeneration.chance(), treeGeneration.addedAmount());
             var biomeModifier = new Tree.BiomeModifier(treeGeneration.biomeTag());
-            Tree tree = new Tree(IOHelper.getResourceId(configuredFeatureKey), configuration, placement, biomeModifier);
+            Tree tree = new Tree(ResourceUtils.getResourceId(configuredFeatureKey), configuration, placement, biomeModifier);
             GenerationFeaturesDescriptionContainer.TREES.put(configuredFeatureKey, tree);
         }
     }

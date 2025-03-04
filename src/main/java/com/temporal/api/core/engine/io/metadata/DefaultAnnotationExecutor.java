@@ -1,6 +1,5 @@
 package com.temporal.api.core.engine.io.metadata;
 
-import com.temporal.api.core.engine.io.IOHelper;
 import com.temporal.api.core.engine.io.metadata.annotation.injection.Injected;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.biome.*;
@@ -27,6 +26,7 @@ import com.temporal.api.core.engine.io.metadata.strategy.type.data.resource.Reso
 import com.temporal.api.core.engine.io.metadata.strategy.type.data.tag.TagContainerStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.type.injection.InjectedStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.type.injection.RegistryClassStrategy;
+import com.temporal.api.core.util.other.IOUtils;
 
 import java.util.List;
 import java.util.Set;
@@ -37,7 +37,7 @@ public class DefaultAnnotationExecutor implements AnnotationExecutor {
 
     @Override
     public void prepareBeforeExecution(Class<?> dependencyClass) {
-        this.classes = IOHelper.getAllClasses(dependencyClass, Injected.class);
+        this.classes = IOUtils.getAllClasses(dependencyClass, Injected.class);
         this.strategyExecutor = DefaultAnnotationStrategyExecutor.getInstance();
     }
 

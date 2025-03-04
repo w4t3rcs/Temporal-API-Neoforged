@@ -1,6 +1,7 @@
 package com.temporal.api.core.event.data.map;
 
-import com.temporal.api.core.engine.io.IOHelper;
+import com.temporal.api.core.util.other.RegistryUtils;
+import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -41,18 +42,18 @@ public class ApiDataMapProvider extends DataMapProvider {
                 compostableItemBuilder.add(compostable.item(), new Compostable(compostable.chance()), compostable.replace()));
         Builder<Oxidizable, Block> oxidizableBlockBuilder = this.builder(NeoForgeDataMaps.OXIDIZABLES);
         OXIDIZABLES.forEach(oxidizable ->
-                oxidizableBlockBuilder.add(oxidizable.block(), new Oxidizable(IOHelper.getBlockById(oxidizable.nextStageBlockId())), oxidizable.replace()));
+                oxidizableBlockBuilder.add(oxidizable.block(), new Oxidizable(RegistryUtils.getBlockById(oxidizable.nextStageBlockId())), oxidizable.replace()));
         Builder<Waxable, Block> waxableBlockBuilder = this.builder(NeoForgeDataMaps.WAXABLES);
         WAXABLES.forEach(waxable ->
-                waxableBlockBuilder.add(waxable.block(), new Waxable(IOHelper.getBlockById(waxable.waxedBlock())), waxable.replace()));
+                waxableBlockBuilder.add(waxable.block(), new Waxable(RegistryUtils.getBlockById(waxable.waxedBlock())), waxable.replace()));
         Builder<RaidHeroGift, VillagerProfession> raidHeroGiftVillagerProfessionBuilder = this.builder(NeoForgeDataMaps.RAID_HERO_GIFTS);
         RAID_HERO_GIFTS.forEach(raidHeroGift ->
-                raidHeroGiftVillagerProfessionBuilder.add(raidHeroGift.villagerProfession(), new RaidHeroGift(ResourceKey.create(Registries.LOOT_TABLE, IOHelper.createNamespacedResourceLocation(raidHeroGift.lootTablePath()))), raidHeroGift.replace()));
+                raidHeroGiftVillagerProfessionBuilder.add(raidHeroGift.villagerProfession(), new RaidHeroGift(ResourceKey.create(Registries.LOOT_TABLE, ResourceUtils.createNamespacedResourceLocation(raidHeroGift.lootTablePath()))), raidHeroGift.replace()));
         Builder<MonsterRoomMob, EntityType<?>> monsterRoomMobEntityTypeBuilder = this.builder(NeoForgeDataMaps.MONSTER_ROOM_MOBS);
         MONSTER_ROOM_MOBS.forEach(monsterRoomMob ->
                 monsterRoomMobEntityTypeBuilder.add(monsterRoomMob.entity(), new MonsterRoomMob(Weight.of(monsterRoomMob.weight())), monsterRoomMob.replace()));
         Builder<ParrotImitation, EntityType<?>> parrotImitationEntityTypeBuilder = this.builder(NeoForgeDataMaps.PARROT_IMITATIONS);
         PARROT_IMITATIONS.forEach(parrotImitation ->
-                parrotImitationEntityTypeBuilder.add(parrotImitation.entity(), new ParrotImitation(IOHelper.getSoundEventById(parrotImitation.soundEventId())), parrotImitation.replace()));
+                parrotImitationEntityTypeBuilder.add(parrotImitation.entity(), new ParrotImitation(RegistryUtils.getSoundEventById(parrotImitation.soundEventId())), parrotImitation.replace()));
     }
 }

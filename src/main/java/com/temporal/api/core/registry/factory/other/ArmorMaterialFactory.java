@@ -1,6 +1,6 @@
 package com.temporal.api.core.registry.factory.other;
 
-import com.temporal.api.core.engine.io.IOHelper;
+import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
@@ -20,7 +20,7 @@ public final class ArmorMaterialFactory {
 
     public static ArmorMaterial create(String name, Map<ArmorType, Integer> defenses, int durability, int enchantmentValue, float toughness, float knockbackResistance, TagKey<Item> repairItem, Holder<SoundEvent> soundEvent) {
         ResourceKey<Registry<EquipmentAsset>> root = ResourceKey.createRegistryKey(ResourceLocation.withDefaultNamespace("equipment_asset"));
-        ResourceLocation resourceLocation = IOHelper.createResourceLocation(name);
+        ResourceLocation resourceLocation = ResourceUtils.createResourceLocation(name);
         return new ArmorMaterial(durability, defenses, enchantmentValue, soundEvent, toughness, knockbackResistance, repairItem, ResourceKey.create(root, resourceLocation));
     }
 }

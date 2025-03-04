@@ -1,6 +1,6 @@
 package com.temporal.api.core.util.biome;
 
-import com.temporal.api.core.engine.io.IOHelper;
+import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.core.HolderSet;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
@@ -16,7 +16,7 @@ public final class BiomeModifiersUtils {
     }
 
     public static ResourceKey<BiomeModifier> registerKey(String name) {
-        return ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, IOHelper.createResourceLocation(name));
+        return ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ResourceUtils.createResourceLocation(name));
     }
 
     public static void register(BootstrapContext<BiomeModifier> context, ResourceKey<BiomeModifier> biomeModifierKey, HolderSet.Named<Biome> foundBiomes, HolderSet.Direct<PlacedFeature> placedFeature, GenerationStep.Decoration step) {

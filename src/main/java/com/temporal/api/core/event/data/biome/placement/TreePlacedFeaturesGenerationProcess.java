@@ -1,9 +1,9 @@
 package com.temporal.api.core.event.data.biome.placement;
 
-import com.temporal.api.core.engine.io.IOHelper;
 import com.temporal.api.core.event.data.biome.GenerationProcess;
 import com.temporal.api.core.event.data.biome.dto.Tree;
 import com.temporal.api.core.util.biome.PlacedFeatureUtils;
+import com.temporal.api.core.util.other.RegistryUtils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
@@ -27,7 +27,7 @@ public class TreePlacedFeaturesGenerationProcess implements GenerationProcess<Pl
         Tree.Placement placement = description.placement();
         List<PlacementModifier> placementModifiers = VegetationPlacements.treePlacement(
                 PlacementUtils.countExtra(placement.baseValue(), placement.chance(), placement.addedAmount()),
-                IOHelper.getBlockById(placement.saplingBlock())
+                RegistryUtils.getBlockById(placement.saplingBlock())
         );
         PlacedFeatureUtils.register(context, placedFeatureResourceKey, configuredFeatureReference, placementModifiers);
     }

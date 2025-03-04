@@ -1,7 +1,7 @@
 package com.temporal.api.core.registry.factory.common;
 
-import com.temporal.api.core.engine.io.IOHelper;
 import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.util.other.RegistryUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.flag.FeatureFlagSet;
@@ -16,7 +16,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 public class MenuTypeFactory implements ObjectFactory<MenuType<?>> {
-    public static final DeferredRegister<MenuType<?>> MENU_TYPES = IOHelper.createRegistry(Registries.MENU);
+    public static final DeferredRegister<MenuType<?>> MENU_TYPES = RegistryUtils.createRegistry(Registries.MENU);
 
     public <T extends AbstractContainerMenu> DeferredHolder<MenuType<?>, MenuType<T>> create(String name, IContainerFactory<T> containerFactory) {
         return MENU_TYPES.register(name, () -> IMenuTypeExtension.create(containerFactory));

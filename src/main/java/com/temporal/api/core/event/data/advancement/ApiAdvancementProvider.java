@@ -1,6 +1,6 @@
 package com.temporal.api.core.event.data.advancement;
 
-import com.temporal.api.core.engine.io.IOHelper;
+import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementRewards;
@@ -32,7 +32,7 @@ public class ApiAdvancementProvider implements AdvancementSubProvider {
             Pair<String, Criterion<?>> criterion = advancement.getCriterion();
             builder.addCriterion(criterion.getA(), criterion.getB());
             builder.requirements(advancement.getRequirements());
-            builder.save(consumer, IOHelper.createResourceLocation(advancement.getId()));
+            builder.save(consumer, ResourceUtils.createResourceLocation(advancement.getId()));
         });
     }
 }

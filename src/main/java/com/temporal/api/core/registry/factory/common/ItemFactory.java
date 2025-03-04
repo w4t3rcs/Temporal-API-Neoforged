@@ -1,7 +1,7 @@
 package com.temporal.api.core.registry.factory.common;
 
-import com.temporal.api.core.engine.io.IOHelper;
 import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.util.other.RegistryUtils;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -11,7 +11,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class ItemFactory implements ObjectFactory<Item> {
-    public static final DeferredRegister.Items ITEMS = IOHelper.createItemRegistry();
+    public static final DeferredRegister.Items ITEMS = RegistryUtils.createItemRegistry();
 
     public DeferredItem<Item> create(String name) {
         return ITEMS.registerSimpleItem(name);

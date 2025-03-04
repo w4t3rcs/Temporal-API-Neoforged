@@ -1,6 +1,6 @@
 package com.temporal.api.core.event.data.model.block;
 
-import com.temporal.api.core.engine.io.IOHelper;
+import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.blockstates.BlockStateGenerator;
 import net.minecraft.resources.ResourceLocation;
@@ -16,9 +16,9 @@ public class StairsBlockModelProviderStrategy extends AbstractModelProviderStrat
     public void registerBlockModel(DeferredBlock<StairBlock> blockRegistry) {
         StairBlock block = blockRegistry.get();
         String path = this.getBlockPath(blockRegistry);
-        ResourceLocation innerModel = IOHelper.createResourceLocation(path + "_inner");
-        ResourceLocation straightModel = IOHelper.createResourceLocation(path);
-        ResourceLocation outerModel = IOHelper.createResourceLocation(path + "_outer");
+        ResourceLocation innerModel = ResourceUtils.createResourceLocation(path + "_inner");
+        ResourceLocation straightModel = ResourceUtils.createResourceLocation(path);
+        ResourceLocation outerModel = ResourceUtils.createResourceLocation(path + "_outer");
         BlockStateGenerator generator = BlockModelGenerators.createStairs(block, innerModel, straightModel, outerModel);
         this.getBlockModels().blockStateOutput.accept(generator);
     }

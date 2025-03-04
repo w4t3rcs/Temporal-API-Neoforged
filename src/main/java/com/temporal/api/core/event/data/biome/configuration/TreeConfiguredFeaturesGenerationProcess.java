@@ -1,10 +1,10 @@
 package com.temporal.api.core.event.data.biome.configuration;
 
 import com.temporal.api.ApiMod;
-import com.temporal.api.core.engine.io.IOHelper;
 import com.temporal.api.core.event.data.biome.GenerationProcess;
 import com.temporal.api.core.event.data.biome.dto.Tree;
 import com.temporal.api.core.util.biome.ConfiguredFeatureUtils;
+import com.temporal.api.core.util.other.RegistryUtils;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.valueproviders.ConstantInt;
@@ -33,12 +33,12 @@ public class TreeConfiguredFeaturesGenerationProcess implements GenerationProces
             FoliagePlacer foliagePlacer = getFoliagePlacer(configuration);
             FeatureSize featureSize = getFeatureSize(configuration);
             TreeConfiguration.TreeConfigurationBuilder builder = new TreeConfiguration.TreeConfigurationBuilder(
-                    BlockStateProvider.simple(IOHelper.getBlockById(configuration.logBlock())),
+                    BlockStateProvider.simple(RegistryUtils.getBlockById(configuration.logBlock())),
                     trunkPlacer,
-                    BlockStateProvider.simple(IOHelper.getBlockById(configuration.leavesBlock())),
+                    BlockStateProvider.simple(RegistryUtils.getBlockById(configuration.leavesBlock())),
                     foliagePlacer,
                     featureSize
-            ).dirt(BlockStateProvider.simple(IOHelper.getBlockById(configuration.rootBlock())));
+            ).dirt(BlockStateProvider.simple(RegistryUtils.getBlockById(configuration.rootBlock())));
             builder = configuration.ignoreVines() ? builder.ignoreVines() : builder;
             ConfiguredFeatureUtils.register(context, configuredFeatureKey, Feature.TREE, builder.build());
         } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {

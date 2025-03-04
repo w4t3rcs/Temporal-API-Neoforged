@@ -8,7 +8,10 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import static net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
-public class BlockPropertiesFactory {
+public final class BlockPropertiesFactory {
+    private BlockPropertiesFactory() {
+    }
+
     public static Properties empty() {
         return Properties.of();
     }
@@ -21,6 +24,10 @@ public class BlockPropertiesFactory {
         return copy(Blocks.OAK_WOOD);
     }
 
+    public static Properties dirtLike() {
+        return copy(Blocks.DIRT);
+    }
+
     public static Properties stoneLike() {
         return copy(Blocks.STONE);
     }
@@ -29,8 +36,16 @@ public class BlockPropertiesFactory {
         return copy(Blocks.DEEPSLATE);
     }
 
+    public static Properties shortGrassLike() {
+        return copy(Blocks.SHORT_GRASS);
+    }
+
     public static Properties flowerLike() {
         return copy(Blocks.ALLIUM);
+    }
+
+    public static Properties leavesLike() {
+        return copy(Blocks.OAK_LEAVES);
     }
 
     public static Properties copy(BlockBehaviour block) {

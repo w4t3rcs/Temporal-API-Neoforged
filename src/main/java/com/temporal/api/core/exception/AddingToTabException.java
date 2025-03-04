@@ -1,4 +1,4 @@
-package com.temporal.api.core.util.exception;
+package com.temporal.api.core.exception;
 
 public class AddingToTabException extends RuntimeException {
     public AddingToTabException() {

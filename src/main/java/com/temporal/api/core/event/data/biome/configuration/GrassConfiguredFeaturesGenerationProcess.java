@@ -1,9 +1,9 @@
 package com.temporal.api.core.event.data.biome.configuration;
 
-import com.temporal.api.core.engine.io.IOHelper;
 import com.temporal.api.core.event.data.biome.GenerationProcess;
 import com.temporal.api.core.event.data.biome.dto.Grass;
 import com.temporal.api.core.util.biome.ConfiguredFeatureUtils;
+import com.temporal.api.core.util.other.RegistryUtils;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
@@ -21,7 +21,7 @@ public class GrassConfiguredFeaturesGenerationProcess implements GenerationProce
                 FeatureUtils.simpleRandomPatchConfiguration(
                         configuration.tries(), PlacementUtils.onlyWhenEmpty(
                                 Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
-                                        BlockStateProvider.simple(IOHelper.getBlockById(configuration.blockId()))
+                                        BlockStateProvider.simple(RegistryUtils.getBlockById(configuration.blockId()))
                                 )
                         )
                 )

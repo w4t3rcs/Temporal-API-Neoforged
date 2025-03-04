@@ -1,7 +1,7 @@
 package com.temporal.api.core.event.data.preparer.resource.equipment;
 
-import com.temporal.api.core.engine.io.IOHelper;
 import com.temporal.api.core.event.data.preparer.DynamicPreparer;
+import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.equipment.EquipmentAsset;
 import net.minecraft.world.item.equipment.EquipmentAssets;
@@ -15,7 +15,7 @@ public final class EquipmentResourceDynamicPreparer implements DynamicPreparer {
     @Override
     public void prepare() {
         RESOURCE_CONTAINERS.stream()
-                .flatMap(IOHelper::<EquipmentAsset>getResourceKeyStream)
+                .flatMap(ResourceUtils::<EquipmentAsset>getResourceKeyStream)
                 .forEach(resource -> {
                     String path = resource.location().getPath();
                     EQUIPMENT_ASSET_RESOURCES.putIfAbsent(path, resource);

@@ -1,6 +1,6 @@
 package com.temporal.api.core.util.biome;
 
-import com.temporal.api.core.engine.io.IOHelper;
+import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
@@ -13,7 +13,7 @@ public final class ConfiguredFeatureUtils {
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> createKey(String name) {
-        return ResourceKey.create(Registries.CONFIGURED_FEATURE, IOHelper.createResourceLocation(name));
+        return ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceUtils.createResourceLocation(name));
     }
 
     public static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(BootstrapContext<ConfiguredFeature<?, ?>> context, ResourceKey<ConfiguredFeature<?, ?>> key, F feature, FC configuration) {

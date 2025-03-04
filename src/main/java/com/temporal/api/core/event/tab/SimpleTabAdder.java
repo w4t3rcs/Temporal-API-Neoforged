@@ -1,6 +1,6 @@
 package com.temporal.api.core.event.tab;
 
-import com.temporal.api.core.util.exception.AddingToTabException;
+import com.temporal.api.core.exception.AddingToTabException;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.ItemLike;
@@ -8,7 +8,6 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 
 public class SimpleTabAdder implements TabAdder {
     @Override
-    @SafeVarargs
     public final void addAllToTab(BuildCreativeModeTabContentsEvent event, ResourceKey<CreativeModeTab> tab, ItemLike... items) {
         for (ItemLike item : items) {
             addToTab(event, tab, item);

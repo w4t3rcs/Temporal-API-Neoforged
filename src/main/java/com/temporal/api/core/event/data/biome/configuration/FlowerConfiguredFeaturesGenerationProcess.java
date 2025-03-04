@@ -1,9 +1,9 @@
 package com.temporal.api.core.event.data.biome.configuration;
 
-import com.temporal.api.core.engine.io.IOHelper;
 import com.temporal.api.core.event.data.biome.GenerationProcess;
 import com.temporal.api.core.event.data.biome.dto.Flower;
 import com.temporal.api.core.util.biome.ConfiguredFeatureUtils;
+import com.temporal.api.core.util.other.RegistryUtils;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
@@ -30,13 +30,13 @@ public class FlowerConfiguredFeaturesGenerationProcess implements GenerationProc
                                                 configuration.noiseScale(),
                                                 configuration.noiseThreshold(),
                                                 configuration.noiseHighChance(),
-                                                IOHelper.getBlockById(configuration.blockId()).defaultBlockState(),
+                                                RegistryUtils.getBlockById(configuration.blockId()).defaultBlockState(),
                                                 Arrays.stream(configuration.lowStateFlowers())
-                                                        .map(IOHelper::getBlockById)
+                                                        .map(RegistryUtils::getBlockById)
                                                         .map(Block::defaultBlockState)
                                                         .toList(),
                                                 Arrays.stream(configuration.highStateFlowers())
-                                                        .map(IOHelper::getBlockById)
+                                                        .map(RegistryUtils::getBlockById)
                                                         .map(Block::defaultBlockState)
                                                         .toList())))));
     }

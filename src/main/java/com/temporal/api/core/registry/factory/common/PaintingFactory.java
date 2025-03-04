@@ -1,7 +1,8 @@
 package com.temporal.api.core.registry.factory.common;
 
-import com.temporal.api.core.engine.io.IOHelper;
 import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.util.other.RegistryUtils;
+import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -13,7 +14,7 @@ import java.util.Optional;
 import java.util.function.Supplier;
 
 public class PaintingFactory implements ObjectFactory<PaintingVariant> {
-    public static final DeferredRegister<PaintingVariant> PAINTING_VARIANTS = IOHelper.createRegistry(Registries.PAINTING_VARIANT);
+    public static final DeferredRegister<PaintingVariant> PAINTING_VARIANTS = RegistryUtils.createRegistry(Registries.PAINTING_VARIANT);
 
     public Holder<PaintingVariant> create16x16(String name, String title, String author) {
         return create(name, 16, 16, title, author);
@@ -32,7 +33,7 @@ public class PaintingFactory implements ObjectFactory<PaintingVariant> {
     }
 
     public Holder<PaintingVariant> create(String name, int width, int height, String title, String author) {
-        return create(name, () -> new PaintingVariant(width, height, IOHelper.createResourceLocation(name),
+        return create(name, () -> new PaintingVariant(width, height, ResourceUtils.createResourceLocation(name),
                 Optional.of(Component.translatable(title)), Optional.of(Component.translatable(author))));
     }
 

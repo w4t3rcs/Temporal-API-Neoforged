@@ -1,7 +1,7 @@
 package com.temporal.api.core.registry.factory.common;
 
-import com.temporal.api.core.engine.io.IOHelper;
 import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.util.other.RegistryUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -12,7 +12,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 public class ParticleFactory implements ObjectFactory<ParticleType<?>> {
-    public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = IOHelper.createRegistry(Registries.PARTICLE_TYPE);
+    public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = RegistryUtils.createRegistry(Registries.PARTICLE_TYPE);
 
     public Holder<ParticleType<?>> create(String name, boolean overrideLimiter) {
         return create(name, () -> new SimpleParticleType(overrideLimiter));

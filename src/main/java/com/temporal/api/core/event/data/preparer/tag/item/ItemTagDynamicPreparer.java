@@ -1,7 +1,7 @@
 package com.temporal.api.core.event.data.preparer.tag.item;
 
-import com.temporal.api.core.engine.io.IOHelper;
 import com.temporal.api.core.event.data.preparer.DynamicPreparer;
+import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -16,7 +16,7 @@ public final class ItemTagDynamicPreparer implements DynamicPreparer {
     @Override
     public void prepare() {
         TAG_CONTAINERS.stream()
-                .flatMap(IOHelper::<Item>getTagKeyStream)
+                .flatMap(ResourceUtils::<Item>getTagKeyStream)
                 .forEach(tag -> {
                     String path = tag.location().getPath();
                     ITEM_TAGS.putIfAbsent(path, tag);

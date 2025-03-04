@@ -1,7 +1,7 @@
 package com.temporal.api.core.registry.factory.common;
 
-import com.temporal.api.core.engine.io.IOHelper;
 import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.util.other.RegistryUtils;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -14,7 +14,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class BlockFactory implements ObjectFactory<Block> {
-    public static final DeferredRegister.Blocks BLOCKS = IOHelper.createBlockRegistry();
+    public static final DeferredRegister.Blocks BLOCKS = RegistryUtils.createBlockRegistry();
     private final ItemFactory itemFactory = InjectionContext.getFromInstance(ItemFactory.class);
 
     public DeferredBlock<Block> create(String name, BlockBehaviour.Properties properties) {

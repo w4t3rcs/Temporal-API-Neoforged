@@ -1,6 +1,6 @@
 package com.temporal.api.core.event.data.trim.pattern;
 
-import com.temporal.api.core.engine.io.IOHelper;
+import com.temporal.api.core.util.other.RegistryUtils;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -21,7 +21,7 @@ public class ApiTrimPatternProvider implements TrimPatternProvider {
     public void registerTrimPatterns(BootstrapContext<TrimPattern> context) {
         TRIM_PATTERNS.forEach((trimPattern, description) -> {
             ResourceLocation location = trimPattern.location();
-            Holder<Item> itemHolder = IOHelper.getItemById(description.itemId()).getDefaultInstance().getItemHolder();
+            Holder<Item> itemHolder = RegistryUtils.getItemById(description.itemId()).getDefaultInstance().getItemHolder();
             String descriptionId = Util.makeDescriptionId("trim_pattern", location);
             MutableComponent component = Component.translatable(descriptionId);
             context.register(trimPattern, new TrimPattern(location, itemHolder, component, description.decal()));

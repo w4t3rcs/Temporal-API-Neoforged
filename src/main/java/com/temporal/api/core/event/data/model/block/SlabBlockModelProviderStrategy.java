@@ -1,6 +1,6 @@
 package com.temporal.api.core.event.data.model.block;
 
-import com.temporal.api.core.engine.io.IOHelper;
+import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.blockstates.BlockStateGenerator;
 import net.minecraft.resources.ResourceLocation;
@@ -17,9 +17,9 @@ public class SlabBlockModelProviderStrategy extends AbstractModelProviderStrateg
     public void registerBlockModel(DeferredBlock<SlabBlock> blockRegistry) {
         SlabBlock block = blockRegistry.get();
         String path = this.getBlockPath(blockRegistry);
-        ResourceLocation fullTexture = IOHelper.createResourceLocation(StringUtils.substringBefore(path, "_slab"));
-        ResourceLocation upperTexture = IOHelper.createResourceLocation(path + "_top");
-        ResourceLocation lowerTexture = IOHelper.createResourceLocation(path + "_bottom");
+        ResourceLocation fullTexture = ResourceUtils.createResourceLocation(StringUtils.substringBefore(path, "_slab"));
+        ResourceLocation upperTexture = ResourceUtils.createResourceLocation(path + "_top");
+        ResourceLocation lowerTexture = ResourceUtils.createResourceLocation(path + "_bottom");
         BlockStateGenerator generator = BlockModelGenerators.createSlab(block, fullTexture, upperTexture, lowerTexture);
         this.getBlockModels().blockStateOutput.accept(generator);
     }
