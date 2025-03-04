@@ -19,8 +19,8 @@ public class BlockModelStrategy implements FieldAnnotationStrategy {
             BlockModel blockModel = field.getDeclaredAnnotation(BlockModel.class);
             switch (blockModel.type()) {
                 case CUBED -> BlockModelDescriptionContainer.CUBED_BLOCKS.add((DeferredBlock<Block>) registryObject);
+                case CUTOUT_CUBED -> BlockModelDescriptionContainer.CUTOUT_CUBED_BLOCKS.add((DeferredBlock<Block>) registryObject);
                 case CROSS -> BlockModelDescriptionContainer.CROSS_BLOCKS.add((DeferredBlock<Block>) registryObject);
-                case TINTED_CROSS -> BlockModelDescriptionContainer.TINTED_CROSS_BLOCKS.add((DeferredBlock<Block>) registryObject);
                 case DOOR -> BlockModelDescriptionContainer.DOORS.add((DeferredBlock<DoorBlock>) registryObject);
                 case BUTTON -> BlockModelDescriptionContainer.BUTTONS.add((DeferredBlock<ButtonBlock>) registryObject);
                 case FENCE -> BlockModelDescriptionContainer.FENCES.add((DeferredBlock<FenceBlock>) registryObject);

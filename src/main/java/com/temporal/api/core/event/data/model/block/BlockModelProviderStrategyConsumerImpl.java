@@ -13,8 +13,8 @@ public class BlockModelProviderStrategyConsumerImpl implements BlockModelProvide
     @Override
     public void registerModels(@NotNull BlockModelGenerators blockModels) {
         CUBED_BLOCKS.forEach(registerBlockModel(new CubedBlockModelProviderStrategy(blockModels)));
+        CUTOUT_CUBED_BLOCKS.forEach(registerBlockModel(new CutoutCubedBlockModelProviderStrategy(blockModels)));
         CROSS_BLOCKS.forEach(registerBlockModel(new CrossBlockModelProviderStrategy(blockModels)));
-        TINTED_CROSS_BLOCKS.forEach(registerBlockModel(new TintedCrossBlockModelProviderStrategy(blockModels)));
         BUTTONS.forEach(registerBlockModel(new ButtonBlockModelProviderStrategy(blockModels)));
         DOORS.forEach(registerBlockModel(new DoorBlockModelProviderStrategy(blockModels)));
         FENCES.forEach(registerBlockModel(new FenceBlockModelProviderStrategy(blockModels)));
