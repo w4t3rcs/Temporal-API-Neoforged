@@ -4,6 +4,7 @@ public enum BlockModelType {
     CUBED,
     CUTOUT_CUBED,
     CROSS,
+    POTTED_CROSS,
     BUTTON,
     DOOR,
     FENCE,

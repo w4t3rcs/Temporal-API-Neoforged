@@ -5,13 +5,9 @@ import net.minecraft.world.level.block.TrapDoorBlock;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 public class TrapDoorBlockModelProviderStrategy extends AbstractModelProviderStrategy<TrapDoorBlock> {
-    public TrapDoorBlockModelProviderStrategy(BlockModelGenerators blockModels) {
-        super(blockModels);
-    }
-
     @Override
-    public void registerBlockModel(DeferredBlock<TrapDoorBlock> blockRegistry) {
+    public void registerBlockModel(DeferredBlock<TrapDoorBlock> blockRegistry, BlockModelGenerators blockModels) {
         TrapDoorBlock block = blockRegistry.get();
-        this.getBlockModels().createOrientableTrapdoor(block);
+        blockModels.createOrientableTrapdoor(block);
     }
 }

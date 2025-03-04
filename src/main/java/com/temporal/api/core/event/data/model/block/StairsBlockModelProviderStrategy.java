@@ -8,18 +8,14 @@ import net.minecraft.world.level.block.StairBlock;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 public class StairsBlockModelProviderStrategy extends AbstractModelProviderStrategy<StairBlock> {
-    public StairsBlockModelProviderStrategy(BlockModelGenerators blockModels) {
-        super(blockModels);
-    }
-
     @Override
-    public void registerBlockModel(DeferredBlock<StairBlock> blockRegistry) {
+    public void registerBlockModel(DeferredBlock<StairBlock> blockRegistry, BlockModelGenerators blockModels) {
         StairBlock block = blockRegistry.get();
         String path = this.getBlockPath(blockRegistry);
         ResourceLocation innerModel = ResourceUtils.createResourceLocation(path + "_inner");
         ResourceLocation straightModel = ResourceUtils.createResourceLocation(path);
         ResourceLocation outerModel = ResourceUtils.createResourceLocation(path + "_outer");
         BlockStateGenerator generator = BlockModelGenerators.createStairs(block, innerModel, straightModel, outerModel);
-        this.getBlockModels().blockStateOutput.accept(generator);
+        blockModels.blockStateOutput.accept(generator);
     }
 }

@@ -5,13 +5,9 @@ import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 public class CubedBlockModelProviderStrategy extends AbstractModelProviderStrategy<Block> {
-    public CubedBlockModelProviderStrategy(BlockModelGenerators blockModels) {
-        super(blockModels);
-    }
-
     @Override
-    public void registerBlockModel(DeferredBlock<Block> blockRegistry) {
+    public void registerBlockModel(DeferredBlock<Block> blockRegistry, BlockModelGenerators blockModels) {
         final Block block = blockRegistry.get();
-        this.getBlockModels().createTrivialCube(block);
+        blockModels.createTrivialCube(block);
     }
 }

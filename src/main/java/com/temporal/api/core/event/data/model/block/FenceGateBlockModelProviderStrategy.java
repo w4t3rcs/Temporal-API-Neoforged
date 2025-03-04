@@ -8,12 +8,8 @@ import net.minecraft.world.level.block.FenceGateBlock;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 public class FenceGateBlockModelProviderStrategy extends AbstractModelProviderStrategy<FenceGateBlock> {
-    public FenceGateBlockModelProviderStrategy(BlockModelGenerators blockModels) {
-        super(blockModels);
-    }
-
     @Override
-    public void registerBlockModel(DeferredBlock<FenceGateBlock> blockRegistry) {
+    public void registerBlockModel(DeferredBlock<FenceGateBlock> blockRegistry, BlockModelGenerators blockModels) {
         FenceGateBlock block = blockRegistry.get();
         String path = this.getBlockPath(blockRegistry);
         ResourceLocation openModel = ResourceUtils.createResourceLocation(path + "_open");
@@ -21,6 +17,6 @@ public class FenceGateBlockModelProviderStrategy extends AbstractModelProviderSt
         ResourceLocation wallOpenModel = ResourceUtils.createResourceLocation(path + "_wall_open");
         ResourceLocation wallClosedModel = ResourceUtils.createResourceLocation(path + "_wall_closed");
         BlockStateGenerator generator = BlockModelGenerators.createFenceGate(block, openModel, closedModel, wallOpenModel, wallClosedModel, true);
-        this.getBlockModels().blockStateOutput.accept(generator);
+        blockModels.blockStateOutput.accept(generator);
     }
 }

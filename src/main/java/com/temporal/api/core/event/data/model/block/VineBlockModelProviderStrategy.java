@@ -6,14 +6,9 @@ import net.minecraft.world.level.block.VineBlock;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 public class VineBlockModelProviderStrategy extends AbstractModelProviderStrategy<VineBlock> {
-    public VineBlockModelProviderStrategy(BlockModelGenerators blockModels) {
-        super(blockModels);
-    }
-
     @Override
-    public void registerBlockModel(DeferredBlock<VineBlock> blockRegistry) {
+    public void registerBlockModel(DeferredBlock<VineBlock> blockRegistry, BlockModelGenerators blockModels) {
         final VineBlock block = blockRegistry.get();
-        BlockModelGenerators blockModels = this.getBlockModels();
         blockModels.createMultifaceBlockStates(block);
         ResourceLocation resourcelocation = blockModels.createFlatItemModelWithBlockTexture(block.asItem(), block);
         blockModels.registerSimpleItemModel(block, resourcelocation);

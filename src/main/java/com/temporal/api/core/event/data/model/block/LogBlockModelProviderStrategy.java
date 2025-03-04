@@ -5,13 +5,9 @@ import net.minecraft.client.data.models.BlockModelGenerators;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 public class LogBlockModelProviderStrategy extends AbstractModelProviderStrategy<LogBlock> {
-    public LogBlockModelProviderStrategy(BlockModelGenerators blockModels) {
-        super(blockModels);
-    }
-
     @Override
-    public void registerBlockModel(DeferredBlock<LogBlock> blockRegistry) {
+    public void registerBlockModel(DeferredBlock<LogBlock> blockRegistry, BlockModelGenerators blockModels) {
         LogBlock block = blockRegistry.get();
-        this.getBlockModels().woodProvider(block).log(block);
+        blockModels.woodProvider(block).log(block);
     }
 }

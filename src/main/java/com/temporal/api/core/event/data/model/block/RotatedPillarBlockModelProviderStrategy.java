@@ -6,13 +6,9 @@ import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 public class RotatedPillarBlockModelProviderStrategy extends AbstractModelProviderStrategy<RotatedPillarBlock> {
-    public RotatedPillarBlockModelProviderStrategy(BlockModelGenerators blockModels) {
-        super(blockModels);
-    }
-
     @Override
-    public void registerBlockModel(DeferredBlock<RotatedPillarBlock> blockRegistry) {
+    public void registerBlockModel(DeferredBlock<RotatedPillarBlock> blockRegistry, BlockModelGenerators blockModels) {
         RotatedPillarBlock block = blockRegistry.get();
-        this.getBlockModels().createRotatedPillarWithHorizontalVariant(block, TexturedModel.COLUMN_ALT, TexturedModel.COLUMN_HORIZONTAL_ALT);
+        blockModels.createRotatedPillarWithHorizontalVariant(block, TexturedModel.COLUMN_ALT, TexturedModel.COLUMN_HORIZONTAL_ALT);
     }
 }

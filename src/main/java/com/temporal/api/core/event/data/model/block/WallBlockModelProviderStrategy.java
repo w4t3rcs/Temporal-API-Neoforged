@@ -8,18 +8,14 @@ import net.minecraft.world.level.block.WallBlock;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 public class WallBlockModelProviderStrategy extends AbstractModelProviderStrategy<WallBlock> {
-    public WallBlockModelProviderStrategy(BlockModelGenerators blockModels) {
-        super(blockModels);
-    }
-
     @Override
-    public void registerBlockModel(DeferredBlock<WallBlock> blockRegistry) {
+    public void registerBlockModel(DeferredBlock<WallBlock> blockRegistry, BlockModelGenerators blockModels) {
         WallBlock block = blockRegistry.get();
         String path = this.getBlockPath(blockRegistry);
         ResourceLocation postTexture = ResourceUtils.createResourceLocation(path + "_post");
         ResourceLocation lowTexture = ResourceUtils.createResourceLocation(path + "_low");
         ResourceLocation tallTexture = ResourceUtils.createResourceLocation(path + "_tall");
         BlockStateGenerator generator = BlockModelGenerators.createWall(block, postTexture, lowTexture, tallTexture);
-        this.getBlockModels().blockStateOutput.accept(generator);
+        blockModels.blockStateOutput.accept(generator);
     }
 }

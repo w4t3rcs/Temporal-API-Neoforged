@@ -6,13 +6,9 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 public class CropBlockModelProviderStrategy extends AbstractModelProviderStrategy<CropBlock> {
-    public CropBlockModelProviderStrategy(BlockModelGenerators blockModels) {
-        super(blockModels);
-    }
-
     @Override
-    public void registerBlockModel(DeferredBlock<CropBlock> blockRegistry) {
+    public void registerBlockModel(DeferredBlock<CropBlock> blockRegistry, BlockModelGenerators blockModels) {
         final CropBlock block = blockRegistry.get();
-        this.getBlockModels().createCropBlock(block, IntegerProperty.create("age", 0, block.getMaxAge()));
+        blockModels.createCropBlock(block, IntegerProperty.create("age", 0, block.getMaxAge()));
     }
 }

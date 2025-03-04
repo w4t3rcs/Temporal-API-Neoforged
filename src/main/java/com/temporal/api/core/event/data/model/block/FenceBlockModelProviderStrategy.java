@@ -8,17 +8,13 @@ import net.minecraft.world.level.block.FenceBlock;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 public class FenceBlockModelProviderStrategy extends AbstractModelProviderStrategy<FenceBlock> {
-    public FenceBlockModelProviderStrategy(BlockModelGenerators blockModels) {
-        super(blockModels);
-    }
-
     @Override
-    public void registerBlockModel(DeferredBlock<FenceBlock> blockRegistry) {
+    public void registerBlockModel(DeferredBlock<FenceBlock> blockRegistry, BlockModelGenerators blockModels) {
         FenceBlock block = blockRegistry.get();
         String path = this.getBlockPath(blockRegistry);
         ResourceLocation postModel = ResourceUtils.createResourceLocation(path + "_post");
         ResourceLocation sideModel = ResourceUtils.createResourceLocation(path + "_side");
         BlockStateGenerator generator = BlockModelGenerators.createFence(block, postModel, sideModel);
-        this.getBlockModels().blockStateOutput.accept(generator);
+        blockModels.blockStateOutput.accept(generator);
     }
 }

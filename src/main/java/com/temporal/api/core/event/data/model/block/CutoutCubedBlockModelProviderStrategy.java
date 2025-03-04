@@ -8,14 +8,9 @@ import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 public class CutoutCubedBlockModelProviderStrategy extends AbstractModelProviderStrategy<Block> {
-    public CutoutCubedBlockModelProviderStrategy(BlockModelGenerators blockModels) {
-        super(blockModels);
-    }
-
     @Override
-    public void registerBlockModel(DeferredBlock<Block> blockRegistry) {
+    public void registerBlockModel(DeferredBlock<Block> blockRegistry, BlockModelGenerators blockModels) {
         final Block block = blockRegistry.get();
-        BlockModelGenerators blockModels = this.getBlockModels();
         ResourceLocation location = ModelTemplates.CUBE_ALL
                 .extend()
                 .renderType("minecraft:cutout")

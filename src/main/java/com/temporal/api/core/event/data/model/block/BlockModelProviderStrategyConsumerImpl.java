@@ -6,32 +6,38 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 import static com.temporal.api.core.event.data.model.block.BlockModelDescriptionContainer.*;
 
 public class BlockModelProviderStrategyConsumerImpl implements BlockModelProviderStrategyConsumer {
     @Override
     public void registerModels(@NotNull BlockModelGenerators blockModels) {
-        CUBED_BLOCKS.forEach(registerBlockModel(new CubedBlockModelProviderStrategy(blockModels)));
-        CUTOUT_CUBED_BLOCKS.forEach(registerBlockModel(new CutoutCubedBlockModelProviderStrategy(blockModels)));
-        CROSS_BLOCKS.forEach(registerBlockModel(new CrossBlockModelProviderStrategy(blockModels)));
-        BUTTONS.forEach(registerBlockModel(new ButtonBlockModelProviderStrategy(blockModels)));
-        DOORS.forEach(registerBlockModel(new DoorBlockModelProviderStrategy(blockModels)));
-        FENCES.forEach(registerBlockModel(new FenceBlockModelProviderStrategy(blockModels)));
-        FENCE_GATES.forEach(registerBlockModel(new FenceGateBlockModelProviderStrategy(blockModels)));
-        PRESSURE_PLATES.forEach(registerBlockModel(new PressurePlateBlockModelProviderStrategy(blockModels)));
-        SLABS.forEach(registerBlockModel(new SlabBlockModelProviderStrategy(blockModels)));
-        STAIRS.forEach(registerBlockModel(new StairsBlockModelProviderStrategy(blockModels)));
-        TRAPDOORS.forEach(registerBlockModel(new TrapDoorBlockModelProviderStrategy(blockModels)));
-        WALLS.forEach(registerBlockModel(new WallBlockModelProviderStrategy(blockModels)));
-        LOGS.forEach(registerBlockModel(new LogBlockModelProviderStrategy(blockModels)));
-        ROTATED_PILLARS.forEach(registerBlockModel(new RotatedPillarBlockModelProviderStrategy(blockModels)));
-        CROP_BLOCKS.forEach(registerBlockModel(new CropBlockModelProviderStrategy(blockModels)));
-        VINE_BLOCKS.forEach(registerBlockModel(new VineBlockModelProviderStrategy(blockModels)));
+        CUBED_BLOCKS.forEach(registerBlockModel(blockModels, CubedBlockModelProviderStrategy::new));
+        CUTOUT_CUBED_BLOCKS.forEach(registerBlockModel(blockModels, CutoutCubedBlockModelProviderStrategy::new));
+        CROSS_BLOCKS.forEach(registerBlockModel(blockModels, CrossBlockModelProviderStrategy::new));
+        POTTED_CROSS_BLOCKS.forEach(registerBlockModel(blockModels, PottedCrossBlockModelProviderStrategy::new));
+        BUTTONS.forEach(registerBlockModel(blockModels, ButtonBlockModelProviderStrategy::new));
+        DOORS.forEach(registerBlockModel(blockModels, DoorBlockModelProviderStrategy::new));
+        FENCES.forEach(registerBlockModel(blockModels, FenceBlockModelProviderStrategy::new));
+        FENCE_GATES.forEach(registerBlockModel(blockModels, FenceGateBlockModelProviderStrategy::new));
+        PRESSURE_PLATES.forEach(registerBlockModel(blockModels, PressurePlateBlockModelProviderStrategy::new));
+        SLABS.forEach(registerBlockModel(blockModels, SlabBlockModelProviderStrategy::new));
+        STAIRS.forEach(registerBlockModel(blockModels, StairsBlockModelProviderStrategy::new));
+        TRAPDOORS.forEach(registerBlockModel(blockModels, TrapDoorBlockModelProviderStrategy::new));
+        WALLS.forEach(registerBlockModel(blockModels, WallBlockModelProviderStrategy::new));
+        LOGS.forEach(registerBlockModel(blockModels, LogBlockModelProviderStrategy::new));
+        ROTATED_PILLARS.forEach(registerBlockModel(blockModels, RotatedPillarBlockModelProviderStrategy::new));
+        CROP_BLOCKS.forEach(registerBlockModel(blockModels, CropBlockModelProviderStrategy::new));
+        VINE_BLOCKS.forEach(registerBlockModel(blockModels, VineBlockModelProviderStrategy::new));
+        CUSTOM_MODELS.forEach((key, value) -> {
+            ((BlockModelProviderStrategy<Block>) value).registerBlockModel((DeferredBlock<Block>) key, blockModels);
+        });
     }
 
     @Override
-    public <T extends Block> Consumer<? super DeferredBlock<T>> registerBlockModel(@NotNull BlockModelProviderStrategy<T> blockModelProviderStrategy) {
-        return blockModelProviderStrategy::registerBlockModel;
+    public <T extends Block> Consumer<? super DeferredBlock<T>> registerBlockModel(BlockModelGenerators blockModels, @NotNull Supplier<BlockModelProviderStrategy<T>> blockModelProviderStrategy) {
+        return (block) -> blockModelProviderStrategy.get()
+                .registerBlockModel(block, blockModels);
     }
 }

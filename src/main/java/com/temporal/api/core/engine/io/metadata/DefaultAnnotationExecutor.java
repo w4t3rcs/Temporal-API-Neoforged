@@ -4,10 +4,7 @@ import com.temporal.api.core.engine.io.metadata.annotation.injection.Injected;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.biome.*;
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.language.*;
-import com.temporal.api.core.engine.io.metadata.strategy.field.data.model.ArmorAssetStrategy;
-import com.temporal.api.core.engine.io.metadata.strategy.field.data.model.BlockModelStrategy;
-import com.temporal.api.core.engine.io.metadata.strategy.field.data.model.ItemModelStrategy;
-import com.temporal.api.core.engine.io.metadata.strategy.field.data.model.ParticleSpriteSetStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.field.data.model.*;
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.other.*;
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.properties.*;
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.tag.BlockTagComponentStrategy;
@@ -91,6 +88,7 @@ public class DefaultAnnotationExecutor implements AnnotationExecutor {
         );
         final List<FieldAnnotationStrategy> fieldStrategies = List.of(
                 new BlockModelStrategy(),
+                new CustomBlockModelStrategy(),
                 new ItemModelStrategy(),
                 new BlockLootTableStrategy(),
                 new RecipeStrategy(),

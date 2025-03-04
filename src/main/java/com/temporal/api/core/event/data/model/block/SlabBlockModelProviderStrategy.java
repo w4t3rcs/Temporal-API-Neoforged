@@ -9,18 +9,14 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import org.apache.commons.lang3.StringUtils;
 
 public class SlabBlockModelProviderStrategy extends AbstractModelProviderStrategy<SlabBlock> {
-    public SlabBlockModelProviderStrategy(BlockModelGenerators blockModels) {
-        super(blockModels);
-    }
-
     @Override
-    public void registerBlockModel(DeferredBlock<SlabBlock> blockRegistry) {
+    public void registerBlockModel(DeferredBlock<SlabBlock> blockRegistry, BlockModelGenerators blockModels) {
         SlabBlock block = blockRegistry.get();
         String path = this.getBlockPath(blockRegistry);
         ResourceLocation fullTexture = ResourceUtils.createResourceLocation(StringUtils.substringBefore(path, "_slab"));
         ResourceLocation upperTexture = ResourceUtils.createResourceLocation(path + "_top");
         ResourceLocation lowerTexture = ResourceUtils.createResourceLocation(path + "_bottom");
         BlockStateGenerator generator = BlockModelGenerators.createSlab(block, fullTexture, upperTexture, lowerTexture);
-        this.getBlockModels().blockStateOutput.accept(generator);
+        blockModels.blockStateOutput.accept(generator);
     }
 }

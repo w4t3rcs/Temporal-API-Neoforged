@@ -8,17 +8,13 @@ import net.minecraft.world.level.block.PressurePlateBlock;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 public class PressurePlateBlockModelProviderStrategy extends AbstractModelProviderStrategy<PressurePlateBlock> {
-    public PressurePlateBlockModelProviderStrategy(BlockModelGenerators blockModels) {
-        super(blockModels);
-    }
-
     @Override
-    public void registerBlockModel(DeferredBlock<PressurePlateBlock> blockRegistry) {
+    public void registerBlockModel(DeferredBlock<PressurePlateBlock> blockRegistry, BlockModelGenerators blockModels) {
         PressurePlateBlock block = blockRegistry.get();
         String path = this.getBlockPath(blockRegistry);
         ResourceLocation unpoweredModel = ResourceUtils.createResourceLocation(path);
         ResourceLocation poweredModel = ResourceUtils.createResourceLocation(path + "_powered");
         BlockStateGenerator generator = BlockModelGenerators.createPressurePlate(block, unpoweredModel, poweredModel);
-        this.getBlockModels().blockStateOutput.accept(generator);
+        blockModels.blockStateOutput.accept(generator);
     }
 }
