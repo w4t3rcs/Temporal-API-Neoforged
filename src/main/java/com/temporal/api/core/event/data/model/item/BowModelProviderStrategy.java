@@ -8,15 +8,10 @@ import net.minecraft.client.renderer.item.properties.numeric.UseDuration;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
 
-public class BowModelProviderStrategy extends AbstractItemModelProviderStrategy<Item> {
-    protected BowModelProviderStrategy(ItemModelGenerators itemModels) {
-        super(itemModels);
-    }
-
+public class BowModelProviderStrategy implements ItemModelProviderStrategy<Item> {
     @Override
-    public void registerItemModel(DeferredItem<Item> itemRegistry, Object... additionalData) {
+    public void registerItemModel(DeferredItem<Item> itemRegistry, ItemModelGenerators itemModels, Object... additionalData) {
         Item item = itemRegistry.get();
-        ItemModelGenerators itemModels = this.getItemModels();
         ItemModel.Unbaked itemModel = ItemModelUtils.plainModel(itemModels.createFlatItemModel(item, ModelTemplates.BOW));
         ItemModel.Unbaked pullingBow0 = ItemModelUtils.plainModel(itemModels.createFlatItemModel(item, "_pulling_0", ModelTemplates.BOW));
         ItemModel.Unbaked pullingBow1 = ItemModelUtils.plainModel(itemModels.createFlatItemModel(item, "_pulling_1", ModelTemplates.BOW));

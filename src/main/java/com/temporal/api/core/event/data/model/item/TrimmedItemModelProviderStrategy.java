@@ -10,13 +10,9 @@ import net.neoforged.neoforge.registries.DeferredItem;
 
 import java.util.Map;
 
-public class TrimmedItemModelProviderStrategy extends AbstractItemModelProviderStrategy<Item> {
-    protected TrimmedItemModelProviderStrategy(ItemModelGenerators itemModels) {
-        super(itemModels);
-    }
-
+public class TrimmedItemModelProviderStrategy implements ItemModelProviderStrategy<Item> {
     @Override
-    public void registerItemModel(DeferredItem<Item> itemRegistry, Object... additionalData) {
+    public void registerItemModel(DeferredItem<Item> itemRegistry, ItemModelGenerators itemModels, Object... additionalData) {
         ResourceLocation id = itemRegistry.getId();
         String path = id.getPath();
         String armorType = "";
@@ -30,6 +26,6 @@ public class TrimmedItemModelProviderStrategy extends AbstractItemModelProviderS
                 .map(Map.Entry::getValue)
                 .findAny()
                 .orElseThrow();
-        this.getItemModels().generateTrimmableItem(itemRegistry.get(), assetResourceKey, armorType, false);
+        itemModels.generateTrimmableItem(itemRegistry.get(), assetResourceKey, armorType, false);
     }
 }

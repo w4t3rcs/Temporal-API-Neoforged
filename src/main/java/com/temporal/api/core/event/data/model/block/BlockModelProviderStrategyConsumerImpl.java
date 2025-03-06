@@ -36,8 +36,7 @@ public class BlockModelProviderStrategyConsumerImpl implements BlockModelProvide
     }
 
     @Override
-    public <T extends Block> Consumer<? super DeferredBlock<T>> registerBlockModel(BlockModelGenerators blockModels, @NotNull Supplier<BlockModelProviderStrategy<T>> blockModelProviderStrategy) {
-        return (block) -> blockModelProviderStrategy.get()
-                .registerBlockModel(block, blockModels);
+    public <T extends Block> Consumer<? super DeferredBlock<T>> registerBlockModel(@NotNull BlockModelGenerators blockModels, @NotNull Supplier<BlockModelProviderStrategy<T>> blockModelProviderStrategy) {
+        return block -> blockModelProviderStrategy.get().registerBlockModel(block, blockModels);
     }
 }
