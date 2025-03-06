@@ -4,10 +4,10 @@ import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.world.level.block.DoorBlock;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
-public class DoorBlockModelProviderStrategy extends AbstractModelProviderStrategy<DoorBlock> {
+public class DoorBlockModelProviderStrategy extends AbstractModelProviderStrategy {
     @Override
-    public void registerBlockModel(DeferredBlock<DoorBlock> blockRegistry, BlockModelGenerators blockModels) {
-        DoorBlock block = blockRegistry.get();
+    public void registerBlockModel(DeferredBlock<?> blockRegistry, BlockModelGenerators blockModels) {
+        DoorBlock block = (DoorBlock) blockRegistry.get();
         blockModels.createDoor(block);
     }
 }

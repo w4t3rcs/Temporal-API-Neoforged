@@ -8,10 +8,10 @@ import net.minecraft.world.level.block.SlabBlock;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import org.apache.commons.lang3.StringUtils;
 
-public class SlabBlockModelProviderStrategy extends AbstractModelProviderStrategy<SlabBlock> {
+public class SlabBlockModelProviderStrategy extends AbstractModelProviderStrategy {
     @Override
-    public void registerBlockModel(DeferredBlock<SlabBlock> blockRegistry, BlockModelGenerators blockModels) {
-        SlabBlock block = blockRegistry.get();
+    public void registerBlockModel(DeferredBlock<?> blockRegistry, BlockModelGenerators blockModels) {
+        SlabBlock block = (SlabBlock) blockRegistry.get();
         String path = this.getBlockPath(blockRegistry);
         ResourceLocation fullTexture = ResourceUtils.createResourceLocation(StringUtils.substringBefore(path, "_slab"));
         ResourceLocation upperTexture = ResourceUtils.createResourceLocation(path + "_top");

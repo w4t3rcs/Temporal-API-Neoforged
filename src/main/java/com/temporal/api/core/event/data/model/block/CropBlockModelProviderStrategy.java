@@ -5,10 +5,10 @@ import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
-public class CropBlockModelProviderStrategy extends AbstractModelProviderStrategy<CropBlock> {
+public class CropBlockModelProviderStrategy extends AbstractModelProviderStrategy {
     @Override
-    public void registerBlockModel(DeferredBlock<CropBlock> blockRegistry, BlockModelGenerators blockModels) {
-        final CropBlock block = blockRegistry.get();
+    public void registerBlockModel(DeferredBlock<?> blockRegistry, BlockModelGenerators blockModels) {
+        CropBlock block = (CropBlock) blockRegistry.get();
         blockModels.createCropBlock(block, IntegerProperty.create("age", 0, block.getMaxAge()));
     }
 }

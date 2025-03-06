@@ -7,10 +7,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
-public class CutoutCubedBlockModelProviderStrategy extends AbstractModelProviderStrategy<Block> {
+public class CutoutCubedBlockModelProviderStrategy extends AbstractModelProviderStrategy {
     @Override
-    public void registerBlockModel(DeferredBlock<Block> blockRegistry, BlockModelGenerators blockModels) {
-        final Block block = blockRegistry.get();
+    public void registerBlockModel(DeferredBlock<?> blockRegistry, BlockModelGenerators blockModels) {
+        Block block = blockRegistry.get();
         ResourceLocation location = ModelTemplates.CUBE_ALL
                 .extend()
                 .renderType("minecraft:cutout")

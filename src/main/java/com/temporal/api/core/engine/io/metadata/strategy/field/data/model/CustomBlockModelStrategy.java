@@ -15,7 +15,7 @@ public class CustomBlockModelStrategy implements FieldAnnotationStrategy {
             field.setAccessible(true);
             DeferredBlock<?> registryObject = (DeferredBlock<?>) field.get(object);
             CustomBlockModel blockModel = field.getDeclaredAnnotation(CustomBlockModel.class);
-            BlockModelProviderStrategy<?> providerStrategy = blockModel.value()
+            BlockModelProviderStrategy providerStrategy = blockModel.value()
                     .getDeclaredConstructor()
                     .newInstance();
             BlockModelDescriptionContainer.CUSTOM_MODELS.put(registryObject, providerStrategy);

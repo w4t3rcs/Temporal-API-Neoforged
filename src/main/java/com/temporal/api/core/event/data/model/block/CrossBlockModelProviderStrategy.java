@@ -5,10 +5,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
-public class CrossBlockModelProviderStrategy extends AbstractModelProviderStrategy<Block> {
+public class CrossBlockModelProviderStrategy extends AbstractModelProviderStrategy {
     @Override
-    public void registerBlockModel(DeferredBlock<Block> blockRegistry, BlockModelGenerators blockModels) {
-        final Block block = blockRegistry.get();
+    public void registerBlockModel(DeferredBlock<?> blockRegistry, BlockModelGenerators blockModels) {
+        Block block = blockRegistry.get();
         BlockModelGenerators.PlantType plantType = BlockModelGenerators.PlantType.NOT_TINTED;
         ResourceLocation location = plantType.getCross()
                 .extend()

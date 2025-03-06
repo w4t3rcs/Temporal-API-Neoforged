@@ -7,10 +7,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.PressurePlateBlock;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
-public class PressurePlateBlockModelProviderStrategy extends AbstractModelProviderStrategy<PressurePlateBlock> {
+public class PressurePlateBlockModelProviderStrategy extends AbstractModelProviderStrategy {
     @Override
-    public void registerBlockModel(DeferredBlock<PressurePlateBlock> blockRegistry, BlockModelGenerators blockModels) {
-        PressurePlateBlock block = blockRegistry.get();
+    public void registerBlockModel(DeferredBlock<?> blockRegistry, BlockModelGenerators blockModels) {
+        PressurePlateBlock block = (PressurePlateBlock) blockRegistry.get();
         String path = this.getBlockPath(blockRegistry);
         ResourceLocation unpoweredModel = ResourceUtils.createResourceLocation(path);
         ResourceLocation poweredModel = ResourceUtils.createResourceLocation(path + "_powered");

@@ -7,10 +7,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.FenceGateBlock;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
-public class FenceGateBlockModelProviderStrategy extends AbstractModelProviderStrategy<FenceGateBlock> {
+public class FenceGateBlockModelProviderStrategy extends AbstractModelProviderStrategy {
     @Override
-    public void registerBlockModel(DeferredBlock<FenceGateBlock> blockRegistry, BlockModelGenerators blockModels) {
-        FenceGateBlock block = blockRegistry.get();
+    public void registerBlockModel(DeferredBlock<?> blockRegistry, BlockModelGenerators blockModels) {
+        FenceGateBlock block = (FenceGateBlock) blockRegistry.get();
         String path = this.getBlockPath(blockRegistry);
         ResourceLocation openModel = ResourceUtils.createResourceLocation(path + "_open");
         ResourceLocation closedModel = ResourceUtils.createResourceLocation(path + "_closed");

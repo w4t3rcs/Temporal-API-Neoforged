@@ -10,5 +10,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface CustomItemModel {
-    Class<? extends ItemModelProviderStrategy<?>> value();
+    Class<? extends ItemModelProviderStrategy> value();
 }

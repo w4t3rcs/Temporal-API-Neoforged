@@ -7,10 +7,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.FenceBlock;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
-public class FenceBlockModelProviderStrategy extends AbstractModelProviderStrategy<FenceBlock> {
+public class FenceBlockModelProviderStrategy extends AbstractModelProviderStrategy {
     @Override
-    public void registerBlockModel(DeferredBlock<FenceBlock> blockRegistry, BlockModelGenerators blockModels) {
-        FenceBlock block = blockRegistry.get();
+    public void registerBlockModel(DeferredBlock<?> blockRegistry, BlockModelGenerators blockModels) {
+        FenceBlock block = (FenceBlock) blockRegistry.get();
         String path = this.getBlockPath(blockRegistry);
         ResourceLocation postModel = ResourceUtils.createResourceLocation(path + "_post");
         ResourceLocation sideModel = ResourceUtils.createResourceLocation(path + "_side");

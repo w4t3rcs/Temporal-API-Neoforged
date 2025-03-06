@@ -7,10 +7,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.StairBlock;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
-public class StairsBlockModelProviderStrategy extends AbstractModelProviderStrategy<StairBlock> {
+public class StairsBlockModelProviderStrategy extends AbstractModelProviderStrategy {
     @Override
-    public void registerBlockModel(DeferredBlock<StairBlock> blockRegistry, BlockModelGenerators blockModels) {
-        StairBlock block = blockRegistry.get();
+    public void registerBlockModel(DeferredBlock<?> blockRegistry, BlockModelGenerators blockModels) {
+        StairBlock block = (StairBlock) blockRegistry.get();
         String path = this.getBlockPath(blockRegistry);
         ResourceLocation innerModel = ResourceUtils.createResourceLocation(path + "_inner");
         ResourceLocation straightModel = ResourceUtils.createResourceLocation(path);

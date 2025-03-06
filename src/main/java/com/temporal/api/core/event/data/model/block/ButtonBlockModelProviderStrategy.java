@@ -7,10 +7,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.ButtonBlock;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
-public class ButtonBlockModelProviderStrategy extends AbstractModelProviderStrategy<ButtonBlock> {
+public class ButtonBlockModelProviderStrategy extends AbstractModelProviderStrategy {
     @Override
-    public void registerBlockModel(DeferredBlock<ButtonBlock> blockRegistry, BlockModelGenerators blockModels) {
-        ButtonBlock block = blockRegistry.get();
+    public void registerBlockModel(DeferredBlock<?> blockRegistry, BlockModelGenerators blockModels) {
+        ButtonBlock block = (ButtonBlock) blockRegistry.get();
         String path = this.getBlockPath(blockRegistry);
         ResourceLocation unpoweredModel = ResourceUtils.createResourceLocation(path);
         ResourceLocation poweredModel = ResourceUtils.createResourceLocation(path + "_pressed");

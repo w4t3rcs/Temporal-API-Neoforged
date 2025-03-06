@@ -1,7 +1,6 @@
 package com.temporal.api.core.event.data.model.block;
 
 import net.minecraft.client.data.models.BlockModelGenerators;
-import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import org.jetbrains.annotations.NotNull;
 
@@ -30,13 +29,11 @@ public class BlockModelProviderStrategyConsumerImpl implements BlockModelProvide
         ROTATED_PILLARS.forEach(registerBlockModel(blockModels, RotatedPillarBlockModelProviderStrategy::new));
         CROP_BLOCKS.forEach(registerBlockModel(blockModels, CropBlockModelProviderStrategy::new));
         VINE_BLOCKS.forEach(registerBlockModel(blockModels, VineBlockModelProviderStrategy::new));
-        CUSTOM_MODELS.forEach((key, value) -> {
-            ((BlockModelProviderStrategy<Block>) value).registerBlockModel((DeferredBlock<Block>) key, blockModels);
-        });
+        CUSTOM_MODELS.forEach((key, value) -> value.registerBlockModel(key, blockModels));
     }
 
     @Override
-    public <T extends Block> Consumer<? super DeferredBlock<T>> registerBlockModel(@NotNull BlockModelGenerators blockModels, @NotNull Supplier<BlockModelProviderStrategy<T>> blockModelProviderStrategy) {
+    public Consumer<DeferredBlock<?>> registerBlockModel(@NotNull BlockModelGenerators blockModels, @NotNull Supplier<BlockModelProviderStrategy> blockModelProviderStrategy) {
         return block -> blockModelProviderStrategy.get().registerBlockModel(block, blockModels);
     }
 }
