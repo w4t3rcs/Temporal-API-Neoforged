@@ -11,7 +11,7 @@ public final class BlockModelDescriptionContainer {
     public static final List<DeferredBlock<?>> CUBED_BLOCKS = new ArrayList<>();
     public static final List<DeferredBlock<?>> CUTOUT_CUBED_BLOCKS = new ArrayList<>();
     public static final List<DeferredBlock<?>> CROSS_BLOCKS = new ArrayList<>();
-    public static final List<DeferredBlock<?>> POTTED_CROSS_BLOCKS = new ArrayList<>();
+    public static final List<DeferredBlock<?>> FLOWER_BLOCKS = new ArrayList<>();
     public static final List<DeferredBlock<?>> BUTTONS = new ArrayList<>();
     public static final List<DeferredBlock<?>> DOORS = new ArrayList<>();
     public static final List<DeferredBlock<?>> FENCES = new ArrayList<>();

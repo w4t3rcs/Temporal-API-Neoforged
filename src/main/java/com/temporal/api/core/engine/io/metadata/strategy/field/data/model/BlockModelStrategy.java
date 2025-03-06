@@ -18,7 +18,7 @@ public class BlockModelStrategy implements FieldAnnotationStrategy {
                 case CUBED -> BlockModelDescriptionContainer.CUBED_BLOCKS.add(registryObject);
                 case CUTOUT_CUBED -> BlockModelDescriptionContainer.CUTOUT_CUBED_BLOCKS.add(registryObject);
                 case CROSS -> BlockModelDescriptionContainer.CROSS_BLOCKS.add(registryObject);
-                case POTTED_CROSS -> BlockModelDescriptionContainer.POTTED_CROSS_BLOCKS.add(registryObject);
+                case FLOWER -> BlockModelDescriptionContainer.FLOWER_BLOCKS.add(registryObject);
                 case DOOR -> BlockModelDescriptionContainer.DOORS.add(registryObject);
                 case BUTTON -> BlockModelDescriptionContainer.BUTTONS.add(registryObject);
                 case FENCE -> BlockModelDescriptionContainer.FENCES.add(registryObject);

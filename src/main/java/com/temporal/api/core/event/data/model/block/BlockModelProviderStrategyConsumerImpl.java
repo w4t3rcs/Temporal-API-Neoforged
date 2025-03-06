@@ -15,7 +15,7 @@ public class BlockModelProviderStrategyConsumerImpl implements BlockModelProvide
         CUBED_BLOCKS.forEach(registerBlockModel(blockModels, CubedBlockModelProviderStrategy::new));
         CUTOUT_CUBED_BLOCKS.forEach(registerBlockModel(blockModels, CutoutCubedBlockModelProviderStrategy::new));
         CROSS_BLOCKS.forEach(registerBlockModel(blockModels, CrossBlockModelProviderStrategy::new));
-        POTTED_CROSS_BLOCKS.forEach(registerBlockModel(blockModels, PottedCrossBlockModelProviderStrategy::new));
+        FLOWER_BLOCKS.forEach(registerBlockModel(blockModels, FlowerBlockModelProviderStrategy::new));
         BUTTONS.forEach(registerBlockModel(blockModels, ButtonBlockModelProviderStrategy::new));
         DOORS.forEach(registerBlockModel(blockModels, DoorBlockModelProviderStrategy::new));
         FENCES.forEach(registerBlockModel(blockModels, FenceBlockModelProviderStrategy::new));
