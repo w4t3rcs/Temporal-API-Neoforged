@@ -16,7 +16,7 @@ public class LithuanianTranslationStrategy extends TranslationStrategy {
             field.setAccessible(true);
             Object o = field.get(object);
             LithuanianTranslation translation = field.getDeclaredAnnotation(LithuanianTranslation.class);
-            putTranslation(translation.type(), translation.id(), translation.value(), o);
+            putDynamicTranslation(translation.id(), translation.value(), o);
         }
     }
 }

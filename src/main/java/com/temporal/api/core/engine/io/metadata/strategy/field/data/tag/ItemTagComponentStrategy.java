@@ -17,7 +17,7 @@ public class ItemTagComponentStrategy implements FieldAnnotationStrategy {
             ItemTagComponent annotation = field.getDeclaredAnnotation(ItemTagComponent.class);
             DeferredItem<?> deferredItem = (DeferredItem<?>) field.get(object);
             if (!annotation.tagContainer().equals(Object.class)) ItemTagDynamicPreparer.TAG_CONTAINERS.add(annotation.tagContainer());
-            for (String tag : annotation.tags()) {
+            for (String tag : annotation.value()) {
                 boolean exists = ApiItemTagsProvider.TAG_GENERATION_DESCRIPTIONS.containsKey(tag);
                 if (exists) {
                     ApiItemTagsProvider.TAG_GENERATION_DESCRIPTIONS.get(tag).add(deferredItem);

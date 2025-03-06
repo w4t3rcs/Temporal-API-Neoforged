@@ -10,5 +10,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface ItemModel {
-    ItemModelType type() default ItemModelType.BASIC;
+    ItemModelType value() default ItemModelType.BASIC;
 }

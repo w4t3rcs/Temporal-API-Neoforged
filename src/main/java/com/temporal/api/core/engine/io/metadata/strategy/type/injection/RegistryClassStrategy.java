@@ -12,7 +12,7 @@ public class RegistryClassStrategy implements ClassAnnotationStrategy {
     public void execute(Class<?> clazz, Object object) throws Exception {
         if (clazz.isAnnotationPresent(Registry.class)) {
             Registry registry = clazz.getDeclaredAnnotation(Registry.class);
-            String modCondition = registry.registryOnModCondition();
+            String modCondition = registry.mandatoryMod();
             if (modCondition.isBlank() || ModList.get().isLoaded(modCondition)) {
                 Field field = clazz.getDeclaredFields()[0];
                 field.setAccessible(true);

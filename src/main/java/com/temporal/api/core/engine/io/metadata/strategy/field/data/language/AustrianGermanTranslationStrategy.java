@@ -16,7 +16,7 @@ public class AustrianGermanTranslationStrategy extends TranslationStrategy {
             field.setAccessible(true);
             Object o = field.get(object);
             AustrianGermanTranslation translation = field.getDeclaredAnnotation(AustrianGermanTranslation.class);
-            putTranslation(translation.type(), translation.id(), translation.value(), o);
+            putDynamicTranslation(translation.id(), translation.value(), o);
         }
     }
 }

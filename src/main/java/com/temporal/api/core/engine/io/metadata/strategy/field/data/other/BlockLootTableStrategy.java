@@ -18,7 +18,7 @@ public class BlockLootTableStrategy implements FieldAnnotationStrategy {
             field.setAccessible(true);
             DeferredBlock<?> registryObject = (DeferredBlock<?>) field.get(object);
             BlockLootTable blockLootTable = field.getDeclaredAnnotation(BlockLootTable.class);
-            switch (blockLootTable.type()) {
+            switch (blockLootTable.value()) {
                 case SELF -> BlockLootTableProvider.SELF.add(registryObject);
                 case SILK_TOUCH -> BlockLootTableProvider.SILK_TOUCH.add(registryObject);
                 case POTTED_CONTENT -> BlockLootTableProvider.POTTED_CONTENT.add(registryObject);

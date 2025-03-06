@@ -16,7 +16,7 @@ public class HungarianTranslationStrategy extends TranslationStrategy {
             field.setAccessible(true);
             Object o = field.get(object);
             HungarianTranslation translation = field.getDeclaredAnnotation(HungarianTranslation.class);
-            putTranslation(translation.type(), translation.id(), translation.value(), o);
+            putDynamicTranslation(translation.id(), translation.value(), o);
         }
     }
 }

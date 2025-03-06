@@ -10,7 +10,7 @@ public class InjectedStrategy implements ClassAnnotationStrategy {
     @Override
     public void execute(Class<?> clazz, Object object) throws Exception {
         Injected injected = clazz.getDeclaredAnnotation(Injected.class);
-        String modCondition = injected.injectionOnModCondition();
+        String modCondition = injected.mandatoryMod();
         if (injected.value() && injected.isInjection() && (modCondition.isBlank() || ModList.get().isLoaded(modCondition))) {
             Context context = InjectionContext.getInstance();
             context.putObject(clazz);

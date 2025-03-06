@@ -16,7 +16,7 @@ public class IcelandicTranslationStrategy extends TranslationStrategy {
             field.setAccessible(true);
             Object o = field.get(object);
             IcelandicTranslation translation = field.getDeclaredAnnotation(IcelandicTranslation.class);
-            putTranslation(translation.type(), translation.id(), translation.value(), o);
+            putDynamicTranslation(translation.id(), translation.value(), o);
         }
     }
 }

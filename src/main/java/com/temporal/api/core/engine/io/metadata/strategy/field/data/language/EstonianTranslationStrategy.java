@@ -16,7 +16,7 @@ public class EstonianTranslationStrategy extends TranslationStrategy {
             field.setAccessible(true);
             Object o = field.get(object);
             EstonianTranslation translation = field.getDeclaredAnnotation(EstonianTranslation.class);
-            putTranslation(translation.type(), translation.id(), translation.value(), o);
+            putDynamicTranslation(translation.id(), translation.value(), o);
         }
     }
 }

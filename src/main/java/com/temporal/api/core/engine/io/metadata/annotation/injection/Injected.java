@@ -10,5 +10,5 @@ import java.lang.annotation.Target;
 public @interface Injected {
     boolean value() default true;
     boolean isInjection() default true;
-    String injectionOnModCondition() default "";
+    String mandatoryMod() default "";
 }

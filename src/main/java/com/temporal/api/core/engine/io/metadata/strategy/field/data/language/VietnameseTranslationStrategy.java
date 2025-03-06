@@ -16,7 +16,7 @@ public class VietnameseTranslationStrategy extends TranslationStrategy {
             field.setAccessible(true);
             Object o = field.get(object);
             VietnameseTranslation translation = field.getDeclaredAnnotation(VietnameseTranslation.class);
-            putTranslation(translation.type(), translation.id(), translation.value(), o);
+            putDynamicTranslation(translation.id(), translation.value(), o);
         }
     }
 }

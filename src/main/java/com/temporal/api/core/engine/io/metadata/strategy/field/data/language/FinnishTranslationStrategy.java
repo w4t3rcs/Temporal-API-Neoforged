@@ -16,7 +16,7 @@ public class FinnishTranslationStrategy extends TranslationStrategy {
             field.setAccessible(true);
             Object o = field.get(object);
             FinnishTranslation translation = field.getDeclaredAnnotation(FinnishTranslation.class);
-            putTranslation(translation.type(), translation.id(), translation.value(), o);
+            putDynamicTranslation(translation.id(), translation.value(), o);
         }
     }
 }

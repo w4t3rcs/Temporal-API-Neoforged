@@ -16,7 +16,7 @@ public class MandarinTranslationStrategy extends TranslationStrategy {
             field.setAccessible(true);
             Object o = field.get(object);
             MandarinTranslation translation = field.getDeclaredAnnotation(MandarinTranslation.class);
-            putTranslation(translation.type(), translation.id(), translation.value(), o);
+            putDynamicTranslation(translation.id(), translation.value(), o);
         }
     }
 }

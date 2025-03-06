@@ -13,7 +13,7 @@ public class RegistryFieldStrategy implements FieldAnnotationStrategy {
         if (field.isAnnotationPresent(Registry.class)) {
             field.setAccessible(true);
             Registry registry = field.getDeclaredAnnotation(Registry.class);
-            String modCondition = registry.registryOnModCondition();
+            String modCondition = registry.mandatoryMod();
             if (modCondition.isBlank() || ModList.get().isLoaded(modCondition)) {
                 ObjectFactory<?> objectFactory = (ObjectFactory<?>) field.get(object);
                 objectFactory.register();

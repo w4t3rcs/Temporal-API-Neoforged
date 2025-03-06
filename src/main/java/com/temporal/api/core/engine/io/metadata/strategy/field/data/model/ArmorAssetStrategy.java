@@ -20,7 +20,7 @@ public class ArmorAssetStrategy implements FieldAnnotationStrategy {
             ArmorMaterial armorMaterial = (ArmorMaterial) field.get(object);
             ResourceKey<EquipmentAsset> equipmentAsset = armorMaterial.assetId();
             ArmorAsset annotation = field.getDeclaredAnnotation(ArmorAsset.class);
-            switch (annotation.type()) {
+            switch (annotation.value()) {
                 case HUMANOID -> EquipmentDescriptionContainer.HUMANOID_EQUIPMENT.put(equipmentAsset, EquipmentClientInfo.builder()
                         .addHumanoidLayers(ResourceUtils.createResourceLocation(equipmentAsset))
                         .build());

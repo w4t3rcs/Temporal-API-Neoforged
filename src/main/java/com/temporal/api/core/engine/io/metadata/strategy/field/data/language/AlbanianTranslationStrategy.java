@@ -16,7 +16,7 @@ public class AlbanianTranslationStrategy extends TranslationStrategy {
             field.setAccessible(true);
             Object o = field.get(object);
             AlbanianTranslation translation = field.getDeclaredAnnotation(AlbanianTranslation.class);
-            putTranslation(translation.type(), translation.id(), translation.value(), o);
+            putDynamicTranslation(translation.id(), translation.value(), o);
         }
     }
 }

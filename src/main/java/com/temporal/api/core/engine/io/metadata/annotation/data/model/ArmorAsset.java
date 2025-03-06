@@ -10,5 +10,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface ArmorAsset {
-    ArmorAssetType type() default ArmorAssetType.HUMANOID;
+    ArmorAssetType value() default ArmorAssetType.HUMANOID;
 }

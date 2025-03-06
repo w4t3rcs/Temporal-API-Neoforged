@@ -11,7 +11,7 @@ public class ExecutionStrategy implements MethodAnnotationStrategy {
         if (method.isAnnotationPresent(Execution.class)) {
             method.setAccessible(true);
             Execution execution = method.getDeclaredAnnotation(Execution.class);
-            String modCondition = execution.executionOnModCondition();
+            String modCondition = execution.mandatoryMod();
             if (modCondition.isBlank() || ModList.get().isLoaded(modCondition)) method.invoke(object);
         }
     }

@@ -14,7 +14,7 @@ public class ItemModelStrategy implements FieldAnnotationStrategy {
             field.setAccessible(true);
             DeferredItem<?> registryObject = (DeferredItem<?>) field.get(object);
             ItemModel itemModel = field.getDeclaredAnnotation(ItemModel.class);
-            switch (itemModel.type()) {
+            switch (itemModel.value()) {
                 case BASIC -> ItemModelDescriptionContainer.BASIC_ITEMS.add(registryObject);
                 case HANDHELD -> ItemModelDescriptionContainer.HANDHELD_ITEMS.add(registryObject);
                 case TRIMMED_ARMOR -> ItemModelDescriptionContainer.TRIMMED_ARMOR_ITEMS.add(registryObject);

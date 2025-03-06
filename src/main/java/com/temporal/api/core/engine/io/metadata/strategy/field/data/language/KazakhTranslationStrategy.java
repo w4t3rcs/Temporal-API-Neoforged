@@ -16,7 +16,7 @@ public class KazakhTranslationStrategy extends TranslationStrategy {
             field.setAccessible(true);
             Object o = field.get(object);
             KazakhTranslation translation = field.getDeclaredAnnotation(KazakhTranslation.class);
-            putTranslation(translation.type(), translation.id(), translation.value(), o);
+            putDynamicTranslation(translation.id(), translation.value(), o);
         }
     }
 }

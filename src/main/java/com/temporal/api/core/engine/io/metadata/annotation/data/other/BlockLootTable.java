@@ -10,6 +10,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface BlockLootTable {
-    BlockLootTableType type() default BlockLootTableType.SELF;
+    BlockLootTableType value() default BlockLootTableType.SELF;
     String itemId() default "";
 }

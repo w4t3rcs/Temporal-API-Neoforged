@@ -11,7 +11,7 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import java.util.function.Supplier;
 
 public interface PottedFlowerExtension {
-    default DeferredBlock<Block> createPot(String name, BlockBehaviour.Properties properties, Supplier<? extends Block> flower) {
+    default DeferredBlock<Block> createPottedFlower(String name, BlockBehaviour.Properties properties, Supplier<? extends Block> flower) {
         final BlockFactory blockFactory = InjectionContext.getFromInstance(BlockFactory.class);
         return blockFactory.createWithoutItem(name, properties.noOcclusion().noCollission(), props -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT), flower, props));
     }

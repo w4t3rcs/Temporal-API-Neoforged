@@ -16,7 +16,7 @@ public class HebrewTranslationStrategy extends TranslationStrategy {
             field.setAccessible(true);
             Object o = field.get(object);
             HebrewTranslation translation = field.getDeclaredAnnotation(HebrewTranslation.class);
-            putTranslation(translation.type(), translation.id(), translation.value(), o);
+            putDynamicTranslation(translation.id(), translation.value(), o);
         }
     }
 }

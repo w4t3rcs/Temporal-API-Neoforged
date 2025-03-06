@@ -14,7 +14,7 @@ public class BlockModelStrategy implements FieldAnnotationStrategy {
             field.setAccessible(true);
             DeferredBlock<?> registryObject = (DeferredBlock<?>) field.get(object);
             BlockModel blockModel = field.getDeclaredAnnotation(BlockModel.class);
-            switch (blockModel.type()) {
+            switch (blockModel.value()) {
                 case CUBED -> BlockModelDescriptionContainer.CUBED_BLOCKS.add(registryObject);
                 case CUTOUT_CUBED -> BlockModelDescriptionContainer.CUTOUT_CUBED_BLOCKS.add(registryObject);
                 case CROSS -> BlockModelDescriptionContainer.CROSS_BLOCKS.add(registryObject);

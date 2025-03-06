@@ -16,7 +16,7 @@ public class UkrainianTranslationStrategy extends TranslationStrategy {
             field.setAccessible(true);
             Object o = field.get(object);
             UkrainianTranslation translation = field.getDeclaredAnnotation(UkrainianTranslation.class);
-            putTranslation(translation.type(), translation.id(), translation.value(), o);
+            putDynamicTranslation(translation.id(), translation.value(), o);
         }
     }
 }

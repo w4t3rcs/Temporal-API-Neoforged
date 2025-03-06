@@ -10,5 +10,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface BlockModel {
-    BlockModelType type() default BlockModelType.CUBED;
+    BlockModelType value() default BlockModelType.CUBED;
 }

@@ -7,6 +7,7 @@ import org.objectweb.asm.Type;
 
 import java.lang.annotation.Annotation;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -52,5 +53,14 @@ public final class IOUtils {
                 })
                 .filter(filteringPredicate)
                 .map(mapper);
+    }
+
+    public static <T> Optional<T> tryCast(Object o) {
+        try {
+            T casted = (T) o;
+            return Optional.of(casted);
+        } catch (Exception e) {
+            return Optional.empty();
+        }
     }
 }

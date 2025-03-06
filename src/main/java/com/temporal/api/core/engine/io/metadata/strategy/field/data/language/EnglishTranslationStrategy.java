@@ -16,7 +16,7 @@ public class EnglishTranslationStrategy extends TranslationStrategy {
             field.setAccessible(true);
             Object o = field.get(object);
             EnglishTranslation translation = field.getDeclaredAnnotation(EnglishTranslation.class);
-            putTranslation(translation.type(), translation.id(), translation.value(), o);
+            putDynamicTranslation(translation.id(), translation.value(), o);
         }
     }
 }
