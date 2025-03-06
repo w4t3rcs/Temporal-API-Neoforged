@@ -1,7 +1,6 @@
 package com.temporal.api.core.event.data.model.item;
 
 import net.minecraft.client.data.models.ItemModelGenerators;
-import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
 import org.jetbrains.annotations.NotNull;
 
@@ -20,13 +19,11 @@ public class ItemModelProviderStrategyConsumerImpl implements ItemModelProviderS
         SHIELD_ITEMS.forEach(registerItemModel(itemModels, ShieldModelProviderStrategy::new));
         TRIMMED_ARMOR_ITEMS.forEach(registerItemModel(itemModels, TrimmedItemModelProviderStrategy::new));
         POTION_ITEMS.forEach(registerItemModel(itemModels, PotionItemModelProviderStrategy::new));
-        CUSTOM_MODELS.forEach((key, value) -> {
-            ((ItemModelProviderStrategy<Item>) value).registerItemModel((DeferredItem<Item>) key, itemModels);
-        });
+        CUSTOM_MODELS.forEach((key, value) -> value.registerItemModel(key, itemModels));
     }
 
     @Override
-    public <T extends Item> Consumer<? super DeferredItem<T>> registerItemModel(@NotNull ItemModelGenerators itemModels, @NotNull Supplier<ItemModelProviderStrategy<T>> itemModelProviderStrategy) {
+    public Consumer<DeferredItem<?>> registerItemModel(@NotNull ItemModelGenerators itemModels, @NotNull Supplier<ItemModelProviderStrategy> itemModelProviderStrategy) {
         return (item) -> itemModelProviderStrategy.get().registerItemModel(item, itemModels);
     }
 }

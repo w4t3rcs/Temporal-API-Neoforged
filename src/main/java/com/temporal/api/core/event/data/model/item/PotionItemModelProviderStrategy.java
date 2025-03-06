@@ -4,9 +4,9 @@ import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
 
-public class PotionItemModelProviderStrategy implements ItemModelProviderStrategy<Item> {
+public class PotionItemModelProviderStrategy implements ItemModelProviderStrategy {
     @Override
-    public void registerItemModel(DeferredItem<Item> itemRegistry, ItemModelGenerators itemModels, Object... additionalData) {
+    public void registerItemModel(DeferredItem<?> itemRegistry, ItemModelGenerators itemModels, Object... additionalData) {
         Item item = itemRegistry.get();
         itemModels.generatePotion(item);
     }

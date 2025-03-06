@@ -4,15 +4,14 @@ import com.temporal.api.core.event.data.preparer.resource.equipment.EquipmentRes
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.equipment.EquipmentAsset;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 import java.util.Map;
 
-public class TrimmedItemModelProviderStrategy implements ItemModelProviderStrategy<Item> {
+public class TrimmedItemModelProviderStrategy implements ItemModelProviderStrategy {
     @Override
-    public void registerItemModel(DeferredItem<Item> itemRegistry, ItemModelGenerators itemModels, Object... additionalData) {
+    public void registerItemModel(DeferredItem<?> itemRegistry, ItemModelGenerators itemModels, Object... additionalData) {
         ResourceLocation id = itemRegistry.getId();
         String path = id.getPath();
         String armorType = "";

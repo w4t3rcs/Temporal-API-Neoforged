@@ -10,9 +10,9 @@ import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
 
-public class CrossbowModelProviderStrategy implements ItemModelProviderStrategy<Item> {
+public class CrossbowModelProviderStrategy implements ItemModelProviderStrategy {
     @Override
-    public void registerItemModel(DeferredItem<Item> itemRegistry, ItemModelGenerators itemModels, Object... additionalData) {
+    public void registerItemModel(DeferredItem<?> itemRegistry, ItemModelGenerators itemModels, Object... additionalData) {
         Item item = itemRegistry.get();
         ItemModel.Unbaked crossbowModel = ItemModelUtils.plainModel(itemModels.createFlatItemModel(item, ModelTemplates.CROSSBOW));
         ItemModel.Unbaked crossbowPulling0 = ItemModelUtils.plainModel(itemModels.createFlatItemModel(item, "_pulling_0", ModelTemplates.CROSSBOW));

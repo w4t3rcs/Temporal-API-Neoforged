@@ -5,9 +5,9 @@ import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
 
-public class BasicItemModelProviderStrategy implements ItemModelProviderStrategy<Item> {
+public class BasicItemModelProviderStrategy implements ItemModelProviderStrategy {
     @Override
-    public void registerItemModel(DeferredItem<Item> itemRegistry, ItemModelGenerators itemModels, Object... additionalData) {
+    public void registerItemModel(DeferredItem<?> itemRegistry, ItemModelGenerators itemModels, Object... additionalData) {
         Item item = itemRegistry.get();
         itemModels.generateFlatItem(item, ModelTemplates.FLAT_ITEM);
     }
