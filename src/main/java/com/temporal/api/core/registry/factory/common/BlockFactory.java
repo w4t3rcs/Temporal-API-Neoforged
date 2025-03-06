@@ -17,6 +17,14 @@ public class BlockFactory implements ObjectFactory<Block> {
     public static final DeferredRegister.Blocks BLOCKS = RegistryUtils.createBlockRegistry();
     private final ItemFactory itemFactory = InjectionContext.getFromInstance(ItemFactory.class);
 
+    public DeferredBlock<Block> createWithoutItem(String name, BlockBehaviour.Properties properties) {
+        return BLOCKS.registerBlock(name, Block::new, properties);
+    }
+
+    public DeferredBlock<Block> createWithoutItem(String name, BlockBehaviour.Properties properties, Function<BlockBehaviour.Properties, ? extends Block> function) {
+        return BLOCKS.registerBlock(name, function, properties);
+    }
+
     public DeferredBlock<Block> create(String name, BlockBehaviour.Properties properties) {
         return create(name, properties, new Item.Properties());
     }
