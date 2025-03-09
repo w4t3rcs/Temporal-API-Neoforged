@@ -18,7 +18,11 @@ public class FlowerBlockModelProviderStrategy extends AbstractModelProviderStrat
         BlockModelGenerators.PlantType plantType = BlockModelGenerators.PlantType.NOT_TINTED;
         CROSS_PROVIDER.registerBlockModel(blockRegistry, blockModels);
         TextureMapping texturemapping = plantType.getPlantTextureMapping(block);
-        ResourceLocation resourcelocation = plantType.getCrossPot().create(pottedBlock, texturemapping, blockModels.modelOutput);
+        ResourceLocation resourcelocation = plantType.getCrossPot()
+                .extend()
+                .renderType("minecraft:cutout")
+                .build()
+                .create(pottedBlock, texturemapping, blockModels.modelOutput);
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(pottedBlock, resourcelocation));
     }
 }
