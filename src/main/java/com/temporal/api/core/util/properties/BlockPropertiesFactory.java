@@ -44,6 +44,14 @@ public final class BlockPropertiesFactory {
         return copy(Blocks.ALLIUM);
     }
 
+    public static Properties flowerPotLike() {
+        return copy(Blocks.FLOWER_POT);
+    }
+
+    public static Properties saplingLike() {
+        return copy(Blocks.OAK_SAPLING);
+    }
+
     public static Properties leavesLike() {
         return copy(Blocks.OAK_LEAVES);
     }
