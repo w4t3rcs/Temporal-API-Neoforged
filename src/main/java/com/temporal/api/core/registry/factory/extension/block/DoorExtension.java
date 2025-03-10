@@ -10,10 +10,18 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 public interface DoorExtension {
+    default DeferredBlock<Block> createDoor(String name, BlockBehaviour.Properties properties) {
+        return createDoor(name, properties, BlockSetType.OAK);
+    }
+
     default DeferredBlock<Block> createDoor(String name, BlockBehaviour.Properties properties, BlockSetType setType) {
         return createDoor(name, properties, new Item.Properties(), setType);
     }
 
+    default DeferredBlock<Block> createDoor(String name, BlockBehaviour.Properties properties, Item.Properties itemProperties) {
+        return createDoor(name, properties, itemProperties, BlockSetType.OAK);
+    }
+    
     default DeferredBlock<Block> createDoor(String name, BlockBehaviour.Properties properties, Item.Properties itemProperties, BlockSetType setType) {
         final BlockFactory blockFactory = InjectionContext.getFromInstance(BlockFactory.class);
         return blockFactory.create(name, properties, props -> new DoorBlock(setType, props), itemProperties);

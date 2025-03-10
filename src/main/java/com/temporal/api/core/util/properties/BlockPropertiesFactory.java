@@ -64,6 +64,30 @@ public final class BlockPropertiesFactory {
         return copy(Blocks.OAK_PLANKS);
     }
 
+    public static Properties button() {
+        return copy(Blocks.OAK_BUTTON);
+    }
+
+    public static Properties pressurePlate() {
+        return copy(Blocks.OAK_PRESSURE_PLATE);
+    }
+
+    public static Properties fence() {
+        return copy(Blocks.OAK_FENCE);
+    }
+
+    public static Properties fenceGate() {
+        return copy(Blocks.OAK_FENCE_GATE);
+    }
+
+    public static Properties door() {
+        return copy(Blocks.OAK_DOOR);
+    }
+
+    public static Properties trapdoor() {
+        return copy(Blocks.OAK_TRAPDOOR);
+    }
+
     public static Properties copy(BlockBehaviour block) {
         return Properties.ofFullCopy(block);
     }

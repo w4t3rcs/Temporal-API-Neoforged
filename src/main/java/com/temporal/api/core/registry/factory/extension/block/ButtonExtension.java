@@ -10,8 +10,16 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 public interface ButtonExtension {
+    default DeferredBlock<Block> createButton(String name, BlockBehaviour.Properties properties) {
+        return createButton(name, properties, BlockSetType.OAK, 30);
+    }
+
     default DeferredBlock<Block> createButton(String name, BlockBehaviour.Properties properties, BlockSetType setType, int ticksToStayPressed) {
         return createButton(name, properties, new Item.Properties(), setType, ticksToStayPressed);
+    }
+
+    default DeferredBlock<Block> createButton(String name, BlockBehaviour.Properties properties, Item.Properties itemProperties) {
+        return createButton(name, properties, itemProperties, BlockSetType.OAK, 30);
     }
 
     default DeferredBlock<Block> createButton(String name, BlockBehaviour.Properties properties, Item.Properties itemProperties, BlockSetType setType, int ticksToStayPressed) {

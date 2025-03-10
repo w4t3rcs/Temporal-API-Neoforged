@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
+//todo
 public interface SignExtension {
     default DeferredBlock<Block> createStandingSign(String name, float strength, WoodType woodType) {
         return createStandingSign(name, BlockPropertiesFactory.empty(), new Item.Properties(), strength, woodType);
