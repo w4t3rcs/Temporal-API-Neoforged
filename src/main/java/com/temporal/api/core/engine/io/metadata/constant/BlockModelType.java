@@ -15,6 +15,7 @@ public enum BlockModelType {
     TRAPDOOR,
     WALL,
     LOG,
+    WOOD,
     ROTATED_PILLAR,
     CROP,
     VINE

@@ -26,6 +26,7 @@ public class BlockModelProviderStrategyConsumerImpl implements BlockModelProvide
         TRAPDOORS.forEach(registerBlockModel(blockModels, TrapDoorBlockModelProviderStrategy::new));
         WALLS.forEach(registerBlockModel(blockModels, WallBlockModelProviderStrategy::new));
         LOGS.forEach(registerBlockModel(blockModels, LogBlockModelProviderStrategy::new));
+        WOOD.forEach(registerBlockModel(blockModels, WoodBlockModelProviderStrategy::new));
         ROTATED_PILLARS.forEach(registerBlockModel(blockModels, RotatedPillarBlockModelProviderStrategy::new));
         CROP_BLOCKS.forEach(registerBlockModel(blockModels, CropBlockModelProviderStrategy::new));
         VINE_BLOCKS.forEach(registerBlockModel(blockModels, VineBlockModelProviderStrategy::new));

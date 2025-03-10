@@ -22,6 +22,7 @@ public final class BlockModelDescriptionContainer {
     public static final List<DeferredBlock<?>> TRAPDOORS = new ArrayList<>();
     public static final List<DeferredBlock<?>> WALLS = new ArrayList<>();
     public static final List<DeferredBlock<?>> LOGS = new ArrayList<>();
+    public static final List<DeferredBlock<?>> WOOD = new ArrayList<>();
     public static final List<DeferredBlock<?>> ROTATED_PILLARS = new ArrayList<>();
     public static final List<DeferredBlock<?>> CROP_BLOCKS = new ArrayList<>();
     public static final List<DeferredBlock<?>> VINE_BLOCKS = new ArrayList<>();
