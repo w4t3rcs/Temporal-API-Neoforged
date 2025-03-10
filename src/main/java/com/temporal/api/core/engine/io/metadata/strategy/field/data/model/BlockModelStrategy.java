@@ -19,6 +19,9 @@ public class BlockModelStrategy implements FieldAnnotationStrategy {
                 case CUTOUT_CUBED -> BlockModelDescriptionContainer.CUTOUT_CUBED_BLOCKS.add(registryObject);
                 case CROSS -> BlockModelDescriptionContainer.CROSS_BLOCKS.add(registryObject);
                 case FLOWER -> BlockModelDescriptionContainer.FLOWER_BLOCKS.add(registryObject);
+                case ROTATED_PILLAR -> BlockModelDescriptionContainer.ROTATED_PILLARS.add(registryObject);
+                case LOG -> BlockModelDescriptionContainer.LOGS.add(registryObject);
+                case WOOD -> BlockModelDescriptionContainer.WOODS.add(registryObject);
                 case DOOR -> BlockModelDescriptionContainer.DOORS.add(registryObject);
                 case BUTTON -> BlockModelDescriptionContainer.BUTTONS.add(registryObject);
                 case FENCE -> BlockModelDescriptionContainer.FENCES.add(registryObject);
@@ -28,8 +31,12 @@ public class BlockModelStrategy implements FieldAnnotationStrategy {
                 case SLAB -> BlockModelDescriptionContainer.SLABS.add(registryObject);
                 case STAIRS -> BlockModelDescriptionContainer.STAIRS.add(registryObject);
                 case WALL -> BlockModelDescriptionContainer.WALLS.add(registryObject);
-                case LOG -> BlockModelDescriptionContainer.LOGS.add(registryObject);
-                case ROTATED_PILLAR -> BlockModelDescriptionContainer.ROTATED_PILLARS.add(registryObject);
+                case PLANKS_BUTTON -> BlockModelDescriptionContainer.PLANKS_BUTTONS.add(registryObject);
+                case PLANKS_FENCE -> BlockModelDescriptionContainer.PLANKS_FENCES.add(registryObject);
+                case PLANKS_FENCE_GATE -> BlockModelDescriptionContainer.PLANKS_FENCE_GATES.add(registryObject);
+                case PLANKS_PRESSURE_PLATE -> BlockModelDescriptionContainer.PLANKS_PRESSURE_PLATES.add(registryObject);
+                case PLANKS_SLAB -> BlockModelDescriptionContainer.PLANKS_SLABS.add(registryObject);
+                case PLANKS_STAIRS -> BlockModelDescriptionContainer.PLANKS_STAIRS.add(registryObject);
                 case CROP -> BlockModelDescriptionContainer.CROP_BLOCKS.add(registryObject);
                 case VINE -> BlockModelDescriptionContainer.VINE_BLOCKS.add(registryObject);
             }

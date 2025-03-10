@@ -16,44 +16,48 @@ public final class BlockPropertiesFactory {
         return Properties.of();
     }
 
-    public static Properties woolLike() {
+    public static Properties wool() {
         return copy(Blocks.WHITE_WOOL);
     }
 
-    public static Properties woodLike() {
-        return copy(Blocks.OAK_WOOD);
-    }
-
-    public static Properties dirtLike() {
+    public static Properties dirt() {
         return copy(Blocks.DIRT);
     }
 
-    public static Properties stoneLike() {
+    public static Properties stone() {
         return copy(Blocks.STONE);
     }
 
-    public static Properties deepslateLike() {
+    public static Properties deepslate() {
         return copy(Blocks.DEEPSLATE);
     }
 
-    public static Properties shortGrassLike() {
+    public static Properties shortGrass() {
         return copy(Blocks.SHORT_GRASS);
     }
 
-    public static Properties flowerLike() {
+    public static Properties flower() {
         return copy(Blocks.ALLIUM);
     }
 
-    public static Properties flowerPotLike() {
+    public static Properties flowerPot() {
         return copy(Blocks.FLOWER_POT);
     }
 
-    public static Properties saplingLike() {
+    public static Properties sapling() {
         return copy(Blocks.OAK_SAPLING);
     }
 
-    public static Properties leavesLike() {
+    public static Properties leaves() {
         return copy(Blocks.OAK_LEAVES);
+    }
+
+    public static Properties wood() {
+        return copy(Blocks.OAK_WOOD);
+    }
+
+    public static Properties planks() {
+        return copy(Blocks.OAK_PLANKS);
     }
 
     public static Properties copy(BlockBehaviour block) {

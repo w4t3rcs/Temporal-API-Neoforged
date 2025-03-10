@@ -1,9 +1,9 @@
-package com.temporal.api.core.event.data.model.block;
+package com.temporal.api.core.event.data.model.block.planks;
 
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
-public class StairsBlockModelProviderStrategy extends AbstractFamilyBlockModelProviderStrategy {
+public class PlanksStairsBlockModelProviderStrategy extends AbstractPlanksFamilyBlockModelProviderStrategy {
     @Override
     public void registerBlockModel(DeferredBlock<?> blockRegistry, BlockModelGenerators blockModels) {
         createFamilyProvider(blockRegistry, blockModels, "_stairs").stairs(blockRegistry.get());
