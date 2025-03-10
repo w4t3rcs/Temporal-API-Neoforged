@@ -1,6 +1,6 @@
 package com.temporal.api.core.event.data.tag.item;
 
-import com.temporal.api.core.engine.IOLayer;
+import com.temporal.api.core.engine.io.IOLayer;
 import com.temporal.api.core.event.data.preparer.tag.item.ItemTagDynamicPreparer;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;

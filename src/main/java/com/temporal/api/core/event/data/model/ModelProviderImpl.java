@@ -1,6 +1,6 @@
 package com.temporal.api.core.event.data.model;
 
-import com.temporal.api.core.engine.IOLayer;
+import com.temporal.api.core.engine.io.IOLayer;
 import com.temporal.api.core.event.data.model.block.BlockModelProviderStrategyConsumer;
 import com.temporal.api.core.event.data.model.block.BlockModelProviderStrategyConsumerImpl;
 import com.temporal.api.core.event.data.model.item.ItemModelProviderStrategyConsumer;

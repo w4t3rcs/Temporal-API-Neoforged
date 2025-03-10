@@ -1,6 +1,6 @@
 package com.temporal.api.core.event.data.recipe.strategy;
 
-import com.temporal.api.core.engine.IOLayer;
+import com.temporal.api.core.engine.io.IOLayer;
 import com.temporal.api.core.event.data.recipe.ApiRecipeProvider;
 import com.temporal.api.core.event.data.recipe.holder.BlastingRecipeHolder;
 import net.minecraft.data.recipes.RecipeOutput;

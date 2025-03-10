@@ -1,6 +1,6 @@
 package com.temporal.api.core.util.other;
 
-import com.temporal.api.core.engine.IOLayer;
+import com.temporal.api.core.engine.io.IOLayer;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;

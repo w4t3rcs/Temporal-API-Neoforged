@@ -1,6 +1,7 @@
 package com.temporal.api.core.engine;
 
 import com.temporal.api.ApiMod;
+import com.temporal.api.core.engine.io.IOLayer;
 import com.temporal.api.core.engine.io.context.ContextInitializer;
 import com.temporal.api.core.engine.io.context.EventBusContextInitializer;
 import com.temporal.api.core.engine.io.context.ExtraContextInitializer;

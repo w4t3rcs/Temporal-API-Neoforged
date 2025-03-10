@@ -1,6 +1,6 @@
 package com.temporal.api.core.registry.factory.other;
 
-import com.temporal.api.core.engine.IOLayer;
+import com.temporal.api.core.engine.io.IOLayer;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
