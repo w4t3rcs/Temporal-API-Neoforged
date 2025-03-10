@@ -40,6 +40,10 @@ public final class BlockPropertiesFactory {
         return copy(Blocks.ALLIUM);
     }
 
+    public static Properties mushroom() {
+        return copy(Blocks.BROWN_MUSHROOM);
+    }
+
     public static Properties flowerPot() {
         return copy(Blocks.FLOWER_POT);
     }
