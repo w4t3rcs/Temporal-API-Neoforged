@@ -1,6 +1,8 @@
 package com.temporal.api.core.engine;
 
 import com.temporal.api.ApiMod;
+import com.temporal.api.core.engine.event.EventLayer;
+import com.temporal.api.core.engine.event.handler.EventHandler;
 import com.temporal.api.core.engine.io.IOLayer;
 import com.temporal.api.core.engine.io.context.ContextInitializer;
 import com.temporal.api.core.engine.io.context.EventBusContextInitializer;
@@ -29,6 +31,8 @@ public class TemporalEngine {
                 .addLayer(new IOLayer())
                 .processIOLayer(modClass, List.of(eventBus, modContainer),
                         new ExtraContextInitializer(), new EventBusContextInitializer(), new ModContainerContextInitializer())
+                .addLayer(new EventLayer())
+                .processEventLayer()
                 .build();
     }
 
@@ -64,6 +68,17 @@ public class TemporalEngine {
             };
 
             tasks.add(ioSetupTask);
+            return this;
+        }
+
+        public Configurator processEventLayer(EventHandler... additionalHandlers) {
+            Task eventSetupTask = () -> {
+                EventLayer eventLayer = layerContainer.getLayer(EventLayer.class);
+                eventLayer.setAdditionalEventHandlers(List.of(additionalHandlers));
+                this.processLayer(eventLayer);
+            };
+
+            tasks.add(eventSetupTask);
             return this;
         }
 
