@@ -6,18 +6,28 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Map;
 import java.util.stream.Stream;
 
 public final class ResourceUtils {
+    public static final String MINECRAFT_NAMESPACE = "minecraft";
+
     private ResourceUtils() {
     }
 
-    public static <T> @NotNull Stream<ResourceKey<T>> getResourceKeyStream(Class<?> resourceClassHolder) {
-        return IOUtils.getFieldStream(resourceClassHolder, o -> o instanceof ResourceKey, o -> (ResourceKey<T>) o);
-    }
-
-    public static <T> @NotNull Stream<TagKey<T>> getTagKeyStream(Class<?> tagClassHolder) {
-        return IOUtils.getFieldStream(tagClassHolder, o -> o instanceof TagKey, o -> (TagKey<T>) o);
+    public static <T> void putPrioritizedTagKey(TagKey<T> tag, Map<String, TagKey<T>> data) {
+        String path = tag.location().getPath();
+        String currentTagNamespace = tag.location().getNamespace();
+        String modId = IOLayer.NEO_MOD.getModId();
+        if (data.containsKey(path)) {
+            TagKey<T> existingKey = data.get(path);
+            String namespace = existingKey.location().getNamespace();
+            if (currentTagNamespace.equals(modId) || (!namespace.equals(modId) && currentTagNamespace.equals(MINECRAFT_NAMESPACE))) {
+                data.put(path, tag);
+            }
+        } else {
+            data.put(path, tag);
+        }
     }
 
     public static ResourceLocation createNamespacedResourceLocation(String name) {
@@ -32,6 +42,14 @@ public final class ResourceUtils {
 
     public static ResourceLocation createResourceLocation(String name) {
         return ResourceLocation.fromNamespaceAndPath(IOLayer.NEO_MOD.getModId(), name);
+    }
+
+    public static <T> @NotNull Stream<ResourceKey<T>> getResourceKeyStream(Class<?> resourceClassHolder) {
+        return IOUtils.getFieldStream(resourceClassHolder, o -> o instanceof ResourceKey, o -> (ResourceKey<T>) o);
+    }
+
+    public static <T> @NotNull Stream<TagKey<T>> getTagKeyStream(Class<?> tagClassHolder) {
+        return IOUtils.getFieldStream(tagClassHolder, o -> o instanceof TagKey, o -> (TagKey<T>) o);
     }
 
     public static String getResourceId(ResourceKey<?> resourceKey) {

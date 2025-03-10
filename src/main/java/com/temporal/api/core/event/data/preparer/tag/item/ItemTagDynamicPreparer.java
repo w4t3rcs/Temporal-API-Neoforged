@@ -17,9 +17,6 @@ public final class ItemTagDynamicPreparer implements DynamicPreparer {
     public void prepare() {
         TAG_CONTAINERS.stream()
                 .flatMap(ResourceUtils::<Item>getTagKeyStream)
-                .forEach(tag -> {
-                    String path = tag.location().getPath();
-                    ITEM_TAGS.putIfAbsent(path, tag);
-                });
+                .forEach(tag -> ResourceUtils.putPrioritizedTagKey(tag, ITEM_TAGS));
     }
 }

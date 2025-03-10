@@ -17,9 +17,6 @@ public final class BiomeTagDynamicPreparer implements DynamicPreparer {
     public void prepare() {
         TAG_CONTAINERS.stream()
                 .flatMap(ResourceUtils::<Biome>getTagKeyStream)
-                .forEach(tag -> {
-                    String path = tag.location().getPath();
-                    BIOME_TAGS.putIfAbsent(path, tag);
-                });
+                .forEach(tag -> ResourceUtils.putPrioritizedTagKey(tag, BIOME_TAGS));
     }
 }

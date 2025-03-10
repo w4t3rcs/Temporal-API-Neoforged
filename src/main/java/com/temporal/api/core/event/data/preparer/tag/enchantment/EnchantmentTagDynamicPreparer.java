@@ -17,9 +17,6 @@ public final class EnchantmentTagDynamicPreparer implements DynamicPreparer {
     public void prepare() {
         TAG_CONTAINERS.stream()
                 .flatMap(ResourceUtils::<Enchantment>getTagKeyStream)
-                .forEach(tag -> {
-                    String path = tag.location().getPath();
-                    ENCHANTMENT_TAGS.putIfAbsent(path, tag);
-                });
+                .forEach(tag -> ResourceUtils.putPrioritizedTagKey(tag, ENCHANTMENT_TAGS));
     }
 }

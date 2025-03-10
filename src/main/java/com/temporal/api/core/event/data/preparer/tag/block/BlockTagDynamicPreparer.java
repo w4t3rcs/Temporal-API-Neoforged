@@ -17,9 +17,6 @@ public final class BlockTagDynamicPreparer implements DynamicPreparer {
     public void prepare() {
         TAG_CONTAINERS.stream()
                 .flatMap(ResourceUtils::<Block>getTagKeyStream)
-                .forEach(tag -> {
-                    String path = tag.location().getPath();
-                    BLOCK_TAGS.putIfAbsent(path, tag);
-                });
+                .forEach(tag -> ResourceUtils.putPrioritizedTagKey(tag, BLOCK_TAGS));
     }
 }
