@@ -2,6 +2,7 @@ package com.temporal.api.core.registry.factory.extension.block;
 
 import com.temporal.api.core.engine.io.context.InjectionContext;
 import com.temporal.api.core.registry.factory.common.BlockFactory;
+import com.temporal.api.core.util.properties.BlockPropertiesFactory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoorBlock;
@@ -10,6 +11,10 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 public interface DoorExtension {
+    default DeferredBlock<Block> createDoor(String name) {
+        return createDoor(name, BlockPropertiesFactory.door());
+    }
+
     default DeferredBlock<Block> createDoor(String name, BlockBehaviour.Properties properties) {
         return createDoor(name, properties, BlockSetType.OAK);
     }

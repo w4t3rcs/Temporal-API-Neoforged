@@ -2,6 +2,7 @@ package com.temporal.api.core.registry.factory.extension.block;
 
 import com.temporal.api.core.engine.io.context.InjectionContext;
 import com.temporal.api.core.registry.factory.common.BlockFactory;
+import com.temporal.api.core.util.properties.BlockPropertiesFactory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SweetBerryBushBlock;
@@ -9,6 +10,10 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 public interface BushExtension {
+    default DeferredBlock<Block> createBush(String name) {
+        return createBush(name, BlockPropertiesFactory.bush());
+    }
+
     default DeferredBlock<Block> createBush(String name, BlockBehaviour.Properties properties) {
         return createBush(name, properties, new Item.Properties());
     }

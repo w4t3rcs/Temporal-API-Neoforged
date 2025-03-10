@@ -2,6 +2,7 @@ package com.temporal.api.core.registry.factory.extension.block;
 
 import com.temporal.api.core.engine.io.context.InjectionContext;
 import com.temporal.api.core.registry.factory.common.BlockFactory;
+import com.temporal.api.core.util.properties.BlockPropertiesFactory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.PressurePlateBlock;
@@ -10,6 +11,10 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 public interface PressurePlateExtension {
+    default DeferredBlock<Block> createPressurePlate(String name) {
+        return createPressurePlate(name, BlockPropertiesFactory.pressurePlate());
+    }
+
     default DeferredBlock<Block> createPressurePlate(String name, BlockBehaviour.Properties properties) {
         return createPressurePlate(name, properties, BlockSetType.OAK);
     }

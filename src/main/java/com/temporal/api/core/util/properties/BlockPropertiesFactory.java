@@ -32,8 +32,20 @@ public final class BlockPropertiesFactory {
         return copy(Blocks.DEEPSLATE);
     }
 
+    public static Properties metal() {
+        return copy(Blocks.IRON_BLOCK);
+    }
+
+    public static Properties bricks() {
+        return copy(Blocks.BRICKS);
+    }
+
     public static Properties shortGrass() {
         return copy(Blocks.SHORT_GRASS);
+    }
+
+    public static Properties bush() {
+        return copy(Blocks.SWEET_BERRY_BUSH);
     }
 
     public static Properties flower() {
@@ -46,6 +58,10 @@ public final class BlockPropertiesFactory {
 
     public static Properties flowerPot() {
         return copy(Blocks.FLOWER_POT);
+    }
+
+    public static Properties crop() {
+        return copy(Blocks.CARROTS);
     }
 
     public static Properties sapling() {
@@ -80,12 +96,20 @@ public final class BlockPropertiesFactory {
         return copy(Blocks.OAK_FENCE_GATE);
     }
 
+    public static Properties wall() {
+        return copy(Blocks.COBBLESTONE_WALL);
+    }
+
     public static Properties door() {
         return copy(Blocks.OAK_DOOR);
     }
 
-    public static Properties trapdoor() {
+    public static Properties trapDoor() {
         return copy(Blocks.OAK_TRAPDOOR);
+    }
+
+    public static Properties chain() {
+        return copy(Blocks.CHAIN);
     }
 
     public static Properties copy(BlockBehaviour block) {

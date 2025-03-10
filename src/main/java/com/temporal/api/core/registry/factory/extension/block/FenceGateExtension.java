@@ -2,6 +2,7 @@ package com.temporal.api.core.registry.factory.extension.block;
 
 import com.temporal.api.core.engine.io.context.InjectionContext;
 import com.temporal.api.core.registry.factory.common.BlockFactory;
+import com.temporal.api.core.util.properties.BlockPropertiesFactory;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Item;
@@ -14,6 +15,10 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import java.util.Optional;
 
 public interface FenceGateExtension {
+    default DeferredBlock<Block> createFenceGate(String name) {
+        return createFenceGate(name, BlockPropertiesFactory.fenceGate());
+    }
+
     default DeferredBlock<Block> createFenceGate(String name, BlockBehaviour.Properties properties) {
         return createFenceGate(name, properties, WoodType.OAK, SoundEvents.WOODEN_DOOR_OPEN, SoundEvents.WOODEN_DOOR_CLOSE);
     }
