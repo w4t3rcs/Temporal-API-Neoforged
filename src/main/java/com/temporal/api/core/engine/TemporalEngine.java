@@ -2,7 +2,9 @@ package com.temporal.api.core.engine;
 
 import com.temporal.api.ApiMod;
 import com.temporal.api.core.engine.event.EventLayer;
+import com.temporal.api.core.engine.event.handler.ClientDataEventHandler;
 import com.temporal.api.core.engine.event.handler.EventHandler;
+import com.temporal.api.core.engine.event.handler.FovModifierEventHandler;
 import com.temporal.api.core.engine.io.IOLayer;
 import com.temporal.api.core.engine.io.context.ContextInitializer;
 import com.temporal.api.core.engine.io.context.EventBusContextInitializer;
@@ -16,14 +18,14 @@ import java.util.List;
 
 public class TemporalEngine {
     private static final String BANNER = """
-                       _________ _________ ___     ___ _________
-                       ---- ---- |   ----| |  \\   / | |  ___  |
-                          | |    |  |      | | \\ /| | |  | |  |
-                          | |    |   --|   | |    | | |  ---  |
-                          | |    |   --|   | |    | | |  -----|
-                          | |    |  |      | |    | | | |
-                          | |    |  -----| | |    | | | |
-                          |-|    --------| |-|    |-| |-|
+                       _________ _________ ___     ___ _________ _________ _________ _________ ____
+                       ---- ---- |   ----| |  \\   / | |  ___  | |  ___  | |  ___  | |  ___  | |  |
+                          | |    |  |      | | \\ /| | |  | |  | |  | |  | |  | |  | |  | |  | |  |
+                          | |    |   --|   | |    | | |  | |  | |  | |  | |  |-|  | |  | |  | |  |
+                          | |    |   --|   | |    | | |  -----| |  | |  | |   ---|  |  |-|  | |  |
+                          | |    |  |      | |    | | | |       |  | |  | |  | |--| |  |-|  | |  |
+                          | |    |  -----| | |    | | | |       |  ---  | |  | |  | |  | |  | |  -----|
+                          |-|    --------| |-|    |-| |-|       --------- |--| |--| |--| |--| --------|
                     """;
 
     public static LayerContainer run(Class<?> modClass, IEventBus eventBus, ModContainer modContainer) {
@@ -32,7 +34,7 @@ public class TemporalEngine {
                 .processIOLayer(modClass, List.of(eventBus, modContainer),
                         new ExtraContextInitializer(), new EventBusContextInitializer(), new ModContainerContextInitializer())
                 .addLayer(new EventLayer())
-                .processEventLayer()
+                .processEventLayer(new ClientDataEventHandler(), new FovModifierEventHandler())
                 .build();
     }
 
