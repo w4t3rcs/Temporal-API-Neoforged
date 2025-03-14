@@ -1,5 +1,6 @@
 package com.temporal.api.core.registry.factory.other;
 
+import com.temporal.api.core.event.data.model.item.TrimmedItemModelProviderStrategy;
 import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -18,9 +19,11 @@ public final class ArmorMaterialFactory {
     private ArmorMaterialFactory() {
     }
 
-    public static ArmorMaterial create(String name, Map<ArmorType, Integer> defenses, int durability, int enchantmentValue, float toughness, float knockbackResistance, TagKey<Item> repairItem, Holder<SoundEvent> soundEvent) {
+    public static ArmorMaterial create(String name, Map<ArmorType, Integer> defenses, int durability, int enchantmentValue, float toughness, float knockbackResistance, TagKey<Item> repairItem, Holder<SoundEvent> soundEvent, boolean isDatagenNeeded) {
         ResourceKey<Registry<EquipmentAsset>> root = ResourceKey.createRegistryKey(ResourceLocation.withDefaultNamespace("equipment_asset"));
         ResourceLocation resourceLocation = ResourceUtils.createResourceLocation(name);
-        return new ArmorMaterial(durability, defenses, enchantmentValue, soundEvent, toughness, knockbackResistance, repairItem, ResourceKey.create(root, resourceLocation));
+        ResourceKey<EquipmentAsset> asset = ResourceKey.create(root, resourceLocation);
+        if (isDatagenNeeded) TrimmedItemModelProviderStrategy.ASSETS.put(name, asset);
+        return new ArmorMaterial(durability, defenses, enchantmentValue, soundEvent, toughness, knockbackResistance, repairItem, asset);
     }
 }

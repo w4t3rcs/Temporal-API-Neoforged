@@ -2,7 +2,7 @@ package com.temporal.api.core.registry.factory.extension.block;
 
 import com.temporal.api.core.engine.io.context.InjectionContext;
 import com.temporal.api.core.registry.factory.common.BlockFactory;
-import com.temporal.api.core.util.properties.BlockPropertiesFactory;
+import com.temporal.api.core.registry.factory.other.BlockPropertiesFactory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.TrapDoorBlock;

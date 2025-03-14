@@ -1,4 +1,4 @@
-package com.temporal.api.core.util.properties;
+package com.temporal.api.core.registry.factory.other;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;

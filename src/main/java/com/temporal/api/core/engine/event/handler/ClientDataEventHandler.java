@@ -5,10 +5,9 @@ import com.temporal.api.core.event.data.DataGatherer;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 public class ClientDataEventHandler implements EventHandler {
-
     @Override
     public void handle() {
-        getEventBus().addListener(GatherDataEvent.Client.class, event -> {
+        subscribeModEvent(GatherDataEvent.Client.class, event -> {
             DataGatherer generator = new ApiDataGenerator();
             generator.gatherData(event);
         });
