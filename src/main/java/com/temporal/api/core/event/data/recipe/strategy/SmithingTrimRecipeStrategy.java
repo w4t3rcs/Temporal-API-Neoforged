@@ -2,25 +2,41 @@ package com.temporal.api.core.event.data.recipe.strategy;
 
 import com.temporal.api.core.event.data.recipe.ApiRecipeProvider;
 import com.temporal.api.core.event.data.recipe.holder.SmithingTrimRecipeHolder;
+import com.temporal.api.core.util.other.RegistryUtils;
 import com.temporal.api.core.util.other.ResourceUtils;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.SmithingTrimRecipeBuilder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
+import java.util.UUID;
 
 public class SmithingTrimRecipeStrategy implements RecipeStrategy<SmithingTrimRecipeHolder> {
     @Override
     public void saveRecipe(SmithingTrimRecipeHolder recipeHolder, ApiRecipeProvider recipeProvider, @NotNull RecipeOutput recipeOutput) {
-        String path = Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(recipeHolder.getResult().asItem())).getPath();
+        Ingredient base = recipeHolder.getBaseTag() != null
+                ? recipeProvider.tag(recipeHolder.getBaseTag())
+                : Ingredient.of(recipeHolder.getBases());
+        Ingredient addition = recipeHolder.getAdditionTag() != null
+                ? recipeProvider.tag(recipeHolder.getAdditionTag())
+                : Ingredient.of(recipeHolder.getAdditions());
+        SmithingTrimRecipeBuilder builder = SmithingTrimRecipeBuilder.smithingTrim(Ingredient.of(recipeHolder.getTemplates()), base, addition, recipeHolder.getRecipeCategory());
+        for (ItemLike template : recipeHolder.getTemplates()) {
+            builder.unlocks("has_smithing_trim_template", recipeProvider.has(template));
+        }
+        String path;
+        if (recipeHolder.getName() != null) {
+            path = recipeHolder.getName();
+        } else {
+            String baseString = RegistryUtils.getIdFromItem(recipeHolder.getBases()[0].asItem()).split("_")[0];
+            path = baseString + "_" + UUID.randomUUID() + "_trim_recipe";
+        }
+
         ResourceKey<Recipe<?>> resourceKey = ResourceKey.create(Registries.RECIPE, ResourceUtils.createResourceLocation(path));
-        SmithingTrimRecipeBuilder.smithingTrim(Ingredient.of(recipeHolder.getTemplate()), Ingredient.of(recipeHolder.getBase()), Ingredient.of(recipeHolder.getAddition()), recipeHolder.getRecipeCategory())
-                .unlocks(ApiRecipeProvider.getHasName(recipeHolder.getTemplate()), recipeProvider.has(recipeHolder.getTemplate()))
-                .save(recipeOutput, resourceKey);
+        builder.save(recipeOutput, resourceKey);
     }
 }

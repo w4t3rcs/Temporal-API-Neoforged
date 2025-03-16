@@ -11,7 +11,9 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.NotNull;
 
@@ -65,10 +67,15 @@ public class ApiRecipeProvider extends RecipeProvider {
     @Override
     public @NotNull Criterion<InventoryChangeTrigger.TriggerInstance> has(@NotNull ItemLike itemLike) {
         HolderLookup.RegistryLookup<Item> lookup = registries.lookupOrThrow(Registries.ITEM);
-        if (lookup == null) throw new RuntimeException("No items found");
         return inventoryTrigger(ItemPredicate.Builder.item()
                 .of(lookup, new ItemLike[]{itemLike})
                 .build());
+    }
+
+    @Override
+    @NotNull
+    public Ingredient tag(@NotNull TagKey<Item> tagKey) {
+        return super.tag(tagKey);
     }
 
     public HolderLookup.Provider getRegistries() {
