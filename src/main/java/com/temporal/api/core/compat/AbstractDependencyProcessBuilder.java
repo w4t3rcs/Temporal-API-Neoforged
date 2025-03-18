@@ -2,12 +2,11 @@ package com.temporal.api.core.compat;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 
 public abstract class AbstractDependencyProcessBuilder<T extends DependencyProcessBuilderFactory<T, B>, B extends AbstractDependencyProcessBuilder<T, B>> implements DependencyProcessBuilder<T, B> {
     private final List<String> dependencyIds;
     private final T director;
-    private final List<Function<Void, Void>> callbacks = new ArrayList<>();
+    private final List<DependencyFunction> callbacks = new ArrayList<>();
 
     protected AbstractDependencyProcessBuilder(List<String> dependencyIds, T director) {
         this.dependencyIds = dependencyIds;
@@ -22,11 +21,11 @@ public abstract class AbstractDependencyProcessBuilder<T extends DependencyProce
         return director;
     }
 
-    protected List<Function<Void, Void>> getCallbacks() {
+    protected List<DependencyFunction> getCallbacks() {
         return callbacks;
     }
 
-    protected void addCallback(Function<Void, Void> callback) {
+    protected void addCallback(DependencyFunction callback) {
         callbacks.add(callback);
     }
 }
