@@ -45,6 +45,7 @@ public class ApiDataGenerator implements DataGatherer {
         addAdvancementProvider(event);
         addSoundProvider(event);
         addParticleProvider(event);
+        finish();
     }
 
     @Override
