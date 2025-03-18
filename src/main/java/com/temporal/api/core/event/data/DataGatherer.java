@@ -36,4 +36,6 @@ public interface DataGatherer {
     PackOutput getPackOutput(GatherDataEvent event);
 
     DataGenerator getDataGenerator(GatherDataEvent event);
+
+    void finish();
 }
