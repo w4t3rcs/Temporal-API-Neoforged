@@ -2,8 +2,6 @@ package com.temporal.api.core.event.data;
 
 import com.temporal.api.core.event.data.advancement.AdvancementProviderFactory;
 import com.temporal.api.core.event.data.equipment.EquipmentAssetProviderImpl;
-import com.temporal.api.core.event.data.finalizer.Finisher;
-import com.temporal.api.core.event.data.finalizer.SimpleCompoundDataFinisher;
 import com.temporal.api.core.event.data.language.*;
 import com.temporal.api.core.event.data.loot.LootTableProviderFactory;
 import com.temporal.api.core.event.data.map.ApiDataMapProvider;
@@ -45,7 +43,6 @@ public class ApiDataGenerator implements DataGatherer {
         addAdvancementProvider(event);
         addSoundProvider(event);
         addParticleProvider(event);
-        finish();
     }
 
     @Override
@@ -56,12 +53,6 @@ public class ApiDataGenerator implements DataGatherer {
                 new BiomeTagDynamicPreparer(),
                 new EnchantmentTagDynamicPreparer()
         ).forEach(DynamicPreparer::prepare);
-    }
-
-    @Override
-    public void finish() {
-        Finisher dataFinisher = new SimpleCompoundDataFinisher();
-        dataFinisher.finish();
     }
 
     @Override
