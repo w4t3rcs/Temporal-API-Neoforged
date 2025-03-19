@@ -9,6 +9,7 @@ import com.temporal.api.core.engine.io.metadata.strategy.field.data.other.*;
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.properties.*;
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.tag.BlockTagComponentStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.tag.ItemTagComponentStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.field.event.TradeHolderStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.field.injection.DependencyStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.field.injection.InjectionStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.field.injection.RegistryFieldStrategy;
@@ -50,7 +51,8 @@ public class DefaultAnnotationExecutor implements AnnotationExecutor {
     @Override
     public void executeStaticFieldAnnotations() {
         final List<FieldAnnotationStrategy> strategies = List.of(
-                new RegistryFieldStrategy()
+                new RegistryFieldStrategy(),
+                new TradeHolderStrategy()
         );
 
         this.classes.forEach(clazz -> strategies.forEach(strategy -> strategyExecutor.executeStaticField(strategy, clazz)));
