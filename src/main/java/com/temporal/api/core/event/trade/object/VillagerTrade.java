@@ -11,4 +11,15 @@ public class VillagerTrade extends Trade {
     public VillagerTradeDescription getTradeDescription() {
         return tradeDescription;
     }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder extends TradeBuilder<Builder, VillagerTrade, VillagerTradeDescription> {
+        @Override
+        public VillagerTrade build() {
+            return new VillagerTrade(this.getLeftHolder(), this.getRightHolder(), this.getTradeDescription());
+        }
+    }
 }
