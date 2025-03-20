@@ -32,11 +32,16 @@ public final class CompoundGenerationProcessFacade {
     }
 
     public static void executeBiomeModifiers(BootstrapContext<BiomeModifier> context) {
-        executeProcess(context, new OreBiomeModifiersGenerationProcess(), GenerationFeaturesDescriptionContainer.ORES);
-        executeProcess(context, new TreeBiomeModifiersGenerationProcess(), GenerationFeaturesDescriptionContainer.TREES);
-        executeProcess(context, new FlowerBiomeModifiersGenerationProcess(), GenerationFeaturesDescriptionContainer.FLOWERS);
-        executeProcess(context, new GrassBiomeModifiersGenerationProcess(), GenerationFeaturesDescriptionContainer.GRASSES);
-        executeProcess(context, new DefinitionBiomeModifiersGenerationProcess(), GenerationFeaturesDescriptionContainer.DEFINITIONS);
+        executeClearableProcess(context, new OreBiomeModifiersGenerationProcess(), GenerationFeaturesDescriptionContainer.ORES);
+        executeClearableProcess(context, new TreeBiomeModifiersGenerationProcess(), GenerationFeaturesDescriptionContainer.TREES);
+        executeClearableProcess(context, new FlowerBiomeModifiersGenerationProcess(), GenerationFeaturesDescriptionContainer.FLOWERS);
+        executeClearableProcess(context, new GrassBiomeModifiersGenerationProcess(), GenerationFeaturesDescriptionContainer.GRASSES);
+        executeClearableProcess(context, new DefinitionBiomeModifiersGenerationProcess(), GenerationFeaturesDescriptionContainer.DEFINITIONS);
+    }
+
+    private static <T, D> void executeClearableProcess(BootstrapContext<T> context, GenerationProcess<T, D> process, Map<ResourceKey<ConfiguredFeature<?, ?>>, D> data) {
+        executeProcess(context, process, data);
+        data.clear();
     }
 
     private static <T, D> void executeProcess(BootstrapContext<T> context, GenerationProcess<T, D> process, Map<ResourceKey<ConfiguredFeature<?, ?>>, D> data) {
