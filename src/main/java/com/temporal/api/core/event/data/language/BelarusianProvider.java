@@ -1,5 +1,6 @@
 package com.temporal.api.core.event.data.language;
 
+import com.temporal.api.core.collection.TemporalHashMap;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.effect.MobEffect;
@@ -10,19 +11,18 @@ import net.minecraft.world.item.equipment.trim.TrimMaterial;
 import net.minecraft.world.item.equipment.trim.TrimPattern;
 import net.minecraft.world.level.block.Block;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
 public class BelarusianProvider extends ApiLanguageProvider {
-    public static final Map<Supplier<? extends Item>, String> ITEM_TRANSLATIONS = new HashMap<>();
-    public static final Map<Supplier<? extends Block>, String> BLOCK_TRANSLATIONS = new HashMap<>();
-    public static final Map<Supplier<? extends EntityType<?>>, String> ENTITY_TRANSLATIONS = new HashMap<>();
-    public static final Map<Supplier<? extends MobEffect>, String> EFFECT_TRANSLATIONS = new HashMap<>();
-    public static final Map<ResourceKey<Enchantment>, String> ENCHANTMENT_TRANSLATIONS = new HashMap<>();
-    public static final Map<ResourceKey<TrimMaterial>, String> TRIM_MATERIAL_TRANSLATIONS = new HashMap<>();
-    public static final Map<ResourceKey<TrimPattern>, String> TRIM_PATTERN_TRANSLATIONS = new HashMap<>();
-    public static final Map<String, String> OTHER_TRANSLATIONS = new HashMap<>();
+    public static final Map<Supplier<? extends Item>, String> ITEM_TRANSLATIONS = new TemporalHashMap<>();
+    public static final Map<Supplier<? extends Block>, String> BLOCK_TRANSLATIONS = new TemporalHashMap<>();
+    public static final Map<Supplier<? extends EntityType<?>>, String> ENTITY_TRANSLATIONS = new TemporalHashMap<>();
+    public static final Map<Supplier<? extends MobEffect>, String> EFFECT_TRANSLATIONS = new TemporalHashMap<>();
+    public static final Map<ResourceKey<Enchantment>, String> ENCHANTMENT_TRANSLATIONS = new TemporalHashMap<>();
+    public static final Map<ResourceKey<TrimMaterial>, String> TRIM_MATERIAL_TRANSLATIONS = new TemporalHashMap<>();
+    public static final Map<ResourceKey<TrimPattern>, String> TRIM_PATTERN_TRANSLATIONS = new TemporalHashMap<>();
+    public static final Map<String, String> OTHER_TRANSLATIONS = new TemporalHashMap<>();
 
     public BelarusianProvider(PackOutput output) {
         super(output, "be_by");

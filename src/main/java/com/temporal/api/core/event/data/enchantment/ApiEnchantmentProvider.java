@@ -1,5 +1,6 @@
 package com.temporal.api.core.event.data.enchantment;
 
+import com.temporal.api.core.collection.TemporalHashMap;
 import com.temporal.api.core.event.data.preparer.tag.enchantment.EnchantmentTagDynamicPreparer;
 import com.temporal.api.core.event.data.preparer.tag.item.ItemTagDynamicPreparer;
 import net.minecraft.core.HolderGetter;
@@ -9,13 +10,12 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantment;
 
-import java.util.HashMap;
 import java.util.Map;
 
 //TODO: For the future updates: this class should either be refactored or contain more effect holders - #w4t3rcs
 public class ApiEnchantmentProvider implements EnchantmentProvider {
-    public static final Map<ResourceKey<Enchantment>, EnchantmentDescriptionHolder> ENCHANTMENTS = new HashMap<>();
-    public static final Map<ResourceKey<Enchantment>, EnchantmentEntityEffectHolder> ENTITY_EFFECTS = new HashMap<>();
+    public static final Map<ResourceKey<Enchantment>, EnchantmentDescriptionHolder> ENCHANTMENTS = new TemporalHashMap<>();
+    public static final Map<ResourceKey<Enchantment>, EnchantmentEntityEffectHolder> ENTITY_EFFECTS = new TemporalHashMap<>();
 
     @Override
     public void registerEnchantments(BootstrapContext<Enchantment> context) {

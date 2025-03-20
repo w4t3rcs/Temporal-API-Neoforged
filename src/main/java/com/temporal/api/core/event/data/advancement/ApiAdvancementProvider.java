@@ -1,5 +1,6 @@
 package com.temporal.api.core.event.data.advancement;
 
+import com.temporal.api.core.collection.TemporalArrayDeque;
 import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
@@ -10,12 +11,11 @@ import net.minecraft.data.advancements.AdvancementSubProvider;
 import org.jetbrains.annotations.NotNull;
 import oshi.util.tuples.Pair;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Queue;
 import java.util.function.Consumer;
 
 public class ApiAdvancementProvider implements AdvancementSubProvider {
-    public static final List<AdvancementGenerationHolder> ADVANCEMENTS = new ArrayList<>();
+    public static final Queue<AdvancementGenerationHolder> ADVANCEMENTS = new TemporalArrayDeque<>();
 
     @Override
     public void generate(@NotNull HolderLookup.Provider provider, @NotNull Consumer<AdvancementHolder> consumer) {

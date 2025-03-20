@@ -1,5 +1,6 @@
 package com.temporal.api.core.event.data.trim.material;
 
+import com.temporal.api.core.collection.TemporalHashMap;
 import com.temporal.api.core.util.other.RegistryUtils;
 import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.Util;
@@ -12,11 +13,10 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.equipment.trim.TrimMaterial;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class ApiTrimMaterialProvider implements TrimMaterialProvider {
-    public static final Map<ResourceKey<TrimMaterial>, TrimMaterialDescriptionHolder> TRIM_MATERIALS = new HashMap<>();
+    public static final Map<ResourceKey<TrimMaterial>, TrimMaterialDescriptionHolder> TRIM_MATERIALS = new TemporalHashMap<>();
 
     @Override
     public void registerTrimMaterials(BootstrapContext<TrimMaterial> context) {

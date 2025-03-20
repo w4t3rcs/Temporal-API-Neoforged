@@ -1,6 +1,7 @@
 package com.temporal.api.core.event.data.modifier;
 
 import com.temporal.api.common.loot.AddItemModifier;
+import com.temporal.api.core.collection.TemporalArrayDeque;
 import com.temporal.api.core.engine.io.IOLayer;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -10,12 +11,11 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCon
 import net.neoforged.neoforge.common.data.GlobalLootModifierProvider;
 import net.neoforged.neoforge.common.loot.LootTableIdCondition;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Queue;
 import java.util.concurrent.CompletableFuture;
 
 public class ApiGlobalLootModifierProvider extends GlobalLootModifierProvider {
-    public static final List<ChestModifierDescription> CHEST_MODIFIER_DESCRIPTIONS = new ArrayList<>();
+    public static final Queue<ChestModifierDescription> CHEST_MODIFIER_DESCRIPTIONS = new TemporalArrayDeque<>();
 
     public ApiGlobalLootModifierProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, IOLayer.NEO_MOD.getModId());

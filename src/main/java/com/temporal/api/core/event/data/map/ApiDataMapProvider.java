@@ -1,5 +1,6 @@
 package com.temporal.api.core.event.data.map;
 
+import com.temporal.api.core.collection.TemporalArrayDeque;
 import com.temporal.api.core.util.other.RegistryUtils;
 import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.core.HolderLookup;
@@ -15,18 +16,17 @@ import net.neoforged.neoforge.common.data.DataMapProvider;
 import net.neoforged.neoforge.registries.datamaps.builtin.*;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Queue;
 import java.util.concurrent.CompletableFuture;
 
 public class ApiDataMapProvider extends DataMapProvider {
-    public static final List<FurnaceFuelDto> FURNACE_FUELS = new ArrayList<>();
-    public static final List<CompostableDto> COMPOSTABLES = new ArrayList<>();
-    public static final List<OxidizableDto> OXIDIZABLES = new ArrayList<>();
-    public static final List<WaxableDto> WAXABLES = new ArrayList<>();
-    public static final List<RaidHeroGiftDto> RAID_HERO_GIFTS = new ArrayList<>();
-    public static final List<MonsterRoomMobDto> MONSTER_ROOM_MOBS = new ArrayList<>();
-    public static final List<ParrotImitationDto> PARROT_IMITATIONS = new ArrayList<>();
+    public static final Queue<FurnaceFuelDto> FURNACE_FUELS = new TemporalArrayDeque<>();
+    public static final Queue<CompostableDto> COMPOSTABLES = new TemporalArrayDeque<>();
+    public static final Queue<OxidizableDto> OXIDIZABLES = new TemporalArrayDeque<>();
+    public static final Queue<WaxableDto> WAXABLES = new TemporalArrayDeque<>();
+    public static final Queue<RaidHeroGiftDto> RAID_HERO_GIFTS = new TemporalArrayDeque<>();
+    public static final Queue<MonsterRoomMobDto> MONSTER_ROOM_MOBS = new TemporalArrayDeque<>();
+    public static final Queue<ParrotImitationDto> PARROT_IMITATIONS = new TemporalArrayDeque<>();
 
     public ApiDataMapProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider) {
         super(packOutput, lookupProvider);

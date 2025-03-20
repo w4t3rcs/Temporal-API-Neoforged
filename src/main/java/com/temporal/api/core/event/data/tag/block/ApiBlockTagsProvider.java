@@ -1,5 +1,6 @@
 package com.temporal.api.core.event.data.tag.block;
 
+import com.temporal.api.core.collection.TemporalHashMap;
 import com.temporal.api.core.engine.io.IOLayer;
 import com.temporal.api.core.event.data.preparer.tag.block.BlockTagDynamicPreparer;
 import net.minecraft.core.HolderLookup;
@@ -11,13 +12,12 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 public class ApiBlockTagsProvider extends BlockTagsProvider {
-    public static final Map<String, List<DeferredBlock<?>>> TAG_GENERATION_DESCRIPTIONS = new HashMap<>();
+    public static final Map<String, List<DeferredBlock<?>>> TAG_GENERATION_DESCRIPTIONS = new TemporalHashMap<>();
 
     public ApiBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
         super(output, lookupProvider, IOLayer.NEO_MOD.getModId());

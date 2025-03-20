@@ -1,7 +1,9 @@
 package com.temporal.api.core.compat;
 
-public interface DependencyProcessBuilder<T extends DependencyProcessBuilderFactory<T, B>, B extends DependencyProcessBuilder<T, B>> {
-    DependencyProcessBuilder<T, B> addProcess(DependencyFunction callback);
+public interface DependencyProcessBuilder<B extends DependencyProcessBuilder<B>> {
+    B addProcess(DependencyFunction callback);
 
-    DependencyProcessBuilderFactory<T, B> build();
+    B startNext(String dependencyId, String... additionalDependencyIds);
+
+    void build();
 }

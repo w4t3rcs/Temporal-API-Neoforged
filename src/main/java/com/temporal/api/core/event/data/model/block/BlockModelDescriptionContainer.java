@@ -1,38 +1,38 @@
 package com.temporal.api.core.event.data.model.block;
 
+import com.temporal.api.core.collection.TemporalArrayDeque;
+import com.temporal.api.core.collection.TemporalHashMap;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 
 public final class BlockModelDescriptionContainer {
-    public static final List<DeferredBlock<?>> CUBED_BLOCKS = new ArrayList<>();
-    public static final List<DeferredBlock<?>> CUTOUT_CUBED_BLOCKS = new ArrayList<>();
-    public static final List<DeferredBlock<?>> CROSS_BLOCKS = new ArrayList<>();
-    public static final List<DeferredBlock<?>> FLOWER_BLOCKS = new ArrayList<>();
-    public static final List<DeferredBlock<?>> ROTATED_PILLARS = new ArrayList<>();
-    public static final List<DeferredBlock<?>> LOGS = new ArrayList<>();
-    public static final List<DeferredBlock<?>> WOODS = new ArrayList<>();
-    public static final List<DeferredBlock<?>> BUTTONS = new ArrayList<>();
-    public static final List<DeferredBlock<?>> DOORS = new ArrayList<>();
-    public static final List<DeferredBlock<?>> FENCES = new ArrayList<>();
-    public static final List<DeferredBlock<?>> FENCE_GATES = new ArrayList<>();
-    public static final List<DeferredBlock<?>> PRESSURE_PLATES = new ArrayList<>();
-    public static final List<DeferredBlock<?>> SLABS = new ArrayList<>();
-    public static final List<DeferredBlock<?>> STAIRS = new ArrayList<>();
-    public static final List<DeferredBlock<?>> TRAPDOORS = new ArrayList<>();
-    public static final List<DeferredBlock<?>> WALLS = new ArrayList<>();
-    public static final List<DeferredBlock<?>> PLANKS_BUTTONS = new ArrayList<>();
-    public static final List<DeferredBlock<?>> PLANKS_FENCES = new ArrayList<>();
-    public static final List<DeferredBlock<?>> PLANKS_FENCE_GATES = new ArrayList<>();
-    public static final List<DeferredBlock<?>> PLANKS_PRESSURE_PLATES = new ArrayList<>();
-    public static final List<DeferredBlock<?>> PLANKS_SLABS = new ArrayList<>();
-    public static final List<DeferredBlock<?>> PLANKS_STAIRS = new ArrayList<>();
-    public static final List<DeferredBlock<?>> CROP_BLOCKS = new ArrayList<>();
-    public static final List<DeferredBlock<?>> VINE_BLOCKS = new ArrayList<>();
-    public static final Map<DeferredBlock<?>, BlockModelProviderStrategy> CUSTOM_MODELS = new HashMap<>();
+    public static final Queue<DeferredBlock<?>> CUBED_BLOCKS = new TemporalArrayDeque<>();
+    public static final Queue<DeferredBlock<?>> CUTOUT_CUBED_BLOCKS = new TemporalArrayDeque<>();
+    public static final Queue<DeferredBlock<?>> CROSS_BLOCKS = new TemporalArrayDeque<>();
+    public static final Queue<DeferredBlock<?>> FLOWER_BLOCKS = new TemporalArrayDeque<>();
+    public static final Queue<DeferredBlock<?>> ROTATED_PILLARS = new TemporalArrayDeque<>();
+    public static final Queue<DeferredBlock<?>> LOGS = new TemporalArrayDeque<>();
+    public static final Queue<DeferredBlock<?>> WOODS = new TemporalArrayDeque<>();
+    public static final Queue<DeferredBlock<?>> BUTTONS = new TemporalArrayDeque<>();
+    public static final Queue<DeferredBlock<?>> DOORS = new TemporalArrayDeque<>();
+    public static final Queue<DeferredBlock<?>> FENCES = new TemporalArrayDeque<>();
+    public static final Queue<DeferredBlock<?>> FENCE_GATES = new TemporalArrayDeque<>();
+    public static final Queue<DeferredBlock<?>> PRESSURE_PLATES = new TemporalArrayDeque<>();
+    public static final Queue<DeferredBlock<?>> SLABS = new TemporalArrayDeque<>();
+    public static final Queue<DeferredBlock<?>> STAIRS = new TemporalArrayDeque<>();
+    public static final Queue<DeferredBlock<?>> TRAPDOORS = new TemporalArrayDeque<>();
+    public static final Queue<DeferredBlock<?>> WALLS = new TemporalArrayDeque<>();
+    public static final Queue<DeferredBlock<?>> PLANKS_BUTTONS = new TemporalArrayDeque<>();
+    public static final Queue<DeferredBlock<?>> PLANKS_FENCES = new TemporalArrayDeque<>();
+    public static final Queue<DeferredBlock<?>> PLANKS_FENCE_GATES = new TemporalArrayDeque<>();
+    public static final Queue<DeferredBlock<?>> PLANKS_PRESSURE_PLATES = new TemporalArrayDeque<>();
+    public static final Queue<DeferredBlock<?>> PLANKS_SLABS = new TemporalArrayDeque<>();
+    public static final Queue<DeferredBlock<?>> PLANKS_STAIRS = new TemporalArrayDeque<>();
+    public static final Queue<DeferredBlock<?>> CROP_BLOCKS = new TemporalArrayDeque<>();
+    public static final Queue<DeferredBlock<?>> VINE_BLOCKS = new TemporalArrayDeque<>();
+    public static final Map<DeferredBlock<?>, BlockModelProviderStrategy> CUSTOM_MODELS = new TemporalHashMap<>();
 
     private BlockModelDescriptionContainer() {
     }
