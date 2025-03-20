@@ -1,6 +1,7 @@
 package com.temporal.api.core.compat;
 
 import com.temporal.api.ApiMod;
+import com.temporal.api.core.engine.event.handler.EventHandler;
 import net.neoforged.fml.ModList;
 
 import java.util.ArrayList;
@@ -18,6 +19,10 @@ public class SimpleDependencyProcessBuilder extends AbstractDependencyProcessBui
         return new SimpleDependencyProcessBuilder(ids);
     }
 
+    @Override
+    public SimpleDependencyProcessBuilder addProcess(EventHandler eventHandler) {
+        return this.addProcess((DependencyFunction) eventHandler::handle);
+    }
 
     @Override
     public SimpleDependencyProcessBuilder addProcess(DependencyFunction callback) {
