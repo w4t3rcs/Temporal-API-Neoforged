@@ -30,7 +30,6 @@ public class ApiSoundProvider extends SoundDefinitionsProvider {
                             .attenuationDistance(soundHolder.attenuationDistance())
                             .stream(soundHolder.stream())
                             .preload(soundHolder.preload())));
-
             add(description.sound().value(), soundDefinition.subtitle("sound." + modId + "." + Objects.requireNonNull(description.sound().getKey()).location().getPath())
                     .replace(description.replace()));
         });
