@@ -12,7 +12,7 @@ public class SimpleDependencyProcessBuilder extends AbstractDependencyProcessBui
         super(dependencyIds);
     }
 
-    public static SimpleDependencyProcessBuilder createBuilder(String dependencyId, String... additionalDependencyIds) {
+    public static SimpleDependencyProcessBuilder create(String dependencyId, String... additionalDependencyIds) {
         List<String> ids = new ArrayList<>(additionalDependencyIds.length + 1);
         ids.add(dependencyId);
         ids.addAll(List.of(additionalDependencyIds));
@@ -40,7 +40,7 @@ public class SimpleDependencyProcessBuilder extends AbstractDependencyProcessBui
     @Override
     public SimpleDependencyProcessBuilder startNext(String dependencyId, String... additionalDependencyIds) {
         this.build();
-        return createBuilder(dependencyId, additionalDependencyIds);
+        return create(dependencyId, additionalDependencyIds);
     }
 
     @Override
