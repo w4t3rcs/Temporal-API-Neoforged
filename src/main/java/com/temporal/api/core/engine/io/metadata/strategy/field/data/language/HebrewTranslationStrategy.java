@@ -1,7 +1,7 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field.data.language;
 
 import com.temporal.api.core.engine.io.metadata.annotation.data.language.HebrewTranslation;
-import com.temporal.api.core.event.data.language.HebrewProvider;
+import com.temporal.api.core.event.data.language.provider.HebrewProvider;
 
 import java.lang.reflect.Field;
 

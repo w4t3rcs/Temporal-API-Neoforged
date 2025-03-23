@@ -1,7 +1,7 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field.data.language;
 
 import com.temporal.api.core.engine.io.metadata.annotation.data.language.GreekTranslation;
-import com.temporal.api.core.event.data.language.GreekProvider;
+import com.temporal.api.core.event.data.language.provider.GreekProvider;
 
 import java.lang.reflect.Field;
 

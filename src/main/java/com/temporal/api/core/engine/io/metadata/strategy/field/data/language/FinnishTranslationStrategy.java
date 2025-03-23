@@ -1,7 +1,7 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field.data.language;
 
 import com.temporal.api.core.engine.io.metadata.annotation.data.language.FinnishTranslation;
-import com.temporal.api.core.event.data.language.FinnishProvider;
+import com.temporal.api.core.event.data.language.provider.FinnishProvider;
 
 import java.lang.reflect.Field;
 

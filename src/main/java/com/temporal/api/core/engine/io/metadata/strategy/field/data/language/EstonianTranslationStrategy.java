@@ -1,7 +1,7 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field.data.language;
 
 import com.temporal.api.core.engine.io.metadata.annotation.data.language.EstonianTranslation;
-import com.temporal.api.core.event.data.language.EstonianProvider;
+import com.temporal.api.core.event.data.language.provider.EstonianProvider;
 
 import java.lang.reflect.Field;
 

@@ -1,7 +1,7 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field.data.language;
 
 import com.temporal.api.core.engine.io.metadata.annotation.data.language.KoreanTranslation;
-import com.temporal.api.core.event.data.language.KoreanProvider;
+import com.temporal.api.core.event.data.language.provider.KoreanProvider;
 
 import java.lang.reflect.Field;
 

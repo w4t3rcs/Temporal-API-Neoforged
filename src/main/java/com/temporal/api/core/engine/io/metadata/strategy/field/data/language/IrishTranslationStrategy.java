@@ -1,7 +1,7 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field.data.language;
 
 import com.temporal.api.core.engine.io.metadata.annotation.data.language.IrishTranslation;
-import com.temporal.api.core.event.data.language.IrishProvider;
+import com.temporal.api.core.event.data.language.provider.IrishProvider;
 
 import java.lang.reflect.Field;
 

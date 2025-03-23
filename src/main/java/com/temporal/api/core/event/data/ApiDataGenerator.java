@@ -2,7 +2,7 @@ package com.temporal.api.core.event.data;
 
 import com.temporal.api.core.event.data.advancement.AdvancementProviderFactory;
 import com.temporal.api.core.event.data.equipment.EquipmentAssetProviderImpl;
-import com.temporal.api.core.event.data.language.*;
+import com.temporal.api.core.event.data.language.provider.*;
 import com.temporal.api.core.event.data.loot.LootTableProviderFactory;
 import com.temporal.api.core.event.data.map.ApiDataMapProvider;
 import com.temporal.api.core.event.data.model.ModelProviderImpl;
