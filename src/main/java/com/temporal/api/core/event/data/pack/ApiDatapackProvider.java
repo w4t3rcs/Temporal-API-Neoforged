@@ -6,6 +6,7 @@ import com.temporal.api.core.event.data.damage.ApiDamageTypeProvider;
 import com.temporal.api.core.event.data.enchantment.ApiEnchantmentProvider;
 import com.temporal.api.core.event.data.trim.material.ApiTrimMaterialProvider;
 import com.temporal.api.core.event.data.trim.pattern.ApiTrimPatternProvider;
+import com.temporal.api.core.event.data.wolf.ApiWolfVariantProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
@@ -21,6 +22,7 @@ public class ApiDatapackProvider extends DatapackBuiltinEntriesProvider {
             .add(Registries.TRIM_MATERIAL, ApiTrimMaterialProvider::bootstrap)
             .add(Registries.TRIM_PATTERN, ApiTrimPatternProvider::bootstrap)
             .add(Registries.DAMAGE_TYPE, ApiDamageTypeProvider::bootstrap)
+            .add(Registries.WOLF_VARIANT, ApiWolfVariantProvider::bootstrap)
             .add(Registries.ENCHANTMENT, ApiEnchantmentProvider::bootstrap)
             .add(Registries.CONFIGURED_FEATURE, CompoundGenerationProcessFacade::executeConfiguredFeatures)
             .add(Registries.PLACED_FEATURE, CompoundGenerationProcessFacade::executePlacedFeatures)
