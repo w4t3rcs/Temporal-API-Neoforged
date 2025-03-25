@@ -114,6 +114,7 @@ public class DefaultAnnotationExecutor implements AnnotationExecutor {
                 new TrimMaterialDescriptionStrategy(),
                 new TrimPatternDescriptionStrategy(),
                 new WolfVariantDescriptionStrategy(),
+                new BannerPatternDescriptionStrategy(),
                 new EnglishTranslationStrategy(),
                 new UkrainianTranslationStrategy(),
                 new PolishTranslationStrategy(),

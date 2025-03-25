@@ -1,6 +1,7 @@
 package com.temporal.api.core.event.data.pack;
 
 import com.temporal.api.core.engine.io.IOLayer;
+import com.temporal.api.core.event.data.banner.ApiBannerPatternProvider;
 import com.temporal.api.core.event.data.biome.CompoundGenerationProcessFacade;
 import com.temporal.api.core.event.data.damage.ApiDamageTypeProvider;
 import com.temporal.api.core.event.data.enchantment.ApiEnchantmentProvider;
@@ -23,6 +24,7 @@ public class ApiDatapackProvider extends DatapackBuiltinEntriesProvider {
             .add(Registries.TRIM_PATTERN, ApiTrimPatternProvider::bootstrap)
             .add(Registries.DAMAGE_TYPE, ApiDamageTypeProvider::bootstrap)
             .add(Registries.WOLF_VARIANT, ApiWolfVariantProvider::bootstrap)
+            .add(Registries.BANNER_PATTERN, ApiBannerPatternProvider::bootstrap)
             .add(Registries.ENCHANTMENT, ApiEnchantmentProvider::bootstrap)
             .add(Registries.CONFIGURED_FEATURE, CompoundGenerationProcessFacade::executeConfiguredFeatures)
             .add(Registries.PLACED_FEATURE, CompoundGenerationProcessFacade::executePlacedFeatures)
