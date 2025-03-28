@@ -6,7 +6,6 @@ import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.random.Weight;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.npc.VillagerProfession;
@@ -48,7 +47,7 @@ public class ApiDataMapProvider extends DataMapProvider {
                 waxableBlockBuilder.add(waxable.block(), new Waxable(RegistryUtils.getBlockById(waxable.waxedBlock())), waxable.replace()));
         Builder<RaidHeroGift, VillagerProfession> raidHeroGiftVillagerProfessionBuilder = this.builder(NeoForgeDataMaps.RAID_HERO_GIFTS);
         RAID_HERO_GIFTS.forEach(raidHeroGift ->
-                raidHeroGiftVillagerProfessionBuilder.add(raidHeroGift.villagerProfession(), new RaidHeroGift(ResourceKey.create(Registries.LOOT_TABLE, ResourceUtils.createNamespacedResourceLocation(raidHeroGift.lootTablePath()))), raidHeroGift.replace()));
+                raidHeroGiftVillagerProfessionBuilder.add(raidHeroGift.villagerProfession(), new RaidHeroGift(ResourceUtils.createNamespacedResourceKey(Registries.LOOT_TABLE, raidHeroGift.lootTablePath())), raidHeroGift.replace()));
         Builder<MonsterRoomMob, EntityType<?>> monsterRoomMobEntityTypeBuilder = this.builder(NeoForgeDataMaps.MONSTER_ROOM_MOBS);
         MONSTER_ROOM_MOBS.forEach(monsterRoomMob ->
                 monsterRoomMobEntityTypeBuilder.add(monsterRoomMob.entity(), new MonsterRoomMob(Weight.of(monsterRoomMob.weight())), monsterRoomMob.replace()));

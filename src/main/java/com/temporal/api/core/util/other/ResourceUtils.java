@@ -1,6 +1,7 @@
 package com.temporal.api.core.util.other;
 
 import com.temporal.api.core.engine.io.IOLayer;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -28,6 +29,14 @@ public final class ResourceUtils {
         } else {
             data.put(path, tag);
         }
+    }
+
+    public static <T> ResourceKey<T> createNamespacedResourceKey(ResourceKey<? extends Registry<T>> registry, String name) {
+        return ResourceKey.create(registry, createNamespacedResourceLocation(name));
+    }
+
+    public static <T> ResourceKey<T> createResourceKey(ResourceKey<? extends Registry<T>> registry, String name) {
+        return ResourceKey.create(registry, createResourceLocation(name));
     }
 
     public static ResourceLocation createNamespacedResourceLocation(String name) {

@@ -34,7 +34,7 @@ public class SmithingTrimRecipeStrategy implements RecipeStrategy<SmithingTrimRe
             path = UUID.randomUUID() + "_trim_recipe";
         }
 
-        ResourceKey<Recipe<?>> resourceKey = ResourceKey.create(Registries.RECIPE, ResourceUtils.createResourceLocation(path));
+        ResourceKey<Recipe<?>> resourceKey = ResourceUtils.createResourceKey(Registries.RECIPE, path);
         builder.save(recipeOutput, resourceKey);
     }
 }

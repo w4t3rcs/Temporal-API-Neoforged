@@ -17,7 +17,7 @@ public interface MusicDiscExtension {
 
     default DeferredItem<Item> createMusicDisc(String name, Item.Properties properties, String soundId) {
         ItemFactory itemFactory = InjectionContext.getFromInstance(ItemFactory.class);
-        ResourceKey<JukeboxSong> songResourceKey = ResourceKey.create(Registries.JUKEBOX_SONG, ResourceUtils.createResourceLocation(soundId));
+        ResourceKey<JukeboxSong> songResourceKey = ResourceUtils.createResourceKey(Registries.JUKEBOX_SONG, soundId);
         return itemFactory.create(name, properties.stacksTo(1)
                 .jukeboxPlayable(songResourceKey)
                 .rarity(Rarity.RARE), Item::new);

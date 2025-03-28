@@ -16,7 +16,7 @@ public final class PlacedFeatureUtils {
     }
 
     public static ResourceKey<PlacedFeature> createKey(String name) {
-        return ResourceKey.create(Registries.PLACED_FEATURE, ResourceUtils.createResourceLocation(name));
+        return ResourceUtils.createResourceKey(Registries.PLACED_FEATURE, name);
     }
 
     public static void register(BootstrapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key, Holder<ConfiguredFeature<?, ?>> configuration, List<PlacementModifier> modifiers) {

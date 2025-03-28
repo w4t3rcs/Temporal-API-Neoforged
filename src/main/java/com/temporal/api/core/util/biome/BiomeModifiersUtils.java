@@ -16,7 +16,7 @@ public final class BiomeModifiersUtils {
     }
 
     public static ResourceKey<BiomeModifier> registerKey(String name) {
-        return ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ResourceUtils.createResourceLocation(name));
+        return ResourceUtils.createResourceKey(NeoForgeRegistries.Keys.BIOME_MODIFIERS, name);
     }
 
     public static void register(BootstrapContext<BiomeModifier> context, ResourceKey<BiomeModifier> biomeModifierKey, HolderSet.Named<Biome> foundBiomes, HolderSet.Direct<PlacedFeature> placedFeature, GenerationStep.Decoration step) {

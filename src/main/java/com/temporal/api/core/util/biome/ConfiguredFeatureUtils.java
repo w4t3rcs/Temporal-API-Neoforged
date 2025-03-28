@@ -13,7 +13,7 @@ public final class ConfiguredFeatureUtils {
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> createKey(String name) {
-        return ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceUtils.createResourceLocation(name));
+        return ResourceUtils.createResourceKey(Registries.CONFIGURED_FEATURE, name);
     }
 
     public static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(BootstrapContext<ConfiguredFeature<?, ?>> context, ResourceKey<ConfiguredFeature<?, ?>> key, F feature, FC configuration) {

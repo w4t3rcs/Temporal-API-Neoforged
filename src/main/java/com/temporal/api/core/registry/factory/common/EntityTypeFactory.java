@@ -24,7 +24,7 @@ public class EntityTypeFactory implements ObjectFactory<EntityType<?>> {
     }
 
     public Holder<EntityType<?>> create(String name, EntityType.Builder<?> builder) {
-        return this.create(name, builder, ResourceKey.create(Registries.ENTITY_TYPE, ResourceUtils.createResourceLocation(name)));
+        return this.create(name, builder, ResourceUtils.createResourceKey(Registries.ENTITY_TYPE, name));
     }
 
     public Holder<EntityType<?>> create(String name, EntityType.Builder<?> builder, ResourceKey<EntityType<?>> entityType) {
