@@ -2,7 +2,6 @@ package com.temporal.api.core.event.data.recipe.strategy;
 
 import com.temporal.api.core.event.data.recipe.ApiRecipeProvider;
 import com.temporal.api.core.event.data.recipe.holder.SmithingTrimRecipeHolder;
-import com.temporal.api.core.util.other.RegistryUtils;
 import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -32,8 +31,7 @@ public class SmithingTrimRecipeStrategy implements RecipeStrategy<SmithingTrimRe
         if (recipeHolder.getName() != null) {
             path = recipeHolder.getName();
         } else {
-            String baseString = RegistryUtils.getIdFromItem(recipeHolder.getBases()[0].asItem()).split("_")[0];
-            path = baseString + "_" + UUID.randomUUID() + "_trim_recipe";
+            path = UUID.randomUUID() + "_trim_recipe";
         }
 
         ResourceKey<Recipe<?>> resourceKey = ResourceKey.create(Registries.RECIPE, ResourceUtils.createResourceLocation(path));
