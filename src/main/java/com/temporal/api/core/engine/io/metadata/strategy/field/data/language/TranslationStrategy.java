@@ -10,6 +10,8 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.decoration.PaintingVariant;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.equipment.trim.TrimMaterial;
 import net.minecraft.world.item.equipment.trim.TrimPattern;
@@ -48,6 +50,10 @@ public abstract class TranslationStrategy implements FieldAnnotationStrategy {
                         putTranslation((ResourceKey<MobEffect>) key, value, ApiLanguageProvider.MOB_EFFECT_TRANSFORMER);
                     } else if (path.contains(Registries.SOUND_EVENT.location().getPath())) {
                         putTranslation(((ResourceKey<SoundEvent>) key), value, ApiLanguageProvider.SOUND_EVENT_TRANSFORMER);
+                    } else if (path.contains(Registries.PAINTING_VARIANT.location().getPath())) {
+                        putTranslation(((ResourceKey<PaintingVariant>) key), value, ApiLanguageProvider.PAINTING_TRANSFORMER);
+                    } else if (path.contains(Registries.CREATIVE_MODE_TAB.location().getPath())) {
+                        putTranslation(((ResourceKey<CreativeModeTab>) key), value, ApiLanguageProvider.CREATIVE_MODE_TAB_TRANSFORMER);
                     }
                 }
                 case ResourceKey<?> key -> {

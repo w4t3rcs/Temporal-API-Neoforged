@@ -8,6 +8,8 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.decoration.PaintingVariant;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.equipment.trim.TrimMaterial;
@@ -24,6 +26,8 @@ public abstract class ApiLanguageProvider extends LanguageProvider {
     public static final KeyTransformer<ResourceKey<EntityType<?>>> ENTITY_TYPE_TRANSFORMER = new EntityTypeTransformer();
     public static final KeyTransformer<ResourceKey<MobEffect>> MOB_EFFECT_TRANSFORMER = new MobEffectTransformer();
     public static final KeyTransformer<ResourceKey<SoundEvent>> SOUND_EVENT_TRANSFORMER = new SoundEventTransformer();
+    public static final KeyTransformer<ResourceKey<PaintingVariant>> PAINTING_TRANSFORMER = new PaintingTransformer();
+    public static final KeyTransformer<ResourceKey<CreativeModeTab>> CREATIVE_MODE_TAB_TRANSFORMER = new CreativeModeTabTransformer();
     public static final KeyTransformer<ResourceKey<Enchantment>> ENCHANTMENT_TRANSFORMER = new EnchantmentTransformer();
     public static final KeyTransformer<ResourceKey<TrimMaterial>> TRIM_MATERIAL_TRANSFORMER = new TrimMaterialTransformer();
     public static final KeyTransformer<ResourceKey<TrimPattern>> TRIM_PATTERN_TRANSFORMER = new TrimPatternTransformer();
