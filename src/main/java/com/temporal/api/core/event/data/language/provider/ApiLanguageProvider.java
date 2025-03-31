@@ -11,7 +11,9 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.decoration.PaintingVariant;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Instrument;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.JukeboxSong;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.equipment.trim.TrimMaterial;
 import net.minecraft.world.item.equipment.trim.TrimPattern;
@@ -35,6 +37,8 @@ public abstract class ApiLanguageProvider extends LanguageProvider {
     public static final KeyTransformer<ResourceKey<TrimPattern>> TRIM_PATTERN_TRANSFORMER = new TrimPatternTransformer();
     public static final KeyTransformer<ResourceKey<BannerPattern>> BANNER_PATTERN_TRANSFORMER = new BannerPatternTransformer();
     public static final KeyTransformer<ResourceKey<DamageType>> DAMAGE_TYPE_TRANSFORMER = new DamageTypeTransformer();
+    public static final KeyTransformer<ResourceKey<Instrument>> INSTRUMENT_TRANSFORMER = new InstrumentTransformer();
+    public static final KeyTransformer<ResourceKey<JukeboxSong>> JUKEBOX_SONG_TRANSFORMER = new JukeboxSongTransformer();
     public static final KeyTransformer<Component> COMPONENT_TRANSFORMER = new ComponentTransformer();
     public static final KeyTransformer<String> STRING_TRANSFORMER = new StringTransformer();
 

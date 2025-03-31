@@ -5,6 +5,8 @@ import com.temporal.api.core.event.data.banner.ApiBannerPatternProvider;
 import com.temporal.api.core.event.data.biome.CompoundGenerationProcessFacade;
 import com.temporal.api.core.event.data.damage.ApiDamageTypeProvider;
 import com.temporal.api.core.event.data.enchantment.ApiEnchantmentProvider;
+import com.temporal.api.core.event.data.music.instrument.ApiInstrumentProvider;
+import com.temporal.api.core.event.data.music.jukebox.ApiJukeboxSongProvider;
 import com.temporal.api.core.event.data.trim.material.ApiTrimMaterialProvider;
 import com.temporal.api.core.event.data.trim.pattern.ApiTrimPatternProvider;
 import com.temporal.api.core.event.data.wolf.ApiWolfVariantProvider;
@@ -26,6 +28,8 @@ public class ApiDatapackProvider extends DatapackBuiltinEntriesProvider {
             .add(Registries.WOLF_VARIANT, ApiWolfVariantProvider::bootstrap)
             .add(Registries.BANNER_PATTERN, ApiBannerPatternProvider::bootstrap)
             .add(Registries.ENCHANTMENT, ApiEnchantmentProvider::bootstrap)
+            .add(Registries.INSTRUMENT, ApiInstrumentProvider::bootstrap)
+            .add(Registries.JUKEBOX_SONG, ApiJukeboxSongProvider::bootstrap)
             .add(Registries.CONFIGURED_FEATURE, CompoundGenerationProcessFacade::executeConfiguredFeatures)
             .add(Registries.PLACED_FEATURE, CompoundGenerationProcessFacade::executePlacedFeatures)
             .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, CompoundGenerationProcessFacade::executeBiomeModifiers);

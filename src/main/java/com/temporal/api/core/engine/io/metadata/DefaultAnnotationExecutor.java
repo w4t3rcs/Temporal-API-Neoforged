@@ -5,6 +5,8 @@ import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationSt
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.biome.*;
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.language.*;
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.model.*;
+import com.temporal.api.core.engine.io.metadata.strategy.field.data.music.InstrumentDescriptionStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.field.data.music.JukeboxSongDescriptionStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.other.*;
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.properties.*;
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.tag.BlockTagComponentStrategy;
@@ -110,6 +112,8 @@ public class DefaultAnnotationExecutor implements AnnotationExecutor {
                 new MonsterRoomMobStrategy(),
                 new ParrotImitationStrategy(),
                 new SoundDescriptionStrategy(),
+                new InstrumentDescriptionStrategy(),
+                new JukeboxSongDescriptionStrategy(),
                 new ParticleSpriteSetStrategy(),
                 new EnchantmentDefinitionStrategy(),
                 new DamageTypeDescriptionStrategy(),

@@ -48,6 +48,8 @@ public abstract class TranslationStrategy implements FieldAnnotationStrategy {
                     putTranslationIfNeeded(key, Registries.TRIM_PATTERN, value, ApiLanguageProvider.TRIM_PATTERN_TRANSFORMER);
                     putTranslationIfNeeded(key, Registries.BANNER_PATTERN, value, ApiLanguageProvider.BANNER_PATTERN_TRANSFORMER);
                     putTranslationIfNeeded(key, Registries.DAMAGE_TYPE, value, ApiLanguageProvider.DAMAGE_TYPE_TRANSFORMER);
+                    putTranslationIfNeeded(key, Registries.INSTRUMENT, value, ApiLanguageProvider.INSTRUMENT_TRANSFORMER);
+                    putTranslationIfNeeded(key, Registries.JUKEBOX_SONG, value, ApiLanguageProvider.JUKEBOX_SONG_TRANSFORMER);
                 }
                 default -> throw new IllegalStateException("Unexpected value: " + o);
             }
