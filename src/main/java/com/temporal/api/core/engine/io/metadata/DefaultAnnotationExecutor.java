@@ -19,6 +19,7 @@ import com.temporal.api.core.engine.io.metadata.strategy.type.data.defined.Defin
 import com.temporal.api.core.engine.io.metadata.strategy.type.data.defined.DefinedEnchantmentEntityEffectStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.type.data.defined.DefinedGlobalLootModifierStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.type.data.defined.DefinedRecipeStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.type.data.other.CustomAdvancementStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.type.data.tag.TagContainerStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.type.injection.InjectedStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.type.injection.RegistryClassStrategy;
@@ -82,7 +83,8 @@ public class DefaultAnnotationExecutor implements AnnotationExecutor {
                 new DefinedRecipeStrategy(),
                 new DefinedGlobalLootModifierStrategy(),
                 new DefinedAdvancementStrategy(),
-                new DefinedEnchantmentEntityEffectStrategy()
+                new DefinedEnchantmentEntityEffectStrategy(),
+                new CustomAdvancementStrategy()
         );
         final List<FieldAnnotationStrategy> fieldStrategies = List.of(
                 new BlockModelStrategy(),

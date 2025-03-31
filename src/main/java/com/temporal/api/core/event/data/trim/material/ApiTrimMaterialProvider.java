@@ -1,9 +1,11 @@
 package com.temporal.api.core.event.data.trim.material;
 
 import com.temporal.api.core.collection.TemporalHashMap;
+import com.temporal.api.core.event.data.model.item.TrimmedItemModelProviderStrategy;
 import com.temporal.api.core.util.other.RegistryUtils;
 import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.Util;
+import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -28,6 +30,7 @@ public class ApiTrimMaterialProvider implements TrimMaterialProvider {
             Style style = Style.EMPTY.withColor(textColor);
             MutableComponent component = Component.translatable(descriptionId).withStyle(style);
             context.register(trimMaterial, TrimMaterial.create(assetName, ingredient, component, Map.of()));
+            TrimmedItemModelProviderStrategy.TRIM_MATERIAL_MODELS.add(new ItemModelGenerators.TrimMaterialData(assetName, trimMaterial, Map.of()));
         });
     }
 
