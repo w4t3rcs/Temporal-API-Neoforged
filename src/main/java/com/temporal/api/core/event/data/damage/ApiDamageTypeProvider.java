@@ -3,6 +3,7 @@ package com.temporal.api.core.event.data.damage;
 import com.temporal.api.core.collection.TemporalHashMap;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageType;
 
 import java.util.Map;
@@ -13,7 +14,8 @@ public class ApiDamageTypeProvider implements DamageTypeProvider {
     @Override
     public void registerDamageTypes(BootstrapContext<DamageType> context) {
         DAMAGE_TYPES.forEach((damageType, description) -> {
-            String messageId = damageType.location().getNamespace() + "." + damageType.location().getPath();
+            ResourceLocation location = damageType.location();
+            String messageId = "damage." + location.getNamespace() + "." + location.getPath();
             context.register(damageType, new DamageType(messageId,
                     description.damageScaling(), description.exhaustion(), description.effects(), description.messageType()));
         });
