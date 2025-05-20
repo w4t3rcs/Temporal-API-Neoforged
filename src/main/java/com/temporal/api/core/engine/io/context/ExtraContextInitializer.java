@@ -20,7 +20,6 @@ public class ExtraContextInitializer implements ContextInitializer {
         context.putObject(new EffectFactory());
         context.putObject(new EntityTypeFactory());
         context.putObject(new BlockEntityTypeFactory());
-        context.putObject(new PaintingFactory());
         context.putObject(new ParticleFactory());
         context.putObject(new PoiTypeFactory());
         context.putObject(new PotionFactory());

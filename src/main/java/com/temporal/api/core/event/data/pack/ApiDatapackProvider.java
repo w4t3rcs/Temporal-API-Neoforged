@@ -7,6 +7,7 @@ import com.temporal.api.core.event.data.damage.ApiDamageTypeProvider;
 import com.temporal.api.core.event.data.enchantment.ApiEnchantmentProvider;
 import com.temporal.api.core.event.data.music.instrument.ApiInstrumentProvider;
 import com.temporal.api.core.event.data.music.jukebox.ApiJukeboxSongProvider;
+import com.temporal.api.core.event.data.painting.ApiPaintingVariantProvider;
 import com.temporal.api.core.event.data.trim.material.ApiTrimMaterialProvider;
 import com.temporal.api.core.event.data.trim.pattern.ApiTrimPatternProvider;
 import com.temporal.api.core.event.data.wolf.ApiWolfVariantProvider;
@@ -24,6 +25,7 @@ public class ApiDatapackProvider extends DatapackBuiltinEntriesProvider {
     public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
             .add(Registries.TRIM_MATERIAL, ApiTrimMaterialProvider::bootstrap)
             .add(Registries.TRIM_PATTERN, ApiTrimPatternProvider::bootstrap)
+            .add(Registries.PAINTING_VARIANT, ApiPaintingVariantProvider::bootstrap)
             .add(Registries.DAMAGE_TYPE, ApiDamageTypeProvider::bootstrap)
             .add(Registries.WOLF_VARIANT, ApiWolfVariantProvider::bootstrap)
             .add(Registries.BANNER_PATTERN, ApiBannerPatternProvider::bootstrap)

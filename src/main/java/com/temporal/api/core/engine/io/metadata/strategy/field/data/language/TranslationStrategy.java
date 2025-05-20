@@ -39,7 +39,6 @@ public abstract class TranslationStrategy implements FieldAnnotationStrategy {
                     putTranslationIfNeeded(key, Registries.ENTITY_TYPE, value, ApiLanguageProvider.ENTITY_TYPE_TRANSFORMER);
                     putTranslationIfNeeded(key, Registries.MOB_EFFECT, value, ApiLanguageProvider.MOB_EFFECT_TRANSFORMER);
                     putTranslationIfNeeded(key, Registries.SOUND_EVENT, value, ApiLanguageProvider.SOUND_EVENT_TRANSFORMER);
-                    putTranslationIfNeeded(key, Registries.PAINTING_VARIANT, value, ApiLanguageProvider.PAINTING_TRANSFORMER);
                     putTranslationIfNeeded(key, Registries.CREATIVE_MODE_TAB, value, ApiLanguageProvider.CREATIVE_MODE_TAB_TRANSFORMER);
                 }
                 case ResourceKey<?> key -> {
@@ -50,6 +49,7 @@ public abstract class TranslationStrategy implements FieldAnnotationStrategy {
                     putTranslationIfNeeded(key, Registries.DAMAGE_TYPE, value, ApiLanguageProvider.DAMAGE_TYPE_TRANSFORMER);
                     putTranslationIfNeeded(key, Registries.INSTRUMENT, value, ApiLanguageProvider.INSTRUMENT_TRANSFORMER);
                     putTranslationIfNeeded(key, Registries.JUKEBOX_SONG, value, ApiLanguageProvider.JUKEBOX_SONG_TRANSFORMER);
+                    putTranslationIfNeeded(key, Registries.PAINTING_VARIANT, value, ApiLanguageProvider.PAINTING_VARIANT_TRANSFORMER);
                 }
                 default -> throw new IllegalStateException("Unexpected value: " + o);
             }

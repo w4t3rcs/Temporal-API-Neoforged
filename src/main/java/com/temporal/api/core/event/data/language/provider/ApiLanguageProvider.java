@@ -30,7 +30,6 @@ public abstract class ApiLanguageProvider extends LanguageProvider {
     public static final KeyTransformer<ResourceKey<EntityType<?>>> ENTITY_TYPE_TRANSFORMER = new EntityTypeTransformer();
     public static final KeyTransformer<ResourceKey<MobEffect>> MOB_EFFECT_TRANSFORMER = new MobEffectTransformer();
     public static final KeyTransformer<ResourceKey<SoundEvent>> SOUND_EVENT_TRANSFORMER = new SoundEventTransformer();
-    public static final KeyTransformer<ResourceKey<PaintingVariant>> PAINTING_TRANSFORMER = new PaintingTransformer();
     public static final KeyTransformer<ResourceKey<CreativeModeTab>> CREATIVE_MODE_TAB_TRANSFORMER = new CreativeModeTabTransformer();
     public static final KeyTransformer<ResourceKey<Enchantment>> ENCHANTMENT_TRANSFORMER = new EnchantmentTransformer();
     public static final KeyTransformer<ResourceKey<TrimMaterial>> TRIM_MATERIAL_TRANSFORMER = new TrimMaterialTransformer();
@@ -39,6 +38,7 @@ public abstract class ApiLanguageProvider extends LanguageProvider {
     public static final KeyTransformer<ResourceKey<DamageType>> DAMAGE_TYPE_TRANSFORMER = new DamageTypeTransformer();
     public static final KeyTransformer<ResourceKey<Instrument>> INSTRUMENT_TRANSFORMER = new InstrumentTransformer();
     public static final KeyTransformer<ResourceKey<JukeboxSong>> JUKEBOX_SONG_TRANSFORMER = new JukeboxSongTransformer();
+    public static final KeyTransformer<ResourceKey<PaintingVariant>> PAINTING_VARIANT_TRANSFORMER = new PaintingVariantTransformer();
     public static final KeyTransformer<Component> COMPONENT_TRANSFORMER = new ComponentTransformer();
     public static final KeyTransformer<String> STRING_TRANSFORMER = new StringTransformer();
 

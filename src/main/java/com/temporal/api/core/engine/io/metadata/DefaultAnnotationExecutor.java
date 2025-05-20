@@ -114,6 +114,7 @@ public class DefaultAnnotationExecutor implements AnnotationExecutor {
                 new SoundDescriptionStrategy(),
                 new InstrumentDescriptionStrategy(),
                 new JukeboxSongDescriptionStrategy(),
+                new PaintingStrategy(),
                 new ParticleSpriteSetStrategy(),
                 new EnchantmentDefinitionStrategy(),
                 new DamageTypeDescriptionStrategy(),
