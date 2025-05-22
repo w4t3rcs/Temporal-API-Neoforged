@@ -18,8 +18,9 @@ public class ApiPaintingVariantProvider implements PaintingVariantProvider {
     public void registerPaintingVariant(BootstrapContext<PaintingVariant> context) {
         PAINTINGS.forEach(description -> {
             ResourceKey<PaintingVariant> variant = description.paintingVariant();
-            MutableComponent titleTranslation = Component.translatable(Util.makeDescriptionId("painting.title", variant.location()));
-            MutableComponent authorTranslation = Component.translatable(Util.makeDescriptionId("painting.author", variant.location()));
+            String descriptionId = Util.makeDescriptionId("painting", variant.location());
+            MutableComponent titleTranslation = Component.translatable(descriptionId + ".title");
+            MutableComponent authorTranslation = Component.translatable(descriptionId + ".author");
             context.register(variant, new PaintingVariant(description.width(), description.height(), variant.location(), Optional.of(titleTranslation), Optional.of(authorTranslation)));
         });
     }
