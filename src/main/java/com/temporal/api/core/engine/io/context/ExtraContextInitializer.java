@@ -3,7 +3,6 @@ package com.temporal.api.core.engine.io.context;
 import com.temporal.api.core.engine.io.metadata.DefaultAnnotationExecutor;
 import com.temporal.api.core.event.data.ApiDataGenerator;
 import com.temporal.api.core.registry.factory.common.*;
-import com.temporal.api.core.tag.factory.*;
 
 import java.util.List;
 
@@ -28,13 +27,6 @@ public class ExtraContextInitializer implements ContextInitializer {
         context.putObject(new VillagerProfessionFactory());
         context.putObject(new LootModifierSerializerFactory());
         context.putObject(new MenuTypeFactory());
-        context.putObject(new ItemTagFactory());
-        context.putObject(new BlockTagFactory());
-        context.putObject(new BannerPatternTagFactory());
-        context.putObject(new BiomeTagFactory());
-        context.putObject(new EntityTypeTagFactory());
-        context.putObject(new FluidTagFactory());
-        context.putObject(new StructureTagFactory());
-        context.putObject(new BiomeModifierTagFactory());
+        context.putObject(new PaintingVariantFactory());
     }
 }
