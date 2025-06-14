@@ -1,4 +1,4 @@
-package com.temporal.api.core.event.adapter;
+package com.temporal.api.core.engine.event.adapter;
 
 import net.neoforged.bus.api.Event;
 

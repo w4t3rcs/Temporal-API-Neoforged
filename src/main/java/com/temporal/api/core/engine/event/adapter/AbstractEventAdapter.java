@@ -1,9 +1,10 @@
-package com.temporal.api.core.event.adapter;
+package com.temporal.api.core.engine.event.adapter;
 
 import net.neoforged.bus.api.Event;
 
 import java.util.Map;
 
+//TODO: 1.9.0
 public abstract class AbstractEventAdapter<T extends Event, R> implements EventAdapter<T, R> {
     @Override
     public R adapt(T t) {
