@@ -1,7 +1,7 @@
 package com.temporal.api.core.event.data.preparer.tag.block;
 
 import com.temporal.api.core.event.data.preparer.DynamicPreparer;
-import com.temporal.api.core.util.other.ResourceUtils;
+import com.temporal.api.core.util.other.TagUtils;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
@@ -16,7 +16,7 @@ public final class BlockTagDynamicPreparer implements DynamicPreparer {
     @Override
     public void prepare() {
         TAG_CONTAINERS.stream()
-                .flatMap(ResourceUtils::<Block>getTagKeyStream)
-                .forEach(tag -> ResourceUtils.putPrioritizedTagKey(tag, BLOCK_TAGS));
+                .flatMap(TagUtils::<Block>getTagKeyStream)
+                .forEach(tag -> TagUtils.putPrioritizedTagKey(tag, BLOCK_TAGS));
     }
 }

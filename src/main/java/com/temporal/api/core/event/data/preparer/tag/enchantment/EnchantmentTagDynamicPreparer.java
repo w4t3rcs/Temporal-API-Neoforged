@@ -1,7 +1,7 @@
 package com.temporal.api.core.event.data.preparer.tag.enchantment;
 
 import com.temporal.api.core.event.data.preparer.DynamicPreparer;
-import com.temporal.api.core.util.other.ResourceUtils;
+import com.temporal.api.core.util.other.TagUtils;
 import net.minecraft.tags.EnchantmentTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -16,7 +16,7 @@ public final class EnchantmentTagDynamicPreparer implements DynamicPreparer {
     @Override
     public void prepare() {
         TAG_CONTAINERS.stream()
-                .flatMap(ResourceUtils::<Enchantment>getTagKeyStream)
-                .forEach(tag -> ResourceUtils.putPrioritizedTagKey(tag, ENCHANTMENT_TAGS));
+                .flatMap(TagUtils::<Enchantment>getTagKeyStream)
+                .forEach(tag -> TagUtils.putPrioritizedTagKey(tag, ENCHANTMENT_TAGS));
     }
 }
