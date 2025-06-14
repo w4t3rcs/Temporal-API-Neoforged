@@ -1,6 +1,7 @@
 package com.temporal.api.core.event.data.painting;
 
 import com.temporal.api.core.collection.TemporalArrayDeque;
+import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.network.chat.Component;
@@ -19,9 +20,12 @@ public class ApiPaintingVariantProvider implements PaintingVariantProvider {
         PAINTINGS.forEach(description -> {
             ResourceKey<PaintingVariant> variant = description.paintingVariant();
             String descriptionId = Util.makeDescriptionId("painting", variant.location());
-            MutableComponent titleTranslation = Component.translatable(descriptionId + ".title");
-            MutableComponent authorTranslation = Component.translatable(descriptionId + ".author");
-            context.register(variant, new PaintingVariant(description.width(), description.height(), variant.location(), Optional.of(titleTranslation), Optional.of(authorTranslation)));
+            MutableComponent titleTranslation = Component.translatable(descriptionId + ".title").withStyle(ChatFormatting.YELLOW);
+            context.register(variant, new PaintingVariant(
+                    description.width(), description.height(), variant.location(),
+                    Optional.of(titleTranslation),
+                    description.hasAuthor() ? Optional.of(Component.translatable(descriptionId + ".author").withStyle(ChatFormatting.GRAY)) : Optional.empty()
+            ));
         });
     }
 

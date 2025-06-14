@@ -11,4 +11,6 @@ public @interface Painting {
     int width() default 1;
 
     int height() default 1;
+
+    boolean hasAuthor() default true;
 }
