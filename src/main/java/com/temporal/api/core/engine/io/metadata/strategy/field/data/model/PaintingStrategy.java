@@ -2,6 +2,7 @@ package com.temporal.api.core.engine.io.metadata.strategy.field.data.model;
 
 import com.temporal.api.core.engine.io.metadata.annotation.data.model.Painting;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
+import com.temporal.api.core.event.data.json.PlaceablePaintingProvider;
 import com.temporal.api.core.event.data.painting.ApiPaintingVariantProvider;
 import com.temporal.api.core.event.data.painting.PaintingHolder;
 import net.minecraft.resources.ResourceKey;
@@ -18,6 +19,7 @@ public class PaintingStrategy implements FieldAnnotationStrategy {
             Painting annotation = field.getDeclaredAnnotation(Painting.class);
             PaintingHolder paintingHolder = new PaintingHolder(paintingVariant, annotation.width(), annotation.height(), annotation.hasAuthor());
             ApiPaintingVariantProvider.PAINTINGS.add(paintingHolder);
+            PlaceablePaintingProvider.PLACEABLES.add(paintingVariant);
         }
     }
 }

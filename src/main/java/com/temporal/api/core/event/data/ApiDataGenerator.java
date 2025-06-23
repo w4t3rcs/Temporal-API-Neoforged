@@ -2,6 +2,8 @@ package com.temporal.api.core.event.data;
 
 import com.temporal.api.core.event.data.advancement.AdvancementProviderFactory;
 import com.temporal.api.core.event.data.equipment.EquipmentAssetProviderImpl;
+import com.temporal.api.core.event.data.json.JsonProvider;
+import com.temporal.api.core.event.data.json.PlaceablePaintingProvider;
 import com.temporal.api.core.event.data.language.provider.*;
 import com.temporal.api.core.event.data.loot.LootTableProviderFactory;
 import com.temporal.api.core.event.data.map.ApiDataMapProvider;
@@ -43,6 +45,7 @@ public class ApiDataGenerator implements DataGatherer {
         addAdvancementProvider(event);
         addSoundProvider(event);
         addParticleProvider(event);
+        addJsonProvider(event);
     }
 
     @Override
@@ -183,6 +186,13 @@ public class ApiDataGenerator implements DataGatherer {
         final DataGenerator generator = getDataGenerator(event);
         final PackOutput packOutput = getPackOutput(event);
         generator.addProvider(true, new ApiParticleProvider(packOutput));
+    }
+
+    @Override
+    public void addJsonProvider(GatherDataEvent event) {
+        List.of(
+                new PlaceablePaintingProvider()
+        ).forEach(JsonProvider::registerFiles);
     }
 
     @Override
