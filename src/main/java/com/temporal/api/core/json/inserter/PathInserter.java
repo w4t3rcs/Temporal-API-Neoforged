@@ -9,7 +9,7 @@ public class PathInserter implements JsonInserter<String, Path> {
     public void insert(String insertable, Path location) {
         try {
             Path normalizedPath = location.toAbsolutePath().normalize();
-            Files.deleteIfExists(normalizedPath);
+            if (Files.exists(normalizedPath)) Files.delete(normalizedPath);
             Files.createDirectories(normalizedPath.getParent());
             Files.createFile(normalizedPath);
             Files.writeString(normalizedPath, insertable);

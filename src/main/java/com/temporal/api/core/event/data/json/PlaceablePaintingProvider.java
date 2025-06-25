@@ -30,7 +30,7 @@ public class PlaceablePaintingProvider implements JsonProvider {
     public void registerFiles() {
         String placeablesString = PLACEABLES.stream()
                 .map(ResourceKey::location)
-                .map(location -> location.getNamespace() + ":" + location.getPath())
+                .map(location -> "\"" + location.getNamespace() + ":" + location.getPath() + "\"")
                 .collect(Collectors.joining(",\n"));
         PLACEABLES.clear();
         String formatted = FORMATTER.format(FORMAT, placeablesString);
