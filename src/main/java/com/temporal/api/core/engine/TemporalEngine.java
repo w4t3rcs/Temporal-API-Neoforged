@@ -6,10 +6,7 @@ import com.temporal.api.core.engine.event.handler.ClientDataEventHandler;
 import com.temporal.api.core.engine.event.handler.EventHandler;
 import com.temporal.api.core.engine.event.handler.FovModifierEventHandler;
 import com.temporal.api.core.engine.io.IOLayer;
-import com.temporal.api.core.engine.io.context.ContextInitializer;
-import com.temporal.api.core.engine.io.context.EventBusContextInitializer;
-import com.temporal.api.core.engine.io.context.ExtraContextInitializer;
-import com.temporal.api.core.engine.io.context.ModContainerContextInitializer;
+import com.temporal.api.core.engine.io.context.*;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 
@@ -29,13 +26,17 @@ public class TemporalEngine {
                     """;
 
     public static LayerContainer run(Class<?> modClass, IEventBus eventBus, ModContainer modContainer) {
-        return config()
-                .addLayer(new IOLayer())
-                .processIOLayer(modClass, List.of(eventBus, modContainer),
-                        new ExtraContextInitializer(), new EventBusContextInitializer(), new ModContainerContextInitializer())
-                .addLayer(new EventLayer())
-                .processEventLayer(new ClientDataEventHandler(), new FovModifierEventHandler())
-                .build();
+        synchronized (TemporalEngine.class) {
+            return config()
+                    .addLayer(new IOLayer())
+                    .processIOLayer(modClass,
+                            List.of(eventBus, modContainer),
+                            List.of(new DeferredRegisterContextInitializer(), new FactoryContextInitializer(), new EventBusContextInitializer(), new ModContainerContextInitializer()),
+                            List.of())
+                    .addLayer(new EventLayer())
+                    .processEventLayer(new ClientDataEventHandler(), new FovModifierEventHandler())
+                    .build();
+        }
     }
 
     public static Configurator config() {
@@ -60,12 +61,17 @@ public class TemporalEngine {
             return this;
         }
 
-        public Configurator processIOLayer(Class<?> modClass, List<?> externalInitializingSource, ContextInitializer... contextInitializers) {
+        public Configurator processIOLayer(Class<?> modClass, List<?> externalSource) {
+            return processIOLayer(modClass, externalSource, List.of(), List.of());
+        }
+
+        public Configurator processIOLayer(Class<?> modClass, List<?> externalSource, List<ContextInitializer> initializers, List<ContextCleaner> cleaners) {
             Task ioSetupTask = () -> {
                 IOLayer ioLayer = layerContainer.getLayer(IOLayer.class);
                 ioLayer.setModClass(modClass);
-                ioLayer.setContextInitializers(List.of(contextInitializers));
-                ioLayer.setExternalSource(externalInitializingSource);
+                ioLayer.setContextInitializers(initializers);
+                ioLayer.setExternalSource(externalSource);
+                ioLayer.setContextCleaners(cleaners);
                 this.processLayer(ioLayer);
             };
 

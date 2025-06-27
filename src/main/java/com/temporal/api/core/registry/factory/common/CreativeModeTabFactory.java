@@ -1,9 +1,7 @@
 package com.temporal.api.core.registry.factory.common;
 
 import com.temporal.api.core.engine.io.context.InjectionContext;
-import com.temporal.api.core.util.other.RegistryUtils;
 import net.minecraft.core.Holder;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -15,7 +13,7 @@ import java.util.Collection;
 import java.util.function.Supplier;
 
 public class CreativeModeTabFactory implements ObjectFactory<CreativeModeTab> {
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = RegistryUtils.createRegistry(Registries.CREATIVE_MODE_TAB);
+    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = InjectionContext.getFromInstance("creative_mode_tabs");
 
     public Holder<CreativeModeTab> create(String name, Item icon, String translationId, Item... items) {
         return create(name, () -> CreativeModeTab.builder()

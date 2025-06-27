@@ -2,9 +2,7 @@ package com.temporal.api.core.registry.factory.common;
 
 import com.google.common.collect.ImmutableSet;
 import com.temporal.api.core.engine.io.context.InjectionContext;
-import com.temporal.api.core.util.other.RegistryUtils;
 import net.minecraft.core.Holder;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -15,7 +13,7 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 public class PoiTypeFactory implements ObjectFactory<PoiType> {
-    public static final DeferredRegister<PoiType> POI_TYPES = RegistryUtils.createRegistry(Registries.POINT_OF_INTEREST_TYPE);
+    public static final DeferredRegister<PoiType> POI_TYPES = InjectionContext.getFromInstance("poi_types");
 
     public Holder<PoiType> create(String name, Block block, int maxTickets, int validRange) {
         return create(name, ImmutableSet.copyOf(block.getStateDefinition().getPossibleStates()), maxTickets, validRange);

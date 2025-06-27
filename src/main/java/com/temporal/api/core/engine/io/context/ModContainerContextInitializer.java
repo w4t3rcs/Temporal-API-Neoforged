@@ -8,7 +8,7 @@ public class ModContainerContextInitializer implements ContextInitializer {
     @Override
     public void initialize(List<?> externalObjects) {
         if (externalObjects == null || externalObjects.isEmpty()) return;
-        InjectionContext context = InjectionContext.getInstance();
+        Context context = InjectionContext.getInstance();
         externalObjects.stream()
                 .filter(o -> o instanceof ModContainer)
                 .map(o -> (ModContainer)o)

@@ -10,12 +10,12 @@ import java.util.List;
 
 public class FovModifierEventHandler implements EventHandler {
     public static final List<DeferredItem<?>> BOWS = new ArrayList<>();
+    private static final FOVModifier FOV_MODIFIER = new BowFOVModifier();
 
     @Override
     public void handle() {
         subscribeEvent(ComputeFovModifierEvent.class, event -> {
-            FOVModifier fovModifier = new BowFOVModifier();
-            BOWS.forEach(bow -> fovModifier.modify(event, bow.get()));
+            BOWS.forEach(bow -> FOV_MODIFIER.modify(event, bow.get()));
         });
     }
 }

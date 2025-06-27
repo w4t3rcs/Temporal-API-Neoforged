@@ -1,17 +1,15 @@
 package com.temporal.api.core.registry.factory.common;
 
 import com.temporal.api.core.engine.io.context.InjectionContext;
-import com.temporal.api.core.util.other.RegistryUtils;
 import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.core.Holder;
-import net.minecraft.core.registries.Registries;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
 
 public class TriggerFactory implements ObjectFactory<CriterionTrigger<?>> {
-    public static final DeferredRegister<CriterionTrigger<?>> TRIGGER_TYPES = RegistryUtils.createRegistry(Registries.TRIGGER_TYPE);
+    public static final DeferredRegister<CriterionTrigger<?>> TRIGGER_TYPES = InjectionContext.getFromInstance("trigger_types");
 
     @Override
     public Holder<CriterionTrigger<?>> create(String name, Supplier<CriterionTrigger<?>> criterionTriggerSupplier) {

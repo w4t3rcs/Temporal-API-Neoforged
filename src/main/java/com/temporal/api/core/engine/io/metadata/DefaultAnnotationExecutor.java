@@ -1,5 +1,6 @@
 package com.temporal.api.core.engine.io.metadata;
 
+import com.temporal.api.core.engine.io.IOLayer;
 import com.temporal.api.core.engine.io.metadata.annotation.injection.Injected;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.biome.*;
@@ -29,6 +30,7 @@ import com.temporal.api.core.util.other.IOUtils;
 
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 
 public class DefaultAnnotationExecutor implements AnnotationExecutor {
     private volatile Set<Class<?>> classes;
@@ -36,7 +38,7 @@ public class DefaultAnnotationExecutor implements AnnotationExecutor {
 
     @Override
     public void prepareBeforeExecution(Class<?> dependencyClass) {
-        this.classes = IOUtils.getAllClasses(dependencyClass, Injected.class);
+        this.classes = IOUtils.getAllClasses(IOLayer.NEO_MOD.getModId(), dependencyClass, Injected.class);
         this.strategyExecutor = DefaultAnnotationStrategyExecutor.getInstance();
     }
 
@@ -46,8 +48,7 @@ public class DefaultAnnotationExecutor implements AnnotationExecutor {
                 new InjectedStrategy(),
                 new RegistryClassStrategy()
         );
-
-        this.classes.forEach(clazz -> strategies.forEach(strategy -> strategyExecutor.executeClass(strategy, clazz)));
+        iterateClasses(clazz -> strategies.forEach(strategy -> strategyExecutor.executeClass(strategy, clazz)));
     }
 
     @Override
@@ -55,8 +56,7 @@ public class DefaultAnnotationExecutor implements AnnotationExecutor {
         final List<FieldAnnotationStrategy> strategies = List.of(
                 new RegistryFieldStrategy()
         );
-
-        this.classes.forEach(clazz -> strategies.forEach(strategy -> strategyExecutor.executeStaticField(strategy, clazz)));
+        iterateClasses(clazz -> strategies.forEach(strategy -> strategyExecutor.executeStaticField(strategy, clazz)));
     }
 
     @Override
@@ -65,8 +65,7 @@ public class DefaultAnnotationExecutor implements AnnotationExecutor {
                 new InjectionStrategy(),
                 new DependencyStrategy()
         );
-
-        this.classes.forEach(clazz -> strategies.forEach(strategy -> strategyExecutor.executeField(strategy, clazz)));
+        iterateClasses(clazz -> strategies.forEach(strategy -> strategyExecutor.executeField(strategy, clazz)));
     }
 
     @Override
@@ -74,8 +73,7 @@ public class DefaultAnnotationExecutor implements AnnotationExecutor {
         final List<MethodAnnotationStrategy> strategies = List.of(
                 new ExecutionStrategy()
         );
-
-        this.classes.forEach(clazz -> strategies.forEach(strategy -> strategyExecutor.executeMethod(strategy, clazz)));
+        iterateClasses(clazz -> strategies.forEach(strategy -> strategyExecutor.executeMethod(strategy, clazz)));
     }
 
     @Override
@@ -166,8 +164,11 @@ public class DefaultAnnotationExecutor implements AnnotationExecutor {
                 new TurkishTranslationStrategy(),
                 new VietnameseTranslationStrategy()
         );
+        iterateClasses(clazz -> classStrategies.forEach(strategy -> strategyExecutor.executeClass(strategy, clazz)));
+        iterateClasses(clazz -> fieldStrategies.forEach(strategy -> strategyExecutor.executeStaticField(strategy, clazz)));
+    }
 
-        this.classes.forEach(clazz -> classStrategies.forEach(strategy -> strategyExecutor.executeClass(strategy, clazz)));
-        this.classes.forEach(clazz -> fieldStrategies.forEach(strategy -> strategyExecutor.executeStaticField(strategy, clazz)));
+    private void iterateClasses(Consumer<Class<?>> clazzConsumer) {
+        this.classes.forEach(clazzConsumer);
     }
 }

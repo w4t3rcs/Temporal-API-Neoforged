@@ -1,9 +1,7 @@
 package com.temporal.api.core.registry.factory.common;
 
 import com.temporal.api.core.engine.io.context.InjectionContext;
-import com.temporal.api.core.util.other.RegistryUtils;
 import net.minecraft.core.Holder;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.alchemy.Potion;
@@ -13,7 +11,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 public class PotionFactory implements ObjectFactory<Potion> {
-    public static final DeferredRegister<Potion> POTIONS = RegistryUtils.createRegistry(Registries.POTION);
+    public static final DeferredRegister<Potion> POTIONS = InjectionContext.getFromInstance("potions");
 
     public Holder<Potion> create(String name, MobEffectInstance mobEffectInstance) {
         return create(name, () -> new Potion(name, mobEffectInstance));

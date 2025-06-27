@@ -2,7 +2,6 @@ package com.temporal.api.core.registry.factory.common;
 
 import com.temporal.api.client.dto.Size;
 import com.temporal.api.core.engine.io.context.InjectionContext;
-import com.temporal.api.core.util.other.RegistryUtils;
 import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
@@ -16,7 +15,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 public class EntityTypeFactory implements ObjectFactory<EntityType<?>> {
-    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = RegistryUtils.createRegistry(Registries.ENTITY_TYPE);
+    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = InjectionContext.getFromInstance("entity_types");
 
     public <T extends Entity> Holder<EntityType<?>> create(String name, EntityType.EntityFactory<T> entityFactory, Size size, MobCategory category) {
         return this.create(name, EntityType.Builder.of(entityFactory, category)
