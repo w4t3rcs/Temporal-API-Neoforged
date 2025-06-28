@@ -14,23 +14,36 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 public class MenuTypeFactory implements ObjectFactory<MenuType<?>> {
-    public static final DeferredRegister<MenuType<?>> MENU_TYPES = InjectionContext.getFromInstance("menu_types");
+    private final DeferredRegister<MenuType<?>> menuTypes;
+
+    public MenuTypeFactory() {
+        this(InjectionContext.getFromInstance("menu_types"));
+    }
+
+    public MenuTypeFactory(DeferredRegister<MenuType<?>> menuTypes) {
+        this.menuTypes = menuTypes;
+    }
 
     public <T extends AbstractContainerMenu> DeferredHolder<MenuType<?>, MenuType<T>> create(String name, IContainerFactory<T> containerFactory) {
-        return MENU_TYPES.register(name, () -> IMenuTypeExtension.create(containerFactory));
+        return menuTypes.register(name, () -> IMenuTypeExtension.create(containerFactory));
     }
 
     public <T extends AbstractContainerMenu> DeferredHolder<MenuType<?>, MenuType<T>> create(String name, MenuType.MenuSupplier<T> container, FeatureFlagSet featureFlagSet) {
-        return MENU_TYPES.register(name, () -> new MenuType<>(container, featureFlagSet));
+        return menuTypes.register(name, () -> new MenuType<>(container, featureFlagSet));
     }
 
     @Override
     public Holder<MenuType<?>> create(String name, Supplier<MenuType<?>> menuTypeSupplier) {
-        return MENU_TYPES.register(name, menuTypeSupplier);
+        return menuTypes.register(name, menuTypeSupplier);
     }
 
     @Override
     public void register() {
-        MENU_TYPES.register(InjectionContext.getFromInstance(IEventBus.class));
+        menuTypes.register(InjectionContext.getFromInstance(IEventBus.class));
+    }
+
+    @Override
+    public DeferredRegister<MenuType<?>> getRegistry() {
+        return menuTypes;
     }
 }

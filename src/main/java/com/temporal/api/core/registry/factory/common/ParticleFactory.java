@@ -10,7 +10,15 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 public class ParticleFactory implements ObjectFactory<ParticleType<?>> {
-    public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = InjectionContext.getFromInstance("particle_types");
+    private final DeferredRegister<ParticleType<?>> particleTypes;
+
+    public ParticleFactory() {
+        this(InjectionContext.getFromInstance("particle_types"));
+    }
+
+    public ParticleFactory(DeferredRegister<ParticleType<?>> particleTypes) {
+        this.particleTypes = particleTypes;
+    }
 
     public Holder<ParticleType<?>> create(String name, boolean overrideLimiter) {
         return create(name, () -> new SimpleParticleType(overrideLimiter));
@@ -18,11 +26,16 @@ public class ParticleFactory implements ObjectFactory<ParticleType<?>> {
 
     @Override
     public Holder<ParticleType<?>> create(String name, Supplier<ParticleType<?>> particleTypeSupplier) {
-        return PARTICLE_TYPES.register(name, particleTypeSupplier);
+        return particleTypes.register(name, particleTypeSupplier);
     }
 
     @Override
     public void register() {
-        PARTICLE_TYPES.register(InjectionContext.getFromInstance(IEventBus.class));
+        particleTypes.register(InjectionContext.getFromInstance(IEventBus.class));
+    }
+
+    @Override
+    public DeferredRegister<ParticleType<?>> getRegistry() {
+        return particleTypes;
     }
 }

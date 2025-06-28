@@ -9,7 +9,15 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 public class RecipeSerializerFactory implements ObjectFactory<RecipeSerializer<?>> {
-    public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = InjectionContext.getFromInstance("recipe_serializers");
+    private final DeferredRegister<RecipeSerializer<?>> recipeSerializers;
+
+    public RecipeSerializerFactory() {
+        this(InjectionContext.getFromInstance("recipe_serializers"));
+    }
+
+    public RecipeSerializerFactory(DeferredRegister<RecipeSerializer<?>> recipeSerializers) {
+        this.recipeSerializers = recipeSerializers;
+    }
 
     public Holder<RecipeSerializer<?>> create(String name, RecipeSerializer<?> recipeSerializer) {
         return this.create(name, () -> recipeSerializer);
@@ -17,11 +25,16 @@ public class RecipeSerializerFactory implements ObjectFactory<RecipeSerializer<?
 
     @Override
     public Holder<RecipeSerializer<?>> create(String name, Supplier<RecipeSerializer<?>> recipeSerializerSupplier) {
-        return RECIPE_SERIALIZERS.register(name, recipeSerializerSupplier);
+        return recipeSerializers.register(name, recipeSerializerSupplier);
     }
 
     @Override
     public void register() {
-        RECIPE_SERIALIZERS.register(InjectionContext.getFromInstance(IEventBus.class));
+        recipeSerializers.register(InjectionContext.getFromInstance(IEventBus.class));
+    }
+
+    @Override
+    public DeferredRegister<RecipeSerializer<?>> getRegistry() {
+        return recipeSerializers;
     }
 }

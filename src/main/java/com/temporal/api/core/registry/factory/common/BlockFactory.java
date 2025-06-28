@@ -13,15 +13,28 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class BlockFactory implements ObjectFactory<Block> {
-    public static final DeferredRegister.Blocks BLOCKS = InjectionContext.getFromInstance("blocks");
-    private final ItemFactory itemFactory = InjectionContext.getFromInstance(ItemFactory.class);
+    private final DeferredRegister.Blocks blocks;
+    private final ItemFactory itemFactory;
+
+    public BlockFactory() {
+        this(InjectionContext.getFromInstance("blocks"));
+    }
+
+    public BlockFactory(DeferredRegister.Blocks blocks) {
+        this(blocks, InjectionContext.getFromInstance(ItemFactory.class));
+    }
+
+    public BlockFactory(DeferredRegister.Blocks blocks, ItemFactory itemFactory) {
+        this.blocks = blocks;
+        this.itemFactory = itemFactory;
+    }
 
     public DeferredBlock<Block> createWithoutItem(String name, BlockBehaviour.Properties properties) {
-        return BLOCKS.registerBlock(name, Block::new, properties);
+        return blocks.registerBlock(name, Block::new, properties);
     }
 
     public DeferredBlock<Block> createWithoutItem(String name, BlockBehaviour.Properties properties, Function<BlockBehaviour.Properties, ? extends Block> function) {
-        return BLOCKS.registerBlock(name, function, properties);
+        return blocks.registerBlock(name, function, properties);
     }
 
     public DeferredBlock<Block> create(String name, BlockBehaviour.Properties properties) {
@@ -37,7 +50,7 @@ public class BlockFactory implements ObjectFactory<Block> {
     }
 
     public DeferredBlock<Block> create(String name, BlockBehaviour.Properties properties, Function<BlockBehaviour.Properties, ? extends Block> function, Item.Properties itemProperties) {
-        DeferredBlock<Block> block = BLOCKS.registerBlock(name, function, properties);
+        DeferredBlock<Block> block = blocks.registerBlock(name, function, properties);
         this.itemFactory.create(name, itemProperties, props -> new BlockItem(block.value(), props));
         return block;
     }
@@ -48,13 +61,18 @@ public class BlockFactory implements ObjectFactory<Block> {
     }
 
     public DeferredBlock<Block> create(String name, Supplier<Block> blockSupplier, Item.Properties itemProperties) {
-        DeferredBlock<Block> block = BLOCKS.register(name, blockSupplier);
+        DeferredBlock<Block> block = blocks.register(name, blockSupplier);
         this.itemFactory.create(name, itemProperties, props -> new BlockItem(block.value(), props));
         return block;
     }
 
     @Override
     public void register() {
-        BLOCKS.register(InjectionContext.getFromInstance(IEventBus.class));
+        blocks.register(InjectionContext.getFromInstance(IEventBus.class));
+    }
+
+    @Override
+    public DeferredRegister<Block> getRegistry() {
+        return blocks;
     }
 }

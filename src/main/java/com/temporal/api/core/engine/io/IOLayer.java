@@ -4,7 +4,7 @@ import com.temporal.api.core.engine.EngineLayer;
 import com.temporal.api.core.engine.io.context.Context;
 import com.temporal.api.core.engine.io.context.ContextCleaner;
 import com.temporal.api.core.engine.io.context.ContextInitializer;
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionContextContainer;
 import com.temporal.api.core.engine.io.metadata.AnnotationExecutor;
 import com.temporal.api.core.engine.io.metadata.DefaultAnnotationExecutor;
 import com.temporal.api.core.engine.io.resource.NeoMod;
@@ -21,7 +21,8 @@ public class IOLayer implements EngineLayer {
     @Override
     public void processAllTasks() {
         NEO_MOD = NeoMod.create(this.modClass);
-        Context context = InjectionContext.getInstance();
+        Context context = InjectionContextContainer.getInstance()
+                .createContext(NEO_MOD.getModId());
         contextInitializers.forEach(initializer -> initializer.initialize(this.externalSource));
         context.getObjects(ContextInitializer.class)
                 .forEach(initializer -> initializer.initialize(this.externalSource));

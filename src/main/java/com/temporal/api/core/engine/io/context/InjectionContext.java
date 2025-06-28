@@ -1,5 +1,7 @@
 package com.temporal.api.core.engine.io.context;
 
+import com.temporal.api.core.engine.io.IOLayer;
+
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.List;
@@ -7,10 +9,9 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 public class InjectionContext implements Context {
-    private static volatile InjectionContext instance;
     private final Map<ContextKey, Object> objects;
 
-    private InjectionContext() {
+    protected InjectionContext() {
         this.objects = new HashMap<>();
     }
 
@@ -123,14 +124,7 @@ public class InjectionContext implements Context {
     }
 
     public static InjectionContext getInstance() {
-        if (instance == null) {
-            synchronized (InjectionContext.class) {
-                if (instance == null) {
-                    instance = new InjectionContext();
-                }
-            }
-        }
-
-        return instance;
+        return InjectionContextContainer.getInstance()
+                .getContext(IOLayer.NEO_MOD.getModId());
     }
 }

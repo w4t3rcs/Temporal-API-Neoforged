@@ -10,15 +10,28 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 public class LootModifierSerializerFactory implements ObjectFactory<MapCodec<? extends IGlobalLootModifier>> {
-    public static final DeferredRegister<MapCodec<? extends IGlobalLootModifier>> GLOBAL_LOOT_MODIFIER_SERIALIZERS = InjectionContext.getFromInstance("global_loot_modifier_serializers");
+    private final DeferredRegister<MapCodec<? extends IGlobalLootModifier>> lootModifierSerializers;
+
+    public LootModifierSerializerFactory() {
+        this(InjectionContext.getFromInstance("global_loot_modifier_serializers"));
+    }
+
+    public LootModifierSerializerFactory(DeferredRegister<MapCodec<? extends IGlobalLootModifier>> lootModifierSerializers) {
+        this.lootModifierSerializers = lootModifierSerializers;
+    }
 
     @Override
     public Holder<MapCodec<? extends IGlobalLootModifier>> create(String name, Supplier<MapCodec<? extends IGlobalLootModifier>> codecSupplier) {
-        return GLOBAL_LOOT_MODIFIER_SERIALIZERS.register(name, codecSupplier);
+        return lootModifierSerializers.register(name, codecSupplier);
     }
 
     @Override
     public void register() {
-        GLOBAL_LOOT_MODIFIER_SERIALIZERS.register(InjectionContext.getFromInstance(IEventBus.class));
+        lootModifierSerializers.register(InjectionContext.getFromInstance(IEventBus.class));
+    }
+
+    @Override
+    public DeferredRegister<MapCodec<? extends IGlobalLootModifier>> getRegistry() {
+        return lootModifierSerializers;
     }
 }

@@ -15,7 +15,15 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 public class EntityTypeFactory implements ObjectFactory<EntityType<?>> {
-    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = InjectionContext.getFromInstance("entity_types");
+    private final DeferredRegister<EntityType<?>> entityTypes;
+
+    public EntityTypeFactory() {
+        this(InjectionContext.getFromInstance("entity_types"));
+    }
+
+    public EntityTypeFactory(DeferredRegister<EntityType<?>> entityTypes) {
+        this.entityTypes = entityTypes;
+    }
 
     public <T extends Entity> Holder<EntityType<?>> create(String name, EntityType.EntityFactory<T> entityFactory, Size size, MobCategory category) {
         return this.create(name, EntityType.Builder.of(entityFactory, category)
@@ -32,11 +40,16 @@ public class EntityTypeFactory implements ObjectFactory<EntityType<?>> {
 
     @Override
     public Holder<EntityType<?>> create(String name, Supplier<EntityType<?>> entitySupplier) {
-        return ENTITY_TYPES.register(name, entitySupplier);
+        return entityTypes.register(name, entitySupplier);
     }
 
     @Override
     public void register() {
-        ENTITY_TYPES.register(InjectionContext.getFromInstance(IEventBus.class));
+        entityTypes.register(InjectionContext.getFromInstance(IEventBus.class));
+    }
+
+    @Override
+    public DeferredRegister<EntityType<?>> getRegistry() {
+        return entityTypes;
     }
 }

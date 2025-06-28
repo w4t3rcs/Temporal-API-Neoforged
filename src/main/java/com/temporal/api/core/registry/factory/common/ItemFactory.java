@@ -10,27 +10,40 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class ItemFactory implements ObjectFactory<Item> {
-    public static final DeferredRegister.Items ITEMS = InjectionContext.getFromInstance("items");
+    private final DeferredRegister.Items items;
+
+    public ItemFactory() {
+        this(InjectionContext.getFromInstance("items"));
+    }
+
+    public ItemFactory(DeferredRegister.Items items) {
+        this.items = items;
+    }
 
     public DeferredItem<Item> create(String name) {
-        return ITEMS.registerSimpleItem(name);
+        return items.registerSimpleItem(name);
     }
 
     public DeferredItem<Item> create(String name, Item.Properties properties) {
-        return ITEMS.registerSimpleItem(name, properties);
+        return items.registerSimpleItem(name, properties);
     }
 
     public DeferredItem<Item> create(String name, Item.Properties properties, Function<Item.Properties, ? extends Item> function) {
-        return ITEMS.registerItem(name, function, properties);
+        return items.registerItem(name, function, properties);
     }
 
     @Override
     public DeferredItem<Item> create(String name, Supplier<Item> itemSupplier) {
-        return ITEMS.register(name, itemSupplier);
+        return items.register(name, itemSupplier);
     }
 
     @Override
     public void register() {
-        ITEMS.register(InjectionContext.getFromInstance(IEventBus.class));
+        items.register(InjectionContext.getFromInstance(IEventBus.class));
+    }
+
+    @Override
+    public DeferredRegister<Item> getRegistry() {
+        return items;
     }
 }

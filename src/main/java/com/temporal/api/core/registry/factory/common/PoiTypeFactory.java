@@ -13,7 +13,15 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 public class PoiTypeFactory implements ObjectFactory<PoiType> {
-    public static final DeferredRegister<PoiType> POI_TYPES = InjectionContext.getFromInstance("poi_types");
+    private final DeferredRegister<PoiType> poiTypes;
+
+    public PoiTypeFactory() {
+        this(InjectionContext.getFromInstance("poi_types"));
+    }
+
+    public PoiTypeFactory(DeferredRegister<PoiType> poiTypes) {
+        this.poiTypes = poiTypes;
+    }
 
     public Holder<PoiType> create(String name, Block block, int maxTickets, int validRange) {
         return create(name, ImmutableSet.copyOf(block.getStateDefinition().getPossibleStates()), maxTickets, validRange);
@@ -25,11 +33,16 @@ public class PoiTypeFactory implements ObjectFactory<PoiType> {
 
     @Override
     public Holder<PoiType> create(String name, Supplier<PoiType> poiSupplier) {
-        return POI_TYPES.register(name, poiSupplier);
+        return poiTypes.register(name, poiSupplier);
     }
 
     @Override
     public void register() {
-        POI_TYPES.register(InjectionContext.getFromInstance(IEventBus.class));
+        poiTypes.register(InjectionContext.getFromInstance(IEventBus.class));
+    }
+
+    @Override
+    public DeferredRegister<PoiType> getRegistry() {
+        return poiTypes;
     }
 }

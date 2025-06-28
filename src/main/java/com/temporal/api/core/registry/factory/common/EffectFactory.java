@@ -9,15 +9,28 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 public class EffectFactory implements ObjectFactory<MobEffect> {
-    public static final DeferredRegister<MobEffect> EFFECTS = InjectionContext.getFromInstance("mob_effects");
+    private final DeferredRegister<MobEffect> mobEffects;
+
+    public EffectFactory() {
+        this(InjectionContext.getFromInstance("mob_effects"));
+    }
+
+    public EffectFactory(DeferredRegister<MobEffect> mobEffects) {
+        this.mobEffects = mobEffects;
+    }
 
     @Override
     public Holder<MobEffect> create(String name, Supplier<MobEffect> mobEffectSupplier) {
-        return EFFECTS.register(name, mobEffectSupplier);
+        return mobEffects.register(name, mobEffectSupplier);
     }
 
     @Override
     public void register() {
-        EFFECTS.register(InjectionContext.getFromInstance(IEventBus.class));
+        mobEffects.register(InjectionContext.getFromInstance(IEventBus.class));
+    }
+
+    @Override
+    public DeferredRegister<MobEffect> getRegistry() {
+        return mobEffects;
     }
 }

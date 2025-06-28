@@ -13,7 +13,15 @@ import java.util.Collection;
 import java.util.function.Supplier;
 
 public class CreativeModeTabFactory implements ObjectFactory<CreativeModeTab> {
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = InjectionContext.getFromInstance("creative_mode_tabs");
+    private final DeferredRegister<CreativeModeTab> creativeModeTabs;
+
+    public CreativeModeTabFactory() {
+        this(InjectionContext.getFromInstance("creative_mode_tabs"));
+    }
+
+    public CreativeModeTabFactory(DeferredRegister<CreativeModeTab> creativeModeTabs) {
+        this.creativeModeTabs = creativeModeTabs;
+    }
 
     public Holder<CreativeModeTab> create(String name, Item icon, String translationId, Item... items) {
         return create(name, () -> CreativeModeTab.builder()
@@ -36,11 +44,16 @@ public class CreativeModeTabFactory implements ObjectFactory<CreativeModeTab> {
 
     @Override
     public Holder<CreativeModeTab> create(String name, Supplier<CreativeModeTab> creativeModeTabSupplier) {
-        return CREATIVE_MODE_TABS.register(name, creativeModeTabSupplier);
+        return creativeModeTabs.register(name, creativeModeTabSupplier);
     }
 
     @Override
     public void register() {
-        CREATIVE_MODE_TABS.register(InjectionContext.getFromInstance(IEventBus.class));
+        creativeModeTabs.register(InjectionContext.getFromInstance(IEventBus.class));
+    }
+
+    @Override
+    public DeferredRegister<CreativeModeTab> getRegistry() {
+        return creativeModeTabs;
     }
 }

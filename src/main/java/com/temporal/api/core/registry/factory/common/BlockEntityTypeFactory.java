@@ -12,7 +12,15 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 public class BlockEntityTypeFactory implements ObjectFactory<BlockEntityType<?>> {
-    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = InjectionContext.getFromInstance("block_entity_types");
+    private final DeferredRegister<BlockEntityType<?>> blockEntityTypes;
+
+    public BlockEntityTypeFactory() {
+        this(InjectionContext.getFromInstance("block_entity_types"));
+    }
+
+    public BlockEntityTypeFactory(DeferredRegister<BlockEntityType<?>> blockEntityTypes) {
+        this.blockEntityTypes = blockEntityTypes;
+    }
 
     public Holder<BlockEntityType<?>> create(String name, BlockEntityType.BlockEntitySupplier<? extends BlockEntity> blockEntitySupplier, Block... blocks) {
         return this.create(name, () -> new BlockEntityType<>(blockEntitySupplier, Set.of(blocks) ));
@@ -20,11 +28,16 @@ public class BlockEntityTypeFactory implements ObjectFactory<BlockEntityType<?>>
 
     @Override
     public Holder<BlockEntityType<?>> create(String name, Supplier<BlockEntityType<?>> entitySupplier) {
-        return BLOCK_ENTITY_TYPES.register(name, entitySupplier);
+        return blockEntityTypes.register(name, entitySupplier);
     }
 
     @Override
     public void register() {
-        BLOCK_ENTITY_TYPES.register(InjectionContext.getFromInstance(IEventBus.class));
+        blockEntityTypes.register(InjectionContext.getFromInstance(IEventBus.class));
+    }
+
+    @Override
+    public DeferredRegister<BlockEntityType<?>> getRegistry() {
+        return blockEntityTypes;
     }
 }

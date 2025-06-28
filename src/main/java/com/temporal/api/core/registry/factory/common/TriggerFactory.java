@@ -9,15 +9,28 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 public class TriggerFactory implements ObjectFactory<CriterionTrigger<?>> {
-    public static final DeferredRegister<CriterionTrigger<?>> TRIGGER_TYPES = InjectionContext.getFromInstance("trigger_types");
+    private final DeferredRegister<CriterionTrigger<?>> triggerTypes;
+
+    public TriggerFactory() {
+        this(InjectionContext.getFromInstance("trigger_types"));
+    }
+
+    public TriggerFactory(DeferredRegister<CriterionTrigger<?>> triggerTypes) {
+        this.triggerTypes = triggerTypes;
+    }
 
     @Override
     public Holder<CriterionTrigger<?>> create(String name, Supplier<CriterionTrigger<?>> criterionTriggerSupplier) {
-        return TRIGGER_TYPES.register(name, criterionTriggerSupplier);
+        return triggerTypes.register(name, criterionTriggerSupplier);
     }
 
     @Override
     public void register() {
-        TRIGGER_TYPES.register(InjectionContext.getFromInstance(IEventBus.class));
+        triggerTypes.register(InjectionContext.getFromInstance(IEventBus.class));
+    }
+
+    @Override
+    public DeferredRegister<CriterionTrigger<?>> getRegistry() {
+        return triggerTypes;
     }
 }

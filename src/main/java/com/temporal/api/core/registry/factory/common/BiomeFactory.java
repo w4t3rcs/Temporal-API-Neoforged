@@ -9,15 +9,28 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 public class BiomeFactory implements ObjectFactory<Biome> {
-    public static final DeferredRegister<Biome> BIOMES = InjectionContext.getFromInstance("biomes");
+    private final DeferredRegister<Biome> biomes;
+
+    public BiomeFactory() {
+        this(InjectionContext.getFromInstance("biomes"));
+    }
+
+    public BiomeFactory(DeferredRegister<Biome> biomes) {
+        this.biomes = biomes;
+    }
 
     @Override
     public Holder<Biome> create(String name, Supplier<Biome> biomeSupplier) {
-        return BIOMES.register(name, biomeSupplier);
+        return biomes.register(name, biomeSupplier);
     }
 
     @Override
     public void register() {
-        BIOMES.register(InjectionContext.getFromInstance(IEventBus.class));
+        biomes.register(InjectionContext.getFromInstance(IEventBus.class));
+    }
+
+    @Override
+    public DeferredRegister<Biome> getRegistry() {
+        return biomes;
     }
 }

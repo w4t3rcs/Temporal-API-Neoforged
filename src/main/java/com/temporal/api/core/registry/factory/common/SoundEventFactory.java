@@ -10,7 +10,15 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 public class SoundEventFactory implements ObjectFactory<SoundEvent> {
-    public static final DeferredRegister<SoundEvent> SOUND_EVENTS = InjectionContext.getFromInstance("sound_events");
+    private final DeferredRegister<SoundEvent> soundEvents;
+
+    public SoundEventFactory() {
+        this(InjectionContext.getFromInstance("sound_events"));
+    }
+
+    public SoundEventFactory(DeferredRegister<SoundEvent> soundEvents) {
+        this.soundEvents = soundEvents;
+    }
 
     public Holder<SoundEvent> create(String name) {
         return create(name, () -> SoundEvent.createVariableRangeEvent(ResourceUtils.createResourceLocation(name)));
@@ -18,11 +26,16 @@ public class SoundEventFactory implements ObjectFactory<SoundEvent> {
 
     @Override
     public Holder<SoundEvent> create(String name, Supplier<SoundEvent> soundEventSupplier) {
-        return SOUND_EVENTS.register(name, soundEventSupplier);
+        return soundEvents.register(name, soundEventSupplier);
     }
 
     @Override
     public void register() {
-        SOUND_EVENTS.register(InjectionContext.getFromInstance(IEventBus.class));
+        soundEvents.register(InjectionContext.getFromInstance(IEventBus.class));
+    }
+
+    @Override
+    public DeferredRegister<SoundEvent> getRegistry() {
+        return soundEvents;
     }
 }

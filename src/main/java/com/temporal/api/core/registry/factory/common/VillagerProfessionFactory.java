@@ -14,7 +14,15 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 public class VillagerProfessionFactory implements ObjectFactory<VillagerProfession> {
-    public static final DeferredRegister<VillagerProfession> VILLAGER_PROFESSIONS = InjectionContext.getFromInstance("villager_professions");
+    private final DeferredRegister<VillagerProfession> villagerProfessions;
+
+    public VillagerProfessionFactory() {
+        this(InjectionContext.getFromInstance("villager_professions"));
+    }
+
+    public VillagerProfessionFactory(DeferredRegister<VillagerProfession> villagerProfessions) {
+        this.villagerProfessions = villagerProfessions;
+    }
 
     public Holder<VillagerProfession> create(String name, String professionName, PoiType heldJobSite, SoundEvent workSound) {
         return create(name, () -> new VillagerProfession(professionName, holder -> holder.value() == heldJobSite, holder -> holder.value() == heldJobSite, ImmutableSet.of(), ImmutableSet.of(), workSound));
@@ -30,11 +38,16 @@ public class VillagerProfessionFactory implements ObjectFactory<VillagerProfessi
 
     @Override
     public Holder<VillagerProfession> create(String name, Supplier<VillagerProfession> villagerProfessionSupplier) {
-        return VILLAGER_PROFESSIONS.register(name, villagerProfessionSupplier);
+        return villagerProfessions.register(name, villagerProfessionSupplier);
     }
 
     @Override
     public void register() {
-        VILLAGER_PROFESSIONS.register(InjectionContext.getFromInstance(IEventBus.class));
+        villagerProfessions.register(InjectionContext.getFromInstance(IEventBus.class));
+    }
+
+    @Override
+    public DeferredRegister<VillagerProfession> getRegistry() {
+        return villagerProfessions;
     }
 }

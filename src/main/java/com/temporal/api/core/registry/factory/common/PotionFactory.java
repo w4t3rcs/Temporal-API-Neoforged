@@ -11,7 +11,15 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 public class PotionFactory implements ObjectFactory<Potion> {
-    public static final DeferredRegister<Potion> POTIONS = InjectionContext.getFromInstance("potions");
+    private final DeferredRegister<Potion> potions;
+
+    public PotionFactory() {
+        this(InjectionContext.getFromInstance("potions"));
+    }
+
+    public PotionFactory(DeferredRegister<Potion> potions) {
+        this.potions = potions;
+    }
 
     public Holder<Potion> create(String name, MobEffectInstance mobEffectInstance) {
         return create(name, () -> new Potion(name, mobEffectInstance));
@@ -23,11 +31,16 @@ public class PotionFactory implements ObjectFactory<Potion> {
 
     @Override
     public Holder<Potion> create(String name, Supplier<Potion> potionSupplier) {
-        return POTIONS.register(name, potionSupplier);
+        return potions.register(name, potionSupplier);
     }
 
     @Override
     public void register() {
-        POTIONS.register(InjectionContext.getFromInstance(IEventBus.class));
+        potions.register(InjectionContext.getFromInstance(IEventBus.class));
+    }
+
+    @Override
+    public DeferredRegister<Potion> getRegistry() {
+        return potions;
     }
 }
