@@ -1,14 +1,18 @@
 package com.temporal.api.core.util.other;
 
+import com.temporal.api.core.json.formatter.JsonFormatter;
+import com.temporal.api.core.json.formatter.StringJsonFormatter;
+import com.temporal.api.core.json.inserter.JsonInserter;
+import com.temporal.api.core.json.inserter.ResourceInserter;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforgespi.language.ModFileScanData;
 import org.jetbrains.annotations.NotNull;
 import org.objectweb.asm.Type;
 
 import java.lang.annotation.Annotation;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
@@ -64,13 +68,10 @@ public final class IOUtils {
                 .map(mapper);
     }
 
-    @SuppressWarnings("unchecked")
-    public static <T> Optional<T> tryCast(Object o) {
-        try {
-            T casted = (T) o;
-            return Optional.of(casted);
-        } catch (Exception e) {
-            return Optional.empty();
-        }
+    public static void writeJson(Path path, String format, Object... arguments) {
+        JsonFormatter<String> jsonFormatter = new StringJsonFormatter();
+        String formatted = jsonFormatter.format(format, arguments);
+        JsonInserter<String, Path> resourceInserter = new ResourceInserter();
+        resourceInserter.insert(formatted, path);
     }
 }
