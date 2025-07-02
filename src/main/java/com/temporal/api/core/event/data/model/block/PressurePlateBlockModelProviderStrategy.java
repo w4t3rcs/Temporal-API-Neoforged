@@ -1,11 +1,14 @@
 package com.temporal.api.core.event.data.model.block;
 
-import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.world.level.block.PressurePlateBlock;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
-public class PressurePlateBlockModelProviderStrategy extends AbstractFamilyBlockModelProviderStrategy {
+public class PressurePlateBlockModelProviderStrategy implements BlockModelProviderStrategy {
     @Override
-    public void registerBlockModel(DeferredBlock<?> blockRegistry, BlockModelGenerators blockModels) {
-        createFamilyProvider(blockRegistry, blockModels, "_pressure_plate").pressurePlate(blockRegistry.get());
+    public void registerBlockModel(DeferredBlock<?> blockRegistry, ApiBlockModelProvider provider) {
+        provider.familyMemberWithItem((PressurePlateBlock) blockRegistry.get(), "_pressure_plate",
+                provider::pressurePlateBlock,
+                (block, parentTexture) -> provider.itemModels()
+                        .pressurePlate(provider.getBlockPath(block), parentTexture));
     }
 }

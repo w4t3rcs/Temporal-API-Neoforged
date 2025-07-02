@@ -1,21 +1,16 @@
 package com.temporal.api.core.event.data.model.block;
 
-import net.minecraft.client.data.models.BlockModelGenerators;
-import net.minecraft.client.data.models.model.ModelTemplates;
-import net.minecraft.client.data.models.model.TextureMapping;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
-public class CutoutCubedBlockModelProviderStrategy extends AbstractModelProviderStrategy {
+public class CutoutCubedBlockModelProviderStrategy implements BlockModelProviderStrategy {
     @Override
-    public void registerBlockModel(DeferredBlock<?> blockRegistry, BlockModelGenerators blockModels) {
+    public void registerBlockModel(DeferredBlock<?> blockRegistry, ApiBlockModelProvider provider) {
         Block block = blockRegistry.get();
-        ResourceLocation location = ModelTemplates.CUBE_ALL
-                .extend()
-                .renderType("minecraft:cutout")
-                .build()
-                .create(block, TextureMapping.cube(block), blockModels.modelOutput);
-        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, location));
+        provider.simpleBlock(block, provider.models()
+                .cubeAll(BuiltInRegistries.BLOCK.getKey(block).getPath(), provider.blockTexture(block))
+                .renderType("minecraft:cutout"));
+        provider.simpleBlockItem(block, provider.cubeAll(block));
     }
 }

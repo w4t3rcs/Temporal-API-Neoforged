@@ -94,7 +94,6 @@ public class DefaultAnnotationExecutor implements AnnotationExecutor {
                 new BlockLootTableStrategy(),
                 new CustomBlockLootTableStrategy(),
                 new RecipeStrategy(),
-                new ArmorAssetStrategy(),
                 new BlockTagComponentStrategy(),
                 new ItemTagComponentStrategy(),
                 new OreGenerationStrategy(),

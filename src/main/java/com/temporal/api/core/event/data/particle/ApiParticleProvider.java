@@ -5,6 +5,7 @@ import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.data.PackOutput;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.common.data.ParticleDescriptionProvider;
 
 import java.util.Map;
@@ -12,8 +13,8 @@ import java.util.Map;
 public class ApiParticleProvider extends ParticleDescriptionProvider {
     public static final Map<Holder<ParticleType<?>>, ParticleSprite> PARTICLE_SPRITES = new TemporalHashMap<>();
 
-    public ApiParticleProvider(PackOutput output) {
-        super(output);
+    public ApiParticleProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
+        super(output, existingFileHelper);
     }
 
     @Override

@@ -20,7 +20,7 @@ public class SmithingTransformRecipeStrategy implements RecipeStrategy<SmithingT
                 : Ingredient.of(recipeHolder.getAdditions());
         SmithingTransformRecipeBuilder builder = SmithingTransformRecipeBuilder.smithing(Ingredient.of(recipeHolder.getTemplates()), base, addition, recipeHolder.getRecipeCategory(), recipeHolder.getResult().asItem());
         for (ItemLike item : recipeHolder.getAdditions())
-            builder.unlocks(ApiRecipeProvider.getHasName(item), recipeProvider.has(item));
+            builder.unlocks(ApiRecipeProvider.getHasName(item), ApiRecipeProvider.has(item));
         String path;
         if (recipeHolder.getName() != null) {
             path = recipeHolder.getName();

@@ -11,12 +11,13 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import java.util.function.Supplier;
 
 public interface SpawnEggExtension {
-    default DeferredItem<Item> createSpawnEgg(String name, Supplier<? extends EntityType<? extends Mob>> type) {
-        return createSpawnEgg(name, new Item.Properties(), type);
+    default DeferredItem<Item> createSpawnEgg(String name, Supplier<? extends EntityType<? extends Mob>> type, int backgroundColor, int highlightColor) {
+        return createSpawnEgg(name, new Item.Properties(), type, backgroundColor, highlightColor);
     }
 
-    default DeferredItem<Item> createSpawnEgg(String name, Item.Properties properties, Supplier<? extends EntityType<? extends Mob>> type) {
+    @SuppressWarnings("deprecation")
+    default DeferredItem<Item> createSpawnEgg(String name, Item.Properties properties, Supplier<? extends EntityType<? extends Mob>> type, int backgroundColor, int highlightColor) {
         ItemFactory itemFactory = InjectionContext.getFromInstance(ItemFactory.class);
-        return itemFactory.create(name, properties, props -> new SpawnEggItem(type.get(), props));
+        return itemFactory.create(name, properties, props -> new SpawnEggItem(type.get(), backgroundColor, highlightColor, props));
     }
 }

@@ -1,7 +1,7 @@
 package com.temporal.api.core.event.data.language.transformer;
 
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.equipment.trim.TrimMaterial;
+import net.minecraft.world.item.armortrim.TrimMaterial;
 
 public class TrimMaterialTransformer implements KeyTransformer<ResourceKey<TrimMaterial>> {
     @Override

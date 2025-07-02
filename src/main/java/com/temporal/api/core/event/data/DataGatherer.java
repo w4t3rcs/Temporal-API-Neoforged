@@ -2,6 +2,7 @@ package com.temporal.api.core.event.data;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import org.jetbrains.annotations.NotNull;
 
@@ -38,4 +39,6 @@ public interface DataGatherer {
     PackOutput getPackOutput(GatherDataEvent event);
 
     DataGenerator getDataGenerator(GatherDataEvent event);
+
+    ExistingFileHelper getExistingFileHelper(GatherDataEvent event);
 }

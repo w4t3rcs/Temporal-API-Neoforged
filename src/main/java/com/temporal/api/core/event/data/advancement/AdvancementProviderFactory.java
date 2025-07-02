@@ -11,6 +11,7 @@ public final class AdvancementProviderFactory {
     private AdvancementProviderFactory() {
     }
 
+    @SuppressWarnings("deprecation")
     public static AdvancementProvider createProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
         return new AdvancementProvider(output, lookupProvider, List.of(new ApiAdvancementProvider()));
     }

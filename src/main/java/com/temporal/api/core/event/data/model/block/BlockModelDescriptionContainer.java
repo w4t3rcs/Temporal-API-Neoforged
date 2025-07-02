@@ -12,9 +12,7 @@ public final class BlockModelDescriptionContainer {
     public static final Queue<DeferredBlock<?>> CUTOUT_CUBED_BLOCKS = new TemporalArrayDeque<>();
     public static final Queue<DeferredBlock<?>> CROSS_BLOCKS = new TemporalArrayDeque<>();
     public static final Queue<DeferredBlock<?>> FLOWER_BLOCKS = new TemporalArrayDeque<>();
-    public static final Queue<DeferredBlock<?>> ROTATED_PILLARS = new TemporalArrayDeque<>();
     public static final Queue<DeferredBlock<?>> LOGS = new TemporalArrayDeque<>();
-    public static final Queue<DeferredBlock<?>> WOODS = new TemporalArrayDeque<>();
     public static final Queue<DeferredBlock<?>> BUTTONS = new TemporalArrayDeque<>();
     public static final Queue<DeferredBlock<?>> DOORS = new TemporalArrayDeque<>();
     public static final Queue<DeferredBlock<?>> FENCES = new TemporalArrayDeque<>();
@@ -24,14 +22,6 @@ public final class BlockModelDescriptionContainer {
     public static final Queue<DeferredBlock<?>> STAIRS = new TemporalArrayDeque<>();
     public static final Queue<DeferredBlock<?>> TRAPDOORS = new TemporalArrayDeque<>();
     public static final Queue<DeferredBlock<?>> WALLS = new TemporalArrayDeque<>();
-    public static final Queue<DeferredBlock<?>> PLANKS_BUTTONS = new TemporalArrayDeque<>();
-    public static final Queue<DeferredBlock<?>> PLANKS_FENCES = new TemporalArrayDeque<>();
-    public static final Queue<DeferredBlock<?>> PLANKS_FENCE_GATES = new TemporalArrayDeque<>();
-    public static final Queue<DeferredBlock<?>> PLANKS_PRESSURE_PLATES = new TemporalArrayDeque<>();
-    public static final Queue<DeferredBlock<?>> PLANKS_SLABS = new TemporalArrayDeque<>();
-    public static final Queue<DeferredBlock<?>> PLANKS_STAIRS = new TemporalArrayDeque<>();
-    public static final Queue<DeferredBlock<?>> CROP_BLOCKS = new TemporalArrayDeque<>();
-    public static final Queue<DeferredBlock<?>> VINE_BLOCKS = new TemporalArrayDeque<>();
     public static final Map<DeferredBlock<?>, BlockModelProviderStrategy> CUSTOM_MODELS = new TemporalHashMap<>();
 
     private BlockModelDescriptionContainer() {

@@ -9,6 +9,7 @@ import net.minecraft.data.tags.BiomeTagsProvider;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -18,8 +19,8 @@ import java.util.concurrent.CompletableFuture;
 public class ApiBiomeTagsProvider extends BiomeTagsProvider {
     public static final Map<String, List<ResourceKey<Biome>>> TAG_GENERATION_DESCRIPTIONS = new TemporalHashMap<>();
 
-    public ApiBiomeTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
-        super(output, lookupProvider, IOLayer.NEO_MOD.getModId());
+    public ApiBiomeTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper existingFileHelper) {
+        super(output, lookupProvider, IOLayer.NEO_MOD.getModId(), existingFileHelper);
     }
 
     @Override

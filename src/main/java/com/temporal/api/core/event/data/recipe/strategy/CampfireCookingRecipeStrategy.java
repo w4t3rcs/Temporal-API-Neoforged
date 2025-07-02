@@ -14,7 +14,7 @@ public class CampfireCookingRecipeStrategy implements RecipeStrategy<CampfireCoo
         SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(recipeHolder.getIngredient()), recipeHolder.getRecipeCategory(), recipeHolder.getResult(),
                         recipeHolder.getExperience(), recipeHolder.getCookingTime())
                 .group(recipeHolder.getGroup())
-                .unlockedBy(ApiRecipeProvider.getHasName(recipeHolder.getIngredient()), recipeProvider.has(recipeHolder.getIngredient()))
+                .unlockedBy(ApiRecipeProvider.getHasName(recipeHolder.getIngredient()), ApiRecipeProvider.has(recipeHolder.getIngredient()))
                 .save(recipeOutput, IOLayer.NEO_MOD.getModId() + ":" + ApiRecipeProvider.getItemName(recipeHolder.getResult()) + recipeHolder.getName() + "_" + ApiRecipeProvider.getItemName(recipeHolder.getIngredient()));
     }
 }

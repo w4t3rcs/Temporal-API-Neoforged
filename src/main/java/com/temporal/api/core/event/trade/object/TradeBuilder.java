@@ -1,5 +1,6 @@
 package com.temporal.api.core.event.trade.object;
 
+@SuppressWarnings("unchecked")
 public abstract class TradeBuilder<B extends TradeBuilder<B, T, D>, T extends Trade, D extends TradeDescription> {
     private TradingItemHolder leftHolder;
     private TradingItemHolder rightHolder;

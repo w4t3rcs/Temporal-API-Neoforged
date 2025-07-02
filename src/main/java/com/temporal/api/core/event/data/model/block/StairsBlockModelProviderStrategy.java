@@ -1,11 +1,14 @@
 package com.temporal.api.core.event.data.model.block;
 
-import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.world.level.block.StairBlock;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
-public class StairsBlockModelProviderStrategy extends AbstractFamilyBlockModelProviderStrategy {
+public class StairsBlockModelProviderStrategy implements BlockModelProviderStrategy {
     @Override
-    public void registerBlockModel(DeferredBlock<?> blockRegistry, BlockModelGenerators blockModels) {
-        createFamilyProvider(blockRegistry, blockModels, "_stairs").stairs(blockRegistry.get());
+    public void registerBlockModel(DeferredBlock<?> blockRegistry, ApiBlockModelProvider provider) {
+        provider.familyMemberWithItem((StairBlock) blockRegistry.get(), "_stairs",
+                provider::stairsBlock,
+                (block, parentTexture) -> provider.itemModels()
+                        .stairs(provider.getBlockPath(block), parentTexture, parentTexture, parentTexture));
     }
 }

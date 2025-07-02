@@ -5,7 +5,7 @@ import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationSt
 import com.temporal.api.core.event.data.trim.material.ApiTrimMaterialProvider;
 import com.temporal.api.core.event.data.trim.material.TrimMaterialDescriptionHolder;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.equipment.trim.TrimMaterial;
+import net.minecraft.world.item.armortrim.TrimMaterial;
 
 import java.lang.reflect.Field;
 

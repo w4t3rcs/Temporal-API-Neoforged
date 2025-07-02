@@ -35,7 +35,7 @@ public class ApiAdvancementProvider implements AdvancementSubProvider {
             Pair<String, Criterion<?>> criterion = advancement.getCriterion();
             builder.addCriterion(criterion.getA(), criterion.getB());
             builder.requirements(advancement.getRequirements());
-            builder.save(consumer, ResourceUtils.createResourceLocation(advancement.getId()));
+            builder.save(consumer, ResourceUtils.createResourceLocation(advancement.getId()).toString());
         });
 
         CUSTOM_ADVANCEMENTS.forEach((advancement, strategy) -> strategy.generateAdvancement(advancement, provider, consumer));

@@ -29,7 +29,7 @@ public final class RegistryUtils {
     }
 
     public static SoundEvent getSoundEventById(String id) {
-        return getRegistryByCondition(BuiltInRegistries.SOUND_EVENT, soundEvent -> soundEvent.location()
+        return getRegistryByCondition(BuiltInRegistries.SOUND_EVENT, soundEvent -> soundEvent.getLocation()
                 .getPath()
                 .equals(id));
     }

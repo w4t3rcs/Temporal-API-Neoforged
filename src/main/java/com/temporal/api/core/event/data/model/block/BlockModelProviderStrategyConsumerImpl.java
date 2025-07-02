@@ -1,7 +1,5 @@
 package com.temporal.api.core.event.data.model.block;
 
-import com.temporal.api.core.event.data.model.block.planks.*;
-import net.minecraft.client.data.models.BlockModelGenerators;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import org.jetbrains.annotations.NotNull;
 
@@ -12,36 +10,26 @@ import static com.temporal.api.core.event.data.model.block.BlockModelDescription
 
 public class BlockModelProviderStrategyConsumerImpl implements BlockModelProviderStrategyConsumer {
     @Override
-    public void registerModels(@NotNull BlockModelGenerators blockModels) {
-        CUBED_BLOCKS.forEach(registerBlockModel(blockModels, CubedBlockModelProviderStrategy::new));
-        CUTOUT_CUBED_BLOCKS.forEach(registerBlockModel(blockModels, CutoutCubedBlockModelProviderStrategy::new));
-        CROSS_BLOCKS.forEach(registerBlockModel(blockModels, CrossBlockModelProviderStrategy::new));
-        FLOWER_BLOCKS.forEach(registerBlockModel(blockModels, FlowerBlockModelProviderStrategy::new));
-        ROTATED_PILLARS.forEach(registerBlockModel(blockModels, RotatedPillarBlockModelProviderStrategy::new));
-        LOGS.forEach(registerBlockModel(blockModels, LogBlockModelProviderStrategy::new));
-        WOODS.forEach(registerBlockModel(blockModels, WoodBlockModelProviderStrategy::new));
-        BUTTONS.forEach(registerBlockModel(blockModels, ButtonBlockModelProviderStrategy::new));
-        DOORS.forEach(registerBlockModel(blockModels, DoorBlockModelProviderStrategy::new));
-        FENCES.forEach(registerBlockModel(blockModels, FenceBlockModelProviderStrategy::new));
-        FENCE_GATES.forEach(registerBlockModel(blockModels, FenceGateBlockModelProviderStrategy::new));
-        PRESSURE_PLATES.forEach(registerBlockModel(blockModels, PressurePlateBlockModelProviderStrategy::new));
-        SLABS.forEach(registerBlockModel(blockModels, SlabBlockModelProviderStrategy::new));
-        STAIRS.forEach(registerBlockModel(blockModels, StairsBlockModelProviderStrategy::new));
-        TRAPDOORS.forEach(registerBlockModel(blockModels, TrapDoorBlockModelProviderStrategy::new));
-        WALLS.forEach(registerBlockModel(blockModels, WallBlockModelProviderStrategy::new));
-        PLANKS_BUTTONS.forEach(registerBlockModel(blockModels, PlanksButtonBlockModelProviderStrategy::new));
-        PLANKS_FENCES.forEach(registerBlockModel(blockModels, PlanksFenceBlockModelProviderStrategy::new));
-        PLANKS_FENCE_GATES.forEach(registerBlockModel(blockModels, PlanksFenceGateBlockModelProviderStrategy::new));
-        PLANKS_PRESSURE_PLATES.forEach(registerBlockModel(blockModels, PlanksPressurePlateBlockModelProviderStrategy::new));
-        PLANKS_SLABS.forEach(registerBlockModel(blockModels, PlanksSlabBlockModelProviderStrategy::new));
-        PLANKS_STAIRS.forEach(registerBlockModel(blockModels, PlanksStairsBlockModelProviderStrategy::new));
-        CROP_BLOCKS.forEach(registerBlockModel(blockModels, CropBlockModelProviderStrategy::new));
-        VINE_BLOCKS.forEach(registerBlockModel(blockModels, VineBlockModelProviderStrategy::new));
-        CUSTOM_MODELS.forEach((key, value) -> value.registerBlockModel(key, blockModels));
+    public void registerModels(@NotNull ApiBlockModelProvider provider) {
+        CUBED_BLOCKS.forEach(registerBlockModel(provider, CubedBlockModelProviderStrategy::new));
+        CUTOUT_CUBED_BLOCKS.forEach(registerBlockModel(provider, CutoutCubedBlockModelProviderStrategy::new));
+        CROSS_BLOCKS.forEach(registerBlockModel(provider, CrossBlockModelProviderStrategy::new));
+        FLOWER_BLOCKS.forEach(registerBlockModel(provider, FlowerBlockModelProviderStrategy::new));
+        LOGS.forEach(registerBlockModel(provider, LogBlockModelProviderStrategy::new));
+        BUTTONS.forEach(registerBlockModel(provider, ButtonBlockModelProviderStrategy::new));
+        DOORS.forEach(registerBlockModel(provider, DoorBlockModelProviderStrategy::new));
+        FENCES.forEach(registerBlockModel(provider, FenceBlockModelProviderStrategy::new));
+        FENCE_GATES.forEach(registerBlockModel(provider, FenceGateBlockModelProviderStrategy::new));
+        PRESSURE_PLATES.forEach(registerBlockModel(provider, PressurePlateBlockModelProviderStrategy::new));
+        SLABS.forEach(registerBlockModel(provider, SlabBlockModelProviderStrategy::new));
+        STAIRS.forEach(registerBlockModel(provider, StairsBlockModelProviderStrategy::new));
+        TRAPDOORS.forEach(registerBlockModel(provider, TrapDoorBlockModelProviderStrategy::new));
+        WALLS.forEach(registerBlockModel(provider, WallBlockModelProviderStrategy::new));
+        CUSTOM_MODELS.forEach((key, value) -> value.registerBlockModel(key, provider));
     }
 
     @Override
-    public Consumer<DeferredBlock<?>> registerBlockModel(@NotNull BlockModelGenerators blockModels, @NotNull Supplier<BlockModelProviderStrategy> blockModelProviderStrategy) {
-        return block -> blockModelProviderStrategy.get().registerBlockModel(block, blockModels);
+    public Consumer<DeferredBlock<?>> registerBlockModel(@NotNull ApiBlockModelProvider provider, @NotNull Supplier<BlockModelProviderStrategy> blockModelProviderStrategy) {
+        return block -> blockModelProviderStrategy.get().registerBlockModel(block, provider);
     }
 }

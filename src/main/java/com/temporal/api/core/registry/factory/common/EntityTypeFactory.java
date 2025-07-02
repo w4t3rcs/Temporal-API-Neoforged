@@ -35,7 +35,7 @@ public class EntityTypeFactory implements ObjectFactory<EntityType<?>> {
     }
 
     public Holder<EntityType<?>> create(String name, EntityType.Builder<?> builder, ResourceKey<EntityType<?>> entityType) {
-        return this.create(name, () -> builder.build(entityType));
+        return this.create(name, () -> builder.build(entityType.registry().toString()));
     }
 
     @Override

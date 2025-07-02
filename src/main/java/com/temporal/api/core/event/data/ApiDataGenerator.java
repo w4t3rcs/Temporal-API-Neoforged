@@ -1,13 +1,13 @@
 package com.temporal.api.core.event.data;
 
 import com.temporal.api.core.event.data.advancement.AdvancementProviderFactory;
-import com.temporal.api.core.event.data.equipment.EquipmentAssetProviderImpl;
 import com.temporal.api.core.event.data.json.JsonProvider;
 import com.temporal.api.core.event.data.json.PlaceablePaintingProvider;
 import com.temporal.api.core.event.data.language.provider.*;
 import com.temporal.api.core.event.data.loot.LootTableProviderFactory;
 import com.temporal.api.core.event.data.map.ApiDataMapProvider;
-import com.temporal.api.core.event.data.model.ModelProviderImpl;
+import com.temporal.api.core.event.data.model.block.ApiBlockModelProvider;
+import com.temporal.api.core.event.data.model.item.ApiItemModelProvider;
 import com.temporal.api.core.event.data.modifier.ApiGlobalLootModifierProvider;
 import com.temporal.api.core.event.data.pack.ApiDatapackProvider;
 import com.temporal.api.core.event.data.particle.ApiParticleProvider;
@@ -24,6 +24,7 @@ import com.temporal.api.core.event.data.tag.item.ApiItemTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import org.jetbrains.annotations.NotNull;
 
@@ -63,7 +64,7 @@ public class ApiDataGenerator implements DataGatherer {
         final DataGenerator generator = getDataGenerator(event);
         final PackOutput packOutput = getPackOutput(event);
         final CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
-        generator.addProvider(true, new ApiGlobalLootModifierProvider(packOutput, lookupProvider));
+        generator.addProvider(event.includeServer(), new ApiGlobalLootModifierProvider(packOutput, lookupProvider));
     }
 
     @Override
@@ -71,64 +72,65 @@ public class ApiDataGenerator implements DataGatherer {
         final DataGenerator generator = getDataGenerator(event);
         final PackOutput packOutput = getPackOutput(event);
         final CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
-        generator.addProvider(true, LootTableProviderFactory.createProvider(packOutput, lookupProvider));
+        generator.addProvider(event.includeServer(), LootTableProviderFactory.createProvider(packOutput, lookupProvider));
     }
 
     @Override
     public void addModelProvider(GatherDataEvent event) {
         final DataGenerator generator = getDataGenerator(event);
         final PackOutput packOutput = getPackOutput(event);
-        generator.addProvider(true, new ModelProviderImpl(packOutput));
-        generator.addProvider(true, new EquipmentAssetProviderImpl(packOutput));
+        final ExistingFileHelper existingFileHelper = getExistingFileHelper(event);
+        generator.addProvider(event.includeClient(), new ApiItemModelProvider(packOutput, existingFileHelper));
+        generator.addProvider(event.includeClient(), new ApiBlockModelProvider(packOutput, existingFileHelper));
     }
 
     @Override
     public void addLanguageProvider(GatherDataEvent event) {
         final DataGenerator generator = getDataGenerator(event);
         final PackOutput packOutput = getPackOutput(event);
-        generator.addProvider(true, new EnglishProvider(packOutput));
-        generator.addProvider(true, new UkrainianProvider(packOutput));
-        generator.addProvider(true, new PolishProvider(packOutput));
-        generator.addProvider(true, new GermanProvider(packOutput));
-        generator.addProvider(true, new FrenchProvider(packOutput));
-        generator.addProvider(true, new ItalianProvider(packOutput));
-        generator.addProvider(true, new SpanishProvider(packOutput));
-        generator.addProvider(true, new AlbanianProvider(packOutput));
-        generator.addProvider(true, new AustrianGermanProvider(packOutput));
-        generator.addProvider(true, new SwissGermanProvider(packOutput));
-        generator.addProvider(true, new BelarusianProvider(packOutput));
-        generator.addProvider(true, new BosnianProvider(packOutput));
-        generator.addProvider(true, new BulgarianProvider(packOutput));
-        generator.addProvider(true, new CroatianProvider(packOutput));
-        generator.addProvider(true, new CzechProvider(packOutput));
-        generator.addProvider(true, new DanishProvider(packOutput));
-        generator.addProvider(true, new DutchProvider(packOutput));
-        generator.addProvider(true, new EstonianProvider(packOutput));
-        generator.addProvider(true, new FilipinoProvider(packOutput));
-        generator.addProvider(true, new FinnishProvider(packOutput));
-        generator.addProvider(true, new GreekProvider(packOutput));
-        generator.addProvider(true, new HebrewProvider(packOutput));
-        generator.addProvider(true, new HindiProvider(packOutput));
-        generator.addProvider(true, new HungarianProvider(packOutput));
-        generator.addProvider(true, new IcelandicProvider(packOutput));
-        generator.addProvider(true, new IndonesianProvider(packOutput));
-        generator.addProvider(true, new IrishProvider(packOutput));
-        generator.addProvider(true, new JapaneseProvider(packOutput));
-        generator.addProvider(true, new KazakhProvider(packOutput));
-        generator.addProvider(true, new KoreanProvider(packOutput));
-        generator.addProvider(true, new LatvianProvider(packOutput));
-        generator.addProvider(true, new LithuanianProvider(packOutput));
-        generator.addProvider(true, new MandarinProvider(packOutput));
-        generator.addProvider(true, new PersianProvider(packOutput));
-        generator.addProvider(true, new PortugueseProvider(packOutput));
-        generator.addProvider(true, new RomanianProvider(packOutput));
-        generator.addProvider(true, new SerbianProvider(packOutput));
-        generator.addProvider(true, new SlovakProvider(packOutput));
-        generator.addProvider(true, new SlovenianProvider(packOutput));
-        generator.addProvider(true, new SwedishProvider(packOutput));
-        generator.addProvider(true, new ThaiProvider(packOutput));
-        generator.addProvider(true, new TurkishProvider(packOutput));
-        generator.addProvider(true, new VietnameseProvider(packOutput));
+        generator.addProvider(event.includeClient(), new EnglishProvider(packOutput));
+        generator.addProvider(event.includeClient(), new UkrainianProvider(packOutput));
+        generator.addProvider(event.includeClient(), new PolishProvider(packOutput));
+        generator.addProvider(event.includeClient(), new GermanProvider(packOutput));
+        generator.addProvider(event.includeClient(), new FrenchProvider(packOutput));
+        generator.addProvider(event.includeClient(), new ItalianProvider(packOutput));
+        generator.addProvider(event.includeClient(), new SpanishProvider(packOutput));
+        generator.addProvider(event.includeClient(), new AlbanianProvider(packOutput));
+        generator.addProvider(event.includeClient(), new AustrianGermanProvider(packOutput));
+        generator.addProvider(event.includeClient(), new SwissGermanProvider(packOutput));
+        generator.addProvider(event.includeClient(), new BelarusianProvider(packOutput));
+        generator.addProvider(event.includeClient(), new BosnianProvider(packOutput));
+        generator.addProvider(event.includeClient(), new BulgarianProvider(packOutput));
+        generator.addProvider(event.includeClient(), new CroatianProvider(packOutput));
+        generator.addProvider(event.includeClient(), new CzechProvider(packOutput));
+        generator.addProvider(event.includeClient(), new DanishProvider(packOutput));
+        generator.addProvider(event.includeClient(), new DutchProvider(packOutput));
+        generator.addProvider(event.includeClient(), new EstonianProvider(packOutput));
+        generator.addProvider(event.includeClient(), new FilipinoProvider(packOutput));
+        generator.addProvider(event.includeClient(), new FinnishProvider(packOutput));
+        generator.addProvider(event.includeClient(), new GreekProvider(packOutput));
+        generator.addProvider(event.includeClient(), new HebrewProvider(packOutput));
+        generator.addProvider(event.includeClient(), new HindiProvider(packOutput));
+        generator.addProvider(event.includeClient(), new HungarianProvider(packOutput));
+        generator.addProvider(event.includeClient(), new IcelandicProvider(packOutput));
+        generator.addProvider(event.includeClient(), new IndonesianProvider(packOutput));
+        generator.addProvider(event.includeClient(), new IrishProvider(packOutput));
+        generator.addProvider(event.includeClient(), new JapaneseProvider(packOutput));
+        generator.addProvider(event.includeClient(), new KazakhProvider(packOutput));
+        generator.addProvider(event.includeClient(), new KoreanProvider(packOutput));
+        generator.addProvider(event.includeClient(), new LatvianProvider(packOutput));
+        generator.addProvider(event.includeClient(), new LithuanianProvider(packOutput));
+        generator.addProvider(event.includeClient(), new MandarinProvider(packOutput));
+        generator.addProvider(event.includeClient(), new PersianProvider(packOutput));
+        generator.addProvider(event.includeClient(), new PortugueseProvider(packOutput));
+        generator.addProvider(event.includeClient(), new RomanianProvider(packOutput));
+        generator.addProvider(event.includeClient(), new SerbianProvider(packOutput));
+        generator.addProvider(event.includeClient(), new SlovakProvider(packOutput));
+        generator.addProvider(event.includeClient(), new SlovenianProvider(packOutput));
+        generator.addProvider(event.includeClient(), new SwedishProvider(packOutput));
+        generator.addProvider(event.includeClient(), new ThaiProvider(packOutput));
+        generator.addProvider(event.includeClient(), new TurkishProvider(packOutput));
+        generator.addProvider(event.includeClient(), new VietnameseProvider(packOutput));
     }
 
     @Override
@@ -136,18 +138,19 @@ public class ApiDataGenerator implements DataGatherer {
         final DataGenerator generator = getDataGenerator(event);
         final PackOutput packOutput = getPackOutput(event);
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
-        generator.addProvider(true, new ApiRecipeProvider.Runner(packOutput, lookupProvider));
+        generator.addProvider(event.includeServer(), new ApiRecipeProvider(packOutput, lookupProvider));
     }
 
     @Override
     public void addTagProvider(GatherDataEvent event) {
         final DataGenerator generator = getDataGenerator(event);
         final PackOutput packOutput = getPackOutput(event);
+        final ExistingFileHelper existingFileHelper = getExistingFileHelper(event);
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
-        ApiBlockTagsProvider blockTagsProvider = new ApiBlockTagsProvider(packOutput, lookupProvider);
-        generator.addProvider(true, blockTagsProvider);
-        generator.addProvider(true, new ApiItemTagsProvider(packOutput, lookupProvider, blockTagsProvider.contentsGetter()));
-        generator.addProvider(true, new ApiBiomeTagsProvider(packOutput, lookupProvider));
+        ApiBlockTagsProvider blockTagsProvider = new ApiBlockTagsProvider(packOutput, lookupProvider, existingFileHelper);
+        generator.addProvider(event.includeServer(), blockTagsProvider);
+        generator.addProvider(event.includeServer(), new ApiItemTagsProvider(packOutput, lookupProvider, blockTagsProvider.contentsGetter(), existingFileHelper));
+        generator.addProvider(event.includeServer(), new ApiBiomeTagsProvider(packOutput, lookupProvider, existingFileHelper));
     }
 
     @Override
@@ -155,7 +158,7 @@ public class ApiDataGenerator implements DataGatherer {
         final DataGenerator generator = getDataGenerator(event);
         final PackOutput packOutput = getPackOutput(event);
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
-        generator.addProvider(true, new ApiDatapackProvider(packOutput, lookupProvider));
+        generator.addProvider(event.includeServer(), new ApiDatapackProvider(packOutput, lookupProvider));
     }
 
     @Override
@@ -163,7 +166,7 @@ public class ApiDataGenerator implements DataGatherer {
         final DataGenerator generator = getDataGenerator(event);
         final PackOutput packOutput = getPackOutput(event);
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
-        generator.addProvider(true, new ApiDataMapProvider(packOutput, lookupProvider));
+        generator.addProvider(event.includeServer(), new ApiDataMapProvider(packOutput, lookupProvider));
     }
 
     @Override
@@ -171,21 +174,23 @@ public class ApiDataGenerator implements DataGatherer {
         final DataGenerator generator = getDataGenerator(event);
         final PackOutput packOutput = getPackOutput(event);
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
-        generator.addProvider(true, AdvancementProviderFactory.createProvider(packOutput, lookupProvider));
+        generator.addProvider(event.includeServer(), AdvancementProviderFactory.createProvider(packOutput, lookupProvider));
     }
 
     @Override
     public void addSoundProvider(GatherDataEvent event) {
         final DataGenerator generator = getDataGenerator(event);
         final PackOutput packOutput = getPackOutput(event);
-        generator.addProvider(true, new ApiSoundProvider(packOutput));
+        final ExistingFileHelper existingFileHelper = getExistingFileHelper(event);
+        generator.addProvider(event.includeClient(), new ApiSoundProvider(packOutput, existingFileHelper));
     }
 
     @Override
     public void addParticleProvider(GatherDataEvent event) {
         final DataGenerator generator = getDataGenerator(event);
         final PackOutput packOutput = getPackOutput(event);
-        generator.addProvider(true, new ApiParticleProvider(packOutput));
+        final ExistingFileHelper existingFileHelper = getExistingFileHelper(event);
+        generator.addProvider(event.includeClient(), new ApiParticleProvider(packOutput, existingFileHelper));
     }
 
     @Override
@@ -203,5 +208,10 @@ public class ApiDataGenerator implements DataGatherer {
     @Override
     public DataGenerator getDataGenerator(GatherDataEvent event) {
         return event.getGenerator();
+    }
+
+    @Override
+    public ExistingFileHelper getExistingFileHelper(GatherDataEvent event) {
+        return event.getExistingFileHelper();
     }
 }

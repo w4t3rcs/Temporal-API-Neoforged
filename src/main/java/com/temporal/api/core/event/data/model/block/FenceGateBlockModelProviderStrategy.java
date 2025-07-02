@@ -1,11 +1,14 @@
 package com.temporal.api.core.event.data.model.block;
 
-import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.world.level.block.FenceGateBlock;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
-public class FenceGateBlockModelProviderStrategy extends AbstractFamilyBlockModelProviderStrategy {
+public class FenceGateBlockModelProviderStrategy implements BlockModelProviderStrategy {
     @Override
-    public void registerBlockModel(DeferredBlock<?> blockRegistry, BlockModelGenerators blockModels) {
-        createFamilyProvider(blockRegistry, blockModels, "_fence_gate").fenceGate(blockRegistry.get());
+    public void registerBlockModel(DeferredBlock<?> blockRegistry, ApiBlockModelProvider provider) {
+        provider.familyMemberWithItem((FenceGateBlock) blockRegistry.get(), "_fence_gate",
+                (block, parentTexture) -> provider.fenceGateBlockWithRenderType(block, parentTexture, "minecraft:cutout"),
+                (block, parentTexture) -> provider.itemModels()
+                        .fenceGate(provider.getBlockPath(block), parentTexture));
     }
 }

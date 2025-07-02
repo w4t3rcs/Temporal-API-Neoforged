@@ -5,10 +5,8 @@ import com.temporal.api.core.event.data.recipe.holder.*;
 import com.temporal.api.core.event.data.recipe.strategy.*;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
-import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
@@ -34,12 +32,12 @@ public class ApiRecipeProvider extends RecipeProvider {
     private static final RecipeStrategy<SmithingTransformRecipeHolder> SMITHING_TRANSFORM_RECIPE_STRATEGY = new SmithingTransformRecipeStrategy();
     private static final RecipeStrategy<StoneCuttingRecipeHolder> STONE_CUTTING_RECIPE_STRATEGY_RECIPE_STRATEGY = new StoneCuttingRecipeStrategy();
 
-    public ApiRecipeProvider(HolderLookup.Provider registries, RecipeOutput recipeOutput) {
-        super(registries, recipeOutput);
+    public ApiRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+        super(output, registries);
     }
 
     @Override
-    protected void buildRecipes() {
+    protected void buildRecipes(@NotNull RecipeOutput output) {
         RECIPES.forEach(undefinedRecipe -> {
             switch (undefinedRecipe) {
                 case ShapelessRecipeHolder recipe -> SHAPELESS_RECIPE_STRATEGY.saveRecipe(recipe, this, output);
@@ -56,6 +54,11 @@ public class ApiRecipeProvider extends RecipeProvider {
         });
     }
 
+    @NotNull
+    public Ingredient tag(@NotNull TagKey<Item> tagKey) {
+        return Ingredient.of(tagKey);
+    }
+
     public static String getHasName(ItemLike itemLike) {
         return "has_" + getItemName(itemLike);
     }
@@ -64,38 +67,7 @@ public class ApiRecipeProvider extends RecipeProvider {
         return Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(itemLike.asItem())).getPath();
     }
 
-    @Override
-    public @NotNull Criterion<InventoryChangeTrigger.TriggerInstance> has(@NotNull ItemLike itemLike) {
-        HolderLookup.RegistryLookup<Item> lookup = registries.lookupOrThrow(Registries.ITEM);
-        return inventoryTrigger(ItemPredicate.Builder.item()
-                .of(lookup, new ItemLike[]{itemLike})
-                .build());
-    }
-
-    @Override
-    @NotNull
-    public Ingredient tag(@NotNull TagKey<Item> tagKey) {
-        return super.tag(tagKey);
-    }
-
-    public HolderLookup.Provider getRegistries() {
-        return registries;
-    }
-
-    public static class Runner extends RecipeProvider.Runner {
-        public Runner(PackOutput pPackOutput, CompletableFuture<HolderLookup.Provider> pRegistries) {
-            super(pPackOutput, pRegistries);
-
-        }
-
-        @Override
-        protected @NotNull RecipeProvider createRecipeProvider(HolderLookup.@NotNull Provider provider, @NotNull RecipeOutput recipeOutput) {
-            return new ApiRecipeProvider(provider, recipeOutput);
-        }
-
-        @Override
-        public @NotNull String getName() {
-            return ApiRecipeProvider.class.getSimpleName();
-        }
+    public static @NotNull Criterion<InventoryChangeTrigger.TriggerInstance> has(@NotNull ItemLike itemLike) {
+        return RecipeProvider.has(itemLike);
     }
 }

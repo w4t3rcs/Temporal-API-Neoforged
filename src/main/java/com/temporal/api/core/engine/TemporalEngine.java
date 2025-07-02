@@ -2,8 +2,9 @@ package com.temporal.api.core.engine;
 
 import com.temporal.api.ApiMod;
 import com.temporal.api.core.engine.event.EventLayer;
-import com.temporal.api.core.engine.event.handler.ClientDataEventHandler;
+import com.temporal.api.core.engine.event.handler.DataEventHandler;
 import com.temporal.api.core.engine.event.handler.EventHandler;
+import com.temporal.api.core.engine.event.handler.FMLClientSetupEventHandler;
 import com.temporal.api.core.engine.event.handler.FovModifierEventHandler;
 import com.temporal.api.core.engine.io.IOLayer;
 import com.temporal.api.core.engine.io.context.*;
@@ -34,7 +35,7 @@ public class TemporalEngine {
                             List.of(new DeferredRegisterContextInitializer(), new FactoryContextInitializer(), new EventBusContextInitializer(), new ModContainerContextInitializer()),
                             List.of())
                     .addLayer(new EventLayer())
-                    .processEventLayer(new ClientDataEventHandler(), new FovModifierEventHandler())
+                    .processEventLayer(new FMLClientSetupEventHandler(), new DataEventHandler(), new FovModifierEventHandler())
                     .build();
         }
     }

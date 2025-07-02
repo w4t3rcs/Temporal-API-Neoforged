@@ -17,7 +17,7 @@ public class PaintingStrategy implements FieldAnnotationStrategy {
             field.setAccessible(true);
             ResourceKey<PaintingVariant> paintingVariant = (ResourceKey<PaintingVariant>) field.get(object);
             Painting annotation = field.getDeclaredAnnotation(Painting.class);
-            PaintingHolder paintingHolder = new PaintingHolder(paintingVariant, annotation.width(), annotation.height(), annotation.hasAuthor());
+            PaintingHolder paintingHolder = new PaintingHolder(paintingVariant, annotation.width(), annotation.height());
             ApiPaintingVariantProvider.PAINTINGS.add(paintingHolder);
             PlaceablePaintingProvider.PLACEABLES.add(paintingVariant);
         }

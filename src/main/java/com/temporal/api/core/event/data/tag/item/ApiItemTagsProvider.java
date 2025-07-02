@@ -9,6 +9,7 @@ import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import org.jetbrains.annotations.NotNull;
@@ -20,8 +21,8 @@ import java.util.concurrent.CompletableFuture;
 public class ApiItemTagsProvider extends ItemTagsProvider {
     public static final Map<String, List<DeferredItem<?>>> TAG_GENERATION_DESCRIPTIONS = new TemporalHashMap<>();
 
-    public ApiItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> blockTags) {
-        super(output, lookupProvider, blockTags, IOLayer.NEO_MOD.getModId());
+    public ApiItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> blockTags, ExistingFileHelper existingFileHelper) {
+        super(output, lookupProvider, blockTags, IOLayer.NEO_MOD.getModId(), existingFileHelper);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.temporal.api.core.registry.factory.common;
 
+import com.mojang.datafixers.types.Type;
 import com.temporal.api.core.engine.io.context.InjectionContext;
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.block.Block;
@@ -22,8 +23,8 @@ public class BlockEntityTypeFactory implements ObjectFactory<BlockEntityType<?>>
         this.blockEntityTypes = blockEntityTypes;
     }
 
-    public Holder<BlockEntityType<?>> create(String name, BlockEntityType.BlockEntitySupplier<? extends BlockEntity> blockEntitySupplier, Block... blocks) {
-        return this.create(name, () -> new BlockEntityType<>(blockEntitySupplier, Set.of(blocks) ));
+    public Holder<BlockEntityType<?>> create(String name, BlockEntityType.BlockEntitySupplier<? extends BlockEntity> blockEntitySupplier, Type<?> dataType, Block... blocks) {
+        return this.create(name, () -> new BlockEntityType<>(blockEntitySupplier, Set.of(blocks), dataType));
     }
 
     @Override

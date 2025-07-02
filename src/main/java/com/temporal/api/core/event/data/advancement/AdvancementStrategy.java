@@ -21,6 +21,6 @@ public interface AdvancementStrategy {
     }
 
     default void saveAdvancement(@NotNull Advancement.Builder builder, @NotNull Consumer<AdvancementHolder> consumer, String id) {
-        builder.save(consumer, ResourceUtils.createResourceLocation(id));
+        builder.save(consumer, ResourceUtils.createResourceLocation(id).toString());
     }
 }

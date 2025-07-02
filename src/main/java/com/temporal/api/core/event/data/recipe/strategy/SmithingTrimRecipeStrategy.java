@@ -25,7 +25,7 @@ public class SmithingTrimRecipeStrategy implements RecipeStrategy<SmithingTrimRe
                 : Ingredient.of(recipeHolder.getAdditions());
         SmithingTrimRecipeBuilder builder = SmithingTrimRecipeBuilder.smithingTrim(Ingredient.of(recipeHolder.getTemplates()), base, addition, recipeHolder.getRecipeCategory());
         for (ItemLike template : recipeHolder.getTemplates()) {
-            builder.unlocks("has_smithing_trim_template", recipeProvider.has(template));
+            builder.unlocks("has_smithing_trim_template", ApiRecipeProvider.has(template));
         }
         String path;
         if (recipeHolder.getName() != null) {
@@ -35,6 +35,6 @@ public class SmithingTrimRecipeStrategy implements RecipeStrategy<SmithingTrimRe
         }
 
         ResourceKey<Recipe<?>> resourceKey = ResourceUtils.createResourceKey(Registries.RECIPE, path);
-        builder.save(recipeOutput, resourceKey);
+        builder.save(recipeOutput, resourceKey.location());
     }
 }

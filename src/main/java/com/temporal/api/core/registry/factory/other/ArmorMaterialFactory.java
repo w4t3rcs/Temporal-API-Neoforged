@@ -1,29 +1,33 @@
 package com.temporal.api.core.registry.factory.other;
 
-import com.temporal.api.core.event.data.model.item.TrimmedItemModelProviderStrategy;
 import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.tags.TagKey;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.equipment.ArmorMaterial;
-import net.minecraft.world.item.equipment.ArmorType;
-import net.minecraft.world.item.equipment.EquipmentAsset;
+import net.minecraft.world.item.crafting.Ingredient;
 
-import java.util.Map;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.function.Supplier;
 
 public final class ArmorMaterialFactory {
     private ArmorMaterialFactory() {
     }
 
-    public static ArmorMaterial create(String name, Map<ArmorType, Integer> defenses, int durability, int enchantmentValue, float toughness, float knockbackResistance, TagKey<Item> repairItem, Holder<SoundEvent> soundEvent, boolean isDatagenNeeded) {
-        ResourceKey<Registry<EquipmentAsset>> root = ResourceKey.createRegistryKey(ResourceLocation.withDefaultNamespace("equipment_asset"));
-        ResourceLocation resourceLocation = ResourceUtils.createResourceLocation(name);
-        ResourceKey<EquipmentAsset> asset = ResourceKey.create(root, resourceLocation);
-        if (isDatagenNeeded) TrimmedItemModelProviderStrategy.ASSETS.put(name, asset);
-        return new ArmorMaterial(durability, defenses, enchantmentValue, soundEvent, toughness, knockbackResistance, repairItem, asset);
+    public static Holder<ArmorMaterial> create(String name, EnumMap<ArmorItem.Type, Integer> defenses,
+                                               int enchantability, float toughness, float knockbackResistance,
+                                               Supplier<Item> ingredientItem) {
+        ResourceLocation location = ResourceUtils.createResourceLocation(name);
+        Holder<SoundEvent> equipSound = SoundEvents.ARMOR_EQUIP_NETHERITE;
+        Supplier<Ingredient> ingredient = () -> Ingredient.of(ingredientItem.get());
+        List<ArmorMaterial.Layer> layers = List.of(new ArmorMaterial.Layer(location));
+        return Registry.registerForHolder(BuiltInRegistries.ARMOR_MATERIAL, location,
+                new ArmorMaterial(defenses, enchantability, equipSound, ingredient, layers, toughness, knockbackResistance));
     }
 }

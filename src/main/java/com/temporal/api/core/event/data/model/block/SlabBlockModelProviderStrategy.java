@@ -1,11 +1,14 @@
 package com.temporal.api.core.event.data.model.block;
 
-import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.world.level.block.SlabBlock;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
-public class SlabBlockModelProviderStrategy extends AbstractFamilyBlockModelProviderStrategy {
+public class SlabBlockModelProviderStrategy implements BlockModelProviderStrategy {
     @Override
-    public void registerBlockModel(DeferredBlock<?> blockRegistry, BlockModelGenerators blockModels) {
-        createFamilyProvider(blockRegistry, blockModels, "_slab").slab(blockRegistry.get());
+    public void registerBlockModel(DeferredBlock<?> blockRegistry, ApiBlockModelProvider provider) {
+        provider.familyMemberWithItem((SlabBlock) blockRegistry.get(), "_slab",
+                (block, parentTexture) -> provider.slabBlock(block, parentTexture, parentTexture) ,
+                (block, parentTexture) -> provider.itemModels()
+                        .slab(provider.getBlockPath(block), parentTexture, parentTexture, parentTexture));
     }
 }

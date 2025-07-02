@@ -3,6 +3,7 @@ package com.temporal.api.core.event.data.sound;
 import com.temporal.api.core.collection.TemporalHashMap;
 import com.temporal.api.core.engine.io.IOLayer;
 import net.minecraft.data.PackOutput;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.common.data.SoundDefinition;
 import net.neoforged.neoforge.common.data.SoundDefinitionsProvider;
 
@@ -13,8 +14,8 @@ import java.util.Objects;
 public class ApiSoundProvider extends SoundDefinitionsProvider {
     public static final Map<SoundGenerationDescription, List<SoundHolder>> SOUNDS = new TemporalHashMap<>();
 
-    public ApiSoundProvider(PackOutput output) {
-        super(output, IOLayer.NEO_MOD.getModId());
+    public ApiSoundProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
+        super(output, IOLayer.NEO_MOD.getModId(), existingFileHelper);
     }
 
     @Override
