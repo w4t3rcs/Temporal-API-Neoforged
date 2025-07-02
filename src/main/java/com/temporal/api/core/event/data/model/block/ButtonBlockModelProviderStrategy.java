@@ -9,6 +9,6 @@ public class ButtonBlockModelProviderStrategy implements BlockModelProviderStrat
         provider.familyMemberWithItem((ButtonBlock) blockRegistry.get(), "_button",
                 provider::buttonBlock,
                 (block, parentTexture) -> provider.itemModels()
-                        .buttonInventory(provider.getBlockPath(block), parentTexture));
+                        .button(provider.getBlockPath(block), parentTexture));
     }
 }

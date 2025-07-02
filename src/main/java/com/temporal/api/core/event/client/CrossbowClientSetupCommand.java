@@ -1,10 +1,12 @@
 package com.temporal.api.core.event.client;
 
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.ChargedProjectiles;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 
@@ -55,10 +57,12 @@ public class CrossbowClientSetupCommand implements ClientSetupCommand<DeferredIt
     private void registerChargedFirework(Item crossbow) {
         ItemProperties.register(crossbow,
                 ResourceLocation.withDefaultNamespace("firework"),
-                (item, level, entity, seed) ->
-                        entity != null
-                        && CrossbowItem.isCharged(item)
-                        && CrossbowItem.getHeldProjectile(entity, CrossbowItem.ARROW_OR_FIREWORK).is(Items.FIREWORK_ROCKET) ? 1.0F : 0.0F
+                (item, level, entity, seed) -> {
+                    ChargedProjectiles chargedprojectiles = item.get(DataComponents.CHARGED_PROJECTILES);
+                    return entity != null
+                            && chargedprojectiles != null
+                            && chargedprojectiles.contains(Items.FIREWORK_ROCKET) ? 1.0F : 0.0F;
+                }
         );
     }
 }

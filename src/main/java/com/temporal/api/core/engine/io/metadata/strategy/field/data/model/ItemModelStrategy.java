@@ -17,6 +17,8 @@ public class ItemModelStrategy implements FieldAnnotationStrategy {
             switch (itemModel.value()) {
                 case BASIC -> ItemModelDescriptionContainer.BASIC_ITEMS.add(registryObject);
                 case HANDHELD -> ItemModelDescriptionContainer.HANDHELD_ITEMS.add(registryObject);
+                case BOW -> ItemModelDescriptionContainer.BOW_ITEMS.add(registryObject);
+                case CROSSBOW -> ItemModelDescriptionContainer.CROSSBOW_ITEMS.add(registryObject);
                 case TRIMMED_ARMOR -> ItemModelDescriptionContainer.TRIMMED_ARMOR_ITEMS.add(registryObject);
                 case POTION -> ItemModelDescriptionContainer.POTION_ITEMS.add(registryObject);
             }

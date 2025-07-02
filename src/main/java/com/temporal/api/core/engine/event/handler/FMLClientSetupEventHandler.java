@@ -20,12 +20,10 @@ public class FMLClientSetupEventHandler implements EventHandler {
 
     @Override
     public void handle() {
-        subscribeEvent(FMLClientSetupEvent.class, event -> {
-            event.enqueueWork(() -> {
-                BOW_COMMAND.execute(BOWS);
-                CROSSBOW_COMMAND.execute(CROSSBOWS);
-                SHIELD_COMMAND.execute(SHIELDS);
-            });
-        });
+        subscribeModEvent(FMLClientSetupEvent.class, event -> event.enqueueWork(() -> {
+            BOW_COMMAND.execute(BOWS);
+            CROSSBOW_COMMAND.execute(CROSSBOWS);
+            SHIELD_COMMAND.execute(SHIELDS);
+        }));
     }
 }

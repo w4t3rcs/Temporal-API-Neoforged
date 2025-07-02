@@ -15,6 +15,6 @@ public interface ArmorExtension {
 
     default DeferredItem<Item> createArmor(String name, Item.Properties properties, Holder<ArmorMaterial> material, ArmorItem.Type type) {
         ItemFactory itemFactory = InjectionContext.getFromInstance(ItemFactory.class);
-        return itemFactory.create(name, properties, props -> new ArmorItem(material, type, props));
+        return itemFactory.create(name, properties.stacksTo(1), props -> new ArmorItem(material, type, props));
     }
 }

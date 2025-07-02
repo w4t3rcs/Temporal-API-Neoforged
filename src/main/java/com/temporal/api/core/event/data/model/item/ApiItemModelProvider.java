@@ -23,6 +23,10 @@ public class ApiItemModelProvider extends ItemModelProvider {
 
     protected ItemModelBuilder simpleItem(Item item, String parent) {
         String itemPath = this.getItemPath(item);
+        return this.simpleItem(itemPath, parent);
+    }
+
+    protected ItemModelBuilder simpleItem(String itemPath, String parent) {
         return this.withExistingParent(itemPath, "item/" + parent)
                 .texture("layer0", ResourceLocation.parse(itemPath));
     }

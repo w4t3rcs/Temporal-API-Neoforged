@@ -26,5 +26,6 @@ public class DeferredRegisterContextInitializer implements ContextInitializer {
         context.putObject("global_loot_modifier_serializers", RegistryUtils.createRegistry(NeoForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS));
         context.putObject("menu_types", RegistryUtils.createRegistry(Registries.MENU));
         context.putObject("trigger_types", RegistryUtils.createRegistry(Registries.TRIGGER_TYPE));
+        context.putObject("armor_materials", RegistryUtils.createRegistry(Registries.ARMOR_MATERIAL));
     }
 }
