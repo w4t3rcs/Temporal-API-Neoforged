@@ -8,12 +8,12 @@ import net.minecraft.world.item.Tier;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 public interface HoeExtension {
-    default DeferredItem<Item> createHoe(String name, Tier tier) {
-        return this.createHoe(name, new Item.Properties(), tier);
+    default DeferredItem<Item> createHoe(String name, Tier tier, int damage, float speed) {
+        return this.createHoe(name, new Item.Properties(), tier, damage, speed);
     }
 
-    default DeferredItem<Item> createHoe(String name, Item.Properties properties, Tier tier) {
+    default DeferredItem<Item> createHoe(String name, Item.Properties properties, Tier tier, int damage, float speed) {
         ItemFactory itemFactory = InjectionContext.getFromInstance(ItemFactory.class);
-        return itemFactory.create(name, properties, props -> new HoeItem(tier, props));
+        return itemFactory.create(name, properties.attributes(HoeItem.createAttributes(tier, damage, speed)), props -> new HoeItem(tier, props));
     }
 }
