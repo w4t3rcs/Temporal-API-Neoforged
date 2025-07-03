@@ -2,7 +2,6 @@ package com.temporal.api.core.registry.factory.common;
 
 import com.temporal.api.core.engine.io.context.InjectionContext;
 import net.minecraft.world.item.Item;
-import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -35,11 +34,6 @@ public class ItemFactory implements ObjectFactory<Item> {
     @Override
     public DeferredItem<Item> create(String name, Supplier<Item> itemSupplier) {
         return items.register(name, itemSupplier);
-    }
-
-    @Override
-    public void register() {
-        items.register(InjectionContext.getFromInstance(IEventBus.class));
     }
 
     @Override

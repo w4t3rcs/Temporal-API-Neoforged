@@ -24,5 +24,6 @@ public class FactoryContextInitializer implements ContextInitializer {
         context.putObject(new LootModifierSerializerFactory());
         context.putObject(new MenuTypeFactory());
         context.putObject(new TriggerFactory());
+        context.putObject(new ArmorMaterialFactory());
     }
 }

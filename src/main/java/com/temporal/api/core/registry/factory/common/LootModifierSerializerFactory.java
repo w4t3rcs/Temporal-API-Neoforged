@@ -3,7 +3,6 @@ package com.temporal.api.core.registry.factory.common;
 import com.mojang.serialization.MapCodec;
 import com.temporal.api.core.engine.io.context.InjectionContext;
 import net.minecraft.core.Holder;
-import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -23,11 +22,6 @@ public class LootModifierSerializerFactory implements ObjectFactory<MapCodec<? e
     @Override
     public Holder<MapCodec<? extends IGlobalLootModifier>> create(String name, Supplier<MapCodec<? extends IGlobalLootModifier>> codecSupplier) {
         return lootModifierSerializers.register(name, codecSupplier);
-    }
-
-    @Override
-    public void register() {
-        lootModifierSerializers.register(InjectionContext.getFromInstance(IEventBus.class));
     }
 
     @Override

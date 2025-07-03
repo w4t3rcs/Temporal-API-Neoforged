@@ -4,7 +4,6 @@ import com.temporal.api.core.engine.io.context.InjectionContext;
 import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvent;
-import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
@@ -27,11 +26,6 @@ public class SoundEventFactory implements ObjectFactory<SoundEvent> {
     @Override
     public Holder<SoundEvent> create(String name, Supplier<SoundEvent> soundEventSupplier) {
         return soundEvents.register(name, soundEventSupplier);
-    }
-
-    @Override
-    public void register() {
-        soundEvents.register(InjectionContext.getFromInstance(IEventBus.class));
     }
 
     @Override

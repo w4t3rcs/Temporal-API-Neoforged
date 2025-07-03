@@ -8,7 +8,6 @@ import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
@@ -39,11 +38,6 @@ public class VillagerProfessionFactory implements ObjectFactory<VillagerProfessi
     @Override
     public Holder<VillagerProfession> create(String name, Supplier<VillagerProfession> villagerProfessionSupplier) {
         return villagerProfessions.register(name, villagerProfessionSupplier);
-    }
-
-    @Override
-    public void register() {
-        villagerProfessions.register(InjectionContext.getFromInstance(IEventBus.class));
     }
 
     @Override

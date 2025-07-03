@@ -5,7 +5,6 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -64,11 +63,6 @@ public class BlockFactory implements ObjectFactory<Block> {
         DeferredBlock<Block> block = blocks.register(name, blockSupplier);
         this.itemFactory.create(name, itemProperties, props -> new BlockItem(block.value(), props));
         return block;
-    }
-
-    @Override
-    public void register() {
-        blocks.register(InjectionContext.getFromInstance(IEventBus.class));
     }
 
     @Override

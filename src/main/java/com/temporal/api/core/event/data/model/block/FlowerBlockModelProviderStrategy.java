@@ -13,10 +13,11 @@ public class FlowerBlockModelProviderStrategy implements BlockModelProviderStrat
         Block block = blockRegistry.get();
         String id = RegistryUtils.getIdFromBlock(block);
         Block pottedBlock = RegistryUtils.getBlockById("potted_" + id);
-        String path = provider.getBlockPath(block);
+        String flowerPath = provider.getBlockPath(block);
+        String potPath = provider.getBlockPath(pottedBlock);
         provider.simpleBlock(pottedBlock, provider.models()
-                .withExistingParent(path, provider.mcLoc("block/flower_pot_cross"))
-                .texture("plant", path)
+                .withExistingParent(potPath, provider.mcLoc("block/flower_pot_cross"))
+                .texture("plant", flowerPath)
                 .renderType("minecraft:cutout"));
     }
 }

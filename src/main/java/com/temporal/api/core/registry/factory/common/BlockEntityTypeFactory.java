@@ -6,7 +6,6 @@ import net.minecraft.core.Holder;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.Set;
@@ -30,11 +29,6 @@ public class BlockEntityTypeFactory implements ObjectFactory<BlockEntityType<?>>
     @Override
     public Holder<BlockEntityType<?>> create(String name, Supplier<BlockEntityType<?>> entitySupplier) {
         return blockEntityTypes.register(name, entitySupplier);
-    }
-
-    @Override
-    public void register() {
-        blockEntityTypes.register(InjectionContext.getFromInstance(IEventBus.class));
     }
 
     @Override

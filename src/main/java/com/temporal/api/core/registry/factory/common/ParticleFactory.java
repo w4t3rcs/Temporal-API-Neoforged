@@ -4,7 +4,6 @@ import com.temporal.api.core.engine.io.context.InjectionContext;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
-import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
@@ -27,11 +26,6 @@ public class ParticleFactory implements ObjectFactory<ParticleType<?>> {
     @Override
     public Holder<ParticleType<?>> create(String name, Supplier<ParticleType<?>> particleTypeSupplier) {
         return particleTypes.register(name, particleTypeSupplier);
-    }
-
-    @Override
-    public void register() {
-        particleTypes.register(InjectionContext.getFromInstance(IEventBus.class));
     }
 
     @Override

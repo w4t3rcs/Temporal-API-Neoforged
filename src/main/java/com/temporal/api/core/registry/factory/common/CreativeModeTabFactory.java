@@ -6,7 +6,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.Collection;
@@ -45,11 +44,6 @@ public class CreativeModeTabFactory implements ObjectFactory<CreativeModeTab> {
     @Override
     public Holder<CreativeModeTab> create(String name, Supplier<CreativeModeTab> creativeModeTabSupplier) {
         return creativeModeTabs.register(name, creativeModeTabSupplier);
-    }
-
-    @Override
-    public void register() {
-        creativeModeTabs.register(InjectionContext.getFromInstance(IEventBus.class));
     }
 
     @Override

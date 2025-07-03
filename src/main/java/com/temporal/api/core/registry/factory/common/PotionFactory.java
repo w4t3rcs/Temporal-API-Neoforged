@@ -5,7 +5,6 @@ import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.alchemy.Potion;
-import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
@@ -32,11 +31,6 @@ public class PotionFactory implements ObjectFactory<Potion> {
     @Override
     public Holder<Potion> create(String name, Supplier<Potion> potionSupplier) {
         return potions.register(name, potionSupplier);
-    }
-
-    @Override
-    public void register() {
-        potions.register(InjectionContext.getFromInstance(IEventBus.class));
     }
 
     @Override

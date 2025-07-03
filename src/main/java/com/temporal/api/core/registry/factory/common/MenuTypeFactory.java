@@ -5,7 +5,6 @@ import net.minecraft.core.Holder;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
-import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
 import net.neoforged.neoforge.network.IContainerFactory;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -35,11 +34,6 @@ public class MenuTypeFactory implements ObjectFactory<MenuType<?>> {
     @Override
     public Holder<MenuType<?>> create(String name, Supplier<MenuType<?>> menuTypeSupplier) {
         return menuTypes.register(name, menuTypeSupplier);
-    }
-
-    @Override
-    public void register() {
-        menuTypes.register(InjectionContext.getFromInstance(IEventBus.class));
     }
 
     @Override

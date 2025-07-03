@@ -12,6 +12,6 @@ public class CrossBlockModelProviderStrategy implements BlockModelProviderStrate
                 .cross(BuiltInRegistries.BLOCK.getKey(block)
                         .getPath(), provider.blockTexture(block))
                 .renderType("minecraft:cutout"));
-        provider.blockItem(block);
+        provider.singleTextureItemModel(block);
     }
 }

@@ -9,7 +9,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
@@ -41,11 +40,6 @@ public class EntityTypeFactory implements ObjectFactory<EntityType<?>> {
     @Override
     public Holder<EntityType<?>> create(String name, Supplier<EntityType<?>> entitySupplier) {
         return entityTypes.register(name, entitySupplier);
-    }
-
-    @Override
-    public void register() {
-        entityTypes.register(InjectionContext.getFromInstance(IEventBus.class));
     }
 
     @Override
