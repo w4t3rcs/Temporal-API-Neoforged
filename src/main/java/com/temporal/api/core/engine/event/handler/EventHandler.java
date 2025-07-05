@@ -1,7 +1,7 @@
 package com.temporal.api.core.engine.event.handler;
 
 import com.temporal.api.core.engine.event.adapter.EventAdapter;
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
 import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.NeoForge;
@@ -16,7 +16,7 @@ public interface EventHandler {
     }
 
     default IEventBus getModEventBus() {
-        return InjectionContext.getFromInstance(IEventBus.class);
+        return InjectionPool.getFromInstance(IEventBus.class);
     }
 
     default <T extends Event> void subscribeEvent(Class<T> event, EventAdapter<T, Void> eventAdapter) {

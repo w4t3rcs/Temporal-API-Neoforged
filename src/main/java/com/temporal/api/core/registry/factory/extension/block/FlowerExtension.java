@@ -1,6 +1,6 @@
 package com.temporal.api.core.registry.factory.extension.block;
 
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
 import com.temporal.api.core.registry.factory.common.BlockFactory;
 import com.temporal.api.core.registry.factory.other.BlockPropertiesFactory;
 import net.minecraft.core.Holder;
@@ -21,7 +21,7 @@ public interface FlowerExtension {
     }
 
     default DeferredBlock<Block> createFlower(String name, BlockBehaviour.Properties properties, Item.Properties itemProperties, Holder<MobEffect> mobEffect, int duration) {
-        final BlockFactory blockFactory = InjectionContext.getFromInstance(BlockFactory.class);
+        final BlockFactory blockFactory = InjectionPool.getFromInstance(BlockFactory.class);
         return blockFactory.create(name, properties.noOcclusion().noCollission(), props -> new FlowerBlock(mobEffect, duration, props), itemProperties);
     }
 }

@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
-public class InjectionContext implements Context {
+public class InjectionPool implements ObjectPool {
     private final Map<ContextKey, Object> objects;
 
-    protected InjectionContext() {
+    protected InjectionPool() {
         this.objects = new HashMap<>();
     }
 
@@ -114,17 +114,17 @@ public class InjectionContext implements Context {
     }
 
     public static <T> T getFromInstance(String key) {
-        Context context = InjectionContext.getInstance();
-        return context.getObject(key);
+        ObjectPool objectPool = InjectionPool.getInstance();
+        return objectPool.getObject(key);
     }
 
     public static <T> T getFromInstance(Class<? extends T> key) {
-        Context context = InjectionContext.getInstance();
-        return context.getObject(key);
+        ObjectPool objectPool = InjectionPool.getInstance();
+        return objectPool.getObject(key);
     }
 
-    public static InjectionContext getInstance() {
-        return InjectionContextContainer.getInstance()
-                .getContext(IOLayer.NEO_MOD.getModId());
+    public static InjectionPool getInstance() {
+        return ModContext.getInstance()
+                .getPool(IOLayer.NEO_MOD.getModId());
     }
 }

@@ -1,6 +1,6 @@
 package com.temporal.api.core.registry.factory.extension.block;
 
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
 import com.temporal.api.core.registry.factory.common.BlockFactory;
 import com.temporal.api.core.registry.factory.other.BlockPropertiesFactory;
 import com.temporal.api.core.registry.factory.other.TreeGrowerFactory;
@@ -27,7 +27,7 @@ public interface SaplingExtension {
     }
 
     default DeferredBlock<Block> createSapling(String name, BlockBehaviour.Properties properties, Item.Properties itemProperties, TreeGrower treeGrower) {
-        final BlockFactory blockFactory = InjectionContext.getFromInstance(BlockFactory.class);
+        final BlockFactory blockFactory = InjectionPool.getFromInstance(BlockFactory.class);
         return blockFactory.create(name, properties.noOcclusion().noCollission(), props -> new SaplingBlock(treeGrower, props), itemProperties);
     }
 }

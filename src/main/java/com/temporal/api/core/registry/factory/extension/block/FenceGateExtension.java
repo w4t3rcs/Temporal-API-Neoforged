@@ -1,6 +1,6 @@
 package com.temporal.api.core.registry.factory.extension.block;
 
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
 import com.temporal.api.core.registry.factory.common.BlockFactory;
 import com.temporal.api.core.registry.factory.other.BlockPropertiesFactory;
 import net.minecraft.sounds.SoundEvent;
@@ -32,7 +32,7 @@ public interface FenceGateExtension {
     }
 
     default DeferredBlock<Block> createFenceGate(String name, BlockBehaviour.Properties properties, Item.Properties itemProperties, WoodType woodType, SoundEvent openSound, SoundEvent closeSound) {
-        final BlockFactory blockFactory = InjectionContext.getFromInstance(BlockFactory.class);
+        final BlockFactory blockFactory = InjectionPool.getFromInstance(BlockFactory.class);
         return blockFactory.create(name, properties, (props) -> new FenceGateBlock(Optional.of(woodType), props, Optional.of(openSound), Optional.of(closeSound)), itemProperties);
     }
 }

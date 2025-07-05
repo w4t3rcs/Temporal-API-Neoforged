@@ -1,7 +1,7 @@
 package com.temporal.api.core.engine.io.metadata.strategy.type.injection;
 
-import com.temporal.api.core.engine.io.context.Context;
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
+import com.temporal.api.core.engine.io.context.ObjectPool;
 import com.temporal.api.core.engine.io.metadata.annotation.injection.Injected;
 import com.temporal.api.core.engine.io.metadata.strategy.type.ClassAnnotationStrategy;
 import net.neoforged.fml.ModList;
@@ -12,8 +12,8 @@ public class InjectedStrategy implements ClassAnnotationStrategy {
         Injected injected = clazz.getDeclaredAnnotation(Injected.class);
         String modCondition = injected.mandatoryMod();
         if (injected.value() && injected.isInjection() && (modCondition.isBlank() || ModList.get().isLoaded(modCondition))) {
-            Context context = InjectionContext.getInstance();
-            context.putObject(clazz);
+            ObjectPool objectPool = InjectionPool.getInstance();
+            objectPool.putObject(clazz);
         }
     }
 }

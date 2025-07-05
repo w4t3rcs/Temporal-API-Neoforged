@@ -1,6 +1,6 @@
 package com.temporal.api.core.registry.factory.common;
 
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -12,7 +12,7 @@ public class ItemFactory implements ObjectFactory<Item> {
     private final DeferredRegister.Items items;
 
     public ItemFactory() {
-        this(InjectionContext.getFromInstance("items"));
+        this(InjectionPool.getFromInstance("$Items"));
     }
 
     public ItemFactory(DeferredRegister.Items items) {

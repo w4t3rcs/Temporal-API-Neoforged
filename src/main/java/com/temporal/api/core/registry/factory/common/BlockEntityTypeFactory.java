@@ -1,7 +1,7 @@
 package com.temporal.api.core.registry.factory.common;
 
 import com.mojang.datafixers.types.Type;
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -15,7 +15,7 @@ public class BlockEntityTypeFactory implements ObjectFactory<BlockEntityType<?>>
     private final DeferredRegister<BlockEntityType<?>> blockEntityTypes;
 
     public BlockEntityTypeFactory() {
-        this(InjectionContext.getFromInstance("block_entity_types"));
+        this(InjectionPool.getFromInstance("$BlockEntityTypes"));
     }
 
     public BlockEntityTypeFactory(DeferredRegister<BlockEntityType<?>> blockEntityTypes) {

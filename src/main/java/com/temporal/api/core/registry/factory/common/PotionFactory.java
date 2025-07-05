@@ -1,6 +1,6 @@
 package com.temporal.api.core.registry.factory.common;
 
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -13,7 +13,7 @@ public class PotionFactory implements ObjectFactory<Potion> {
     private final DeferredRegister<Potion> potions;
 
     public PotionFactory() {
-        this(InjectionContext.getFromInstance("potions"));
+        this(InjectionPool.getFromInstance("$Potions"));
     }
 
     public PotionFactory(DeferredRegister<Potion> potions) {

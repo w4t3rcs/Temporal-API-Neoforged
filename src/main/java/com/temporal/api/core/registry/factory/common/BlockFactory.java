@@ -1,6 +1,6 @@
 package com.temporal.api.core.registry.factory.common;
 
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -16,11 +16,11 @@ public class BlockFactory implements ObjectFactory<Block> {
     private final ItemFactory itemFactory;
 
     public BlockFactory() {
-        this(InjectionContext.getFromInstance("blocks"));
+        this(InjectionPool.getFromInstance("$Blocks"));
     }
 
     public BlockFactory(DeferredRegister.Blocks blocks) {
-        this(blocks, InjectionContext.getFromInstance(ItemFactory.class));
+        this(blocks, InjectionPool.getFromInstance(ItemFactory.class));
     }
 
     public BlockFactory(DeferredRegister.Blocks blocks, ItemFactory itemFactory) {

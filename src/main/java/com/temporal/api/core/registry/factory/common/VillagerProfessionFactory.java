@@ -1,7 +1,7 @@
 package com.temporal.api.core.registry.factory.common;
 
 import com.google.common.collect.ImmutableSet;
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
 import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
@@ -16,7 +16,7 @@ public class VillagerProfessionFactory implements ObjectFactory<VillagerProfessi
     private final DeferredRegister<VillagerProfession> villagerProfessions;
 
     public VillagerProfessionFactory() {
-        this(InjectionContext.getFromInstance("villager_professions"));
+        this(InjectionPool.getFromInstance("$VillagerProfessions"));
     }
 
     public VillagerProfessionFactory(DeferredRegister<VillagerProfession> villagerProfessions) {

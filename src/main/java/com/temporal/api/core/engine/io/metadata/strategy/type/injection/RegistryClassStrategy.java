@@ -1,6 +1,6 @@
 package com.temporal.api.core.engine.io.metadata.strategy.type.injection;
 
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
 import com.temporal.api.core.engine.io.metadata.annotation.injection.Registry;
 import com.temporal.api.core.engine.io.metadata.strategy.type.ClassAnnotationStrategy;
 import com.temporal.api.core.registry.factory.common.ObjectFactory;
@@ -19,7 +19,7 @@ public class RegistryClassStrategy implements ClassAnnotationStrategy {
                 Field field = clazz.getDeclaredFields()[0];
                 field.setAccessible(true);
                 ObjectFactory<?> objectFactory = (ObjectFactory<?>) field.get(object);
-                IEventBus eventBus = InjectionContext.getFromInstance(IEventBus.class);
+                IEventBus eventBus = InjectionPool.getFromInstance(IEventBus.class);
                 objectFactory.register(eventBus);
             }
         }

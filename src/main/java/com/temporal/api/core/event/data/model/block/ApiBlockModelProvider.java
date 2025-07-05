@@ -39,8 +39,7 @@ public class ApiBlockModelProvider extends BlockStateProvider {
     }
 
     public void blockItem(Block block, String suffix) {
-        String locationFormat = "%s%s";
-        String location = locationFormat.formatted(this.getBlockPath(block), suffix);
+        String location = this.getBlockPath(block) + suffix;
         this.simpleBlockItem(block, new ModelFile.UncheckedModelFile(location));
     }
 

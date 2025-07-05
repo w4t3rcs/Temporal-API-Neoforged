@@ -1,7 +1,7 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field.injection;
 
-import com.temporal.api.core.engine.io.context.Context;
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
+import com.temporal.api.core.engine.io.context.ObjectPool;
 import com.temporal.api.core.engine.io.metadata.annotation.injection.Injection;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 
@@ -12,9 +12,9 @@ public class InjectionStrategy implements FieldAnnotationStrategy {
     public void execute(Field field, Object object) throws Exception {
         if (field.isAnnotationPresent(Injection.class)) {
             field.setAccessible(true);
-            Context context = InjectionContext.getInstance();
-            field.set(object, context.getObject(field.getType()));
-            context.putObject(object);
+            ObjectPool objectPool = InjectionPool.getInstance();
+            field.set(object, objectPool.getObject(field.getType()));
+            objectPool.putObject(object);
         }
     }
 }

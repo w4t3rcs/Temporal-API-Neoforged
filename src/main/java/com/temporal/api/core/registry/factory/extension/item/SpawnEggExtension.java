@@ -1,6 +1,6 @@
 package com.temporal.api.core.registry.factory.extension.item;
 
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
 import com.temporal.api.core.registry.factory.common.ItemFactory;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -17,7 +17,7 @@ public interface SpawnEggExtension {
 
     @SuppressWarnings("deprecation")
     default DeferredItem<Item> createSpawnEgg(String name, Item.Properties properties, Supplier<? extends EntityType<? extends Mob>> type, int backgroundColor, int highlightColor) {
-        ItemFactory itemFactory = InjectionContext.getFromInstance(ItemFactory.class);
+        ItemFactory itemFactory = InjectionPool.getFromInstance(ItemFactory.class);
         return itemFactory.create(name, properties, props -> new SpawnEggItem(type.get(), backgroundColor, highlightColor, props));
     }
 }

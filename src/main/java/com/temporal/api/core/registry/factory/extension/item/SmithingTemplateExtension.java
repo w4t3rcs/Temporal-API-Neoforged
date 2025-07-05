@@ -1,6 +1,6 @@
 package com.temporal.api.core.registry.factory.extension.item;
 
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
 import com.temporal.api.core.registry.factory.common.ItemFactory;
 import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.world.item.Item;
@@ -13,7 +13,7 @@ public interface SmithingTemplateExtension {
     }
 
     default DeferredItem<Item> createSmithingTemplate(String name, Item.Properties properties, String location) {
-        ItemFactory itemFactory = InjectionContext.getFromInstance(ItemFactory.class);
+        ItemFactory itemFactory = InjectionPool.getFromInstance(ItemFactory.class);
         return itemFactory.create(name, properties, (props) -> SmithingTemplateItem.createArmorTrimTemplate(ResourceUtils.createResourceLocation(location)));
     }
 }

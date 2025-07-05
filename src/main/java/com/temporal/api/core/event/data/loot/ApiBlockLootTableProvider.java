@@ -1,6 +1,6 @@
 package com.temporal.api.core.event.data.loot;
 
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
@@ -18,7 +18,7 @@ public abstract class ApiBlockLootTableProvider extends BlockLootSubProvider {
     @Override
     @NotNull
     protected Iterable<Block> getKnownBlocks() {
-        return InjectionContext.<DeferredRegister.Blocks>getFromInstance("blocks")
+        return InjectionPool.<DeferredRegister.Blocks>getFromInstance("blocks")
                 .getEntries()
                 .stream()
                 .map(holder -> (Block) holder.get())

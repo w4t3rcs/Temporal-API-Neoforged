@@ -1,6 +1,6 @@
 package com.temporal.api.core.registry.factory.common;
 
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -11,7 +11,7 @@ public class RecipeSerializerFactory implements ObjectFactory<RecipeSerializer<?
     private final DeferredRegister<RecipeSerializer<?>> recipeSerializers;
 
     public RecipeSerializerFactory() {
-        this(InjectionContext.getFromInstance("recipe_serializers"));
+        this(InjectionPool.getFromInstance("$RecipeSerializers"));
     }
 
     public RecipeSerializerFactory(DeferredRegister<RecipeSerializer<?>> recipeSerializers) {

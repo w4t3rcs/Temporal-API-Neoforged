@@ -1,6 +1,6 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field.injection;
 
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
 import com.temporal.api.core.engine.io.metadata.annotation.injection.Registry;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.registry.factory.common.ObjectFactory;
@@ -18,7 +18,7 @@ public class RegistryFieldStrategy implements FieldAnnotationStrategy {
             String modCondition = registry.mandatoryMod();
             if (modCondition.isBlank() || ModList.get().isLoaded(modCondition)) {
                 ObjectFactory<?> objectFactory = (ObjectFactory<?>) field.get(object);
-                IEventBus eventBus = InjectionContext.getFromInstance(IEventBus.class);
+                IEventBus eventBus = InjectionPool.getFromInstance(IEventBus.class);
                 objectFactory.register(eventBus);
             }
         }

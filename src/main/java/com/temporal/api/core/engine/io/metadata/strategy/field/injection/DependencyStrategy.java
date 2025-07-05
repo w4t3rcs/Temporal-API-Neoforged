@@ -1,7 +1,7 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field.injection;
 
-import com.temporal.api.core.engine.io.context.Context;
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
+import com.temporal.api.core.engine.io.context.ObjectPool;
 import com.temporal.api.core.engine.io.metadata.annotation.injection.Dependency;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 import net.neoforged.fml.ModList;
@@ -15,8 +15,8 @@ public class DependencyStrategy implements FieldAnnotationStrategy {
             field.setAccessible(true);
             Dependency dependency = field.getDeclaredAnnotation(Dependency.class);
             field.setBoolean(object, ModList.get().isLoaded(dependency.value()));
-            Context context = InjectionContext.getInstance();
-            context.putObject(object);
+            ObjectPool objectPool = InjectionPool.getInstance();
+            objectPool.putObject(object);
         }
     }
 }

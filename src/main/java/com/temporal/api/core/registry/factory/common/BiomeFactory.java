@@ -1,6 +1,6 @@
 package com.temporal.api.core.registry.factory.common;
 
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.biome.Biome;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -11,7 +11,7 @@ public class BiomeFactory implements ObjectFactory<Biome> {
     private final DeferredRegister<Biome> biomes;
 
     public BiomeFactory() {
-        this(InjectionContext.getFromInstance("biomes"));
+        this(InjectionPool.getFromInstance("$Biomes"));
     }
 
     public BiomeFactory(DeferredRegister<Biome> biomes) {

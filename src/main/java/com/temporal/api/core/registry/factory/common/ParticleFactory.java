@@ -1,6 +1,6 @@
 package com.temporal.api.core.registry.factory.common;
 
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -12,7 +12,7 @@ public class ParticleFactory implements ObjectFactory<ParticleType<?>> {
     private final DeferredRegister<ParticleType<?>> particleTypes;
 
     public ParticleFactory() {
-        this(InjectionContext.getFromInstance("particle_types"));
+        this(InjectionPool.getFromInstance("$ParticleTypes"));
     }
 
     public ParticleFactory(DeferredRegister<ParticleType<?>> particleTypes) {

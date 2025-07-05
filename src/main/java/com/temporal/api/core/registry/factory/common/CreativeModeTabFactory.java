@@ -1,6 +1,6 @@
 package com.temporal.api.core.registry.factory.common;
 
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -15,7 +15,7 @@ public class CreativeModeTabFactory implements ObjectFactory<CreativeModeTab> {
     private final DeferredRegister<CreativeModeTab> creativeModeTabs;
 
     public CreativeModeTabFactory() {
-        this(InjectionContext.getFromInstance("creative_mode_tabs"));
+        this(InjectionPool.getFromInstance("$CreativeModeTabs"));
     }
 
     public CreativeModeTabFactory(DeferredRegister<CreativeModeTab> creativeModeTabs) {

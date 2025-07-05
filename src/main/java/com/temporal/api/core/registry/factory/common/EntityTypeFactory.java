@@ -1,7 +1,7 @@
 package com.temporal.api.core.registry.factory.common;
 
 import com.temporal.api.client.dto.Size;
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
 import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
@@ -17,7 +17,7 @@ public class EntityTypeFactory implements ObjectFactory<EntityType<?>> {
     private final DeferredRegister<EntityType<?>> entityTypes;
 
     public EntityTypeFactory() {
-        this(InjectionContext.getFromInstance("entity_types"));
+        this(InjectionPool.getFromInstance("$EntityTypes"));
     }
 
     public EntityTypeFactory(DeferredRegister<EntityType<?>> entityTypes) {

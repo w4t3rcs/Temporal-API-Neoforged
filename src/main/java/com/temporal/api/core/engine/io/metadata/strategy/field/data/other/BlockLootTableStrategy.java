@@ -1,6 +1,6 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field.data.other;
 
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
 import com.temporal.api.core.engine.io.metadata.annotation.data.other.BlockLootTable;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.event.data.loot.BlockLootTableProvider;
@@ -25,7 +25,7 @@ public class BlockLootTableStrategy implements FieldAnnotationStrategy {
                 case POTTED_CONTENT -> BlockLootTableProvider.POTTED_CONTENT.add(registryObject);
                 case OTHER -> {
                     String otherId = blockLootTable.itemId();
-                    Holder<Item> itemRegistry = InjectionContext.<DeferredRegister.Items>getFromInstance("items")
+                    Holder<Item> itemRegistry = InjectionPool.<DeferredRegister.Items>getFromInstance("items")
                             .getEntries()
                             .stream()
                             .filter(item -> item.getId().getPath().equals(otherId))

@@ -1,6 +1,6 @@
 package com.temporal.api.core.registry.factory.extension.block;
 
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
 import com.temporal.api.core.registry.factory.common.BlockFactory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -14,7 +14,7 @@ public interface SlabExtension {
     }
 
     default DeferredBlock<Block> createSlab(String name, BlockBehaviour.Properties properties, Item.Properties itemProperties) {
-        final BlockFactory blockFactory = InjectionContext.getFromInstance(BlockFactory.class);
+        final BlockFactory blockFactory = InjectionPool.getFromInstance(BlockFactory.class);
         return blockFactory.create(name, properties, SlabBlock::new, itemProperties);
     }
 }

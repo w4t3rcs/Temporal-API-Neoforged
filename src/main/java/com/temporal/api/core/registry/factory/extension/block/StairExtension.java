@@ -1,6 +1,6 @@
 package com.temporal.api.core.registry.factory.extension.block;
 
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
 import com.temporal.api.core.registry.factory.common.BlockFactory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -19,7 +19,7 @@ public interface StairExtension {
     }
 
     default DeferredBlock<Block> createStair(String name, BlockBehaviour.Properties properties, Item.Properties itemProperties, Block block) {
-        final BlockFactory blockFactory = InjectionContext.getFromInstance(BlockFactory.class);
+        final BlockFactory blockFactory = InjectionPool.getFromInstance(BlockFactory.class);
         return blockFactory.create(name, properties, props -> new StairBlock(block.defaultBlockState(), props), itemProperties);
     }
 }

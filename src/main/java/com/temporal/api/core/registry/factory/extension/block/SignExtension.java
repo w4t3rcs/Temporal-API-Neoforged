@@ -1,6 +1,6 @@
 package com.temporal.api.core.registry.factory.extension.block;
 
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
 import com.temporal.api.core.registry.factory.common.BlockFactory;
 import com.temporal.api.core.registry.factory.other.BlockPropertiesFactory;
 import net.minecraft.world.item.Item;
@@ -21,7 +21,7 @@ public interface SignExtension {
     }
 
     default DeferredBlock<Block> createStandingSign(String name, BlockBehaviour.Properties properties, Item.Properties itemProperties, float strength, WoodType woodType) {
-        BlockFactory factory = InjectionContext.getFromInstance(BlockFactory.class);
+        BlockFactory factory = InjectionPool.getFromInstance(BlockFactory.class);
         return factory.create(name, properties.mapColor(MapColor.WOOD)
                 .forceSolidOn()
                 .instrument(NoteBlockInstrument.BASS)
@@ -35,7 +35,7 @@ public interface SignExtension {
     }
 
     default DeferredBlock<Block> createHangingSign(String name, BlockBehaviour.Properties properties, Item.Properties itemProperties, MapColor color, float strength, WoodType woodType) {
-        BlockFactory factory = InjectionContext.getFromInstance(BlockFactory.class);
+        BlockFactory factory = InjectionPool.getFromInstance(BlockFactory.class);
         return factory.create(name, properties.mapColor(color)
                 .forceSolidOn()
                 .instrument(NoteBlockInstrument.BASS)
@@ -49,7 +49,7 @@ public interface SignExtension {
     }
 
     default DeferredBlock<Block> createWallSign(String name, BlockBehaviour.Properties properties, Item.Properties itemProperties, float strength, WoodType woodType) {
-        BlockFactory factory = InjectionContext.getFromInstance(BlockFactory.class);
+        BlockFactory factory = InjectionPool.getFromInstance(BlockFactory.class);
         return factory.create(name, properties.mapColor(MapColor.WOOD)
                 .forceSolidOn()
                 .instrument(NoteBlockInstrument.BASS)

@@ -1,7 +1,7 @@
 package com.temporal.api.core.registry.factory.common;
 
 import com.google.common.collect.ImmutableSet;
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
 import net.minecraft.core.Holder;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.level.block.Block;
@@ -15,7 +15,7 @@ public class PoiTypeFactory implements ObjectFactory<PoiType> {
     private final DeferredRegister<PoiType> poiTypes;
 
     public PoiTypeFactory() {
-        this(InjectionContext.getFromInstance("poi_types"));
+        this(InjectionPool.getFromInstance("$PoiTypes"));
     }
 
     public PoiTypeFactory(DeferredRegister<PoiType> poiTypes) {

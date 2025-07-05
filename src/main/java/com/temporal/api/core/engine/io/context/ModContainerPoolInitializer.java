@@ -4,14 +4,14 @@ import net.neoforged.fml.ModContainer;
 
 import java.util.List;
 
-public class ModContainerContextInitializer implements ContextInitializer {
+public class ModContainerPoolInitializer implements ObjectPoolInitializer {
     @Override
     public void initialize(List<?> externalObjects) {
         if (externalObjects == null || externalObjects.isEmpty()) return;
-        Context context = InjectionContext.getInstance();
+        ObjectPool objectPool = InjectionPool.getInstance();
         externalObjects.stream()
                 .filter(o -> o instanceof ModContainer)
                 .map(o -> (ModContainer)o)
-                .forEach(context::putObject);
+                .forEach(objectPool::putObject);
     }
 }

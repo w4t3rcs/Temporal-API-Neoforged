@@ -1,6 +1,6 @@
 package com.temporal.api.core.registry.factory.common;
 
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
 import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.core.Holder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -11,7 +11,7 @@ public class TriggerFactory implements ObjectFactory<CriterionTrigger<?>> {
     private final DeferredRegister<CriterionTrigger<?>> triggerTypes;
 
     public TriggerFactory() {
-        this(InjectionContext.getFromInstance("trigger_types"));
+        this(InjectionPool.getFromInstance("$TriggerTypes"));
     }
 
     public TriggerFactory(DeferredRegister<CriterionTrigger<?>> triggerTypes) {

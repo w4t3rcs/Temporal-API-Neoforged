@@ -1,6 +1,6 @@
 package com.temporal.api.core.registry.factory.extension.item;
 
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
 import com.temporal.api.core.registry.factory.common.ItemFactory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ShovelItem;
@@ -13,7 +13,7 @@ public interface ShovelExtension {
     }
 
     default DeferredItem<Item> createShovel(String name, Item.Properties properties, Tier tier, float damage, float speed) {
-        ItemFactory itemFactory = InjectionContext.getFromInstance(ItemFactory.class);
+        ItemFactory itemFactory = InjectionPool.getFromInstance(ItemFactory.class);
         return itemFactory.create(name, properties.attributes(ShovelItem.createAttributes(tier, damage, speed)), props -> new ShovelItem(tier, props));
     }
 }

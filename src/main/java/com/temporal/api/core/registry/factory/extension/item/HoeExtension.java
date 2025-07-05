@@ -1,6 +1,6 @@
 package com.temporal.api.core.registry.factory.extension.item;
 
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
 import com.temporal.api.core.registry.factory.common.ItemFactory;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.Item;
@@ -13,7 +13,7 @@ public interface HoeExtension {
     }
 
     default DeferredItem<Item> createHoe(String name, Item.Properties properties, Tier tier, int damage, float speed) {
-        ItemFactory itemFactory = InjectionContext.getFromInstance(ItemFactory.class);
+        ItemFactory itemFactory = InjectionPool.getFromInstance(ItemFactory.class);
         return itemFactory.create(name, properties.attributes(HoeItem.createAttributes(tier, damage, speed)), props -> new HoeItem(tier, props));
     }
 }

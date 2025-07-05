@@ -5,14 +5,14 @@ import net.neoforged.bus.api.IEventBus;
 
 import java.util.List;
 
-public class EventBusContextInitializer implements ContextInitializer {
+public class EventBusPoolInitializer implements ObjectPoolInitializer {
     @Override
     public void initialize(List<?> externalObjects) {
         if (externalObjects == null || externalObjects.isEmpty()) return;
-        Context context = InjectionContext.getInstance();
+        ObjectPool objectPool = InjectionPool.getInstance();
         externalObjects.stream()
                 .filter(o -> o instanceof IEventBus)
                 .map(o -> (EventBus)o)
-                .forEach(context::putObject);
+                .forEach(objectPool::putObject);
     }
 }

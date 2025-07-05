@@ -1,6 +1,6 @@
 package com.temporal.api.core.registry.factory.common;
 
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
 import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvent;
@@ -12,7 +12,7 @@ public class SoundEventFactory implements ObjectFactory<SoundEvent> {
     private final DeferredRegister<SoundEvent> soundEvents;
 
     public SoundEventFactory() {
-        this(InjectionContext.getFromInstance("sound_events"));
+        this(InjectionPool.getFromInstance("$SoundEvents"));
     }
 
     public SoundEventFactory(DeferredRegister<SoundEvent> soundEvents) {

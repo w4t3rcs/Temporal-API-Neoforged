@@ -1,6 +1,6 @@
 package com.temporal.api.core.registry.factory.common;
 
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -11,7 +11,7 @@ public class EffectFactory implements ObjectFactory<MobEffect> {
     private final DeferredRegister<MobEffect> mobEffects;
 
     public EffectFactory() {
-        this(InjectionContext.getFromInstance("mob_effects"));
+        this(InjectionPool.getFromInstance("$MobEffects"));
     }
 
     public EffectFactory(DeferredRegister<MobEffect> mobEffects) {

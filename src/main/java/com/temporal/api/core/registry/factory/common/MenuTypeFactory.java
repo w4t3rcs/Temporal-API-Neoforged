@@ -1,6 +1,6 @@
 package com.temporal.api.core.registry.factory.common;
 
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
 import net.minecraft.core.Holder;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -16,7 +16,7 @@ public class MenuTypeFactory implements ObjectFactory<MenuType<?>> {
     private final DeferredRegister<MenuType<?>> menuTypes;
 
     public MenuTypeFactory() {
-        this(InjectionContext.getFromInstance("menu_types"));
+        this(InjectionPool.getFromInstance("$MenuTypes"));
     }
 
     public MenuTypeFactory(DeferredRegister<MenuType<?>> menuTypes) {

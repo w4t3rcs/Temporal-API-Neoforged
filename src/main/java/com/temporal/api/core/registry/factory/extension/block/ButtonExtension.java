@@ -1,6 +1,6 @@
 package com.temporal.api.core.registry.factory.extension.block;
 
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
 import com.temporal.api.core.registry.factory.common.BlockFactory;
 import com.temporal.api.core.registry.factory.other.BlockPropertiesFactory;
 import net.minecraft.world.item.Item;
@@ -28,7 +28,7 @@ public interface ButtonExtension {
     }
 
     default DeferredBlock<Block> createButton(String name, BlockBehaviour.Properties properties, Item.Properties itemProperties, BlockSetType setType, int ticksToStayPressed) {
-        final BlockFactory blockFactory = InjectionContext.getFromInstance(BlockFactory.class);
+        final BlockFactory blockFactory = InjectionPool.getFromInstance(BlockFactory.class);
         return blockFactory.create(name,  properties, props -> new ButtonBlock(setType, ticksToStayPressed, props), itemProperties);
     }
 }

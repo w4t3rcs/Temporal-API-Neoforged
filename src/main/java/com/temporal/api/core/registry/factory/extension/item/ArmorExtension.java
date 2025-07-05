@@ -1,6 +1,6 @@
 package com.temporal.api.core.registry.factory.extension.item;
 
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
 import com.temporal.api.core.registry.factory.common.ItemFactory;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.ArmorItem;
@@ -14,7 +14,7 @@ public interface ArmorExtension {
     }
 
     default DeferredItem<Item> createArmor(String name, Item.Properties properties, Holder<ArmorMaterial> material, ArmorItem.Type type) {
-        ItemFactory itemFactory = InjectionContext.getFromInstance(ItemFactory.class);
+        ItemFactory itemFactory = InjectionPool.getFromInstance(ItemFactory.class);
         return itemFactory.create(name, properties.stacksTo(1), props -> new ArmorItem(material, type, props));
     }
 }

@@ -1,6 +1,6 @@
 package com.temporal.api.core.registry.factory.common;
 
-import com.temporal.api.core.engine.io.context.InjectionContext;
+import com.temporal.api.core.engine.io.context.InjectionPool;
 import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
@@ -22,7 +22,7 @@ public class ArmorMaterialFactory implements ObjectFactory<ArmorMaterial> {
     private final DeferredRegister<ArmorMaterial> armorMaterials;
 
     public ArmorMaterialFactory() {
-        this(InjectionContext.getFromInstance("armor_materials"));
+        this(InjectionPool.getFromInstance("$ArmorMaterials"));
     }
 
     public ArmorMaterialFactory(DeferredRegister<ArmorMaterial> armorMaterials) {
