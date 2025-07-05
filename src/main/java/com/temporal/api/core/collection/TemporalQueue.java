@@ -122,17 +122,13 @@ public class TemporalQueue<E> implements Queue<E> {
     @Override
     @Deprecated
     public E element() {
-        E element = delegate.element();
-        delegate.remove(element);
-        return element;
+        return delegate.element();
     }
 
     @Override
     @Deprecated
     public E peek() {
-        E peek = delegate.peek();
-        delegate.remove(peek);
-        return peek;
+        return delegate.peek();
     }
 
     @Override
