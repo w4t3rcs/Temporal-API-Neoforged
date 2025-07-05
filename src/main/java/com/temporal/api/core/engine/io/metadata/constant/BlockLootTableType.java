@@ -4,5 +4,7 @@ public enum BlockLootTableType {
     SELF,
     SILK_TOUCH,
     POTTED_CONTENT,
+    SIGN,
+    HANGING_SIGN,
     OTHER
 }

@@ -1,22 +1,23 @@
 package com.temporal.api.core.event.data.loot;
 
+import com.temporal.api.core.collection.Pair;
 import com.temporal.api.core.collection.TemporalMap;
-import com.temporal.api.core.collection.TemporalQueue;
-import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredBlock;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
-import java.util.Queue;
+import java.util.function.BiConsumer;
+import java.util.function.Supplier;
 
 public class BlockLootTableProvider extends ApiBlockLootTableProvider {
-    public static final Queue<Holder<Block>> SELF = new TemporalQueue<>();
-    public static final Queue<Holder<Block>> SILK_TOUCH = new TemporalQueue<>();
-    public static final Queue<Holder<Block>> POTTED_CONTENT = new TemporalQueue<>();
-    public static final Map<Holder<Block>, Holder<? extends ItemLike>> OTHER = new TemporalMap<>();
-    public static final Map<DeferredBlock<?>, LootProviderStrategy> CUSTOM_LOOT = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> SELF = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> SILK_TOUCH = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> POTTED_CONTENT = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> SIGN = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> HANGING_SIGN = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> OTHER = new TemporalMap<>();
+    public static final Map<Pair<DeferredBlock<?>, Object[]>, LootProviderStrategy> CUSTOM_LOOT = new TemporalMap<>();
 
     protected BlockLootTableProvider(HolderLookup.Provider registries) {
         super(registries);
@@ -24,10 +25,17 @@ public class BlockLootTableProvider extends ApiBlockLootTableProvider {
 
     @Override
     protected void generate() {
-        SELF.forEach(blockRegistry -> this.dropSelf(blockRegistry.value()));
-        SILK_TOUCH.forEach(blockRegistry -> this.dropWhenSilkTouch(blockRegistry.value()));
-        POTTED_CONTENT.forEach(blockRegistry -> this.dropPottedContents(blockRegistry.value()));
-        OTHER.forEach((blockRegistry, other) -> this.dropOther(blockRegistry.value(), other.value()));
-        CUSTOM_LOOT.forEach((blockRegistry, strategy) -> strategy.generateLoot(blockRegistry, this));
+        SELF.forEach(generateLootTable(this, SelfLootProviderStrategy::new));
+        SILK_TOUCH.forEach(generateLootTable(this, SilkTouchLootProviderStrategy::new));
+        POTTED_CONTENT.forEach(generateLootTable(this, PottedContentLootProviderStrategy::new));
+        SIGN.forEach(generateLootTable(this, SignLootProviderStrategy::new));
+        HANGING_SIGN.forEach(generateLootTable(this, HangingSignLootProviderStrategy::new));
+        OTHER.forEach(generateLootTable(this, OtherLootProviderStrategy::new));
+        CUSTOM_LOOT.forEach((key, strategy) -> strategy.generateLoot(key.getLeft(), this, key.getRight()));
+    }
+
+    @Override
+    protected BiConsumer<DeferredBlock<?>, Object[]> generateLootTable(@NotNull ApiBlockLootTableProvider provider, @NotNull Supplier<LootProviderStrategy> lootProviderStrategySupplier) {
+        return (blockRegistry, additionalData) -> lootProviderStrategySupplier.get().generateLoot(blockRegistry, provider, additionalData);
     }
 }

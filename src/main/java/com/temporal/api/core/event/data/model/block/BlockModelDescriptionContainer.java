@@ -1,5 +1,6 @@
 package com.temporal.api.core.event.data.model.block;
 
+import com.temporal.api.core.collection.Pair;
 import com.temporal.api.core.collection.TemporalMap;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
@@ -28,7 +29,7 @@ public final class BlockModelDescriptionContainer {
     public static final Map<DeferredBlock<?>, Object[]> CARPETS = new TemporalMap<>();
     public static final Map<DeferredBlock<?>, Object[]> PANES = new TemporalMap<>();
     public static final Map<DeferredBlock<?>, Object[]> RAILS = new TemporalMap<>();
-    public static final Map<DeferredBlock<?>, BlockModelProviderStrategy> CUSTOM_MODELS = new TemporalMap<>();
+    public static final Map<Pair<DeferredBlock<?>, Object[]>, BlockModelProviderStrategy> CUSTOM_MODELS = new TemporalMap<>();
 
     private BlockModelDescriptionContainer() {
     }

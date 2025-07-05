@@ -11,5 +11,8 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface BlockLootTable {
     BlockLootTableType value() default BlockLootTableType.SELF;
-    String itemId() default "";
+
+    String[] additionalStrings() default {};
+
+    int[] additionalInts() default {};
 }

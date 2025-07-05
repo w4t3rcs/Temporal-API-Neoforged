@@ -17,7 +17,7 @@ public class ItemModelProviderStrategyConsumerImpl implements ItemModelProviderS
         CROSSBOW_ITEMS.forEach(registerItemModel(provider, CrossbowModelProviderStrategy::new));
         TRIMMED_ARMOR_ITEMS.forEach(registerItemModel(provider, TrimmedItemModelProviderStrategy::new));
         POTION_ITEMS.forEach(registerItemModel(provider, PotionItemModelProviderStrategy::new));
-        CUSTOM_MODELS.forEach((key, value) -> value.registerItemModel(key, provider));
+        CUSTOM_MODELS.forEach((key, value) -> value.registerItemModel(key.getLeft(), provider, key.getRight()));
     }
 
     @Override

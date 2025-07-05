@@ -1,16 +1,13 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field.data.other;
 
-import com.temporal.api.core.engine.io.context.InjectionPool;
 import com.temporal.api.core.engine.io.metadata.annotation.data.other.BlockLootTable;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.event.data.loot.BlockLootTableProvider;
-import com.temporal.api.core.exception.NotFoundException;
-import net.minecraft.core.Holder;
-import net.minecraft.world.item.Item;
+import com.temporal.api.core.util.other.CollectionUtils;
 import net.neoforged.neoforge.registries.DeferredBlock;
-import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.lang.reflect.Field;
+import java.util.Arrays;
 
 public class BlockLootTableStrategy implements FieldAnnotationStrategy {
     @Override
@@ -19,20 +16,16 @@ public class BlockLootTableStrategy implements FieldAnnotationStrategy {
             field.setAccessible(true);
             DeferredBlock<?> registryObject = (DeferredBlock<?>) field.get(object);
             BlockLootTable blockLootTable = field.getDeclaredAnnotation(BlockLootTable.class);
+            String[] additionalStrings = blockLootTable.additionalStrings();
+            Integer[] additionalInts = Arrays.stream(blockLootTable.additionalInts()).boxed().toArray(Integer[]::new);
+            Object[] additionalData = CollectionUtils.mergeArrays(additionalStrings, additionalInts);
             switch (blockLootTable.value()) {
-                case SELF -> BlockLootTableProvider.SELF.add(registryObject);
-                case SILK_TOUCH -> BlockLootTableProvider.SILK_TOUCH.add(registryObject);
-                case POTTED_CONTENT -> BlockLootTableProvider.POTTED_CONTENT.add(registryObject);
-                case OTHER -> {
-                    String otherId = blockLootTable.itemId();
-                    Holder<Item> itemRegistry = InjectionPool.<DeferredRegister.Items>getFromInstance("$Items")
-                            .getEntries()
-                            .stream()
-                            .filter(item -> item.getId().getPath().equals(otherId))
-                            .findAny()
-                            .orElseThrow(NotFoundException::new);
-                    BlockLootTableProvider.OTHER.put(registryObject, itemRegistry);
-                }
+                case SELF -> BlockLootTableProvider.SELF.put(registryObject, additionalData);
+                case SILK_TOUCH -> BlockLootTableProvider.SILK_TOUCH.put(registryObject, additionalData);
+                case POTTED_CONTENT -> BlockLootTableProvider.POTTED_CONTENT.put(registryObject, additionalData);
+                case SIGN -> BlockLootTableProvider.SIGN.put(registryObject, additionalData);
+                case HANGING_SIGN -> BlockLootTableProvider.HANGING_SIGN.put(registryObject, additionalData);
+                case OTHER -> BlockLootTableProvider.OTHER.put(registryObject, additionalData);
             }
         }
     }

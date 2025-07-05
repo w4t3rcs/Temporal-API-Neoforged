@@ -11,4 +11,8 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface CustomBlockModel {
     Class<? extends BlockModelProviderStrategy> value();
+
+    String[] additionalStrings() default {};
+
+    int[] additionalInts() default {};
 }

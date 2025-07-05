@@ -1,5 +1,6 @@
 package com.temporal.api.core.event.data.model.item;
 
+import com.temporal.api.core.collection.Pair;
 import com.temporal.api.core.collection.TemporalMap;
 import net.neoforged.neoforge.registries.DeferredItem;
 
@@ -12,7 +13,7 @@ public final class ItemModelDescriptionContainer {
     public static final Map<DeferredItem<?>, Object[]> CROSSBOW_ITEMS = new TemporalMap<>();
     public static final Map<DeferredItem<?>, Object[]> TRIMMED_ARMOR_ITEMS = new TemporalMap<>();
     public static final Map<DeferredItem<?>, Object[]> POTION_ITEMS = new TemporalMap<>();
-    public static final Map<DeferredItem<?>, ItemModelProviderStrategy> CUSTOM_MODELS = new TemporalMap<>();
+    public static final Map<Pair<DeferredItem<?>, Object[]>, ItemModelProviderStrategy> CUSTOM_MODELS = new TemporalMap<>();
 
     private ItemModelDescriptionContainer() {
     }
