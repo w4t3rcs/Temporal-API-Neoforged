@@ -25,7 +25,7 @@ public @interface TreeGeneration {
     int baseValue();
     int chance();
     int addedAmount();
-    String biomeTag() default "is_overworld";
+    String biomeTag() default "minecraft:is_overworld";
     Class<?> biomeTagContainer() default Object.class;
 
     @interface Trunk {

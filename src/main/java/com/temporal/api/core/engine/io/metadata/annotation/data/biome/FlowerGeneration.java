@@ -24,6 +24,6 @@ public @interface FlowerGeneration {
     float noiseLevel() default -0.8F;
     int belowNoise() default 15;
     int aboveNoise() default 4;
-    String biomeTag() default "is_overworld";
+    String biomeTag() default "minecraft:is_overworld";
     Class<?> biomeTagContainer() default Object.class;
 }

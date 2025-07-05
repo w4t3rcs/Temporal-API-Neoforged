@@ -11,6 +11,6 @@ public @interface GrassGeneration {
     String blockId();
     int tries() default 32;
     int count() default 5;
-    String biomeTag() default "is_overworld";
+    String biomeTag() default "minecraft:is_overworld";
     Class<?> biomeTagContainer() default Object.class;
 }
