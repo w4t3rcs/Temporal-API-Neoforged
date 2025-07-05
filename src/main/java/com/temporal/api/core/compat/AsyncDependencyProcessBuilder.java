@@ -9,24 +9,42 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class AsyncDependencyProcessBuilder extends AbstractDependencyProcessBuilder<AsyncDependencyProcessBuilder> {
-    private static final int FIXED_THREAD_NUMBER = 3;
+    private static final byte DEFAULT_FIXED_THREAD_POOL_COUNT = 3;
+    private static final long DEFAULT_TIMEOUT = 30L;
+    private final ExecutorService threadPool;
+    private final boolean isTerminable;
 
-    protected AsyncDependencyProcessBuilder(List<String> dependencyIds) {
+    protected AsyncDependencyProcessBuilder(ExecutorService threadPool, boolean isTerminable, List<String> dependencyIds) {
         super(dependencyIds);
+        this.threadPool = threadPool;
+        this.isTerminable = isTerminable;
     }
 
     public static AsyncDependencyProcessBuilder create(String dependencyId, String... additionalDependencyIds) {
+        return create(DEFAULT_FIXED_THREAD_POOL_COUNT, dependencyId, additionalDependencyIds);
+    }
+
+    public static AsyncDependencyProcessBuilder create(byte fixedThreadPoolCount, String dependencyId, String... additionalDependencyIds) {
+        return create(Executors.newFixedThreadPool(fixedThreadPoolCount), dependencyId, additionalDependencyIds);
+    }
+
+    public static AsyncDependencyProcessBuilder create(ExecutorService threadPool, String dependencyId, String... additionalDependencyIds) {
+        return create(threadPool, true, dependencyId, additionalDependencyIds);
+    }
+
+    public static AsyncDependencyProcessBuilder create(ExecutorService threadPool, boolean isTerminable, String dependencyId, String... additionalDependencyIds) {
         List<String> ids = new ArrayList<>(additionalDependencyIds.length + 1);
         ids.add(dependencyId);
         ids.addAll(List.of(additionalDependencyIds));
-        return new AsyncDependencyProcessBuilder(ids);
+        return new AsyncDependencyProcessBuilder(threadPool, isTerminable, ids);
     }
 
     @Override
-    public AsyncDependencyProcessBuilder addEventProcess(EventHandler eventHandler) {
-        return this.addProcess(eventHandler::handle);
+    public AsyncDependencyProcessBuilder addProcess(EventHandler eventHandler) {
+        return this.addProcess((DependencyFunction) eventHandler::handle);
     }
 
     @Override
@@ -50,14 +68,29 @@ public class AsyncDependencyProcessBuilder extends AbstractDependencyProcessBuil
 
     @Override
     public void build() {
-        ExecutorService pool = Executors.newFixedThreadPool(FIXED_THREAD_NUMBER);
         try {
             List<CompletableFuture<Void>> futures = this.getCallbacks().stream()
-                    .map(callback -> CompletableFuture.runAsync(callback::execute, pool))
+                    .map(callback -> CompletableFuture.runAsync(() -> {
+                        try {
+                            callback.execute();
+                        } catch (Exception e) {
+                            ApiMod.LOGGER.error("Error while running dependency process", e);
+                            throw new RuntimeException(e);
+                        }}, threadPool))
                     .toList();
             CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
         } finally {
-            pool.shutdown();
+            if (isTerminable) {
+                threadPool.shutdown();
+                try {
+                    if (!threadPool.awaitTermination(DEFAULT_TIMEOUT, TimeUnit.SECONDS)) {
+                        threadPool.shutdownNow();
+                    }
+                } catch (InterruptedException e) {
+                    threadPool.shutdownNow();
+                    Thread.currentThread().interrupt();
+                }
+            }
         }
     }
 }

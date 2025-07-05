@@ -20,8 +20,8 @@ public class SimpleDependencyProcessBuilder extends AbstractDependencyProcessBui
     }
 
     @Override
-    public SimpleDependencyProcessBuilder addEventProcess(EventHandler eventHandler) {
-        return this.addProcess(eventHandler::handle);
+    public SimpleDependencyProcessBuilder addProcess(EventHandler eventHandler) {
+        return this.addProcess((DependencyFunction) eventHandler::handle);
     }
 
     @Override
