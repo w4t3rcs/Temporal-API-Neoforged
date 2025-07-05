@@ -1,6 +1,7 @@
 package com.temporal.api.core.event.data.trim.material;
 
 import com.temporal.api.core.collection.TemporalMap;
+import com.temporal.api.core.event.data.json.AtlasTrimProvider;
 import com.temporal.api.core.util.other.RegistryUtils;
 import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.Util;
@@ -10,6 +11,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.armortrim.TrimMaterial;
 
@@ -23,11 +25,14 @@ public class ApiTrimMaterialProvider implements TrimMaterialProvider {
         TRIM_MATERIALS.forEach((trimMaterial, description) -> {
             String assetName = ResourceUtils.getResourceId(trimMaterial);
             Item ingredient = RegistryUtils.getItemById(description.itemId());
-            String descriptionId = Util.makeDescriptionId("trim_material", trimMaterial.location());
+            ResourceLocation location = trimMaterial.location();
+            String descriptionId = Util.makeDescriptionId("trim_material", location);
             TextColor textColor = TextColor.parseColor(description.color()).getOrThrow();
             Style style = Style.EMPTY.withColor(textColor);
             MutableComponent component = Component.translatable(descriptionId).withStyle(style);
             context.register(trimMaterial, TrimMaterial.create(assetName, ingredient, description.itemModelIndex(), component, Map.of()));
+            Map<String, ResourceLocation> materialLocations = AtlasTrimProvider.TRIM_INFO.getRight();
+            materialLocations.put(assetName, location);
         });
     }
 

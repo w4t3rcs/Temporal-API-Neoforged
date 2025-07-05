@@ -25,7 +25,7 @@ public class PlaceablePaintingProvider implements JsonProvider {
     public void registerFiles() {
         String placeablesString = PLACEABLES.stream()
                 .map(ResourceKey::location)
-                .map(location -> "\"" + location.getNamespace() + ":" + location.getPath() + "\"")
+                .map(location -> "\"" + location + "\"")
                 .collect(Collectors.joining(",\n"));
         IOUtils.writeJson(TARGET_FILE_PATH, FORMAT, placeablesString);
         PLACEABLES.clear();

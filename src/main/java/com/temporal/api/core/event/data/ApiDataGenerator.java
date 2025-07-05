@@ -1,6 +1,7 @@
 package com.temporal.api.core.event.data;
 
 import com.temporal.api.core.event.data.advancement.AdvancementProviderFactory;
+import com.temporal.api.core.event.data.json.AtlasTrimProvider;
 import com.temporal.api.core.event.data.json.JsonProvider;
 import com.temporal.api.core.event.data.json.PlaceablePaintingProvider;
 import com.temporal.api.core.event.data.language.provider.*;
@@ -196,7 +197,8 @@ public class ApiDataGenerator implements DataGatherer {
     @Override
     public void addJsonProvider(GatherDataEvent event) {
         List.of(
-                new PlaceablePaintingProvider()
+                new PlaceablePaintingProvider(),
+                new AtlasTrimProvider()
         ).forEach(JsonProvider::registerFiles);
     }
 
