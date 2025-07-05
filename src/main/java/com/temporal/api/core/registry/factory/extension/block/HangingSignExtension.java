@@ -28,7 +28,7 @@ public interface HangingSignExtension {
                 .noCollission()
                 .strength(strength)
                 .ignitedByLava(), props -> new CeilingHangingSignBlock(woodType, props));
-        DeferredBlock<Block> wallHangingSignBlock = factory.createWithoutItem(name, properties.mapColor(color)
+        DeferredBlock<Block> wallHangingSignBlock = factory.createWithoutItem(name.replace("hanging", "wall_hanging"), properties.mapColor(color)
                 .forceSolidOn()
                 .instrument(NoteBlockInstrument.BASS)
                 .noCollission()

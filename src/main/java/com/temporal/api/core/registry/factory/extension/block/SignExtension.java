@@ -28,7 +28,7 @@ public interface SignExtension {
                 .noCollission()
                 .strength(strength)
                 .ignitedByLava(), props -> new StandingSignBlock(woodType, props));
-        DeferredBlock<Block> wallSignBlock = factory.createWithoutItem(name, properties.mapColor(MapColor.WOOD)
+        DeferredBlock<Block> wallSignBlock = factory.createWithoutItem(name.replace("sign", "wall_sign"), properties.mapColor(MapColor.WOOD)
                 .forceSolidOn()
                 .instrument(NoteBlockInstrument.BASS)
                 .noCollission()
