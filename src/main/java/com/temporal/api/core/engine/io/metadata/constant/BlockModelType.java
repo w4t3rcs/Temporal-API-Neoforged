@@ -14,5 +14,7 @@ public enum BlockModelType {
     SLAB,
     STAIRS,
     TRAPDOOR,
-    WALL
+    WALL,
+    SIGN,
+    HANGING_SIGN
 }

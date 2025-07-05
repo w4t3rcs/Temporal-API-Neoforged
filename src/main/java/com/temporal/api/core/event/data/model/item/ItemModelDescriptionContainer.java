@@ -1,19 +1,17 @@
 package com.temporal.api.core.event.data.model.item;
 
 import com.temporal.api.core.collection.TemporalMap;
-import com.temporal.api.core.collection.TemporalQueue;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 import java.util.Map;
-import java.util.Queue;
 
 public final class ItemModelDescriptionContainer {
-    public static final Queue<DeferredItem<?>> BASIC_ITEMS = new TemporalQueue<>();
-    public static final Queue<DeferredItem<?>> HANDHELD_ITEMS = new TemporalQueue<>();
-    public static final Queue<DeferredItem<?>> BOW_ITEMS = new TemporalQueue<>();
-    public static final Queue<DeferredItem<?>> CROSSBOW_ITEMS = new TemporalQueue<>();
-    public static final Queue<DeferredItem<?>> TRIMMED_ARMOR_ITEMS = new TemporalQueue<>();
-    public static final Queue<DeferredItem<?>> POTION_ITEMS = new TemporalQueue<>();
+    public static final Map<DeferredItem<?>, Object[]> BASIC_ITEMS = new TemporalMap<>();
+    public static final Map<DeferredItem<?>, Object[]> HANDHELD_ITEMS = new TemporalMap<>();
+    public static final Map<DeferredItem<?>, Object[]> BOW_ITEMS = new TemporalMap<>();
+    public static final Map<DeferredItem<?>, Object[]> CROSSBOW_ITEMS = new TemporalMap<>();
+    public static final Map<DeferredItem<?>, Object[]> TRIMMED_ARMOR_ITEMS = new TemporalMap<>();
+    public static final Map<DeferredItem<?>, Object[]> POTION_ITEMS = new TemporalMap<>();
     public static final Map<DeferredItem<?>, ItemModelProviderStrategy> CUSTOM_MODELS = new TemporalMap<>();
 
     private ItemModelDescriptionContainer() {

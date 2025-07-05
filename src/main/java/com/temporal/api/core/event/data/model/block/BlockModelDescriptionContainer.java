@@ -1,27 +1,27 @@
 package com.temporal.api.core.event.data.model.block;
 
 import com.temporal.api.core.collection.TemporalMap;
-import com.temporal.api.core.collection.TemporalQueue;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 import java.util.Map;
-import java.util.Queue;
 
 public final class BlockModelDescriptionContainer {
-    public static final Queue<DeferredBlock<?>> CUBED_BLOCKS = new TemporalQueue<>();
-    public static final Queue<DeferredBlock<?>> CUTOUT_CUBED_BLOCKS = new TemporalQueue<>();
-    public static final Queue<DeferredBlock<?>> CROSS_BLOCKS = new TemporalQueue<>();
-    public static final Queue<DeferredBlock<?>> FLOWER_BLOCKS = new TemporalQueue<>();
-    public static final Queue<DeferredBlock<?>> LOGS = new TemporalQueue<>();
-    public static final Queue<DeferredBlock<?>> BUTTONS = new TemporalQueue<>();
-    public static final Queue<DeferredBlock<?>> DOORS = new TemporalQueue<>();
-    public static final Queue<DeferredBlock<?>> FENCES = new TemporalQueue<>();
-    public static final Queue<DeferredBlock<?>> FENCE_GATES = new TemporalQueue<>();
-    public static final Queue<DeferredBlock<?>> PRESSURE_PLATES = new TemporalQueue<>();
-    public static final Queue<DeferredBlock<?>> SLABS = new TemporalQueue<>();
-    public static final Queue<DeferredBlock<?>> STAIRS = new TemporalQueue<>();
-    public static final Queue<DeferredBlock<?>> TRAPDOORS = new TemporalQueue<>();
-    public static final Queue<DeferredBlock<?>> WALLS = new TemporalQueue<>();
+    public static final Map<DeferredBlock<?>, Object[]> CUBED_BLOCKS = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> CUTOUT_CUBED_BLOCKS = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> CROSS_BLOCKS = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> FLOWER_BLOCKS = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> LOGS = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> BUTTONS = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> DOORS = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> FENCES = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> FENCE_GATES = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> PRESSURE_PLATES = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> SLABS = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> STAIRS = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> TRAPDOORS = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> WALLS = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> SIGNS = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> HANGING_SIGNS = new TemporalMap<>();
     public static final Map<DeferredBlock<?>, BlockModelProviderStrategy> CUSTOM_MODELS = new TemporalMap<>();
 
     private BlockModelDescriptionContainer() {

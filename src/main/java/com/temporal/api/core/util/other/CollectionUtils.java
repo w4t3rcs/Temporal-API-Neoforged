@@ -4,13 +4,21 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collector;
 
-public final class HolderUtils {
-    private HolderUtils() {
+public final class CollectionUtils {
+    private CollectionUtils() {
+    }
+
+    public static Object[] mergeArrays(Object[]... arrays) {
+        if (arrays == null || arrays.length == 0) return new Object[]{};
+        return Arrays.stream(arrays)
+                .flatMap(Arrays::stream)
+                .toArray(Object[]::new);
     }
 
     public static <T> HolderSet<T> createHolderSetFromIds(List<String> ids, Function<String, T> mapper) {

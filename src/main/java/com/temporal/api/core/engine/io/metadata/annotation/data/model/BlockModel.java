@@ -11,4 +11,8 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface BlockModel {
     BlockModelType value() default BlockModelType.CUBED;
+
+    String[] additionalStrings() default {};
+
+    int[] additionalInts() default {};
 }

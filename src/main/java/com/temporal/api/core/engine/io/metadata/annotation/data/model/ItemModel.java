@@ -11,4 +11,10 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface ItemModel {
     ItemModelType value() default ItemModelType.BASIC;
+
+    String[] additionalStrings() default {};
+
+    int[] additionalInts() default {};
+
+    Class<?>[] additionalPOJOClasses() default {};
 }
