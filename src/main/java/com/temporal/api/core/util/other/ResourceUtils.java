@@ -16,14 +16,14 @@ public final class ResourceUtils {
     }
 
     public static <T> ResourceKey<T> createNamespacedResourceKey(ResourceKey<? extends Registry<T>> registry, String name) {
-        return ResourceKey.create(registry, createNamespacedResourceLocation(name));
+        return ResourceKey.create(registry, parse(name));
     }
 
     public static <T> ResourceKey<T> createResourceKey(ResourceKey<? extends Registry<T>> registry, String name) {
         return ResourceKey.create(registry, createResourceLocation(name));
     }
 
-    public static ResourceLocation createNamespacedResourceLocation(String name) {
+    public static ResourceLocation parse(String name) {
         String[] split = name.split(":");
         return ResourceLocation.fromNamespaceAndPath(split[0], split[1]);
     }
