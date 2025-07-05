@@ -25,7 +25,7 @@ public class BlockLootTableStrategy implements FieldAnnotationStrategy {
                 case POTTED_CONTENT -> BlockLootTableProvider.POTTED_CONTENT.add(registryObject);
                 case OTHER -> {
                     String otherId = blockLootTable.itemId();
-                    Holder<Item> itemRegistry = InjectionPool.<DeferredRegister.Items>getFromInstance("items")
+                    Holder<Item> itemRegistry = InjectionPool.<DeferredRegister.Items>getFromInstance("$Items")
                             .getEntries()
                             .stream()
                             .filter(item -> item.getId().getPath().equals(otherId))
