@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class AsyncDependencyProcessBuilder extends AbstractDependencyProcessBuilder<AsyncDependencyProcessBuilder> {
-    private static final int FIXED_THREAD_NUMBER = 2;
+    private static final int FIXED_THREAD_NUMBER = 3;
 
     protected AsyncDependencyProcessBuilder(List<String> dependencyIds) {
         super(dependencyIds);
