@@ -65,6 +65,7 @@ public class NeoMod {
                 .add("name", name)
                 .add("clazz", clazz)
                 .add("modId", modId)
+                .add("classes", classes)
                 .toString();
     }
 }
