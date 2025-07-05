@@ -18,7 +18,7 @@ public abstract class ApiBlockLootTableProvider extends BlockLootSubProvider {
     @Override
     @NotNull
     protected Iterable<Block> getKnownBlocks() {
-        return InjectionPool.<DeferredRegister.Blocks>getFromInstance("blocks")
+        return InjectionPool.<DeferredRegister.Blocks>getFromInstance("$Blocks")
                 .getEntries()
                 .stream()
                 .map(holder -> (Block) holder.get())
