@@ -1,6 +1,6 @@
 package com.temporal.api.core.event.data.tag.biome;
 
-import com.temporal.api.core.collection.TemporalHashMap;
+import com.temporal.api.core.collection.TemporalMap;
 import com.temporal.api.core.engine.io.IOLayer;
 import com.temporal.api.core.event.data.preparer.tag.biome.BiomeTagDynamicPreparer;
 import net.minecraft.core.HolderLookup;
@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 public class ApiBiomeTagsProvider extends BiomeTagsProvider {
-    public static final Map<String, List<ResourceKey<Biome>>> TAG_GENERATION_DESCRIPTIONS = new TemporalHashMap<>();
+    public static final Map<String, List<ResourceKey<Biome>>> TAG_GENERATION_DESCRIPTIONS = new TemporalMap<>();
 
     public ApiBiomeTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper existingFileHelper) {
         super(output, lookupProvider, IOLayer.NEO_MOD.getModId(), existingFileHelper);

@@ -1,6 +1,6 @@
 package com.temporal.api.core.event.data.tag.block;
 
-import com.temporal.api.core.collection.TemporalHashMap;
+import com.temporal.api.core.collection.TemporalMap;
 import com.temporal.api.core.engine.io.IOLayer;
 import com.temporal.api.core.event.data.preparer.tag.block.BlockTagDynamicPreparer;
 import net.minecraft.core.HolderLookup;
@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 public class ApiBlockTagsProvider extends BlockTagsProvider {
-    public static final Map<String, List<DeferredBlock<?>>> TAG_GENERATION_DESCRIPTIONS = new TemporalHashMap<>();
+    public static final Map<String, List<DeferredBlock<?>>> TAG_GENERATION_DESCRIPTIONS = new TemporalMap<>();
 
     public ApiBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper existingFileHelper) {
         super(output, lookupProvider, IOLayer.NEO_MOD.getModId(), existingFileHelper);

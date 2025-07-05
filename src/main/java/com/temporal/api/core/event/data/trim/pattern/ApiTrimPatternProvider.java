@@ -1,6 +1,6 @@
 package com.temporal.api.core.event.data.trim.pattern;
 
-import com.temporal.api.core.collection.TemporalHashMap;
+import com.temporal.api.core.collection.TemporalMap;
 import com.temporal.api.core.util.other.RegistryUtils;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
@@ -15,7 +15,7 @@ import net.minecraft.world.item.armortrim.TrimPattern;
 import java.util.Map;
 
 public class ApiTrimPatternProvider implements TrimPatternProvider {
-    public static final Map<ResourceKey<TrimPattern>, TrimPatternDescriptionHolder> TRIM_PATTERNS = new TemporalHashMap<>();
+    public static final Map<ResourceKey<TrimPattern>, TrimPatternDescriptionHolder> TRIM_PATTERNS = new TemporalMap<>();
 
     @Override
     public void registerTrimPatterns(BootstrapContext<TrimPattern> context) {

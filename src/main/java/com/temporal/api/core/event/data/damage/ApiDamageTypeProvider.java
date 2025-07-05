@@ -1,6 +1,6 @@
 package com.temporal.api.core.event.data.damage;
 
-import com.temporal.api.core.collection.TemporalHashMap;
+import com.temporal.api.core.collection.TemporalMap;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -9,7 +9,7 @@ import net.minecraft.world.damagesource.DamageType;
 import java.util.Map;
 
 public class ApiDamageTypeProvider implements DamageTypeProvider {
-    public static final Map<ResourceKey<DamageType>, DamageTypeDescriptionHolder> DAMAGE_TYPES = new TemporalHashMap<>();
+    public static final Map<ResourceKey<DamageType>, DamageTypeDescriptionHolder> DAMAGE_TYPES = new TemporalMap<>();
 
     @Override
     public void registerDamageTypes(BootstrapContext<DamageType> context) {

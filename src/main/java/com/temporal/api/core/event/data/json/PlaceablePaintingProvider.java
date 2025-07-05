@@ -1,6 +1,6 @@
 package com.temporal.api.core.event.data.json;
 
-import com.temporal.api.core.collection.TemporalArrayDeque;
+import com.temporal.api.core.collection.TemporalQueue;
 import com.temporal.api.core.util.other.IOUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.decoration.PaintingVariant;
@@ -10,7 +10,7 @@ import java.util.Queue;
 import java.util.stream.Collectors;
 
 public class PlaceablePaintingProvider implements JsonProvider {
-    public static final Queue<ResourceKey<PaintingVariant>> PLACEABLES = new TemporalArrayDeque<>();
+    public static final Queue<ResourceKey<PaintingVariant>> PLACEABLES = new TemporalQueue<>();
     private static final String FORMAT = """
             {
               "values": [

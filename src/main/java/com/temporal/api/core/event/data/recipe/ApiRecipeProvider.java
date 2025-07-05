@@ -1,6 +1,6 @@
 package com.temporal.api.core.event.data.recipe;
 
-import com.temporal.api.core.collection.TemporalArrayDeque;
+import com.temporal.api.core.collection.TemporalQueue;
 import com.temporal.api.core.event.data.recipe.holder.*;
 import com.temporal.api.core.event.data.recipe.strategy.*;
 import net.minecraft.advancements.Criterion;
@@ -21,7 +21,7 @@ import java.util.Queue;
 import java.util.concurrent.CompletableFuture;
 
 public class ApiRecipeProvider extends RecipeProvider {
-    public static final Queue<RecipeHolder> RECIPES = new TemporalArrayDeque<>();
+    public static final Queue<RecipeHolder> RECIPES = new TemporalQueue<>();
     private static final RecipeStrategy<ShapelessRecipeHolder> SHAPELESS_RECIPE_STRATEGY = new ShapelessRecipeStrategy();
     private static final RecipeStrategy<ShapedRecipeHolder> SHAPED_RECIPE_STRATEGY = new ShapedRecipeStrategy();
     private static final RecipeStrategy<BlastingRecipeHolder> BLASTING_RECIPE_STRATEGY = new BlastingRecipeStrategy();

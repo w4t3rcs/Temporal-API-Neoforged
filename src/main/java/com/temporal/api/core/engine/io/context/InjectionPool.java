@@ -6,13 +6,18 @@ import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
 
 public class InjectionPool implements ObjectPool {
     private final Map<ContextKey, Object> objects;
+    private final Map<String, ContextKey> cachedNames;
+    private final Map<Class<?>, ContextKey> cachedClasses;
 
     protected InjectionPool() {
         this.objects = new HashMap<>();
+        this.cachedNames = new ConcurrentHashMap<>();
+        this.cachedClasses = new ConcurrentHashMap<>();
     }
 
     @Override
@@ -35,12 +40,15 @@ public class InjectionPool implements ObjectPool {
 
     @Override
     public ContextKey getContextKey(String name) {
-        return this.getContextKey(key -> name.equals(key.getName()));
+        return cachedNames.computeIfAbsent(name, (id) ->
+                this.getContextKey(key -> id.equals(key.getName())));
     }
 
     @Override
     public ContextKey getContextKey(Class<?> clazz) {
-        return this.getContextKey(key -> clazz.equals(key.getClazz()));
+        return cachedClasses.computeIfAbsent(clazz, (id) ->
+                this.getContextKey(key -> id.equals(key.getClazz())));
+
     }
 
     @Override
@@ -88,21 +96,28 @@ public class InjectionPool implements ObjectPool {
     @Override
     public <T> void putObject(ContextKey key, T value) {
         this.objects.put(key, value);
+        this.cachedNames.put(key.getName(), key);
+        this.cachedClasses.put(key.getClazz(), key);
     }
 
     @Override
     public <T> void removeObject(Class<? extends T> key) {
-        this.objects.remove(this.getContextKey(key));
+        ContextKey contextKey = this.getContextKey(key);
+        this.objects.remove(contextKey);
+        this.cachedNames.remove(contextKey.getName());
+        this.cachedClasses.remove(key);
     }
 
     @Override
     public <T> void removeObject(T value) {
-        this.objects.remove(this.getContextKey(value.getClass()));
+        this.removeObject(value.getClass());
     }
 
     @Override
     public void removeAllObjects() {
         this.objects.clear();
+        this.cachedNames.clear();
+        this.cachedClasses.clear();
     }
 
     private ContextKey getContextKey(Predicate<? super ContextKey> predicate) {

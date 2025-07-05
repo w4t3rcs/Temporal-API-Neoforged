@@ -1,7 +1,7 @@
 package com.temporal.api.core.event.data.modifier;
 
 import com.temporal.api.common.loot.AddItemModifier;
-import com.temporal.api.core.collection.TemporalArrayDeque;
+import com.temporal.api.core.collection.TemporalQueue;
 import com.temporal.api.core.engine.io.IOLayer;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -15,7 +15,7 @@ import java.util.Queue;
 import java.util.concurrent.CompletableFuture;
 
 public class ApiGlobalLootModifierProvider extends GlobalLootModifierProvider {
-    public static final Queue<ChestModifierDescription> CHEST_MODIFIER_DESCRIPTIONS = new TemporalArrayDeque<>();
+    public static final Queue<ChestModifierDescription> CHEST_MODIFIER_DESCRIPTIONS = new TemporalQueue<>();
 
     public ApiGlobalLootModifierProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, IOLayer.NEO_MOD.getModId());

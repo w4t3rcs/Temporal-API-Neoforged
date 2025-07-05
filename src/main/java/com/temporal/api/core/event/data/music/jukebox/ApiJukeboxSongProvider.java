@@ -1,6 +1,6 @@
 package com.temporal.api.core.event.data.music.jukebox;
 
-import com.temporal.api.core.collection.TemporalArrayDeque;
+import com.temporal.api.core.collection.TemporalQueue;
 import com.temporal.api.core.util.other.RegistryUtils;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
@@ -14,7 +14,7 @@ import net.minecraft.world.item.JukeboxSong;
 import java.util.Queue;
 
 public class ApiJukeboxSongProvider implements JukeboxSongProvider {
-    public static final Queue<JukeboxSongDescriptionHolder> SONGS = new TemporalArrayDeque<>();
+    public static final Queue<JukeboxSongDescriptionHolder> SONGS = new TemporalQueue<>();
 
     @Override
     public void registerSong(BootstrapContext<JukeboxSong> context) {

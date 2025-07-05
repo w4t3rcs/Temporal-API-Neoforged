@@ -1,6 +1,6 @@
 package com.temporal.api.core.event.data.wolf;
 
-import com.temporal.api.core.collection.TemporalArrayDeque;
+import com.temporal.api.core.collection.TemporalQueue;
 import com.temporal.api.core.event.data.preparer.tag.biome.BiomeTagDynamicPreparer;
 import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.core.HolderGetter;
@@ -15,7 +15,7 @@ import net.minecraft.world.level.biome.Biome;
 import java.util.Queue;
 
 public class ApiWolfVariantProvider implements WolfVariantProvider {
-    public static final Queue<WolfVariantDescriptionHolder> VARIANTS = new TemporalArrayDeque<>();
+    public static final Queue<WolfVariantDescriptionHolder> VARIANTS = new TemporalQueue<>();
 
     @Override
     public void addVariant(BootstrapContext<WolfVariant> context) {

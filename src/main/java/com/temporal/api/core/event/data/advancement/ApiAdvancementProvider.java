@@ -1,7 +1,7 @@
 package com.temporal.api.core.event.data.advancement;
 
-import com.temporal.api.core.collection.TemporalArrayDeque;
-import com.temporal.api.core.collection.TemporalHashMap;
+import com.temporal.api.core.collection.TemporalMap;
+import com.temporal.api.core.collection.TemporalQueue;
 import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
@@ -17,8 +17,8 @@ import java.util.Queue;
 import java.util.function.Consumer;
 
 public class ApiAdvancementProvider implements AdvancementSubProvider {
-    public static final Queue<AdvancementGenerationHolder> ADVANCEMENTS = new TemporalArrayDeque<>();
-    public static final Map<AdvancementGenerationHolder, AdvancementStrategy> CUSTOM_ADVANCEMENTS = new TemporalHashMap<>();
+    public static final Queue<AdvancementGenerationHolder> ADVANCEMENTS = new TemporalQueue<>();
+    public static final Map<AdvancementGenerationHolder, AdvancementStrategy> CUSTOM_ADVANCEMENTS = new TemporalMap<>();
 
     @Override
     public void generate(@NotNull HolderLookup.Provider provider, @NotNull Consumer<AdvancementHolder> consumer) {

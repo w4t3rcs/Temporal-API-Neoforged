@@ -1,6 +1,6 @@
 package com.temporal.api.core.event.data.painting;
 
-import com.temporal.api.core.collection.TemporalArrayDeque;
+import com.temporal.api.core.collection.TemporalQueue;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.decoration.PaintingVariant;
@@ -8,7 +8,7 @@ import net.minecraft.world.entity.decoration.PaintingVariant;
 import java.util.Queue;
 
 public class ApiPaintingVariantProvider implements PaintingVariantProvider {
-    public static final Queue<PaintingHolder> PAINTINGS = new TemporalArrayDeque<>();
+    public static final Queue<PaintingHolder> PAINTINGS = new TemporalQueue<>();
 
     @Override
     public void registerPaintingVariant(BootstrapContext<PaintingVariant> context) {
