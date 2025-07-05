@@ -17,6 +17,6 @@ public final class BlockTagDynamicPreparer implements DynamicPreparer {
     public void prepare() {
         TAG_CONTAINERS.stream()
                 .flatMap(TagUtils::<Block>getTagKeyStream)
-                .forEach(tag -> TagUtils.putPrioritizedTagKey(tag, BLOCK_TAGS));
+                .forEach(tag -> TagUtils.putTagKey(tag, BLOCK_TAGS));
     }
 }

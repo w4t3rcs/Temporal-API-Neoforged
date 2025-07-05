@@ -17,6 +17,6 @@ public final class ItemTagDynamicPreparer implements DynamicPreparer {
     public void prepare() {
         TAG_CONTAINERS.stream()
                 .flatMap(TagUtils::<Item>getTagKeyStream)
-                .forEach(tag -> TagUtils.putPrioritizedTagKey(tag, ITEM_TAGS));
+                .forEach(tag -> TagUtils.putTagKey(tag, ITEM_TAGS));
     }
 }
