@@ -11,13 +11,33 @@ import java.util.function.BiConsumer;
 
 public class TemporalMap<K, V> implements Map<K, V> {
     private final Map<K, V> delegate;
+    private byte count;
+    private final byte limit;
 
     public TemporalMap() {
-        this.delegate = new HashMap<>();
+        this((byte) 1);
+    }
+
+    public TemporalMap(byte limit) {
+        this((byte) 0, limit);
+    }
+
+    public TemporalMap(byte count, byte limit) {
+        this(new HashMap<>(), count, limit);
     }
 
     public TemporalMap(Map<K, V> delegate) {
+        this(delegate, (byte) 1);
+    }
+
+    public TemporalMap(Map<K, V> delegate, byte limit) {
+        this(delegate, (byte) 0, limit);
+    }
+
+    public TemporalMap(Map<K, V> delegate, byte count, byte limit) {
         this.delegate = delegate;
+        this.count = count;
+        this.limit = limit;
     }
 
     @Override
@@ -89,10 +109,13 @@ public class TemporalMap<K, V> implements Map<K, V> {
         return v;
     }
 
-
     @Override
     public void forEach(BiConsumer<? super K, ? super V> action) {
         delegate.forEach(action);
-        this.clear();
+        count++;
+        if (count == limit) {
+            this.clear();
+            count = 0;
+        }
     }
 }
