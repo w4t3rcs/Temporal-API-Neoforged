@@ -6,6 +6,7 @@ public enum BlockModelType {
     CROSS,
     FLOWER,
     LOG,
+    WOOD,
     BUTTON,
     DOOR,
     FENCE,
@@ -16,5 +17,10 @@ public enum BlockModelType {
     TRAPDOOR,
     WALL,
     SIGN,
-    HANGING_SIGN
+    HANGING_SIGN,
+    BARREL,
+    VINE,
+    CARPET,
+    PANE,
+    RAIL
 }

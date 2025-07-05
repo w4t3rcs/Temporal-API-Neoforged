@@ -25,6 +25,7 @@ public class BlockModelStrategy implements FieldAnnotationStrategy {
                 case CROSS -> BlockModelDescriptionContainer.CROSS_BLOCKS.put(registryObject, additionalData);
                 case FLOWER -> BlockModelDescriptionContainer.FLOWER_BLOCKS.put(registryObject, additionalData);
                 case LOG -> BlockModelDescriptionContainer.LOGS.put(registryObject, additionalData);
+                case WOOD -> BlockModelDescriptionContainer.WOODS.put(registryObject, additionalData);
                 case DOOR -> BlockModelDescriptionContainer.DOORS.put(registryObject, additionalData);
                 case BUTTON -> BlockModelDescriptionContainer.BUTTONS.put(registryObject, additionalData);
                 case FENCE -> BlockModelDescriptionContainer.FENCES.put(registryObject, additionalData);
@@ -36,6 +37,11 @@ public class BlockModelStrategy implements FieldAnnotationStrategy {
                 case WALL -> BlockModelDescriptionContainer.WALLS.put(registryObject, additionalData);
                 case SIGN -> BlockModelDescriptionContainer.SIGNS.put(registryObject, additionalData);
                 case HANGING_SIGN -> BlockModelDescriptionContainer.HANGING_SIGNS.put(registryObject, additionalData);
+                case BARREL -> BlockModelDescriptionContainer.BARRELS.put(registryObject, additionalData);
+                case VINE -> BlockModelDescriptionContainer.VINES.put(registryObject, additionalData);
+                case CARPET -> BlockModelDescriptionContainer.CARPETS.put(registryObject, additionalData);
+                case PANE -> BlockModelDescriptionContainer.PANES.put(registryObject, additionalData);
+                case RAIL -> BlockModelDescriptionContainer.RAILS.put(registryObject, additionalData);
             }
         }
     }

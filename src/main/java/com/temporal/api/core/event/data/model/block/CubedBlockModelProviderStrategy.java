@@ -5,7 +5,7 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 
 public class CubedBlockModelProviderStrategy implements BlockModelProviderStrategy {
     @Override
-    public void registerBlockModel(DeferredBlock<?> blockRegistry, ApiBlockModelProvider provider) {
+    public void registerBlockModel(DeferredBlock<?> blockRegistry, ApiBlockModelProvider provider, Object... additionalData) {
         Block block = blockRegistry.get();
         provider.blockWithItem(block);
     }

@@ -51,13 +51,17 @@ public class ApiBlockModelProvider extends BlockStateProvider {
 
     public ResourceLocation getFamilyParentTexture(Block block, String removableSuffix) {
         String texturePath = this.getBlockPath(block).replace(removableSuffix, "");
-        return ResourceLocation.parse(texturePath);
+        return ResourceUtils.parse(texturePath);
     }
 
     public ModelFile singleTextureItemModel(Block block) {
+        return this.singleTextureItemModel(block, this.getBlockPath(block));
+    }
+
+    public ModelFile singleTextureItemModel(Block block, String path) {
         return this.itemModels()
                 .withExistingParent(BuiltInRegistries.ITEM.getKey(block.asItem()).toString(), "item/generated")
-                .texture("layer0", this.getBlockPath(block));
+                .texture("layer0", path);
     }
 
     public void cropBlock(CropBlock block, String modelName, String textureName) {

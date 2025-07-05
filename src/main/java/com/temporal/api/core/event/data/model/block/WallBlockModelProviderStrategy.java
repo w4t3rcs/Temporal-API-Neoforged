@@ -5,7 +5,7 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 
 public class WallBlockModelProviderStrategy implements BlockModelProviderStrategy {
     @Override
-    public void registerBlockModel(DeferredBlock<?> blockRegistry, ApiBlockModelProvider provider) {
+    public void registerBlockModel(DeferredBlock<?> blockRegistry, ApiBlockModelProvider provider, Object... additionalData) {
         provider.familyMemberWithItem((WallBlock) blockRegistry.get(), "_wall",
                 (block, parentTexture) -> provider.wallBlockWithRenderType(block, parentTexture, "minecraft:cutout"),
                 (block, parentTexture) -> provider.itemModels()

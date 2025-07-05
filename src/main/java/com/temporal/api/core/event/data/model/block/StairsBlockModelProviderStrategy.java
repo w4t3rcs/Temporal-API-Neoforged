@@ -5,7 +5,7 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 
 public class StairsBlockModelProviderStrategy implements BlockModelProviderStrategy {
     @Override
-    public void registerBlockModel(DeferredBlock<?> blockRegistry, ApiBlockModelProvider provider) {
+    public void registerBlockModel(DeferredBlock<?> blockRegistry, ApiBlockModelProvider provider, Object... additionalData) {
         provider.familyMemberWithItem((StairBlock) blockRegistry.get(), "_stairs",
                 provider::stairsBlock,
                 (block, parentTexture) -> provider.itemModels()

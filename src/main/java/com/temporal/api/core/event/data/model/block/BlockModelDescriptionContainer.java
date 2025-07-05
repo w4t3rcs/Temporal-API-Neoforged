@@ -11,6 +11,7 @@ public final class BlockModelDescriptionContainer {
     public static final Map<DeferredBlock<?>, Object[]> CROSS_BLOCKS = new TemporalMap<>();
     public static final Map<DeferredBlock<?>, Object[]> FLOWER_BLOCKS = new TemporalMap<>();
     public static final Map<DeferredBlock<?>, Object[]> LOGS = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> WOODS = new TemporalMap<>();
     public static final Map<DeferredBlock<?>, Object[]> BUTTONS = new TemporalMap<>();
     public static final Map<DeferredBlock<?>, Object[]> DOORS = new TemporalMap<>();
     public static final Map<DeferredBlock<?>, Object[]> FENCES = new TemporalMap<>();
@@ -22,6 +23,11 @@ public final class BlockModelDescriptionContainer {
     public static final Map<DeferredBlock<?>, Object[]> WALLS = new TemporalMap<>();
     public static final Map<DeferredBlock<?>, Object[]> SIGNS = new TemporalMap<>();
     public static final Map<DeferredBlock<?>, Object[]> HANGING_SIGNS = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> BARRELS = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> VINES = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> CARPETS = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> PANES = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> RAILS = new TemporalMap<>();
     public static final Map<DeferredBlock<?>, BlockModelProviderStrategy> CUSTOM_MODELS = new TemporalMap<>();
 
     private BlockModelDescriptionContainer() {

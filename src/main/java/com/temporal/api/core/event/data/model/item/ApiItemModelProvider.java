@@ -1,6 +1,7 @@
 package com.temporal.api.core.event.data.model.item;
 
 import com.temporal.api.core.engine.io.IOLayer;
+import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -28,7 +29,7 @@ public class ApiItemModelProvider extends ItemModelProvider {
 
     protected ItemModelBuilder simpleItem(String itemPath, String parent) {
         return this.withExistingParent(itemPath, "item/" + parent)
-                .texture("layer0", ResourceLocation.parse(itemPath));
+                .texture("layer0", ResourceUtils.parse(itemPath));
     }
 
     protected String getItemPath(Item item) {

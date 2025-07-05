@@ -3,9 +3,9 @@ package com.temporal.api.core.event.data.modifier;
 import com.temporal.api.common.loot.AddItemModifier;
 import com.temporal.api.core.collection.TemporalQueue;
 import com.temporal.api.core.engine.io.IOLayer;
+import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.neoforged.neoforge.common.data.GlobalLootModifierProvider;
@@ -25,7 +25,7 @@ public class ApiGlobalLootModifierProvider extends GlobalLootModifierProvider {
     protected void start() {
         CHEST_MODIFIER_DESCRIPTIONS.forEach(description -> {
             add(description.getModifierName(), new AddItemModifier(new LootItemCondition[]{
-                    LootTableIdCondition.builder(ResourceLocation.parse(description.getChestId())).build(),
+                    LootTableIdCondition.builder(ResourceUtils.parse(description.getChestId())).build(),
                     LootItemRandomChanceCondition.randomChance(description.getChance()).build()
             }, description.getItem()));
         });

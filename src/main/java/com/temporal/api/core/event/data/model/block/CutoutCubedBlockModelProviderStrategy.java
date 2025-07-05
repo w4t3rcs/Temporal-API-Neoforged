@@ -6,7 +6,7 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 
 public class CutoutCubedBlockModelProviderStrategy implements BlockModelProviderStrategy {
     @Override
-    public void registerBlockModel(DeferredBlock<?> blockRegistry, ApiBlockModelProvider provider) {
+    public void registerBlockModel(DeferredBlock<?> blockRegistry, ApiBlockModelProvider provider, Object... additionalData) {
         Block block = blockRegistry.get();
         provider.simpleBlock(block, provider.models()
                 .cubeAll(BuiltInRegistries.BLOCK.getKey(block).getPath(), provider.blockTexture(block))

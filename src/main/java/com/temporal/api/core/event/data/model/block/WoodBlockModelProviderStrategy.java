@@ -4,13 +4,13 @@ import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
-public class LogBlockModelProviderStrategy implements BlockModelProviderStrategy {
+public class WoodBlockModelProviderStrategy implements BlockModelProviderStrategy {
     @Override
     public void registerBlockModel(DeferredBlock<?> blockRegistry, ApiBlockModelProvider provider, Object... additionalData) {
         RotatedPillarBlock block = ((RotatedPillarBlock) blockRegistry.get());
-        provider.logBlock(block);
-        String blockPath = provider.getBlockPath(block);
+        String logBlockPath = provider.getBlockPath(block).replace("wood", "log");
+        provider.axisBlock(block, ResourceUtils.parse(logBlockPath), ResourceUtils.parse(logBlockPath));
         provider.simpleBlockItem(block, provider.models()
-                .cubeColumn(blockPath, ResourceUtils.parse(blockPath + "_top"), ResourceUtils.parse(blockPath)));
+                .cubeColumn(logBlockPath, ResourceUtils.parse(logBlockPath), ResourceUtils.parse(logBlockPath)));
     }
 }

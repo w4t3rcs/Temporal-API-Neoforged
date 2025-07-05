@@ -8,7 +8,7 @@ public class FlowerBlockModelProviderStrategy implements BlockModelProviderStrat
     private static final CrossBlockModelProviderStrategy CROSS_PROVIDER = new CrossBlockModelProviderStrategy();
 
     @Override
-    public void registerBlockModel(DeferredBlock<?> blockRegistry, ApiBlockModelProvider provider) {
+    public void registerBlockModel(DeferredBlock<?> blockRegistry, ApiBlockModelProvider provider, Object... additionalData) {
         CROSS_PROVIDER.registerBlockModel(blockRegistry, provider);
         Block block = blockRegistry.get();
         String id = RegistryUtils.getIdFromBlock(block);

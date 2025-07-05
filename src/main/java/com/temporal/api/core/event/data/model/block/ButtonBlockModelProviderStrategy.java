@@ -5,7 +5,7 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 
 public class ButtonBlockModelProviderStrategy implements BlockModelProviderStrategy {
     @Override
-    public void registerBlockModel(DeferredBlock<?> blockRegistry, ApiBlockModelProvider provider) {
+    public void registerBlockModel(DeferredBlock<?> blockRegistry, ApiBlockModelProvider provider, Object... additionalData) {
         provider.familyMemberWithItem((ButtonBlock) blockRegistry.get(), "_button",
                 provider::buttonBlock,
                 (block, parentTexture) -> provider.itemModels()

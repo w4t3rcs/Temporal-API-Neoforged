@@ -5,7 +5,7 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 
 public class SlabBlockModelProviderStrategy implements BlockModelProviderStrategy {
     @Override
-    public void registerBlockModel(DeferredBlock<?> blockRegistry, ApiBlockModelProvider provider) {
+    public void registerBlockModel(DeferredBlock<?> blockRegistry, ApiBlockModelProvider provider, Object... additionalData) {
         provider.familyMemberWithItem((SlabBlock) blockRegistry.get(), "_slab",
                 (block, parentTexture) -> provider.slabBlock(block, parentTexture, parentTexture) ,
                 (block, parentTexture) -> provider.itemModels()
