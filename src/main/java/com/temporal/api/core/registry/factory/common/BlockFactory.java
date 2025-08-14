@@ -11,7 +11,8 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class BlockFactory implements ObjectFactory<Block> {
+@SuppressWarnings("unchecked")
+public class BlockFactory extends AbstractObjectFactory<Block> {
     private final DeferredRegister.Blocks blocks;
     private final ItemFactory itemFactory;
 
@@ -28,39 +29,39 @@ public class BlockFactory implements ObjectFactory<Block> {
         this.itemFactory = itemFactory;
     }
 
-    public DeferredBlock<Block> createWithoutItem(String name, BlockBehaviour.Properties properties) {
-        return blocks.registerBlock(name, Block::new, properties);
+    public <T extends Block> DeferredBlock<T> createWithoutItem(String name, BlockBehaviour.Properties properties) {
+        return (DeferredBlock<T>) blocks.registerBlock(name, Block::new, properties);
     }
 
-    public DeferredBlock<Block> createWithoutItem(String name, BlockBehaviour.Properties properties, Function<BlockBehaviour.Properties, ? extends Block> function) {
-        return blocks.registerBlock(name, function, properties);
+    public <T extends Block> DeferredBlock<T> createWithoutItem(String name, BlockBehaviour.Properties properties, Function<BlockBehaviour.Properties, ? extends Block> function) {
+        return (DeferredBlock<T>) blocks.registerBlock(name, function, properties);
     }
 
-    public DeferredBlock<Block> create(String name, BlockBehaviour.Properties properties) {
+    public <T extends Block> DeferredBlock<T> create(String name, BlockBehaviour.Properties properties) {
         return create(name, properties, new Item.Properties());
     }
 
-    public DeferredBlock<Block> create(String name, BlockBehaviour.Properties properties, Item.Properties itemProperties) {
+    public <T extends Block> DeferredBlock<T> create(String name, BlockBehaviour.Properties properties, Item.Properties itemProperties) {
         return create(name, properties, Block::new, itemProperties);
     }
 
-    public DeferredBlock<Block> create(String name, BlockBehaviour.Properties properties, Function<BlockBehaviour.Properties, ? extends Block> function) {
+    public <T extends Block> DeferredBlock<T> create(String name, BlockBehaviour.Properties properties, Function<BlockBehaviour.Properties, ? extends Block> function) {
         return create(name, properties, function, new Item.Properties());
     }
 
-    public DeferredBlock<Block> create(String name, BlockBehaviour.Properties properties, Function<BlockBehaviour.Properties, ? extends Block> function, Item.Properties itemProperties) {
-        DeferredBlock<Block> block = blocks.registerBlock(name, function, properties);
+    public <T extends Block> DeferredBlock<T> create(String name, BlockBehaviour.Properties properties, Function<BlockBehaviour.Properties, ? extends Block> function, Item.Properties itemProperties) {
+        DeferredBlock<T> block = (DeferredBlock<T>) blocks.registerBlock(name, function, properties);
         this.itemFactory.create(name, itemProperties, props -> new BlockItem(block.value(), props));
         return block;
     }
 
     @Override
-    public DeferredBlock<Block> create(String name, Supplier<Block> blockSupplier) {
-        return create(name, blockSupplier, new Item.Properties());
+    public <T extends Block> DeferredBlock<T> create(String name, Supplier<T> supplier) {
+        return create(name, supplier, new Item.Properties());
     }
 
-    public DeferredBlock<Block> create(String name, Supplier<Block> blockSupplier, Item.Properties itemProperties) {
-        DeferredBlock<Block> block = blocks.register(name, blockSupplier);
+    public <T extends Block> DeferredBlock<T> create(String name, Supplier<T> supplier, Item.Properties itemProperties) {
+        DeferredBlock<T> block = blocks.register(name, supplier);
         this.itemFactory.create(name, itemProperties, props -> new BlockItem(block.value(), props));
         return block;
     }

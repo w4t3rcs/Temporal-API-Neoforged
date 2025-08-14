@@ -18,14 +18,24 @@ public class BlockLootTableStrategy implements FieldAnnotationStrategy {
             BlockLootTable blockLootTable = field.getDeclaredAnnotation(BlockLootTable.class);
             String[] additionalStrings = blockLootTable.additionalStrings();
             Integer[] additionalInts = Arrays.stream(blockLootTable.additionalInts()).boxed().toArray(Integer[]::new);
-            Object[] additionalData = CollectionUtils.mergeArrays(additionalStrings, additionalInts);
+            Double[] additionalDoubles = Arrays.stream(blockLootTable.additionalDoubles()).boxed().toArray(Double[]::new);
+            Object[] additionalData = CollectionUtils.mergeArrays(additionalStrings, additionalInts, additionalDoubles);
             switch (blockLootTable.value()) {
                 case SELF -> BlockLootTableProvider.SELF.put(registryObject, additionalData);
                 case SILK_TOUCH -> BlockLootTableProvider.SILK_TOUCH.put(registryObject, additionalData);
-                case POTTED_CONTENT -> BlockLootTableProvider.POTTED_CONTENT.put(registryObject, additionalData);
-                case SIGN -> BlockLootTableProvider.SIGN.put(registryObject, additionalData);
-                case HANGING_SIGN -> BlockLootTableProvider.HANGING_SIGN.put(registryObject, additionalData);
+                case POTTED_CONTENT -> BlockLootTableProvider.POTTED_CONTENTS.put(registryObject, additionalData);
+                case ORE -> BlockLootTableProvider.ORES.put(registryObject, additionalData);
+                case MULTIPLE_ORE -> BlockLootTableProvider.MULTIPLE_ORES.put(registryObject, additionalData);
+                case GRASS -> BlockLootTableProvider.GRASSES.put(registryObject, additionalData);
+                case LEAVES -> BlockLootTableProvider.LEAVES.put(registryObject, additionalData);
+                case SHULKER_BOX -> BlockLootTableProvider.SHULKER_BOXES.put(registryObject, additionalData);
+                case BANNER -> BlockLootTableProvider.BANNERS.put(registryObject, additionalData);
+                case MUSHROOM_BLOCK -> BlockLootTableProvider.MUSHROOM_BLOCKS.put(registryObject, additionalData);
+                case SHEARS_ONLY -> BlockLootTableProvider.SHEARS_ONLY.put(registryObject, additionalData);
+                case CROP -> BlockLootTableProvider.CROPS.put(registryObject, additionalData);
+                case DOOR -> BlockLootTableProvider.DOORS.put(registryObject, additionalData);
                 case OTHER -> BlockLootTableProvider.OTHER.put(registryObject, additionalData);
+                case EMPTY -> BlockLootTableProvider.EMPTY.put(registryObject, additionalData);
             }
         }
     }

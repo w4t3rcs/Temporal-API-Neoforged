@@ -11,7 +11,7 @@ public final class ToolTierFactory {
     private ToolTierFactory() {
     }
 
-    public static Tier createTier(TagKey<Block> incorrectBlocksForDrops, Item ingredient, int uses, float speed, float attackDamageBonus, int enchantmentValue) {
+    public static Tier create(TagKey<Block> incorrectBlocksForDrops, Item ingredient, int uses, float speed, float attackDamageBonus, int enchantmentValue) {
         return new SimpleTier(incorrectBlocksForDrops, uses, speed, attackDamageBonus, enchantmentValue, () -> Ingredient.of(ingredient));
     }
 }

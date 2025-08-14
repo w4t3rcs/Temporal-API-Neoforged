@@ -2,6 +2,7 @@ package com.temporal.api.core.event.data.model.block;
 
 import com.temporal.api.common.block.ApiCropBlock;
 import com.temporal.api.core.engine.io.IOLayer;
+import com.temporal.api.core.util.other.RegistryUtils;
 import com.temporal.api.core.util.other.ResourceUtils;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -54,6 +55,10 @@ public class ApiBlockModelProvider extends BlockStateProvider {
         return ResourceUtils.parse(texturePath);
     }
 
+    public ModelFile outerSingleTextureItemModel(Block block) {
+        return this.singleTextureItemModel(block, RegistryUtils.getIdFromRegistry(BuiltInRegistries.BLOCK, block, "item"));
+    }
+
     public ModelFile singleTextureItemModel(Block block) {
         return this.singleTextureItemModel(block, this.getBlockPath(block));
     }
@@ -73,17 +78,12 @@ public class ApiBlockModelProvider extends BlockStateProvider {
     public <T extends ApiCropBlock> ConfiguredModel[] states(BlockState state, CropBlock block, String modelName, String textureName) {
         ConfiguredModel[] models = new ConfiguredModel[1];
         Integer age = state.getValue(((T) block).getAgeProperty());
-        models[0] = new ConfiguredModel(models().crop(modelName + age, ResourceUtils.createResourceLocation("block/" + textureName + age))
-                .renderType("cutout"));
+        models[0] = new ConfiguredModel(models().crop(modelName + age, ResourceUtils.parse("block/" + textureName + age))
+                .renderType("minecraft:cutout"));
         return models;
     }
 
     public String getBlockPath(Block block) {
-        return this.getBlockPath(block, "block");
-    }
-
-    public String getBlockPath(Block block, String prefix) {
-        ResourceLocation location = BuiltInRegistries.BLOCK.getKey(block);
-        return location.getNamespace() + ":" + prefix + "/" + location.getPath();
+        return RegistryUtils.getIdFromRegistry(BuiltInRegistries.BLOCK, block, "block");
     }
 }

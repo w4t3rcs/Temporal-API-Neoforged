@@ -20,7 +20,8 @@ public class CustomBlockModelStrategy implements FieldAnnotationStrategy {
             CustomBlockModel blockModel = field.getDeclaredAnnotation(CustomBlockModel.class);
             String[] additionalStrings = blockModel.additionalStrings();
             Integer[] additionalInts = Arrays.stream(blockModel.additionalInts()).boxed().toArray(Integer[]::new);
-            Object[] additionalData = CollectionUtils.mergeArrays(additionalStrings, additionalInts);
+            Double[] additionalDoubles = Arrays.stream(blockModel.additionalDoubles()).boxed().toArray(Double[]::new);
+            Object[] additionalData = CollectionUtils.mergeArrays(additionalStrings, additionalInts, additionalDoubles);
             BlockModelProviderStrategy providerStrategy = blockModel.value()
                     .getDeclaredConstructor()
                     .newInstance();

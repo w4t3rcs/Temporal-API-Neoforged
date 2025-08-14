@@ -12,6 +12,6 @@ public class VineBlockModelProviderStrategy implements BlockModelProviderStrateg
                 .withExistingParent(blockPath, "block/vine")
                 .texture("vine", blockPath)
                 .texture("particle", blockPath));
-        provider.singleTextureItemModel(block);
+        provider.simpleBlockItem(block, provider.singleTextureItemModel(block));
     }
 }

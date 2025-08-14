@@ -10,31 +10,29 @@ import org.jetbrains.annotations.NotNull;
 import java.util.stream.Stream;
 
 public final class ResourceUtils {
-    public static final String MINECRAFT_NAMESPACE = "minecraft";
-
     private ResourceUtils() {
     }
 
-    public static <T> ResourceKey<T> createNamespacedResourceKey(ResourceKey<? extends Registry<T>> registry, String name) {
-        return ResourceKey.create(registry, parse(name));
+    public static <T> ResourceKey<T> createKey(ResourceKey<? extends Registry<T>> registry, String id) {
+        return ResourceKey.create(registry, parse(id));
     }
 
-    public static <T> ResourceKey<T> createResourceKey(ResourceKey<? extends Registry<T>> registry, String name) {
-        return ResourceKey.create(registry, createResourceLocation(name));
+    public static ResourceLocation parse(String id) {
+        if (id.contains(":")) {
+            String[] split = id.split(":");
+            return ResourceLocation.fromNamespaceAndPath(split[0], split[1]);
+        } else {
+            return createLocation(id);
+        }
     }
 
-    public static ResourceLocation parse(String name) {
-        String[] split = name.split(":");
-        return ResourceLocation.fromNamespaceAndPath(split[0], split[1]);
-    }
-
-    public static ResourceLocation createResourceLocation(ResourceKey<?> resourceKey) {
+    public static ResourceLocation createLocation(ResourceKey<?> resourceKey) {
         String namespace = resourceKey.location().getNamespace();
         return ResourceLocation.fromNamespaceAndPath(namespace, getResourceId(resourceKey));
     }
 
-    public static ResourceLocation createResourceLocation(String name) {
-        return ResourceLocation.fromNamespaceAndPath(IOLayer.NEO_MOD.getModId(), name);
+    public static ResourceLocation createLocation(String id) {
+        return ResourceLocation.fromNamespaceAndPath(IOLayer.NEO_MOD.getModId(), id);
     }
 
     @SuppressWarnings("unchecked")
@@ -44,11 +42,11 @@ public final class ResourceUtils {
 
     public static String getResourceId(ResourceKey<?> resourceKey) {
         if (resourceKey == null) throw new RuntimeException("ResourceKey is null");
-        return resourceKey.location().getPath();
+        return resourceKey.location().toString();
     }
 
     public static String getResourceId(TagKey<?> tagKey) {
         if (tagKey == null) throw new RuntimeException("ResourceKey is null");
-        return tagKey.location().getPath();
+        return tagKey.location().toString();
     }
 }

@@ -2,13 +2,11 @@ package com.temporal.api.core.registry.factory.common;
 
 import com.temporal.api.core.engine.io.context.InjectionPool;
 import com.temporal.api.core.util.other.ResourceUtils;
-import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvent;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.function.Supplier;
-
-public class SoundEventFactory implements ObjectFactory<SoundEvent> {
+public class SoundEventFactory extends AbstractObjectFactory<SoundEvent> {
     private final DeferredRegister<SoundEvent> soundEvents;
 
     public SoundEventFactory() {
@@ -19,13 +17,8 @@ public class SoundEventFactory implements ObjectFactory<SoundEvent> {
         this.soundEvents = soundEvents;
     }
 
-    public Holder<SoundEvent> create(String name) {
-        return create(name, () -> SoundEvent.createVariableRangeEvent(ResourceUtils.createResourceLocation(name)));
-    }
-
-    @Override
-    public Holder<SoundEvent> create(String name, Supplier<SoundEvent> soundEventSupplier) {
-        return soundEvents.register(name, soundEventSupplier);
+    public DeferredHolder<SoundEvent, SoundEvent> create(String name) {
+        return create(name, () -> SoundEvent.createVariableRangeEvent(ResourceUtils.parse(name)));
     }
 
     @Override

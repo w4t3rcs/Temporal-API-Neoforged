@@ -21,9 +21,9 @@ public class ApiParticleProvider extends ParticleDescriptionProvider {
     protected void addDescriptions() {
         PARTICLE_SPRITES.forEach((particleType, particleSprite) -> {
             if (particleSprite.count() <= 1) {
-                sprite(particleType.value(), ResourceUtils.createResourceLocation(particleSprite.id()));
+                sprite(particleType.value(), ResourceUtils.parse(particleSprite.id()));
             } else {
-                spriteSet(particleType.value(), ResourceUtils.createResourceLocation(particleSprite.id()),
+                spriteSet(particleType.value(), ResourceUtils.parse(particleSprite.id()),
                         particleSprite.count(),
                         particleSprite.reverse());
             }

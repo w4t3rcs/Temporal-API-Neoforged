@@ -15,4 +15,6 @@ public @interface CustomItemModel {
     String[] additionalStrings() default {};
 
     int[] additionalInts() default {};
+
+    double[] additionalDoubles() default {};
 }

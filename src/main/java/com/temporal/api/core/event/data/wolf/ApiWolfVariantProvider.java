@@ -23,9 +23,9 @@ public class ApiWolfVariantProvider implements WolfVariantProvider {
         VARIANTS.forEach(description -> {
             ResourceKey<WolfVariant> variant = description.variant();
             String name = "entity/wolf/" + ResourceUtils.getResourceId(variant);
-            ResourceLocation defaultTexture = ResourceUtils.createResourceLocation(name);
-            ResourceLocation tamedTexture = ResourceUtils.createResourceLocation(name + "_tame");
-            ResourceLocation angryTexture = ResourceUtils.createResourceLocation(name + "_angry");
+            ResourceLocation defaultTexture = ResourceUtils.parse(name);
+            ResourceLocation tamedTexture = ResourceUtils.parse(name + "_tame");
+            ResourceLocation angryTexture = ResourceUtils.parse(name + "_angry");
             TagKey<Biome> spawnBiome = BiomeTagDynamicPreparer.BIOME_TAGS.get(description.biomeTag());
             context.register(variant, new WolfVariant(defaultTexture, tamedTexture, angryTexture, biomes.getOrThrow(spawnBiome)));
         });

@@ -10,6 +10,6 @@ public class DoorBlockModelProviderStrategy implements BlockModelProviderStrateg
         DoorBlock block = (DoorBlock) blockRegistry.get();
         String blockPath = provider.getBlockPath(block);
         provider.doorBlockWithRenderType(block, ResourceUtils.parse(blockPath + "_bottom"), ResourceUtils.parse(blockPath + "_top"), "minecraft:cutout");
-        provider.simpleBlockItem(block, provider.singleTextureItemModel(block, blockPath.replace("block/", "item/")));
+        provider.simpleBlockItem(block, provider.outerSingleTextureItemModel(block));
     }
 }

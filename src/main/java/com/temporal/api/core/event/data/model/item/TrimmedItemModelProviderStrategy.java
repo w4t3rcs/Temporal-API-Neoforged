@@ -16,17 +16,17 @@ public class TrimmedItemModelProviderStrategy implements ItemModelProviderStrate
     @Override
     public void registerItemModel(DeferredItem<?> itemRegistry, ApiItemModelProvider provider, Object... additionalData) {
         Item item = itemRegistry.get();
-        if (item.asItem() instanceof ArmorItem armor) {
-            ResourceLocation location = BuiltInRegistries.ITEM.getKey(armor);
+        if (item instanceof ArmorItem armorItem) {
+            ResourceLocation location = BuiltInRegistries.ITEM.getKey(armorItem);
             ItemModelBuilder itemModel = provider.simpleItem(item, "generated");
             int trimType = 1;
             for (String trim : TRIM_MATERIALS) {
                 ResourceLocation name = ResourceLocation.fromNamespaceAndPath(location.getNamespace(), "item/" + location.getPath() + "_" + trim + "_trim");
                 itemModel.override().model(new ModelFile.UncheckedModelFile(name)).predicate(ResourceLocation.withDefaultNamespace("trim_type"), (float) (trimType / 10.0));
-                ResourceLocation texture = ResourceLocation.withDefaultNamespace("trims/items/" + armor.getType().getName() + "_trim_" + trim);
+                ResourceLocation texture = ResourceLocation.withDefaultNamespace("trims/items/" + armorItem.getType().getName() + "_trim_" + trim);
                 provider.existingFileHelper.trackGenerated(texture, PackType.CLIENT_RESOURCES, ".png", "textures");
                 provider.withExistingParent(name.getPath(), "item/generated")
-                        .texture("layer0", ResourceUtils.createResourceLocation("item/" + location.getPath()))
+                        .texture("layer0", ResourceUtils.parse("item/" + location.getPath()))
                         .texture("layer1", texture);
                 trimType++;
             }

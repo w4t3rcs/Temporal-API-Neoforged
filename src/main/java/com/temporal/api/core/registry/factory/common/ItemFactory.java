@@ -6,9 +6,9 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Function;
-import java.util.function.Supplier;
 
-public class ItemFactory implements ObjectFactory<Item> {
+@SuppressWarnings("unchecked")
+public class ItemFactory extends AbstractObjectFactory<Item> {
     private final DeferredRegister.Items items;
 
     public ItemFactory() {
@@ -19,21 +19,16 @@ public class ItemFactory implements ObjectFactory<Item> {
         this.items = items;
     }
 
-    public DeferredItem<Item> create(String name) {
-        return items.registerSimpleItem(name);
+    public <T extends Item> DeferredItem<T> create(String name) {
+        return (DeferredItem<T>) items.registerSimpleItem(name);
     }
 
-    public DeferredItem<Item> create(String name, Item.Properties properties) {
-        return items.registerSimpleItem(name, properties);
+    public <T extends Item> DeferredItem<T> create(String name, Item.Properties properties) {
+        return (DeferredItem<T>) items.registerSimpleItem(name, properties);
     }
 
-    public DeferredItem<Item> create(String name, Item.Properties properties, Function<Item.Properties, ? extends Item> function) {
+    public <T extends Item> DeferredItem<T> create(String name, Item.Properties properties, Function<Item.Properties, T> function) {
         return items.registerItem(name, function, properties);
-    }
-
-    @Override
-    public DeferredItem<Item> create(String name, Supplier<Item> itemSupplier) {
-        return items.register(name, itemSupplier);
     }
 
     @Override

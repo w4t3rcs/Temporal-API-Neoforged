@@ -6,9 +6,7 @@ import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.function.Supplier;
-
-public class ParticleFactory implements ObjectFactory<ParticleType<?>> {
+public class ParticleFactory extends AbstractObjectFactory<ParticleType<?>> {
     private final DeferredRegister<ParticleType<?>> particleTypes;
 
     public ParticleFactory() {
@@ -21,11 +19,6 @@ public class ParticleFactory implements ObjectFactory<ParticleType<?>> {
 
     public Holder<ParticleType<?>> create(String name, boolean overrideLimiter) {
         return create(name, () -> new SimpleParticleType(overrideLimiter));
-    }
-
-    @Override
-    public Holder<ParticleType<?>> create(String name, Supplier<ParticleType<?>> particleTypeSupplier) {
-        return particleTypes.register(name, particleTypeSupplier);
     }
 
     @Override

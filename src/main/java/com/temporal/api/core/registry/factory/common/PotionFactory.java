@@ -5,11 +5,10 @@ import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.alchemy.Potion;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.function.Supplier;
-
-public class PotionFactory implements ObjectFactory<Potion> {
+public class PotionFactory extends AbstractObjectFactory<Potion> {
     private final DeferredRegister<Potion> potions;
 
     public PotionFactory() {
@@ -20,18 +19,14 @@ public class PotionFactory implements ObjectFactory<Potion> {
         this.potions = potions;
     }
 
-    public Holder<Potion> create(String name, MobEffectInstance mobEffectInstance) {
+    public DeferredHolder<Potion, Potion> create(String name, MobEffectInstance mobEffectInstance) {
         return create(name, () -> new Potion(name, mobEffectInstance));
     }
 
-    public Holder<Potion> create(String name, Holder<MobEffect> effect, int duration) {
+    public DeferredHolder<Potion, Potion> create(String name, Holder<MobEffect> effect, int duration) {
         return create(name, () -> new Potion(name, new MobEffectInstance(effect, duration)));
     }
 
-    @Override
-    public Holder<Potion> create(String name, Supplier<Potion> potionSupplier) {
-        return potions.register(name, potionSupplier);
-    }
 
     @Override
     public DeferredRegister<Potion> getRegistry() {

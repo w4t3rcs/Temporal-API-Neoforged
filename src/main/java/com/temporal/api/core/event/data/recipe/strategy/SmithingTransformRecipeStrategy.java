@@ -3,6 +3,7 @@ package com.temporal.api.core.event.data.recipe.strategy;
 import com.temporal.api.core.event.data.recipe.ApiRecipeProvider;
 import com.temporal.api.core.event.data.recipe.holder.SmithingTransformRecipeHolder;
 import com.temporal.api.core.util.other.RegistryUtils;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.SmithingTransformRecipeBuilder;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -25,7 +26,7 @@ public class SmithingTransformRecipeStrategy implements RecipeStrategy<SmithingT
         if (recipeHolder.getName() != null) {
             path = recipeHolder.getName();
         } else {
-            path = RegistryUtils.getIdFromItem(recipeHolder.getResult().asItem());
+            path = RegistryUtils.getIdFromRegistry(BuiltInRegistries.ITEM, recipeHolder.getResult().asItem());
         }
 
         builder.save(recipeOutput, path);

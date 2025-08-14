@@ -16,5 +16,5 @@ public @interface ItemModel {
 
     int[] additionalInts() default {};
 
-    Class<?>[] additionalPOJOClasses() default {};
+    double[] additionalDoubles() default {};
 }

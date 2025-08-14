@@ -18,7 +18,8 @@ public class ItemModelStrategy implements FieldAnnotationStrategy {
             ItemModel itemModel = field.getDeclaredAnnotation(ItemModel.class);
             String[] additionalStrings = itemModel.additionalStrings();
             Integer[] additionalInts = Arrays.stream(itemModel.additionalInts()).boxed().toArray(Integer[]::new);
-            Object[] additionalData = CollectionUtils.mergeArrays(additionalStrings, additionalInts);
+            Double[] additionalDoubles = Arrays.stream(itemModel.additionalDoubles()).boxed().toArray(Double[]::new);
+            Object[] additionalData = CollectionUtils.mergeArrays(additionalStrings, additionalInts, additionalDoubles);
             switch (itemModel.value()) {
                 case BASIC -> ItemModelDescriptionContainer.BASIC_ITEMS.put(registryObject, additionalData);
                 case HANDHELD -> ItemModelDescriptionContainer.HANDHELD_ITEMS.put(registryObject, additionalData);

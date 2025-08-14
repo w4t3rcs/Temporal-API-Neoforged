@@ -13,10 +13,19 @@ import java.util.function.Supplier;
 public class BlockLootTableProvider extends ApiBlockLootTableProvider {
     public static final Map<DeferredBlock<?>, Object[]> SELF = new TemporalMap<>();
     public static final Map<DeferredBlock<?>, Object[]> SILK_TOUCH = new TemporalMap<>();
-    public static final Map<DeferredBlock<?>, Object[]> POTTED_CONTENT = new TemporalMap<>();
-    public static final Map<DeferredBlock<?>, Object[]> SIGN = new TemporalMap<>();
-    public static final Map<DeferredBlock<?>, Object[]> HANGING_SIGN = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> POTTED_CONTENTS = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> ORES = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> MULTIPLE_ORES = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> GRASSES = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> LEAVES = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> SHULKER_BOXES = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> BANNERS = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> MUSHROOM_BLOCKS = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> SHEARS_ONLY = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> CROPS = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> DOORS = new TemporalMap<>();
     public static final Map<DeferredBlock<?>, Object[]> OTHER = new TemporalMap<>();
+    public static final Map<DeferredBlock<?>, Object[]> EMPTY = new TemporalMap<>();
     public static final Map<Pair<DeferredBlock<?>, Object[]>, LootProviderStrategy> CUSTOM_LOOT = new TemporalMap<>();
 
     protected BlockLootTableProvider(HolderLookup.Provider registries) {
@@ -27,10 +36,19 @@ public class BlockLootTableProvider extends ApiBlockLootTableProvider {
     protected void generate() {
         SELF.forEach(generateLootTable(this, SelfLootProviderStrategy::new));
         SILK_TOUCH.forEach(generateLootTable(this, SilkTouchLootProviderStrategy::new));
-        POTTED_CONTENT.forEach(generateLootTable(this, PottedContentLootProviderStrategy::new));
-        SIGN.forEach(generateLootTable(this, SignLootProviderStrategy::new));
-        HANGING_SIGN.forEach(generateLootTable(this, HangingSignLootProviderStrategy::new));
+        POTTED_CONTENTS.forEach(generateLootTable(this, PottedContentLootProviderStrategy::new));
+        ORES.forEach(generateLootTable(this, OreLootProviderStrategy::new));
+        MULTIPLE_ORES.forEach(generateLootTable(this, MultipleOreLootProviderStrategy::new));
+        GRASSES.forEach(generateLootTable(this, GrassLootProviderStrategy::new));
+        LEAVES.forEach(generateLootTable(this, LeavesLootProviderStrategy::new));
+        SHULKER_BOXES.forEach(generateLootTable(this, ShulkerBoxLootProviderStrategy::new));
+        BANNERS.forEach(generateLootTable(this, BannerLootProviderStrategy::new));
+        MUSHROOM_BLOCKS.forEach(generateLootTable(this, MushroomBlockLootProviderStrategy::new));
+        SHEARS_ONLY.forEach(generateLootTable(this, ShearsOnlyLootProviderStrategy::new));
+        CROPS.forEach(generateLootTable(this, CropLootProviderStrategy::new));
+        DOORS.forEach(generateLootTable(this, DoorLootProviderStrategy::new));
         OTHER.forEach(generateLootTable(this, OtherLootProviderStrategy::new));
+        EMPTY.forEach(generateLootTable(this, EmptyLootProviderStrategy::new));
         CUSTOM_LOOT.forEach((key, strategy) -> strategy.generateLoot(key.getLeft(), this, key.getRight()));
     }
 

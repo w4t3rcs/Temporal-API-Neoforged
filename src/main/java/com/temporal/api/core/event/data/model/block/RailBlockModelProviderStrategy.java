@@ -11,6 +11,6 @@ public class RailBlockModelProviderStrategy implements BlockModelProviderStrateg
         provider.simpleBlock(block, provider.models()
                 .withExistingParent(blockPath, "block/rail_flat")
                 .texture("rail", blockPath));
-        provider.singleTextureItemModel(block);
+        provider.simpleBlockItem(block, provider.singleTextureItemModel(block));
     }
 }

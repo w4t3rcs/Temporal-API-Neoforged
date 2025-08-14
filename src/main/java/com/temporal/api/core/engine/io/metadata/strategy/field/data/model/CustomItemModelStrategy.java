@@ -20,7 +20,8 @@ public class CustomItemModelStrategy implements FieldAnnotationStrategy {
             CustomItemModel itemModel = field.getDeclaredAnnotation(CustomItemModel.class);
             String[] additionalStrings = itemModel.additionalStrings();
             Integer[] additionalInts = Arrays.stream(itemModel.additionalInts()).boxed().toArray(Integer[]::new);
-            Object[] additionalData = CollectionUtils.mergeArrays(additionalStrings, additionalInts);
+            Double[] additionalDoubles = Arrays.stream(itemModel.additionalDoubles()).boxed().toArray(Double[]::new);
+            Object[] additionalData = CollectionUtils.mergeArrays(additionalStrings, additionalInts, additionalDoubles);
             ItemModelProviderStrategy providerStrategy = itemModel.value()
                     .getDeclaredConstructor()
                     .newInstance();

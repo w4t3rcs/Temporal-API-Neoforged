@@ -24,6 +24,6 @@ public class PaneBlockModelProviderStrategy implements BlockModelProviderStrateg
         provider.simpleBlock(block, provider.models()
                 .paneSideAlt(blockPath, ResourceLocation.parse(blockPath), ResourceLocation.parse(blockPath + "_top"))
                 .renderType("minecraft:cutout"));
-        provider.singleTextureItemModel(block);
+        provider.simpleBlockItem(block, provider.singleTextureItemModel(block));
     }
 }

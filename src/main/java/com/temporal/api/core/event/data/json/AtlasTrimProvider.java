@@ -52,7 +52,7 @@ public class AtlasTrimProvider implements JsonProvider {
                     "trims/models/armor/raiser",
                     "trims/models/armor/raiser_leggings",
                     "trims/models/armor/host",
-                    "trims/models/armor/host_leggings",
+                    "trims/models/armor/host_leggings"
                     ${trim_patterns}
                   ],
                   "palette_key": "trims/color_palettes/trim_palette",
@@ -70,7 +70,7 @@ public class AtlasTrimProvider implements JsonProvider {
                     "iron_darker": "trims/color_palettes/iron_darker",
                     "gold_darker": "trims/color_palettes/gold_darker",
                     "diamond_darker": "trims/color_palettes/diamond_darker",
-                    "netherite_darker": "trims/color_palettes/netherite_darker",
+                    "netherite_darker": "trims/color_palettes/netherite_darker"
                     ${trim_materials}
                   }
                 }
@@ -83,18 +83,25 @@ public class AtlasTrimProvider implements JsonProvider {
 
     @Override
     public void registerFiles() {
-        String trimPatterns = TRIM_INFO.getLeft()
-                .stream()
-                .map(location -> "\"" + location.toString() + "\"")
-                .map(line -> line + ",\n" + line + "_leggings")
-                .collect(Collectors.joining(",\n        "));
-        String trimMaterials = TRIM_INFO.getRight()
-                .entrySet()
-                .stream()
-                .map(entry -> "\"" + entry.getKey() + ": " + entry.getValue().toString() + "\"")
-                .collect(Collectors.joining(",\n        "));
+        String trimPatterns = "";
+        String trimMaterials = "";
+        Queue<ResourceLocation> left = TRIM_INFO.getLeft();
+        Map<String, ResourceLocation> right = TRIM_INFO.getRight();
+        if (left != null && !left.isEmpty()) {
+            trimPatterns = left.stream()
+                    .map(location -> "\"" + location.toString() + "\"")
+                    .map(line -> line + ",\n" + line + "_leggings")
+                    .collect(Collectors.joining(",\n        "));
+            left.clear();
+        }
+        if (right != null && !right.isEmpty()) {
+            trimMaterials = ",\n        " + right.entrySet()
+                    .stream()
+                    .map(entry -> "\"" + entry.getKey() + ": " + entry.getValue().toString() + "\"")
+                    .collect(Collectors.joining(",\n        "));
+            right.clear();
+        }
+
         IOUtils.writeJson(TARGET_FILE_PATH, FORMAT, trimPatterns, trimMaterials);
-        TRIM_INFO.getLeft().clear();
-        TRIM_INFO.getRight().clear();
     }
 }

@@ -20,7 +20,8 @@ public class CustomBlockLootTableStrategy implements FieldAnnotationStrategy {
             CustomBlockLootTable blockLootTable = field.getDeclaredAnnotation(CustomBlockLootTable.class);
             String[] additionalStrings = blockLootTable.additionalStrings();
             Integer[] additionalInts = Arrays.stream(blockLootTable.additionalInts()).boxed().toArray(Integer[]::new);
-            Object[] additionalData = CollectionUtils.mergeArrays(additionalStrings, additionalInts);
+            Double[] additionalDoubles = Arrays.stream(blockLootTable.additionalDoubles()).boxed().toArray(Double[]::new);
+            Object[] additionalData = CollectionUtils.mergeArrays(additionalStrings, additionalInts, additionalDoubles);
             LootProviderStrategy providerStrategy = blockLootTable.value()
                     .getDeclaredConstructor()
                     .newInstance();

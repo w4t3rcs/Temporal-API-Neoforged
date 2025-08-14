@@ -15,4 +15,6 @@ public @interface BlockModel {
     String[] additionalStrings() default {};
 
     int[] additionalInts() default {};
+
+    double[] additionalDoubles() default {};
 }

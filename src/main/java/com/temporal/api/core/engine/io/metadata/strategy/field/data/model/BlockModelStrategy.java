@@ -18,7 +18,8 @@ public class BlockModelStrategy implements FieldAnnotationStrategy {
             BlockModel blockModel = field.getDeclaredAnnotation(BlockModel.class);
             String[] additionalStrings = blockModel.additionalStrings();
             Integer[] additionalInts = Arrays.stream(blockModel.additionalInts()).boxed().toArray(Integer[]::new);
-            Object[] additionalData = CollectionUtils.mergeArrays(additionalStrings, additionalInts);
+            Double[] additionalDoubles = Arrays.stream(blockModel.additionalDoubles()).boxed().toArray(Double[]::new);
+            Object[] additionalData = CollectionUtils.mergeArrays(additionalStrings, additionalInts, additionalDoubles);
             switch (blockModel.value()) {
                 case CUBED -> BlockModelDescriptionContainer.CUBED_BLOCKS.put(registryObject, additionalData);
                 case CUTOUT_CUBED -> BlockModelDescriptionContainer.CUTOUT_CUBED_BLOCKS.put(registryObject, additionalData);

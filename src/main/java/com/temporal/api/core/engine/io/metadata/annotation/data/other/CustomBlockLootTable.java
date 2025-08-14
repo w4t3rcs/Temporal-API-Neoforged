@@ -15,4 +15,6 @@ public @interface CustomBlockLootTable {
     String[] additionalStrings() default {};
 
     int[] additionalInts() default {};
+
+    double[] additionalDoubles() default {};
 }

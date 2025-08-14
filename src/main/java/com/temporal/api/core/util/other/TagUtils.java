@@ -35,7 +35,7 @@ public final class TagUtils {
     }
 
     public static TagKey<Block> createBlockTag(String name) {
-        return BlockTags.create(ResourceUtils.createResourceLocation(name));
+        return BlockTags.create(ResourceUtils.parse(name));
     }
 
     public TagKey<EntityType<?>> createEntityTypeTag(String name) {
@@ -43,11 +43,11 @@ public final class TagUtils {
     }
 
     public static TagKey<Fluid> createFluidTag(String name) {
-        return FluidTags.create(ResourceUtils.createResourceLocation(name));
+        return FluidTags.create(ResourceUtils.parse(name));
     }
 
     public static TagKey<Item> createItemTag(String name) {
-        return ItemTags.create(ResourceUtils.createResourceLocation(name));
+        return ItemTags.create(ResourceUtils.parse(name));
     }
 
     public static TagKey<Structure> createStructureTag(String name) {
@@ -55,7 +55,7 @@ public final class TagUtils {
     }
 
     public static <T> TagKey<T> createTag(ResourceKey<? extends Registry<T>> registry, String name) {
-        return TagKey.create(registry, ResourceUtils.createResourceLocation(name));
+        return TagKey.create(registry, ResourceUtils.parse(name));
     }
 
     public static <T> void putTagKey(TagKey<T> tag, Map<String, TagKey<T>> data) {
