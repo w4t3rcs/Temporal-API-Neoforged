@@ -1,7 +1,5 @@
 package com.temporal.api.core.registry.factory.extension.item;
 
-import com.temporal.api.core.engine.event.handler.FMLClientSetupEventHandler;
-import com.temporal.api.core.engine.event.handler.FovModifierEventHandler;
 import com.temporal.api.core.engine.io.context.InjectionPool;
 import com.temporal.api.core.registry.factory.common.ItemFactory;
 import net.minecraft.world.item.BowItem;
@@ -15,9 +13,6 @@ public interface BowSubFactory {
 
     default DeferredItem<BowItem> createBow(String name, Item.Properties properties) {
         ItemFactory itemFactory = InjectionPool.getFromInstance(ItemFactory.class);
-        DeferredItem<BowItem> bow = itemFactory.create(name, properties.stacksTo(1), BowItem::new);
-        FovModifierEventHandler.BOWS.add(bow);
-        FMLClientSetupEventHandler.BOWS.add(bow);
-        return bow;
+        return itemFactory.create(name, properties.stacksTo(1), BowItem::new);
     }
 }

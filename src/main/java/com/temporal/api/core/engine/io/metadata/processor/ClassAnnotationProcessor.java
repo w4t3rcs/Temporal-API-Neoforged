@@ -3,6 +3,7 @@ package com.temporal.api.core.engine.io.metadata.processor;
 import com.temporal.api.core.engine.io.metadata.executor.AnnotationExecutor;
 import com.temporal.api.core.engine.io.metadata.executor.ClassExecutor;
 import com.temporal.api.core.engine.io.metadata.strategy.type.ClassAnnotationStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.type.event.render.RegisterLayerDefinitionStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.type.injection.InjectedStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.type.injection.RegistryClassStrategy;
 
@@ -12,7 +13,8 @@ public class ClassAnnotationProcessor implements AnnotationProcessor<ClassAnnota
     private final AnnotationExecutor<ClassAnnotationStrategy> executor = new ClassExecutor();
     private final List<ClassAnnotationStrategy> strategies = List.of(
             new InjectedStrategy(),
-            new RegistryClassStrategy()
+            new RegistryClassStrategy(),
+            new RegisterLayerDefinitionStrategy()
     );
 
     @Override

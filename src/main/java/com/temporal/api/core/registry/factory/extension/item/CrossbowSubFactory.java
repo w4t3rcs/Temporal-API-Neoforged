@@ -1,6 +1,5 @@
 package com.temporal.api.core.registry.factory.extension.item;
 
-import com.temporal.api.core.engine.event.handler.FMLClientSetupEventHandler;
 import com.temporal.api.core.engine.io.context.InjectionPool;
 import com.temporal.api.core.registry.factory.common.ItemFactory;
 import net.minecraft.world.item.CrossbowItem;
@@ -15,7 +14,6 @@ public interface CrossbowSubFactory {
     default DeferredItem<CrossbowItem> createCrossbow(String name, Item.Properties properties) {
         ItemFactory itemFactory = InjectionPool.getFromInstance(ItemFactory.class);
         DeferredItem<CrossbowItem> crossbow = itemFactory.create(name, properties.stacksTo(1), CrossbowItem::new);
-        FMLClientSetupEventHandler.CROSSBOWS.add(crossbow);
         return crossbow;
     }
 }

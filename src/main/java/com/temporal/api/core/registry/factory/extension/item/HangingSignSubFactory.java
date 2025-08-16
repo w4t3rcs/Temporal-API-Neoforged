@@ -11,6 +11,10 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import java.util.function.Supplier;
 
 public interface HangingSignSubFactory {
+    default DeferredItem<HangingSignItem> createHangingSign(String name, Supplier<CeilingHangingSignBlock> ceilingSignBlock, Supplier<WallHangingSignBlock> wallSignBlock) {
+        return this.createHangingSign(name, new Item.Properties(), ceilingSignBlock, wallSignBlock);
+    }
+
     default DeferredItem<HangingSignItem> createHangingSign(String name, Item.Properties properties, Supplier<CeilingHangingSignBlock> ceilingSignBlock, Supplier<WallHangingSignBlock> wallSignBlock) {
         ItemFactory factory = InjectionPool.getFromInstance(ItemFactory.class);
         return factory.create(name, properties, props -> new HangingSignItem(ceilingSignBlock.get(), wallSignBlock.get(), props));

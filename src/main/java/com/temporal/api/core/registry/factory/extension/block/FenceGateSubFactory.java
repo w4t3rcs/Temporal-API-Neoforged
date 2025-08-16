@@ -13,7 +13,7 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 
 import java.util.Optional;
 
-public interface FenceGateFactory {
+public interface FenceGateSubFactory {
     default DeferredBlock<FenceGateBlock> createFenceGate(String name, WoodType woodType) {
         return createFenceGate(name, woodType, BlockPropertiesFactory.fenceGate());
     }

@@ -1,9 +1,7 @@
 package com.temporal.api.core.registry.factory.extension.entity;
 
-import com.temporal.api.core.engine.event.handler.EntityRendererRegisterRendererEventHandler;
 import com.temporal.api.core.engine.io.context.InjectionPool;
 import com.temporal.api.core.registry.factory.common.BlockEntityTypeFactory;
-import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.world.level.block.CeilingHangingSignBlock;
 import net.minecraft.world.level.block.WallHangingSignBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -15,8 +13,6 @@ import java.util.function.Supplier;
 public interface HangingSignSubFactory {
     default DeferredHolder<BlockEntityType<?>, BlockEntityType<HangingSignBlockEntity>> createHangingSign(String name, Supplier<CeilingHangingSignBlock> ceilingSignBlock, Supplier<WallHangingSignBlock> wallSignBlock) {
         BlockEntityTypeFactory factory = InjectionPool.getFromInstance(BlockEntityTypeFactory.class);
-        DeferredHolder<BlockEntityType<?>, BlockEntityType<HangingSignBlockEntity>> holder = factory.create(name, HangingSignBlockEntity::new, null, ceilingSignBlock.get(), wallSignBlock.get());
-        EntityRendererRegisterRendererEventHandler.RENDERING_REGISTRIES.add(event -> event.registerBlockEntityRenderer(holder.value(), HangingSignRenderer::new));
-        return holder;
+        return factory.create(name, HangingSignBlockEntity::new, null, ceilingSignBlock.get(), wallSignBlock.get());
     }
 }
