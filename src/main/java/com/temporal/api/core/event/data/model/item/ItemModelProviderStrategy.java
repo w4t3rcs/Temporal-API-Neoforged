@@ -1,7 +1,8 @@
 package com.temporal.api.core.event.data.model.item;
 
-import net.neoforged.neoforge.registries.DeferredItem;
+import net.minecraft.core.Holder;
+import net.minecraft.world.item.Item;
 
 public interface ItemModelProviderStrategy {
-    void registerItemModel(DeferredItem<?> itemRegistry, ApiItemModelProvider provider, Object... additionalData);
+    void registerItemModel(Holder<? extends Item> itemRegistry, ApiItemModelProvider provider, String... additionalData);
 }

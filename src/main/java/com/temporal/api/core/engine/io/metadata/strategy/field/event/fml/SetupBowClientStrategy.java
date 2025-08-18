@@ -6,16 +6,20 @@ import com.temporal.api.core.engine.io.metadata.annotation.event.fml.SetupBowCli
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 import net.neoforged.neoforge.registries.DeferredItem;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
 public class SetupBowClientStrategy implements FieldAnnotationStrategy {
     @Override
     public void execute(Field field, Object object) throws Exception {
-        if (field.isAnnotationPresent(SetupBowClient.class)) {
-            field.setAccessible(true);
-            DeferredItem<?> bowItem = (DeferredItem<?>) field.get(object);
-            FovModifierEventHandler.BOWS.add(bowItem);
-            FMLClientSetupEventHandler.BOWS.add(bowItem);
-        }
+        field.setAccessible(true);
+        DeferredItem<?> bowItem = (DeferredItem<?>) field.get(object);
+        FovModifierEventHandler.BOWS.add(bowItem);
+        FMLClientSetupEventHandler.BOWS.add(bowItem);
+    }
+
+    @Override
+    public Class<? extends Annotation> getAnnotationClass() {
+        return SetupBowClient.class;
     }
 }

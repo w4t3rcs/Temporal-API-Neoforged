@@ -12,9 +12,5 @@ import java.lang.annotation.Target;
 public @interface CustomItemModel {
     Class<? extends ItemModelProviderStrategy> value();
 
-    String[] additionalStrings() default {};
-
-    int[] additionalInts() default {};
-
-    double[] additionalDoubles() default {};
+    String[] additionalData() default {};
 }

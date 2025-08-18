@@ -3,6 +3,7 @@ package com.temporal.api.core.engine.io.metadata.strategy.field.data.language;
 import com.temporal.api.core.engine.io.metadata.annotation.data.language.VietnameseTranslation;
 import com.temporal.api.core.event.data.language.provider.VietnameseProvider;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
 public class VietnameseTranslationStrategy extends TranslationStrategy {
@@ -12,11 +13,14 @@ public class VietnameseTranslationStrategy extends TranslationStrategy {
 
     @Override
     public void execute(Field field, Object object) throws Exception {
-        if (field.isAnnotationPresent(VietnameseTranslation.class)) {
-            field.setAccessible(true);
-            Object o = field.get(object);
-            VietnameseTranslation translation = field.getDeclaredAnnotation(VietnameseTranslation.class);
-            putDynamicTranslation(translation.id(), translation.value(), o);
-        }
+        field.setAccessible(true);
+        Object o = field.get(object);
+        VietnameseTranslation translation = field.getDeclaredAnnotation(VietnameseTranslation.class);
+        this.putDynamicTranslation(translation.id(), translation.value(), o);
+    }
+
+    @Override
+    public Class<? extends Annotation> getAnnotationClass() {
+        return VietnameseTranslation.class;
     }
 }

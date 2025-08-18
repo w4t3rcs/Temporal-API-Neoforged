@@ -1,25 +1,27 @@
 package com.temporal.api.core.engine.io.metadata.processor;
 
+import com.temporal.api.core.engine.io.IOLayer;
 import com.temporal.api.core.engine.io.metadata.executor.AnnotationExecutor;
-import com.temporal.api.core.engine.io.metadata.executor.MethodExecutor;
 import com.temporal.api.core.engine.io.metadata.strategy.method.ExecutionStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.method.MethodAnnotationStrategy;
+import com.temporal.api.core.util.other.IOUtils;
 
+import java.lang.annotation.Annotation;
 import java.util.List;
+import java.util.Map;
 
 public class MethodAnnotationProcessor implements AnnotationProcessor<MethodAnnotationStrategy> {
-    private final AnnotationExecutor<MethodAnnotationStrategy> executor = new MethodExecutor();
-    private final List<MethodAnnotationStrategy> strategies = List.of(
+    private final Map<Class<? extends Annotation>, MethodAnnotationStrategy> strategies = IOUtils.createAnnotationStrategyMap(List.of(
             new ExecutionStrategy()
-    );
+    ));
 
     @Override
     public AnnotationExecutor<MethodAnnotationStrategy> getExecutor() {
-        return executor;
+        return IOLayer.METHOD_EXECUTOR;
     }
 
     @Override
-    public List<MethodAnnotationStrategy> getStrategies() {
+    public Map<Class<? extends Annotation>, MethodAnnotationStrategy> getStrategies() {
         return strategies;
     }
 }

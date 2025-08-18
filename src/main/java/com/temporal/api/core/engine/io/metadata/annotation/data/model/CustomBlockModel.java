@@ -12,9 +12,5 @@ import java.lang.annotation.Target;
 public @interface CustomBlockModel {
     Class<? extends BlockModelProviderStrategy> value();
 
-    String[] additionalStrings() default {};
-
-    int[] additionalInts() default {};
-
-    double[] additionalDoubles() default {};
+    String[] additionalData() default {};
 }

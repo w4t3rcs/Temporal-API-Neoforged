@@ -1,6 +1,7 @@
 package com.temporal.api.core.event.data.model.block;
 
-import net.neoforged.neoforge.registries.DeferredBlock;
+import net.minecraft.core.Holder;
+import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.BiConsumer;
@@ -10,7 +11,7 @@ import static com.temporal.api.core.event.data.model.block.BlockModelDescription
 
 public class BlockModelProviderStrategyConsumerImpl implements BlockModelProviderStrategyConsumer {
     @Override
-    public void registerModels(@NotNull ApiBlockModelProvider provider, Object... additionalData) {
+    public void registerModels(@NotNull ApiBlockModelProvider provider, String... additionalData) {
         CUBED_BLOCKS.forEach(registerBlockModel(provider, CubedBlockModelProviderStrategy::new));
         CUTOUT_CUBED_BLOCKS.forEach(registerBlockModel(provider, CutoutCubedBlockModelProviderStrategy::new));
         CROSS_BLOCKS.forEach(registerBlockModel(provider, CrossBlockModelProviderStrategy::new));
@@ -37,7 +38,7 @@ public class BlockModelProviderStrategyConsumerImpl implements BlockModelProvide
     }
 
     @Override
-    public BiConsumer<DeferredBlock<?>, Object[]> registerBlockModel(@NotNull ApiBlockModelProvider provider, @NotNull Supplier<BlockModelProviderStrategy> blockModelProviderStrategy) {
+    public BiConsumer<Holder<? extends Block>, String[]> registerBlockModel(@NotNull ApiBlockModelProvider provider, @NotNull Supplier<BlockModelProviderStrategy> blockModelProviderStrategy) {
         return (block, additionalData) -> blockModelProviderStrategy.get().registerBlockModel(block, provider, additionalData);
     }
 }

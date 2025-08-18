@@ -19,7 +19,7 @@ public class DataEventHandler implements EventHandler {
     @Override
     public void handle() {
         subscribeModEvent(GatherDataEvent.class, event -> {
-            DATA_PROCESSORS.forEach(annotationProcessor -> annotationProcessor.tryProcess(NEO_MOD.getClasses(), ASYNC_STRATEGY_CONSUMER));
+            DATA_PROCESSORS.forEach(annotationProcessor -> annotationProcessor.process(NEO_MOD.getClasses(), ASYNC_STRATEGY_CONSUMER));
             GENERATOR.gatherData(event);
         });
     }

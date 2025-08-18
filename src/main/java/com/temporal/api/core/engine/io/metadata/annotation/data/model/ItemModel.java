@@ -12,9 +12,5 @@ import java.lang.annotation.Target;
 public @interface ItemModel {
     ItemModelType value() default ItemModelType.BASIC;
 
-    String[] additionalStrings() default {};
-
-    int[] additionalInts() default {};
-
-    double[] additionalDoubles() default {};
+    String[] additionalData() default {};
 }

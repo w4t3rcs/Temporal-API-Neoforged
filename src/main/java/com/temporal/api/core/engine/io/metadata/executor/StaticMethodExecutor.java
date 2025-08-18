@@ -1,13 +1,12 @@
 package com.temporal.api.core.engine.io.metadata.executor;
 
-import com.temporal.api.core.engine.io.context.InjectionPool;
 import com.temporal.api.core.engine.io.metadata.strategy.method.MethodAnnotationStrategy;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-public class MethodExecutor implements AnnotationExecutor<MethodAnnotationStrategy> {
+public class StaticMethodExecutor implements AnnotationExecutor<MethodAnnotationStrategy> {
     @Override
     public void execute(Map<Class<? extends Annotation>, MethodAnnotationStrategy> strategies, Class<?> clazz) throws Exception {
         Method[] methods = clazz.getDeclaredMethods();
@@ -18,7 +17,7 @@ public class MethodExecutor implements AnnotationExecutor<MethodAnnotationStrate
                     Class<? extends Annotation> annotationType = annotation.annotationType();
                     MethodAnnotationStrategy strategy = strategies.get(annotationType);
                     if (strategy != null) {
-                        strategy.execute(method, InjectionPool.getFromInstance(clazz));
+                        strategy.execute(method, null);
                     }
                 }
             } catch (Exception e) {

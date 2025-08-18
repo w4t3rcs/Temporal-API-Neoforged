@@ -3,25 +3,23 @@ package com.temporal.api.core.engine.io.metadata.processor;
 import com.temporal.api.ApiMod;
 import com.temporal.api.core.engine.io.metadata.consumer.AnnotationStrategyConsumer;
 import com.temporal.api.core.engine.io.metadata.executor.AnnotationExecutor;
-import com.temporal.api.core.engine.io.metadata.strategy.ObjectStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.AnnotationStrategy;
 
-import java.util.List;
+import java.lang.annotation.Annotation;
+import java.util.Map;
 import java.util.Set;
 
-public interface AnnotationProcessor<S extends ObjectStrategy<?>> {
-    default void tryProcess(Set<Class<?>> classes, AnnotationStrategyConsumer consumer) {
+public interface AnnotationProcessor<S extends AnnotationStrategy<?>> {
+    default void process(Set<Class<?>> classes, AnnotationStrategyConsumer consumer) {
         try {
-            process(classes, consumer);
+            consumer.execute(getExecutor(), getStrategies(), classes);
         } catch (Exception e) {
             ApiMod.LOGGER.error(e.getMessage());
+            throw new RuntimeException(e);
         }
-    }
-
-    default void process(Set<Class<?>> classes, AnnotationStrategyConsumer consumer) {
-        consumer.execute(getExecutor(), getStrategies(), classes);
     }
 
     AnnotationExecutor<S> getExecutor();
 
-    List<S> getStrategies();
+    Map<Class<? extends Annotation>, S> getStrategies();
 }

@@ -1,7 +1,8 @@
 package com.temporal.api.core.event.data.loot;
 
-import net.neoforged.neoforge.registries.DeferredBlock;
+import net.minecraft.core.Holder;
+import net.minecraft.world.level.block.Block;
 
 public interface LootProviderStrategy {
-    void generateLoot(DeferredBlock<?> blockRegistry, ApiBlockLootTableProvider provider, Object... additionalData);
+    void generateLoot(Holder<? extends Block> blockRegistry, ApiBlockLootTableProvider provider, String... additionalData);
 }

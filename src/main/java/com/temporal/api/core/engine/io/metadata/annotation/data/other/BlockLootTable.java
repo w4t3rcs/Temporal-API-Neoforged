@@ -12,9 +12,5 @@ import java.lang.annotation.Target;
 public @interface BlockLootTable {
     BlockLootTableType value() default BlockLootTableType.SELF;
 
-    String[] additionalStrings() default {};
-
-    int[] additionalInts() default {};
-
-    double[] additionalDoubles() default {};
+    String[] additionalData() default {};
 }

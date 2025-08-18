@@ -7,15 +7,19 @@ import com.temporal.api.core.event.data.banner.BannerPatternDescriptionHolder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.entity.BannerPattern;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
 public class BannerPatternDescriptionStrategy implements FieldAnnotationStrategy {
     @Override
     public void execute(Field field, Object object) throws Exception {
-        if (field.isAnnotationPresent(BannerPatternDescription.class)) {
-            field.setAccessible(true);
-            ResourceKey<BannerPattern> patternResourceKey = (ResourceKey<BannerPattern>) field.get(object);
-            ApiBannerPatternProvider.PATTERNS.add(new BannerPatternDescriptionHolder(patternResourceKey));
-        }
+        field.setAccessible(true);
+        ResourceKey<BannerPattern> patternResourceKey = (ResourceKey<BannerPattern>) field.get(object);
+        ApiBannerPatternProvider.PATTERNS.add(new BannerPatternDescriptionHolder(patternResourceKey));
+    }
+
+    @Override
+    public Class<? extends Annotation> getAnnotationClass() {
+        return BannerPatternDescription.class;
     }
 }

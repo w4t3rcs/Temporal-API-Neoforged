@@ -5,27 +5,27 @@ import com.temporal.api.core.engine.io.metadata.annotation.data.model.CustomBloc
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.event.data.model.block.BlockModelDescriptionContainer;
 import com.temporal.api.core.event.data.model.block.BlockModelProviderStrategy;
-import com.temporal.api.core.util.other.CollectionUtils;
-import net.neoforged.neoforge.registries.DeferredBlock;
+import net.minecraft.core.Holder;
+import net.minecraft.world.level.block.Block;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.util.Arrays;
 
 public class CustomBlockModelStrategy implements FieldAnnotationStrategy {
     @Override
     public void execute(Field field, Object object) throws Exception {
-        if (field.isAnnotationPresent(CustomBlockModel.class)) {
-            field.setAccessible(true);
-            DeferredBlock<?> registryObject = (DeferredBlock<?>) field.get(object);
-            CustomBlockModel blockModel = field.getDeclaredAnnotation(CustomBlockModel.class);
-            String[] additionalStrings = blockModel.additionalStrings();
-            Integer[] additionalInts = Arrays.stream(blockModel.additionalInts()).boxed().toArray(Integer[]::new);
-            Double[] additionalDoubles = Arrays.stream(blockModel.additionalDoubles()).boxed().toArray(Double[]::new);
-            Object[] additionalData = CollectionUtils.mergeArrays(additionalStrings, additionalInts, additionalDoubles);
-            BlockModelProviderStrategy providerStrategy = blockModel.value()
-                    .getDeclaredConstructor()
-                    .newInstance();
-            BlockModelDescriptionContainer.CUSTOM_MODELS.put(new SimplePair<>(registryObject, additionalData), providerStrategy);
-        }
+        field.setAccessible(true);
+        Holder<? extends Block> registryObject = (Holder<? extends Block>) field.get(object);
+        CustomBlockModel blockModel = field.getDeclaredAnnotation(CustomBlockModel.class);
+        String[] additionalData = blockModel.additionalData();
+        BlockModelProviderStrategy providerStrategy = blockModel.value()
+                .getDeclaredConstructor()
+                .newInstance();
+        BlockModelDescriptionContainer.CUSTOM_MODELS.put(new SimplePair<>(registryObject, additionalData), providerStrategy);
+    }
+
+    @Override
+    public Class<? extends Annotation> getAnnotationClass() {
+        return CustomBlockModel.class;
     }
 }

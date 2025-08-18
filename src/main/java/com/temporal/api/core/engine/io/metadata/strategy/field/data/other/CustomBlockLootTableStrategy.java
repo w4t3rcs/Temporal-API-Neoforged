@@ -5,27 +5,26 @@ import com.temporal.api.core.engine.io.metadata.annotation.data.other.CustomBloc
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.event.data.loot.BlockLootTableProvider;
 import com.temporal.api.core.event.data.loot.LootProviderStrategy;
-import com.temporal.api.core.util.other.CollectionUtils;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.util.Arrays;
 
 public class CustomBlockLootTableStrategy implements FieldAnnotationStrategy {
     @Override
     public void execute(Field field, Object object) throws Exception {
-        if (field.isAnnotationPresent(CustomBlockLootTable.class)) {
-            field.setAccessible(true);
-            DeferredBlock<?> registryObject = (DeferredBlock<?>) field.get(object);
-            CustomBlockLootTable blockLootTable = field.getDeclaredAnnotation(CustomBlockLootTable.class);
-            String[] additionalStrings = blockLootTable.additionalStrings();
-            Integer[] additionalInts = Arrays.stream(blockLootTable.additionalInts()).boxed().toArray(Integer[]::new);
-            Double[] additionalDoubles = Arrays.stream(blockLootTable.additionalDoubles()).boxed().toArray(Double[]::new);
-            Object[] additionalData = CollectionUtils.mergeArrays(additionalStrings, additionalInts, additionalDoubles);
-            LootProviderStrategy providerStrategy = blockLootTable.value()
-                    .getDeclaredConstructor()
-                    .newInstance();
-            BlockLootTableProvider.CUSTOM_LOOT.put(new SimplePair<>(registryObject, additionalData), providerStrategy);
-        }
+        field.setAccessible(true);
+        DeferredBlock<?> registryObject = (DeferredBlock<?>) field.get(object);
+        CustomBlockLootTable blockLootTable = field.getDeclaredAnnotation(CustomBlockLootTable.class);
+        String[] additionalData = blockLootTable.additionalData();
+        LootProviderStrategy providerStrategy = blockLootTable.value()
+                .getDeclaredConstructor()
+                .newInstance();
+        BlockLootTableProvider.CUSTOM_LOOT.put(new SimplePair<>(registryObject, additionalData), providerStrategy);
+    }
+
+    @Override
+    public Class<? extends Annotation> getAnnotationClass() {
+        return CustomBlockLootTable.class;
     }
 }

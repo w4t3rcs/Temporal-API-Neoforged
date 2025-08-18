@@ -1,6 +1,7 @@
 package com.temporal.api.core.event.data.loot;
 
 import com.temporal.api.core.util.other.RegistryUtils;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Item;
@@ -11,15 +12,14 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
-import net.neoforged.neoforge.registries.DeferredBlock;
 
 public class MultipleOreLootProviderStrategy implements LootProviderStrategy {
     @Override
-    public void generateLoot(DeferredBlock<?> blockRegistry, ApiBlockLootTableProvider provider, Object... additionalData) {
-        Block block = blockRegistry.get();
-        String itemId = (String) additionalData[0];
-        float itemCountMin = (float) additionalData[1];
-        float itemCountMax = (float) additionalData[2];
+    public void generateLoot(Holder<? extends Block> blockRegistry, ApiBlockLootTableProvider provider, String... additionalData) {
+        Block block = blockRegistry.value();
+        String itemId = additionalData[0];
+        float itemCountMin = Float.parseFloat(additionalData[1]);
+        float itemCountMax = Float.parseFloat(additionalData[2]);
         Item item = RegistryUtils.getItemById(itemId);
         HolderLookup.RegistryLookup<Enchantment> registrylookup = provider.getRegistries().lookupOrThrow(Registries.ENCHANTMENT);
         provider.add(block, provider.createSilkTouchDispatchTable(block, provider.applyExplosionDecay(block, LootItem.lootTableItem(item)

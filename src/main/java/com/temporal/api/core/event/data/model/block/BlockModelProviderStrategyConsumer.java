@@ -1,13 +1,14 @@
 package com.temporal.api.core.event.data.model.block;
 
-import net.neoforged.neoforge.registries.DeferredBlock;
+import net.minecraft.core.Holder;
+import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
 public interface BlockModelProviderStrategyConsumer {
-    void registerModels(@NotNull ApiBlockModelProvider provider, Object... additionalData);
+    void registerModels(@NotNull ApiBlockModelProvider provider, String... additionalData);
 
-    BiConsumer<DeferredBlock<?>, Object[]> registerBlockModel(@NotNull ApiBlockModelProvider provider, @NotNull Supplier<BlockModelProviderStrategy> blockModelProviderStrategy);
+    BiConsumer<Holder<? extends Block>, String[]> registerBlockModel(@NotNull ApiBlockModelProvider provider, @NotNull Supplier<BlockModelProviderStrategy> blockModelProviderStrategy);
 }

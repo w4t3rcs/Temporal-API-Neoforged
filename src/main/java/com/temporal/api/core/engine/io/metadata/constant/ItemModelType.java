@@ -6,5 +6,8 @@ public enum ItemModelType {
     BOW,
     CROSSBOW,
     TRIMMED_ARMOR,
-    POTION
+    POTION,
+    BLOCK,
+    SLAB,
+    STAIRS
 }

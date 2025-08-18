@@ -8,18 +8,22 @@ import com.temporal.api.core.event.data.wolf.WolfVariantDescriptionHolder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.animal.WolfVariant;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
 public class WolfVariantDescriptionStrategy implements FieldAnnotationStrategy {
     @Override
     public void execute(Field field, Object object) throws Exception {
-        if (field.isAnnotationPresent(WolfVariantDescription.class)) {
-            field.setAccessible(true);
-            ResourceKey<WolfVariant> variantResourceKey = (ResourceKey<WolfVariant>) field.get(object);
-            WolfVariantDescription wolfVariantDescription = field.getDeclaredAnnotation(WolfVariantDescription.class);
-            Class<?> tagContainer = wolfVariantDescription.biomeTagContainer();
-            if (!tagContainer.equals(Object.class)) BiomeTagDynamicPreparer.TAG_CONTAINERS.add(tagContainer);
-            ApiWolfVariantProvider.VARIANTS.add(new WolfVariantDescriptionHolder(variantResourceKey, wolfVariantDescription.biomeTag()));
-        }
+        field.setAccessible(true);
+        ResourceKey<WolfVariant> variantResourceKey = (ResourceKey<WolfVariant>) field.get(object);
+        WolfVariantDescription wolfVariantDescription = field.getDeclaredAnnotation(WolfVariantDescription.class);
+        Class<?> tagContainer = wolfVariantDescription.biomeTagContainer();
+        if (!tagContainer.equals(Object.class)) BiomeTagDynamicPreparer.TAG_CONTAINERS.add(tagContainer);
+        ApiWolfVariantProvider.VARIANTS.add(new WolfVariantDescriptionHolder(variantResourceKey, wolfVariantDescription.biomeTag()));
+    }
+
+    @Override
+    public Class<? extends Annotation> getAnnotationClass() {
+        return WolfVariantDescription.class;
     }
 }

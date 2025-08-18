@@ -1,12 +1,12 @@
 package com.temporal.api.core.event.data.model.item;
 
+import net.minecraft.core.Holder;
 import net.minecraft.world.item.Item;
-import net.neoforged.neoforge.registries.DeferredItem;
 
 public class BowModelProviderStrategy implements ItemModelProviderStrategy {
     @Override
-    public void registerItemModel(DeferredItem<?> itemRegistry, ApiItemModelProvider provider, Object... additionalData) {
-        Item item = itemRegistry.get();
+    public void registerItemModel(Holder<? extends Item> itemRegistry, ApiItemModelProvider provider, String... additionalData) {
+        Item item = itemRegistry.value();
         String itemPath = provider.getItemPath(item);
         provider.simpleItem(itemPath, "bow")
                 .override()

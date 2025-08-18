@@ -2,6 +2,7 @@ package com.temporal.api.core.event.data.loot;
 
 import com.temporal.api.core.engine.io.context.InjectionPool;
 import com.temporal.api.core.util.other.RegistryUtils;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -34,7 +35,7 @@ public abstract class ApiBlockLootTableProvider extends BlockLootSubProvider {
         super(Set.of(), FeatureFlags.REGISTRY.allFlags(), registries);
     }
 
-    protected abstract BiConsumer<DeferredBlock<?>, Object[]> generateLootTable(@NotNull ApiBlockLootTableProvider provider, @NotNull Supplier<LootProviderStrategy> lootProviderStrategySupplier);
+    protected abstract BiConsumer<Holder<? extends Block>, String[]> generateLootTable(@NotNull ApiBlockLootTableProvider provider, @NotNull Supplier<LootProviderStrategy> lootProviderStrategySupplier);
 
     public void dropSharedSelf(DeferredBlock<?> block, Function<String, String> mapper) {
         Block mainBlock = block.value();

@@ -1,25 +1,36 @@
 package com.temporal.api.core.engine.io.metadata.executor;
 
 import com.temporal.api.ApiMod;
-import com.temporal.api.core.engine.io.metadata.strategy.ObjectStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.AnnotationStrategy;
 
-public interface AnnotationExecutor<S extends ObjectStrategy<?>> {
-    default void tryExecute(S strategy, Class<?> clazz) {
+import java.lang.annotation.Annotation;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public interface AnnotationExecutor<S extends AnnotationStrategy<?>> {
+    default void tryExecute(Map<Class<? extends Annotation>, S> strategies, Class<?> clazz) {
         try {
-            execute(strategy, clazz);
-            logScanning(strategy, clazz);
+            execute(strategies, clazz);
+            logScanning(strategies, clazz);
         } catch (Exception e) {
-            logException(e, strategy, clazz);
+            logException(e, strategies, clazz);
+            throw new RuntimeException(e);
         }
     }
 
-    void execute(S strategy, Class<?> clazz) throws Exception;
+    void execute(Map<Class<? extends Annotation>, S> strategies, Class<?> clazz) throws Exception;
 
-    private void logScanning(ObjectStrategy<?> strategy, Class<?> clazz) {
-        ApiMod.LOGGER.info("Scanned: strategy - {}, class - {}", strategy.getClass().getSimpleName(), clazz.getSimpleName());
+    private void logScanning(Map<Class<? extends Annotation>, S> strategies, Class<?> clazz) {
+        ApiMod.LOGGER.info("Scanned: class - {}, annotations - {}", clazz.getSimpleName(), strategies.keySet()
+                .stream()
+                .map(Class::getSimpleName)
+                .collect(Collectors.joining(", ")));
     }
 
-    private void logException(Exception e, ObjectStrategy<?> strategy, Class<?> clazz) {
-        ApiMod.LOGGER.warn("{} in {} went wrong! - {}", strategy.getClass().getSimpleName(), clazz.getSimpleName(), e.getMessage());
+    private void logException(Exception e, Map<Class<? extends Annotation>, S> strategies, Class<?> clazz) {
+        ApiMod.LOGGER.warn("Scanning went wrong ({}:{})! - {}", clazz.getSimpleName(), e.getMessage(), strategies.keySet()
+                .stream()
+                .map(Class::getSimpleName)
+                .collect(Collectors.joining(", ")));
     }
 }

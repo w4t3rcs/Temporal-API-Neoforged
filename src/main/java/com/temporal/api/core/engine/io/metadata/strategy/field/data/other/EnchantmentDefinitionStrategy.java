@@ -10,18 +10,22 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.enchantment.Enchantment;
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
 public class EnchantmentDefinitionStrategy implements FieldAnnotationStrategy {
     @Override
     public void execute(Field field, Object object) throws Exception {
-        if (field.isAnnotationPresent(EnchantmentDefinition.class)) {
-            field.setAccessible(true);
-            ResourceKey<Enchantment> enchantment = (ResourceKey<Enchantment>) field.get(object);
-            EnchantmentDefinition annotation = field.getDeclaredAnnotation(EnchantmentDefinition.class);
-            EnchantmentDescriptionHolder descriptionHolder = getDescriptionHolder(annotation);
-            ApiEnchantmentProvider.ENCHANTMENTS.put(enchantment, descriptionHolder);
-        }
+        field.setAccessible(true);
+        ResourceKey<Enchantment> enchantment = (ResourceKey<Enchantment>) field.get(object);
+        EnchantmentDefinition annotation = field.getDeclaredAnnotation(EnchantmentDefinition.class);
+        EnchantmentDescriptionHolder descriptionHolder = getDescriptionHolder(annotation);
+        ApiEnchantmentProvider.ENCHANTMENTS.put(enchantment, descriptionHolder);
+    }
+
+    @Override
+    public Class<? extends Annotation> getAnnotationClass() {
+        return EnchantmentDefinition.class;
     }
 
     private @NotNull EnchantmentDescriptionHolder getDescriptionHolder(EnchantmentDefinition enchantmentDefinition) {

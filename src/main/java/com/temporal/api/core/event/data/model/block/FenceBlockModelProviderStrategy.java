@@ -1,14 +1,15 @@
 package com.temporal.api.core.event.data.model.block;
 
+import net.minecraft.core.Holder;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FenceBlock;
-import net.neoforged.neoforge.registries.DeferredBlock;
+
+import static com.temporal.api.core.event.data.model.block.ApiBlockModelProvider.MINECRAFT_CUTOUT;
 
 public class FenceBlockModelProviderStrategy implements BlockModelProviderStrategy {
     @Override
-    public void registerBlockModel(DeferredBlock<?> blockRegistry, ApiBlockModelProvider provider, Object... additionalData) {
-        provider.familyMemberWithItem((FenceBlock) blockRegistry.get(), "_fence",
-                (block, parentTexture) -> provider.fenceBlockWithRenderType(block, parentTexture, "minecraft:cutout"),
-                (block, parentTexture) -> provider.itemModels()
-                        .fenceInventory(provider.getBlockPath(block), parentTexture));
+    public void registerBlockModel(Holder<? extends Block> blockRegistry, ApiBlockModelProvider provider, String... additionalData) {
+        provider.familyMember((FenceBlock) blockRegistry.value(), additionalData[0],
+                (block, parentTexture) -> provider.fenceBlockWithRenderType(block, parentTexture, MINECRAFT_CUTOUT));
     }
 }

@@ -1,6 +1,7 @@
 package com.temporal.api.core.event.data.model.item;
 
 import com.temporal.api.core.util.other.ResourceUtils;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
@@ -8,14 +9,13 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
-import net.neoforged.neoforge.registries.DeferredItem;
 
 public class TrimmedItemModelProviderStrategy implements ItemModelProviderStrategy {
     private static final String[] TRIM_MATERIALS = {"quartz", "iron", "netherite", "redstone", "copper", "gold", "emerald", "diamond", "lapis", "amethyst"};
 
     @Override
-    public void registerItemModel(DeferredItem<?> itemRegistry, ApiItemModelProvider provider, Object... additionalData) {
-        Item item = itemRegistry.get();
+    public void registerItemModel(Holder<? extends Item> itemRegistry, ApiItemModelProvider provider, String... additionalData) {
+        Item item = itemRegistry.value();
         if (item instanceof ArmorItem armorItem) {
             ResourceLocation location = BuiltInRegistries.ITEM.getKey(armorItem);
             ItemModelBuilder itemModel = provider.simpleItem(item, "generated");

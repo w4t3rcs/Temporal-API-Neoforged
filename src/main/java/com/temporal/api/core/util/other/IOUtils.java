@@ -1,5 +1,6 @@
 package com.temporal.api.core.util.other;
 
+import com.temporal.api.core.engine.io.metadata.strategy.AnnotationStrategy;
 import com.temporal.api.core.exception.ModInfoNotFoundException;
 import com.temporal.api.core.json.formatter.JsonFormatter;
 import com.temporal.api.core.json.formatter.StringJsonFormatter;
@@ -13,9 +14,7 @@ import org.objectweb.asm.Type;
 
 import java.lang.annotation.Annotation;
 import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -73,5 +72,11 @@ public final class IOUtils {
         String formatted = jsonFormatter.format(format, arguments);
         JsonInserter<String, Path> resourceInserter = new ResourceInserter();
         resourceInserter.insert(formatted, path);
+    }
+
+    public static <T, S extends AnnotationStrategy<T>> Map<Class<? extends Annotation>, S> createAnnotationStrategyMap(Collection<S> strategies) {
+        return strategies.stream()
+                .distinct()
+                .collect(Collectors.toMap(AnnotationStrategy::getAnnotationClass, strategy -> strategy));
     }
 }

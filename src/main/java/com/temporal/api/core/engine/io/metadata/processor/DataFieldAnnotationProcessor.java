@@ -1,7 +1,7 @@
 package com.temporal.api.core.engine.io.metadata.processor;
 
+import com.temporal.api.core.engine.io.IOLayer;
 import com.temporal.api.core.engine.io.metadata.executor.AnnotationExecutor;
-import com.temporal.api.core.engine.io.metadata.executor.StaticFieldExecutor;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.biome.*;
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.language.*;
@@ -11,12 +11,14 @@ import com.temporal.api.core.engine.io.metadata.strategy.field.data.other.*;
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.properties.*;
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.tag.BlockTagComponentStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.tag.ItemTagComponentStrategy;
+import com.temporal.api.core.util.other.IOUtils;
 
+import java.lang.annotation.Annotation;
 import java.util.List;
+import java.util.Map;
 
 public class DataFieldAnnotationProcessor implements AnnotationProcessor<FieldAnnotationStrategy> {
-    private final AnnotationExecutor<FieldAnnotationStrategy> executor = new StaticFieldExecutor();
-    private final List<FieldAnnotationStrategy> strategies = List.of(
+    private final Map<Class<? extends Annotation>, FieldAnnotationStrategy> strategies = IOUtils.createAnnotationStrategyMap(List.of(
             new BlockModelStrategy(),
             new CustomBlockModelStrategy(),
             new ItemModelStrategy(),
@@ -91,15 +93,15 @@ public class DataFieldAnnotationProcessor implements AnnotationProcessor<FieldAn
             new ThaiTranslationStrategy(),
             new TurkishTranslationStrategy(),
             new VietnameseTranslationStrategy()
-    );
+    ));
 
     @Override
     public AnnotationExecutor<FieldAnnotationStrategy> getExecutor() {
-        return executor;
+        return IOLayer.STATIC_FIELD_EXECUTOR;
     }
 
     @Override
-    public List<FieldAnnotationStrategy> getStrategies() {
+    public Map<Class<? extends Annotation>, FieldAnnotationStrategy> getStrategies() {
         return strategies;
     }
 }

@@ -5,15 +5,19 @@ import com.temporal.api.core.engine.io.metadata.annotation.event.fml.SetupCrossb
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 import net.neoforged.neoforge.registries.DeferredItem;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
 public class SetupCrossbowClientStrategy implements FieldAnnotationStrategy {
     @Override
     public void execute(Field field, Object object) throws Exception {
-        if (field.isAnnotationPresent(SetupCrossbowClient.class)) {
-            field.setAccessible(true);
-            DeferredItem<?> crossbowItem = (DeferredItem<?>) field.get(object);
-            FMLClientSetupEventHandler.CROSSBOWS.add(crossbowItem);
-        }
+        field.setAccessible(true);
+        DeferredItem<?> crossbowItem = (DeferredItem<?>) field.get(object);
+        FMLClientSetupEventHandler.CROSSBOWS.add(crossbowItem);
+    }
+
+    @Override
+    public Class<? extends Annotation> getAnnotationClass() {
+        return SetupCrossbowClient.class;
     }
 }

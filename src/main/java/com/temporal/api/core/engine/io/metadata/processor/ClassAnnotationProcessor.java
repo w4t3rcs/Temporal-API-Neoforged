@@ -1,29 +1,29 @@
 package com.temporal.api.core.engine.io.metadata.processor;
 
+import com.temporal.api.core.engine.io.IOLayer;
 import com.temporal.api.core.engine.io.metadata.executor.AnnotationExecutor;
-import com.temporal.api.core.engine.io.metadata.executor.ClassExecutor;
 import com.temporal.api.core.engine.io.metadata.strategy.type.ClassAnnotationStrategy;
-import com.temporal.api.core.engine.io.metadata.strategy.type.event.render.RegisterLayerDefinitionStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.type.injection.InjectedStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.type.injection.RegistryClassStrategy;
+import com.temporal.api.core.util.other.IOUtils;
 
+import java.lang.annotation.Annotation;
 import java.util.List;
+import java.util.Map;
 
 public class ClassAnnotationProcessor implements AnnotationProcessor<ClassAnnotationStrategy> {
-    private final AnnotationExecutor<ClassAnnotationStrategy> executor = new ClassExecutor();
-    private final List<ClassAnnotationStrategy> strategies = List.of(
+    private final Map<Class<? extends Annotation>, ClassAnnotationStrategy> strategies = IOUtils.createAnnotationStrategyMap(List.of(
             new InjectedStrategy(),
-            new RegistryClassStrategy(),
-            new RegisterLayerDefinitionStrategy()
-    );
+            new RegistryClassStrategy()
+    ));
 
     @Override
     public AnnotationExecutor<ClassAnnotationStrategy> getExecutor() {
-        return executor;
+        return IOLayer.CLASS_EXECUTOR;
     }
 
     @Override
-    public List<ClassAnnotationStrategy> getStrategies() {
+    public Map<Class<? extends Annotation>, ClassAnnotationStrategy> getStrategies() {
         return strategies;
     }
 }
